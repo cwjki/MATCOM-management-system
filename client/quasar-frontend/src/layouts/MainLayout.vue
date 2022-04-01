@@ -69,6 +69,12 @@ const linksList = [
     icon: 'home',
     link: 'home',
   },
+  {
+    title: 'Axios',
+    caption: 'quasar.dev',
+    icon: 'home',
+    link: 'axios',
+  },
 ];
 
 export default defineComponent({
