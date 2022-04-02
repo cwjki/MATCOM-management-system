@@ -10,8 +10,8 @@ urlpatterns = [
     path('notes/<str:pk>/delete/', views.delete_note, name="delete-note"),
     path('notes/<str:pk>/', views.get_note, name="note"),
 
-    path('snippets/', views.snippet_list, name="snippets"),
-    path('snippets/<int:pk>', views.snippet_detail, name="snippet"),
+    path('snippets/', views.SnippetList.as_view(), name="snippets"),
+    path('snippets/<int:pk>', views.SnippetDetail.as_view(), name="snippet"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
