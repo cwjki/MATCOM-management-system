@@ -2,7 +2,7 @@ from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
-# A PI endpoints
+# API endpoints
 urlpatterns = [
     path('', views.api_root, name="home"),
 
