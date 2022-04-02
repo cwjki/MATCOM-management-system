@@ -19,35 +19,21 @@ class Career(models.Model):
         'auth.User', related_name='careers', on_delete=models.CASCADE)
 
 
-# class StudyPlan(models.Model):
-#     name = models.CharField(max_length=200)
-#     since = models.DateField()
-#     until = models.DateField(null=True, blank=True)
-#     numberOfSemesters = models.SmallIntegerField()
-#     id = models.UUIDField(default=uuid.uuid4, unique=True,
-#                           primary_key=True, editable=False)
-
-#     def __str__(self) -> str:
-#         return self.name
+class StudyPlan(models.Model):
+    name = models.CharField(max_length=200)
+    since = models.DateField()
+    until = models.DateField(null=True, blank=True)
+    numberOfSemesters = models.SmallIntegerField()
 
 
-# class SchoolYear(models.Model):
-#     name = models.CharField(max_length=200)
-#     id = models.UUIDField(default=uuid.uuid4, unique=True,
-#                           primary_key=True, editable=False)
-#     studyPlan = models.ForeignKey(StudyPlan, on_delete=models.PROTECT)
-
-#     def __str__(self) -> str:
-#         return self.name + ' ' + self.studyPlan.name
+class SchoolYear(models.Model):
+    name = models.CharField(max_length=200)
+    studyPlan = models.ForeignKey(StudyPlan, on_delete=models.PROTECT)
 
 
-# class Department(models.Model):
-#     name = models.CharField(max_length=200)
-#     id = models.UUIDField(default=uuid.uuid4, unique=True,
-#                           primary_key=True, editable=False)
-
-#     def __str__(self) -> str:
-#         return self.name
+class Department(models.Model):
+    name = models.CharField(max_length=200)
+    career = models.ForeignKey(Career, on_delete=models.PROTECT)
 
 
 # class ScientificDegree(models.Model):

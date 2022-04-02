@@ -1,7 +1,15 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
-from .models import Snippet, Career
+from .models import Snippet, Career, StudyPlan, SchoolYear, Department
+
+
+class SnippetSerializer(ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = Snippet
+        fields = ['id', 'title', 'code', 'owner']
 
 
 class UserSerializer(ModelSerializer):
@@ -24,9 +32,19 @@ class CareerSerializer(ModelSerializer):
         fields = ['id', 'name', 'owner']
 
 
-class SnippetSerializer(ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-
+class StudyPlanSerializer(ModelSerializer):
     class Meta:
-        model = Snippet
-        fields = ['id', 'title', 'code', 'owner']
+        model = StudyPlan
+        fields = ['id', 'name', 'since', 'until', 'numberOfSemesters']
+
+
+class SchoolYearSerializer(ModelSerializer):
+    class Meta:
+        model = SchoolYear
+        fields = ['id', 'name', 'studyPlan']
+
+
+class DepartmentSerializer(ModelSerializer):
+    class Meta:
+        model = Department
+        fields = ['id', 'name', 'career']
