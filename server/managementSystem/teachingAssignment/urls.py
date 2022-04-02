@@ -7,6 +7,7 @@ from teachingAssignment import views
 router = DefaultRouter()
 router.register(r'snippets', views.SnippetViewSet, basename="snippets")
 router.register(r'users', views.UserViewSet, basename="users")
+router.register(r'careers', views.CareerViewSet, basename="careers")
 
 # The API URLs are now determined automatically by the router
 urlpatterns = [
