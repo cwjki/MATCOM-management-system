@@ -1,15 +1,6 @@
 from django.db import models
 
 
-class Note(models.Model):
-    body = models.TextField(null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    def __str__(self) -> str:
-        return self.body[0:50]
-
-
 class Snippet(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=True, default='')
@@ -19,8 +10,6 @@ class Snippet(models.Model):
 
     class Meta:
         ordering = ['created']
-
-
 
 
 # NOMENCLADORES
