@@ -52,25 +52,19 @@ class YearPeriod(models.Model):
     name = models.CharField(max_length=200)
 
 
-# # Entidades
-# class Professor(models.Model):
-#     name = models.CharField(max_length=200)
-#     lastName = models.CharField(max_length=200)
-#     created = models.DateTimeField(auto_now_add=True)
-#     updated = models.DateTimeField(auto_now=True)
-#     id = models.UUIDField(default=uuid.uuid4, unique=True,
-#                           primary_key=True, editable=False)
+class Professor(models.Model):
+    name = models.CharField(max_length=200)
+    lastName = models.CharField(max_length=200)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
-#     # Relationships
-#     scientificDegree = models.ForeignKey(
-#         ScientificDegree, on_delete=models.PROTECT, null=True, blank=True)
-#     teachingCategory = models.ForeignKey(
-#         TeachingCategory, on_delete=models.PROTECT, null=True, blank=True)
-#     department = models.ForeignKey(
-#         Department, on_delete=models.PROTECT, null=True, blank=True)
-
-#     def __str__(self) -> str:
-#         return self.name + self.lastName
+    # Relationships
+    scientificDegree = models.ForeignKey(
+        ScientificDegree, on_delete=models.PROTECT, null=True, blank=True)
+    teachingCategory = models.ForeignKey(
+        TeachingCategory, on_delete=models.PROTECT, null=True, blank=True)
+    department = models.ForeignKey(
+        Department, on_delete=models.PROTECT, null=True, blank=True)
 
 
 # class Subject(models.Model):

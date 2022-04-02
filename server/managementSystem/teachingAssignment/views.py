@@ -1,8 +1,8 @@
 from rest_framework import permissions, viewsets
 from django.contrib.auth.models import User
 
-from .models import Snippet, Career, StudyPlan, SchoolYear, Department, ClassType, YearPeriod, TeachingCategory, ScientificDegree
-from .serializers import SnippetSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, SchoolYearSerializer, DepartmentSerializer, ClassTypeSerializer, YearPeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer
+from .models import Snippet, Career, StudyPlan, SchoolYear, Department, ClassType, YearPeriod, TeachingCategory, ScientificDegree, Professor
+from .serializers import SnippetSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, SchoolYearSerializer, DepartmentSerializer, ClassTypeSerializer, YearPeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -109,4 +109,14 @@ class TeachingCategoryViewSet(viewsets.ModelViewSet):
     """
     queryset = TeachingCategory.objects.all()
     serializer_class = TeachingCategorySerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class ProfessorViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for professors.
+    """
+    queryset = Professor.objects.all()
+    serializer_class = ProfessorSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
