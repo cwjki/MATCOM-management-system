@@ -13,63 +13,43 @@ class Snippet(models.Model):
 
 
 class Career(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(
         'auth.User', related_name='careers', on_delete=models.CASCADE)
 
 
 class StudyPlan(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=50)
     since = models.DateField()
     until = models.DateField(null=True, blank=True)
     numberOfSemesters = models.SmallIntegerField()
 
 
 class SchoolYear(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=50)
     studyPlan = models.ForeignKey(StudyPlan, on_delete=models.PROTECT)
 
 
 class Department(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=100)
     career = models.ForeignKey(Career, on_delete=models.PROTECT)
 
 
-# class ScientificDegree(models.Model):
-#     name = models.CharField(max_length=200)
-#     id = models.UUIDField(default=uuid.uuid4, unique=True,
-#                           primary_key=True, editable=False)
-
-#     def __str__(self) -> str:
-#         return self.name
+class ScientificDegree(models.Model):
+    name = models.CharField(max_length=100)
 
 
-# class TeachingCategory(models.Model):
-#     name = models.CharField(max_length=200)
-#     id = models.UUIDField(default=uuid.uuid4, unique=True,
-#                           primary_key=True, editable=False)
-
-#     def __str__(self) -> str:
-#         return self.name
+class TeachingCategory(models.Model):
+    name = models.CharField(max_length=100)
 
 
-# class ClassType(models.Model):
-#     name = models.CharField(max_length=200)
-#     id = models.UUIDField(default=uuid.uuid4, unique=True,
-#                           primary_key=True, editable=False)
-
-#     def __str__(self) -> str:
-#         return self.name
+class ClassType(models.Model):
+    name = models.CharField(max_length=50)
 
 
-# class YearPeriod(models.Model):
-#     name = models.CharField(max_length=200)
-#     id = models.UUIDField(default=uuid.uuid4, unique=True,
-#                           primary_key=True, editable=False)
-
-#     def __str__(self) -> str:
-#         return self.name
+class YearPeriod(models.Model):
+    name = models.CharField(max_length=200)
 
 
 # # Entidades
