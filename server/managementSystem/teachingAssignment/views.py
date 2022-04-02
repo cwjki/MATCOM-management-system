@@ -6,7 +6,6 @@ from rest_framework.views import APIView
 
 from .models import Note, Snippet
 from .serializers import NoteSerializer, SnippetSerializer
-from server.managementSystem.teachingAssignment import serializers
 
 
 # class SnippetList(APIView):
