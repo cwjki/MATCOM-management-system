@@ -69,10 +69,10 @@ const linksList = [
         link: 'home',
     },
     {
-        title: 'Axios',
+        title: 'Profesores',
         caption: 'quasar.dev',
-        icon: 'home',
-        link: 'axios',
+        icon: 'face',
+        link: 'professors',
     },
 ];
 

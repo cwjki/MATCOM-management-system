@@ -1,17 +1,17 @@
 <template>
     <q-page padding>
-        <student-table-handler />
+        <professor-table-handler />
         <!-- <div class="bg-secondary full-width" style="height: 100px"></div> -->
     </q-page>
 </template>
 
 <script lang="ts">
-import StudentTableHandler from 'src/components/tables/StudentTable.handler.vue';
+import ProfessorTableHandler from 'src/components/tables/ProfessorTable.handler.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     components: {
-        StudentTableHandler,
+        ProfessorTableHandler,
     },
     setup(props, { emit }) {
         return {};

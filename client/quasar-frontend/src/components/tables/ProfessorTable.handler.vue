@@ -11,14 +11,14 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed, ref, toRef, Ref } from 'vue';
-import { studentTable } from './studentTable.hooks';
+import { professorTable } from './professorTable.hooks';
 export default defineComponent({
-    name: 'studentHandler',
+    name: 'professorHandler',
     props: {},
     emits: [],
     setup(props, { emit }) {
-        const { options, rows, loading } = studentTable();
-        return { options, rows, loading };
+        const { columns, rows, loading } = professorTable();
+        return { columns, rows, loading };
     },
 });
 </script>
