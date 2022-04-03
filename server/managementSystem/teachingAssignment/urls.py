@@ -36,6 +36,15 @@ router.register(r'school-years', views.SchoolYearViewSet,
 router.register(r'professors', views.ProfessorViewSet,
                 basename="professors")
 
+router.register(r'subjects', views.SubjectViewSet,
+                basename="subjects")
+
+router.register(r'teaching-plannings', views.TeachingPlanningViewSet,
+                basename="teaching-plannings")
+
+router.register(r'teaching-assignments', views.TeachingAssignmentViewSet,
+                basename="teaching-assignments")
+
 router.register(r'snippets', views.SnippetViewSet,
                 basename="snippets")
 

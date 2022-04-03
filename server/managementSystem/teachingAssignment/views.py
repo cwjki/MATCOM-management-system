@@ -1,8 +1,8 @@
 from rest_framework import permissions, viewsets
 from django.contrib.auth.models import User
 
-from .models import Snippet, Career, StudyPlan, SchoolYear, Department, ClassType, YearPeriod, TeachingCategory, ScientificDegree, Professor
-from .serializers import SnippetSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, SchoolYearSerializer, DepartmentSerializer, ClassTypeSerializer, YearPeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer
+from .models import Snippet, Career, StudyPlan, SchoolYear, Department, ClassType, YearPeriod, TeachingCategory, ScientificDegree, Professor, Subject, TeachingPlanning, TeachingAssignment
+from .serializers import SnippetSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, SchoolYearSerializer, DepartmentSerializer, ClassTypeSerializer, YearPeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, TeachingPlanningSerializer, TeachingAssignmentSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -119,4 +119,34 @@ class ProfessorViewSet(viewsets.ModelViewSet):
     """
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class SubjectViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for subjects.
+    """
+    queryset = Subject.objects.all()
+    serializer_class = SubjectSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class TeachingPlanningViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for teaching plannings.
+    """
+    queryset = TeachingPlanning.objects.all()
+    serializer_class = TeachingPlanningSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class TeachingAssignmentViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for teaching assignments.
+    """
+    queryset = TeachingAssignment.objects.all()
+    serializer_class = TeachingAssignmentSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
