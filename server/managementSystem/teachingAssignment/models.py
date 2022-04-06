@@ -19,12 +19,18 @@ class Career(models.Model):
     owner = models.ForeignKey(
         'auth.User', related_name='careers', on_delete=models.CASCADE)
 
+    def __str__(self) -> str:
+        return str(self.name)
+
 
 class StudyPlan(models.Model):
     name = models.CharField(max_length=50)
     since = models.DateField()
     until = models.DateField(null=True, blank=True)
     numberOfSemesters = models.SmallIntegerField()
+
+    def __str__(self) -> str:
+        return str(self.name)
 
 
 class SchoolYear(models.Model):
@@ -33,6 +39,9 @@ class SchoolYear(models.Model):
     # Relationship
     studyPlan = models.ForeignKey(StudyPlan, on_delete=models.PROTECT)
 
+    def __str__(self) -> str:
+        return str(self.name)
+
 
 class Department(models.Model):
     name = models.CharField(max_length=100)
@@ -40,21 +49,36 @@ class Department(models.Model):
     # Relationship
     career = models.ForeignKey(Career, on_delete=models.PROTECT)
 
+    def __str__(self) -> str:
+        return str(self.name)
+
 
 class ScientificDegree(models.Model):
     name = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return str(self.name)
 
 
 class TeachingCategory(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self) -> str:
+        return str(self.name)
+
 
 class ClassType(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self) -> str:
+        return str(self.name)
+
 
 class YearPeriod(models.Model):
     name = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+        return str(self.name)
 
 
 class Professor(models.Model):
@@ -71,6 +95,9 @@ class Professor(models.Model):
     department = models.ForeignKey(
         Department, on_delete=models.PROTECT, null=True, blank=True)
 
+    def __str__(self) -> str:
+        return str(self.name) + ' ' + str(self.lastName)
+
 
 class Subject(models.Model):
     name = models.CharField(max_length=200)
@@ -85,6 +112,9 @@ class Subject(models.Model):
     studyPlan = models.ForeignKey(
         StudyPlan, on_delete=models.PROTECT, null=True, blank=True)
 
+    def __str__(self) -> str:
+        return str(self.name)
+
 
 class TeachingPlanning(models.Model):
     numberOfHours = models.PositiveIntegerField()
@@ -95,6 +125,9 @@ class TeachingPlanning(models.Model):
     classType = models.ForeignKey(ClassType, on_delete=models.PROTECT)
     yearPeriod = models.ForeignKey(YearPeriod, on_delete=models.PROTECT)
 
+    def __str__(self) -> str:
+        return '[' + str(self.subject) + '] ' + '[' + str(self.classType) + '] ' + '[' + str(self.yearPeriod) + ']'
+
 
 class TeachingAssignment(models.Model):
     percent = models.IntegerField(default=1)
@@ -104,3 +137,6 @@ class TeachingAssignment(models.Model):
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     teachingPlanning = models.ForeignKey(
         TeachingPlanning, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return '[' + str(self.professor) + '] ' + '[' + str(self.teachingPlanning) + ']'
