@@ -74,6 +74,13 @@ class ClassType(models.Model):
         return str(self.name)
 
 
+class Semester(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return str(self.name)
+
+
 class YearPeriod(models.Model):
     name = models.CharField(max_length=200)
 
@@ -113,7 +120,7 @@ class Subject(models.Model):
         StudyPlan, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self) -> str:
-        return str(self.name)
+        return str(self.name) + ' ' + '[' + str(self.studyPlan) + ']'
 
 
 class TeachingPlanning(models.Model):
@@ -140,3 +147,12 @@ class TeachingAssignment(models.Model):
 
     def __str__(self) -> str:
         return '[' + str(self.professor) + '] ' + '[' + str(self.teachingPlanning) + ']'
+
+
+class CarmenTable(models.Model):
+    schoolYear = models.ForeignKey(SchoolYear, on_delete=models.CASCADE)
+    yearPeriod = models.ForeignKey(YearPeriod, on_delete=models.CASCADE)
+    semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return '[' + str(self.schoolYear) + '] ' + '[' + str(self.yearPeriod) + ']' + '[' + str(self.semester) + ']'

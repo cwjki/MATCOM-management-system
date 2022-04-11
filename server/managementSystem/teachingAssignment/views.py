@@ -1,8 +1,8 @@
 from rest_framework import permissions, viewsets
 from django.contrib.auth.models import User
 
-from .models import Snippet, Career, StudyPlan, SchoolYear, Department, ClassType, YearPeriod, TeachingCategory, ScientificDegree, Professor, Subject, TeachingPlanning, TeachingAssignment
-from .serializers import SnippetSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, SchoolYearSerializer, DepartmentSerializer, ClassTypeSerializer, YearPeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, TeachingPlanningSerializer, TeachingAssignmentSerializer
+from .models import Career, StudyPlan, SchoolYear, Department, ClassType, YearPeriod, TeachingCategory, ScientificDegree, Professor, Subject, TeachingPlanning, TeachingAssignment, Semester, CarmenTable
+from .serializers import UserSerializer, CareerSerializer, StudyPlanSerializer, SchoolYearSerializer, DepartmentSerializer, ClassTypeSerializer, YearPeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, TeachingPlanningSerializer, TeachingAssignmentSerializer, SemesterSerializer, CarmenTableSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -14,18 +14,18 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
 
 
-class SnippetViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions for snippets.
-    """
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+# class SnippetViewSet(viewsets.ModelViewSet):
+#     """
+#     This viewset automatically provides `list`, `create`, `retrieve`,
+#     `update` and `destroy` actions for snippets.
+#     """
+#     queryset = Snippet.objects.all()
+#     serializer_class = SnippetSerializer
+#     permission_classes = [
+#         permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+#     def perform_create(self, serializer):
+#         serializer.save(owner=self.request.user)
 
 
 class CareerViewSet(viewsets.ModelViewSet):
@@ -49,6 +49,16 @@ class StudyPlanViewSet(viewsets.ModelViewSet):
     """
     queryset = StudyPlan.objects.all()
     serializer_class = StudyPlanSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class SemesterViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for semesters.
+    """
+    queryset = Semester.objects.all()
+    serializer_class = SemesterSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -149,4 +159,14 @@ class TeachingAssignmentViewSet(viewsets.ModelViewSet):
     """
     queryset = TeachingAssignment.objects.all()
     serializer_class = TeachingAssignmentSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class CarmenTableViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for carmen table.
+    """
+    queryset = CarmenTable.objects.all()
+    serializer_class = CarmenTableSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]

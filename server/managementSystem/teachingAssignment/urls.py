@@ -45,8 +45,14 @@ router.register(r'teaching-plannings', views.TeachingPlanningViewSet,
 router.register(r'teaching-assignments', views.TeachingAssignmentViewSet,
                 basename="teaching-assignments")
 
-router.register(r'snippets', views.SnippetViewSet,
-                basename="snippets")
+router.register(r'carmen-table', views.CarmenTableViewSet,
+                basename="carmen-table")
+
+router.register(r'semesters', views.SemesterViewSet,
+                basename="semesters")
+
+# router.register(r'snippets', views.SnippetViewSet,
+#                 basename="snippets")
 
 # The API URLs are now determined automatically by the router
 urlpatterns = [

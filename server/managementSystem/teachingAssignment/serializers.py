@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
-from .models import Snippet, Career, StudyPlan, SchoolYear, Department, ClassType, ScientificDegree, TeachingCategory, YearPeriod, Professor, Subject, TeachingPlanning, TeachingAssignment
+from .models import Snippet, Career, StudyPlan, SchoolYear, Department, ClassType, ScientificDegree, TeachingCategory, YearPeriod, Professor, Subject, TeachingPlanning, TeachingAssignment, Semester, CarmenTable
 
 
 class SnippetSerializer(ModelSerializer):
@@ -62,6 +62,12 @@ class YearPeriodSerializer(ModelSerializer):
         fields = ['id', 'name']
 
 
+class SemesterSerializer(ModelSerializer):
+    class Meta:
+        model = Semester
+        fields = ['id', 'name']
+
+
 class ScientificDegreeSerializer(ModelSerializer):
     class Meta:
         model = ScientificDegree
@@ -100,3 +106,8 @@ class TeachingAssignmentSerializer(ModelSerializer):
         model = TeachingAssignment
         fields = ['id', 'percent', 'group', 'teachingPlanning',
                   'professor']
+
+class CarmenTableSerializer(ModelSerializer):
+    class Meta:
+        model = CarmenTable
+        fields = ['id', 'schoolYear', 'yearPeriod', 'semester']
