@@ -18,8 +18,8 @@ router.register(r'departments', views.DepartmentViewSet,
 router.register(r'class-types', views.ClassTypeViewSet,
                 basename="class-types")
 
-router.register(r'year-periods', views.YearPeriodViewSet,
-                basename="year-periods")
+router.register(r'time-periods', views.TimePeriodViewSet,
+                basename="time-periods")
 
 router.register(r'teaching-categories', views.TeachingCategoryViewSet,
                 basename="teaching-categories")
@@ -30,8 +30,8 @@ router.register(r'scientific-degrees', views.ScientificDegreeViewSet,
 router.register(r'study-plans', views.StudyPlanViewSet,
                 basename="study-plans")
 
-router.register(r'school-years', views.SchoolYearViewSet,
-                basename="school-years")
+router.register(r'teaching-groups', views.TeachingGroupViewSet,
+                basename="teaching-groups")
 
 router.register(r'professors', views.ProfessorViewSet,
                 basename="professors")
@@ -39,8 +39,8 @@ router.register(r'professors', views.ProfessorViewSet,
 router.register(r'subjects', views.SubjectViewSet,
                 basename="subjects")
 
-router.register(r'teaching-plannings', views.TeachingPlanningViewSet,
-                basename="teaching-plannings")
+router.register(r'subject-descriptions', views.SubjectDescriptionViewSet,
+                basename="subject-descriptions")
 
 router.register(r'teaching-assignments', views.TeachingAssignmentViewSet,
                 basename="teaching-assignments")

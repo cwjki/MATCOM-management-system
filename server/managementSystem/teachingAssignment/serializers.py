@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
-from .models import Snippet, Career, StudyPlan, SchoolYear, Department, ClassType, ScientificDegree, TeachingCategory, YearPeriod, Professor, Subject, TeachingPlanning, TeachingAssignment, Semester, CarmenTable
+from .models import Snippet, Career, StudyPlan, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable, TimePeriod
 
 
 class SnippetSerializer(ModelSerializer):
@@ -38,9 +38,9 @@ class StudyPlanSerializer(ModelSerializer):
         fields = ['id', 'name', 'since', 'until', 'numberOfSemesters']
 
 
-class SchoolYearSerializer(ModelSerializer):
+class TeachingGroupSerializer(ModelSerializer):
     class Meta:
-        model = SchoolYear
+        model = TeachingGroup
         fields = ['id', 'name', 'studyPlan']
 
 
@@ -56,9 +56,9 @@ class ClassTypeSerializer(ModelSerializer):
         fields = ['id', 'name']
 
 
-class YearPeriodSerializer(ModelSerializer):
+class TimePeriodSerializer(ModelSerializer):
     class Meta:
-        model = YearPeriod
+        model = TimePeriod
         fields = ['id', 'name']
 
 
@@ -94,20 +94,21 @@ class SubjectSerializer(ModelSerializer):
                   'career', 'department', 'studyPlan']
 
 
-class TeachingPlanningSerializer(ModelSerializer):
+class SubjectDescriptionSerializer(ModelSerializer):
     class Meta:
-        model = TeachingPlanning
+        model = SubjectDescription
         fields = ['id', 'numberOfHours', 'numberOfGroups', 'subject',
-                  'classType', 'yearPeriod']
+                  'classType', 'timePeriod']
 
 
 class TeachingAssignmentSerializer(ModelSerializer):
     class Meta:
         model = TeachingAssignment
-        fields = ['id', 'percent', 'group', 'teachingPlanning',
+        fields = ['id', 'percent', 'group', 'subjectDescription',
                   'professor']
+
 
 class CarmenTableSerializer(ModelSerializer):
     class Meta:
         model = CarmenTable
-        fields = ['id', 'schoolYear', 'yearPeriod', 'semester']
+        fields = ['id', 'teachingGroup', 'timePeriod', 'semester']

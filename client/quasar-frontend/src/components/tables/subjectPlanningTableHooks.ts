@@ -40,7 +40,7 @@ export const subjectPlanningTable = () => {
     const rows = ref<any[]>([]);
     const loading = ref(true);
 
-    api.get('http://127.0.0.1:8000/teaching-plannings/').then((response) => {
+    api.get('http://127.0.0.1:8000/subject-descriptions/').then((response) => {
         for (let subject of response.data.results) {
             rows.value.push({
                 subject: subject.subject,

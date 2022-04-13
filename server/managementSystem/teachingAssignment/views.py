@@ -1,8 +1,8 @@
 from rest_framework import permissions, viewsets
 from django.contrib.auth.models import User
 
-from .models import Career, StudyPlan, SchoolYear, Department, ClassType, YearPeriod, TeachingCategory, ScientificDegree, Professor, Subject, TeachingPlanning, TeachingAssignment, Semester, CarmenTable
-from .serializers import UserSerializer, CareerSerializer, StudyPlanSerializer, SchoolYearSerializer, DepartmentSerializer, ClassTypeSerializer, YearPeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, TeachingPlanningSerializer, TeachingAssignmentSerializer, SemesterSerializer, CarmenTableSerializer
+from .models import Career, StudyPlan, TeachingGroup, Department, ClassType, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable
+from .serializers import UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, SemesterSerializer, CarmenTableSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -62,13 +62,13 @@ class SemesterViewSet(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class SchoolYearViewSet(viewsets.ModelViewSet):
+class TeachingGroupViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions for school years.
+    `update` and `destroy` actions for teaching groups.
     """
-    queryset = SchoolYear.objects.all()
-    serializer_class = SchoolYearSerializer
+    queryset = TeachingGroup.objects.all()
+    serializer_class = TeachingGroupSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -92,13 +92,13 @@ class ClassTypeViewSet(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class YearPeriodViewSet(viewsets.ModelViewSet):
+class TimePeriodViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions for year periods.
+    `update` and `destroy` actions for time periods.
     """
-    queryset = YearPeriod.objects.all()
-    serializer_class = YearPeriodSerializer
+    queryset = TimePeriod.objects.all()
+    serializer_class = TimePeriodSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -142,13 +142,13 @@ class SubjectViewSet(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class TeachingPlanningViewSet(viewsets.ModelViewSet):
+class SubjectDescriptionViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions for teaching plannings.
+    `update` and `destroy` actions for subjects descriptions.
     """
-    queryset = TeachingPlanning.objects.all()
-    serializer_class = TeachingPlanningSerializer
+    queryset = SubjectDescription.objects.all()
+    serializer_class = SubjectDescriptionSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
