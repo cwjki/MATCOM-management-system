@@ -74,6 +74,12 @@ const linksList = [
         icon: 'face',
         link: 'professors',
     },
+    {
+        title: 'Carreras',
+        caption: 'quasar.dev',
+        icon: 'face',
+        link: 'careers',
+    },
 ];
 
 export default defineComponent({
