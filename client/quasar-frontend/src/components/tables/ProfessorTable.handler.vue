@@ -1,6 +1,6 @@
 <template>
     <q-table
-        title="Treats"
+        title="Profesores"
         :loading="loading"
         :rows="rows"
         :columns="columns"

@@ -35,16 +35,21 @@ export const professorTable = () => {
             field: 'teachingCategory',
         },
     ]);
-
     const rows = ref<any[]>([]);
     const loading = ref(true);
+
     api.get('http://127.0.0.1:8000/professors/').then((response) => {
         console.log(response.data);
+        response.data.results.forEach((professor : any) => {
+            rows.value.push({
+                "name" : professor.name,
+                "lastName": professor.lastName,
+                "department": professor.department,
+                "scientificDegree": professor.scientificDegree,
+                "teachingCategory": professor.teachingCategory
+            })
+        });
     });
-    setTimeout(() => {
-        loading.value = false;
-        rows.value = [{}];
-    }, 5000);
 
     return {
         columns,
