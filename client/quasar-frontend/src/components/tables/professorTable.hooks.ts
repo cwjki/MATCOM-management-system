@@ -39,16 +39,15 @@ export const professorTable = () => {
     const loading = ref(true);
 
     api.get('http://127.0.0.1:8000/professors/').then((response) => {
-        console.log(response.data);
-        response.data.results.forEach((professor : any) => {
+        for (let professor of response.data.results) {
             rows.value.push({
-                "name" : professor.name,
-                "lastName": professor.lastName,
-                "department": professor.department,
-                "scientificDegree": professor.scientificDegree,
-                "teachingCategory": professor.teachingCategory
-            })
-        });
+                name: professor.name,
+                lastName: professor.lastName,
+                department: professor.department,
+                scientificDegree: professor.scientificDegree,
+                teachingCategory: professor.teachingCategory,
+            });
+        }
     });
 
     return {
