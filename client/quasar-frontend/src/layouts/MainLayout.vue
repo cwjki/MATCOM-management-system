@@ -57,12 +57,6 @@ import EssentialLink from 'components/EssentialLink.vue';
 
 const linksList = [
     {
-        title: 'Docs',
-        caption: 'quasar.dev',
-        icon: 'school',
-        link: 'docs',
-    },
-    {
         title: 'Home',
         caption: 'quasar.dev',
         icon: 'home',
@@ -77,8 +71,14 @@ const linksList = [
     {
         title: 'Carreras',
         caption: 'quasar.dev',
-        icon: 'face',
+        icon: 'school',
         link: 'careers',
+    },
+    {
+        title: 'Departamentos',
+        caption: 'quasar.dev',
+        icon: 'door_front',
+        link: 'departments',
     },
 ];
 
