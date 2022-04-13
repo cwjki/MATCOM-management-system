@@ -86,6 +86,12 @@ const linksList = [
         icon: 'auto_stories',
         link: 'subjects',
     },
+    {
+        title: 'Planificación de Asignaturas',
+        caption: 'quasar.dev',
+        icon: 'auto_stories',
+        link: 'subject-plannings',
+    },
 ];
 
 export default defineComponent({
