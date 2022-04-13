@@ -1,6 +1,6 @@
 <template>
     <q-table
-        title="Carreras"
+        title="Asignaturas"
         :loading="loading"
         :rows="rows"
         :columns="columns"
@@ -11,13 +11,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { careerTable } from './careerTableHooks';
+import { subjectTable } from './subjectTableHooks';
 export default defineComponent({
-    name: 'careerHandler',
+    name: 'subjectHandler',
     props: {},
     emits: [],
     setup(props, { emit }) {
-        const { columns, rows, loading } = careerTable();
+        const { columns, rows, loading } = subjectTable();
         return { columns, rows, loading };
     },
 });

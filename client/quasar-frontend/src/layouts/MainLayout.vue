@@ -80,6 +80,12 @@ const linksList = [
         icon: 'door_front',
         link: 'departments',
     },
+    {
+        title: 'Asignaturas',
+        caption: 'quasar.dev',
+        icon: 'auto_stories',
+        link: 'subjects',
+    },
 ];
 
 export default defineComponent({

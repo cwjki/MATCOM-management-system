@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { departmentTable } from './DepartmentTableHooks';
+import { departmentTable } from './departmentTableHooks';
 export default defineComponent({
     name: 'departmentHandler',
     props: {},
