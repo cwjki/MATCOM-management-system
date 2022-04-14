@@ -33,18 +33,25 @@ class CareerSerializer(ModelSerializer):
 
 
 class StudyPlanSerializer(ModelSerializer):
+    teachingGroups = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = StudyPlan
-        fields = ['id', 'name', 'since', 'until', 'numberOfSemesters']
+        fields = ['id', 'name', 'since', 'until',
+                  'numberOfSemesters', 'teachingGroups']
 
 
 class TeachingGroupSerializer(ModelSerializer):
+    studyPlan_name = serializers.CharField(source='studyPlan.name')
+
     class Meta:
         model = TeachingGroup
-        fields = ['id', 'name', 'studyPlan']
+        fields = ['id', 'name', 'studyPlan', 'studyPlan_name']
 
 
 class DepartmentSerializer(ModelSerializer):
+    career = serializers.CharField(source='career.name')
+
     class Meta:
         model = Department
         fields = ['id', 'name', 'career']
@@ -81,6 +88,10 @@ class TeachingCategorySerializer(ModelSerializer):
 
 
 class ProfessorSerializer(ModelSerializer):
+    department = serializers.CharField(source='department.name')
+    scientificDegree = serializers.CharField(source='scientificDegree.name')
+    teachingCategory = serializers.CharField(source='teachingCategory.name')
+
     class Meta:
         model = Professor
         fields = ['id', 'name', 'lastName', 'department',
@@ -88,6 +99,10 @@ class ProfessorSerializer(ModelSerializer):
 
 
 class SubjectSerializer(ModelSerializer):
+    department = serializers.CharField(source='department.name')
+    career = serializers.CharField(source='career.name')
+    studyPlan = serializers.CharField(source='studyPlan.name')
+
     class Meta:
         model = Subject
         fields = ['id', 'name', 'numberOfHours', 'semester',
