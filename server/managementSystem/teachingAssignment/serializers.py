@@ -42,11 +42,11 @@ class StudyPlanSerializer(ModelSerializer):
 
 
 class TeachingGroupSerializer(ModelSerializer):
-    studyPlan_name = serializers.CharField(source='studyPlan.name')
+    studyPlan = serializers.CharField(source='studyPlan.name')
 
     class Meta:
         model = TeachingGroup
-        fields = ['id', 'name', 'studyPlan', 'studyPlan_name']
+        fields = ['id', 'name', 'studyPlan']
 
 
 class DepartmentSerializer(ModelSerializer):
@@ -110,6 +110,10 @@ class SubjectSerializer(ModelSerializer):
 
 
 class SubjectDescriptionSerializer(ModelSerializer):
+    subject = serializers.CharField(source='subject.name')
+    classType = serializers.CharField(source='classType.name')
+    timePeriod = serializers.CharField(source='timePeriod.name')
+
     class Meta:
         model = SubjectDescription
         fields = ['id', 'numberOfHours', 'numberOfGroups', 'subject',
