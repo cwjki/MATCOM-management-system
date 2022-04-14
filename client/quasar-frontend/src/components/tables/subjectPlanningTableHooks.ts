@@ -1,6 +1,8 @@
 import { quasarColumn } from 'src/models/base';
 import { api } from 'boot/axios';
 import { ref } from 'vue';
+import { SubjectDescriptionModel } from 'src/models/subjectDescription.model';
+import { subjectDescriptionService } from 'src/services';
 
 export const subjectPlanningTable = () => {
     const columns = ref<quasarColumn[]>([
@@ -37,19 +39,11 @@ export const subjectPlanningTable = () => {
             sortable: true,
         },
     ]);
-    const rows = ref<any[]>([]);
+    const rows = ref<SubjectDescriptionModel[]>([]);
     const loading = ref(true);
 
-    api.get('http://127.0.0.1:8000/subject-descriptions/').then((response) => {
-        for (let subject of response.data.results) {
-            rows.value.push({
-                subject: subject.subject,
-                classType: subject.classType,
-                numberOfGroups: subject.numberOfGroups,
-                numberOfHours: subject.numberOfHours,
-                timePeriod: subject.timePeriod,
-            });
-        }
+    subjectDescriptionService.list().then((response) => {
+        rows.value = response.data.results;
     });
 
     return {

@@ -1,6 +1,8 @@
 import { quasarColumn } from 'src/models/base';
 import { api } from 'boot/axios';
 import { ref } from 'vue';
+import { subjectService } from 'src/services';
+import { SubjectModel } from 'src/models/subject.model';
 
 export const subjectTable = () => {
     const columns = ref<quasarColumn[]>([
@@ -43,20 +45,11 @@ export const subjectTable = () => {
             sortable: true,
         },
     ]);
-    const rows = ref<any[]>([]);
+    const rows = ref<SubjectModel[]>([]);
     const loading = ref(true);
 
-    api.get('http://127.0.0.1:8000/subjects/').then((response) => {
-        for (let subject of response.data.results) {
-            rows.value.push({
-                name: subject.name,
-                department: subject.department,
-                career: subject.career,
-                studyPlan: subject.studyPlan,
-                semester: subject.semester,
-                numberOfHours: subject.numberOfHours,
-            });
-        }
+    subjectService.list().then((response) => {
+        rows.value = response.data.results;
     });
 
     return {

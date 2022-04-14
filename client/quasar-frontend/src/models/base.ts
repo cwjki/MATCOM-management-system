@@ -19,10 +19,6 @@ export interface quasarColumn {
     required?: boolean;
 
     // (optional) alignment
-    align?: 'left' | ' right' | 'center';
-
-    // (optional) tell QTable you want this column sortable
-    sortable?: boolean;
 
     // (optional) compare function if you have
     // some custom data or want a specific way to compare two rows
@@ -43,6 +39,10 @@ export interface quasarColumn {
     //   ? /* Unicode checkmark checked */ "\u2611"
     //   : /* Unicode checkmark unchecked */ "\u2610",
 
+    align?: 'left' | ' right' | 'center';
+
+    // (optional) tell QTable you want this column sortable
+    sortable?: boolean;
     // body td:
     style?: string;
     // or as Function --> style: row => ... (return String/Array/Object)

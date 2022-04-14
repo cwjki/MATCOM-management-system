@@ -1,6 +1,8 @@
 import { quasarColumn } from 'src/models/base';
 import { api } from 'boot/axios';
 import { ref } from 'vue';
+import { CareerModel } from 'src/models/career.model';
+import { careerService } from 'src/services';
 
 export const careerTable = () => {
     const columns = ref<quasarColumn[]>([
@@ -13,15 +15,11 @@ export const careerTable = () => {
             sortable: true,
         },
     ]);
-    const rows = ref<any[]>([]);
+    const rows = ref<CareerModel[]>([]);
     const loading = ref(true);
 
-    api.get('http://127.0.0.1:8000/careers/').then((response) => {
-        for (let career of response.data.results) {
-            rows.value.push({
-                name: career.name
-            });
-        }
+    careerService.list().then((response) => {
+        rows.value = response.data.results;
     });
 
     return {

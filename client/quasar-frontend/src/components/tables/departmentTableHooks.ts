@@ -1,6 +1,8 @@
 import { quasarColumn } from 'src/models/base';
 import { api } from 'boot/axios';
 import { ref } from 'vue';
+import { DepartmentModel } from 'src/models/department.model';
+import { departmentService } from 'src/services';
 
 export const departmentTable = () => {
     const columns = ref<quasarColumn[]>([
@@ -19,16 +21,11 @@ export const departmentTable = () => {
             sortable: true,
         },
     ]);
-    const rows = ref<any[]>([]);
+    const rows = ref<DepartmentModel[]>([]);
     const loading = ref(true);
 
-    api.get('http://127.0.0.1:8000/departments/').then((response) => {
-        for (let department of response.data.results) {
-            rows.value.push({
-                name: department.name,
-                career: department.career,
-            });
-        }
+    departmentService.list().then((response) => {
+        rows.value = response.data.results;
     });
 
     return {

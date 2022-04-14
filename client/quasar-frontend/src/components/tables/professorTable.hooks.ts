@@ -1,7 +1,8 @@
 import { quasarColumn } from 'src/models/base';
 import { api } from 'boot/axios';
 import { ref } from 'vue';
-
+import { professorService } from 'src/services';
+import { ProfessorModel } from 'src/models/professor.model';
 export const professorTable = () => {
     const columns = ref<quasarColumn[]>([
         {
@@ -35,20 +36,22 @@ export const professorTable = () => {
             field: 'teachingCategory',
         },
     ]);
-    const rows = ref<any[]>([]);
+    const rows = ref<ProfessorModel[]>([]);
     const loading = ref(true);
-
-    api.get('http://127.0.0.1:8000/professors/').then((response) => {
-        for (let professor of response.data.results) {
-            rows.value.push({
-                name: professor.name,
-                lastName: professor.lastName,
-                department: professor.department,
-                scientificDegree: professor.scientificDegree,
-                teachingCategory: professor.teachingCategory,
-            });
-        }
+    professorService.list().then((response) => {
+        rows.value = response.data.results;
     });
+    // api.get('http://127.0.0.1:8000/professors/').then((response) => {
+    //     for (let professor of response.data.results) {
+    //         rows.value.push({
+    //             name: professor.name,
+    //             lastName: professor.lastName,
+    //             department: professor.department,
+    //             scientificDegree: professor.scientificDegree,
+    //             teachingCategory: professor.teachingCategory,
+    //         });
+    //     }
+    // });
 
     return {
         columns,
