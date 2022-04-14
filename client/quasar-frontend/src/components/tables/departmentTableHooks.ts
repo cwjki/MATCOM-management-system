@@ -1,5 +1,4 @@
 import { quasarColumn } from 'src/models/base';
-import { api } from 'boot/axios';
 import { ref } from 'vue';
 import { DepartmentModel } from 'src/models/department.model';
 import { departmentService } from 'src/services';
