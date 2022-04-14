@@ -1,24 +1,38 @@
 <template>
-    <q-table
-        title="Carreras"
-        :loading="loading"
-        :rows="rows"
-        :columns="columns"
-        table-header-class="bg-secondary text-white"
-        row-key="name"
-    />
+    <generic-crud-data-table :config="config" />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { careerTable } from './careerTableHooks';
+import { defineComponent, ref } from 'vue';
+import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
+import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
+import { careerService } from 'src/services';
 export default defineComponent({
     name: 'careerHandler',
+    components: { GenericCrudDataTable },
     props: {},
     emits: [],
     setup(props, { emit }) {
-        const { columns, rows, loading } = careerTable();
-        return { columns, rows, loading };
+        const config = ref<GenericCrudTableConfig>({
+            name: 'Carreras',
+            singularLabel: 'Carrera',
+            service: careerService,
+            fields: [
+                {
+                    name: 'id',
+                },
+                {
+                    name: 'owner',
+                },
+            ],
+            actions: {
+                create: true,
+                update: true,
+                delete: true,
+            },
+        });
+
+        return { config };
     },
 });
 </script>

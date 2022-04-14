@@ -36,6 +36,9 @@ export default defineComponent({
                     name: 'lastName',
                 },
                 {
+                    name: 'department',
+                },
+                {
                     name: 'scientificDegree',
                 },
                 {

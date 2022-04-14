@@ -1,22 +1,51 @@
 <template>
-    <q-table> </q-table>
+    <q-table
+        :title="config.name"
+        :loading="loading"
+        :rows="rows"
+        :columns="columns"
+    >
+    </q-table>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { GenericCrudTableConfig } from '../models/table.model'
+import { defineComponent, PropType } from 'vue';
+import { GenericCrudTableConfig } from '../models/table.model';
+import { useGenericDataTable } from '../hooks/table.hooks';
 
 export default defineComponent({
-    props:{
+    props: {
         config: {
             type: Object as PropType<GenericCrudTableConfig>,
-            required: true
+            required: true,
         },
     },
     setup(props) {
-        const {} = 
+        const {
+            loading,
+            rows,
+            columns,
+            actions,
+            isActionOnTable,
+            load,
+            onCreate,
+            onEdit,
+            onDelete,
+        } = useGenericDataTable(props.config);
 
-        return {}
+        load({});
+
+        return {
+            loading,
+            rows,
+            columns,
+            actions,
+            isActionOnTable,
+            load,
+            onCreate,
+            onEdit,
+            onDelete,
+        };
     },
-})
+});
 </script>
