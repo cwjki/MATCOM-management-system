@@ -1,4 +1,5 @@
 from rest_framework import permissions, viewsets
+from rest_framework import filters
 from django.contrib.auth.models import User
 
 from .models import Career, StudyPlan, TeachingGroup, Department, ClassType, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable
@@ -129,6 +130,8 @@ class ProfessorViewSet(viewsets.ModelViewSet):
     """
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'lastName']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
