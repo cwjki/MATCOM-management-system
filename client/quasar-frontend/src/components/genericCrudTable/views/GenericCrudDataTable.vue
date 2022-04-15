@@ -7,8 +7,11 @@
         :grid="$q.screen.lt.md"
         table-header-class="bg-secondary text-white"
         row-key="id"
+        v-model:pagination="pagination"
+        @request="onRequest1"
+        :filter="filter"
     >
-        <!-- add new row btn -->
+        <!-- add new row btn  and search bar-->
         <template v-slot:top-right v-if="actions && actions.create">
             <q-btn
                 color="primary"
@@ -17,6 +20,19 @@
                 no-caps
                 @click="onCreate"
             />
+            <q-input
+                v-model="filter"
+                placeholder="Search"
+                dense
+                class="q-ml-md"
+                debounce="300"
+                outlined
+                borderless
+            >
+                <template v-slot:append>
+                    <q-icon name="search" />
+                </template>
+            </q-input>
         </template>
 
         <!-- edit and delete btns -->
@@ -35,7 +51,7 @@
                     color="red"
                     round
                     flat
-                    @click="onEdit(props.row)"
+                    @click="onDelete(props.row)"
                     v-if="actions && actions.delete"
                 />
             </q-td>
@@ -62,13 +78,20 @@ export default defineComponent({
             columns,
             actions,
             isActionOnTable,
+            pagination,
+            filter,
+
             load,
+            onRequest,
             onCreate,
             onEdit,
             onDelete,
+
+            load1,
+            onRequest1,
         } = useGenericDataTable(props.config);
 
-        load({});
+        load1();
 
         return {
             loading,
@@ -76,10 +99,17 @@ export default defineComponent({
             columns,
             actions,
             isActionOnTable,
+            pagination,
+            filter,
+
             load,
+            onRequest,
             onCreate,
             onEdit,
             onDelete,
+
+            load1,
+            onRequest1,
         };
     },
 });
