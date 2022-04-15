@@ -121,6 +121,10 @@ class SubjectDescriptionSerializer(ModelSerializer):
 
 
 class TeachingAssignmentSerializer(ModelSerializer):
+    professor = serializers.CharField(source='professor.name')
+    subjectDescription = serializers.CharField(
+        source='subjectDescription.subject')
+
     class Meta:
         model = TeachingAssignment
         fields = ['id', 'percent', 'group', 'subjectDescription',
@@ -128,6 +132,10 @@ class TeachingAssignmentSerializer(ModelSerializer):
 
 
 class CarmenTableSerializer(ModelSerializer):
+    teachingGroup = serializers.CharField(source='teachingGroup.name')
+    timePeriod = serializers.CharField(source='timePeriod.name')
+    semester = serializers.CharField(source='semester.name')
+
     class Meta:
         model = CarmenTable
         fields = ['id', 'teachingGroup', 'timePeriod', 'semester']

@@ -35,7 +35,7 @@ class StudyPlan(models.Model):
 
 class TeachingGroup(models.Model):
     name = models.CharField(max_length=50)
-    
+
     # Relationship
     studyPlan = models.ForeignKey(
         StudyPlan, related_name='teachingGroups', on_delete=models.PROTECT)
@@ -147,7 +147,7 @@ class TeachingAssignment(models.Model):
         SubjectDescription, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return '[' + str(self.professor) + '] ' + '[' + str(self.teachingPlanning) + ']'
+        return '[' + str(self.professor) + '] ' + '[' + str(self.subjectDescription) + ']'
 
 
 class CarmenTable(models.Model):

@@ -36,6 +36,8 @@ class CareerViewSet(viewsets.ModelViewSet):
     """
     queryset = Career.objects.all()
     serializer_class = CareerSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
@@ -50,6 +52,8 @@ class StudyPlanViewSet(viewsets.ModelViewSet):
     """
     queryset = StudyPlan.objects.all()
     serializer_class = StudyPlanSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -60,6 +64,8 @@ class SemesterViewSet(viewsets.ModelViewSet):
     """
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -70,6 +76,8 @@ class TeachingGroupViewSet(viewsets.ModelViewSet):
     """
     queryset = TeachingGroup.objects.all()
     serializer_class = TeachingGroupSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -80,6 +88,8 @@ class DepartmentViewSet(viewsets.ModelViewSet):
     """
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'career__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -90,6 +100,8 @@ class ClassTypeViewSet(viewsets.ModelViewSet):
     """
     queryset = ClassType.objects.all()
     serializer_class = ClassTypeSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -100,6 +112,8 @@ class TimePeriodViewSet(viewsets.ModelViewSet):
     """
     queryset = TimePeriod.objects.all()
     serializer_class = TimePeriodSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -110,6 +124,8 @@ class ScientificDegreeViewSet(viewsets.ModelViewSet):
     """
     queryset = ScientificDegree.objects.all()
     serializer_class = ScientificDegreeSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -120,6 +136,8 @@ class TeachingCategoryViewSet(viewsets.ModelViewSet):
     """
     queryset = TeachingCategory.objects.all()
     serializer_class = TeachingCategorySerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -131,7 +149,9 @@ class ProfessorViewSet(viewsets.ModelViewSet):
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['name', 'lastName']
+    search_fields = ['name', 'lastName', 'department__name',
+                     'scientificDegree__name', 'teachingCategory__name']
+    filter_backends = [filters.SearchFilter]
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -142,6 +162,8 @@ class SubjectViewSet(viewsets.ModelViewSet):
     """
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -152,6 +174,8 @@ class SubjectDescriptionViewSet(viewsets.ModelViewSet):
     """
     queryset = SubjectDescription.objects.all()
     serializer_class = SubjectDescriptionSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['subject__name', 'classType__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -162,6 +186,8 @@ class TeachingAssignmentViewSet(viewsets.ModelViewSet):
     """
     queryset = TeachingAssignment.objects.all()
     serializer_class = TeachingAssignmentSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['professor__name', 'subjectDescription__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -172,4 +198,6 @@ class CarmenTableViewSet(viewsets.ModelViewSet):
     """
     queryset = CarmenTable.objects.all()
     serializer_class = CarmenTableSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['teachingGroup__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
