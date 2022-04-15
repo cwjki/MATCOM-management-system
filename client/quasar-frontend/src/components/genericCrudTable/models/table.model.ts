@@ -16,3 +16,14 @@ export interface GenericCrudTableConfig {
 
     fields: FieldModel[];
 }
+
+export interface RequestModel {
+    filter: string;
+    pagination: {
+        sortBy: string;
+        descending: boolean;
+        page: number;
+        rowsPerPage: number;
+        rowsNumber: number;
+    };
+}

@@ -1,6 +1,6 @@
 import { Dictionary } from 'src/models/base';
 import { ref } from 'vue';
-import { GenericCrudTableConfig } from '../models/table.model';
+import { GenericCrudTableConfig, RequestModel } from '../models/table.model';
 import { transformQuasarColumn } from './utils.hooks';
 
 export const useGenericDataTable = (config: GenericCrudTableConfig) => {
@@ -19,61 +19,16 @@ export const useGenericDataTable = (config: GenericCrudTableConfig) => {
         rowsNumber: 10,
     });
 
-    const load1 = () => {
-        onRequest1({
+    const load = () => {
+        onRequest({
             filter: filter.value,
             pagination: pagination.value,
         });
     };
 
-    const load = (query: Dictionary) => {
+    const onRequest = (request: RequestModel) => {
         loading.value = true;
-        config.service
-            .list(query)
-            .then((response) => {
-                loading.value = false;
-                rows.value = response.data.results;
-                pagination.value.rowsNumber = response.data.count;
-            })
-            .catch((error) => {
-                loading.value = false;
-                error.value = 'Error en loading';
-            });
-    };
-
-    const onRequest = (request: {
-        filter: string;
-        pagination: {
-            sortBy: string;
-            descending: boolean;
-            page: number;
-            rowsPerPage: number;
-            rowsNumber: number;
-        };
-    }) => {
-        console.log(request);
         pagination.value = request.pagination;
-        load({
-            size: request.pagination.rowsPerPage,
-            page: request.pagination.page,
-            search: request.filter,
-        });
-    };
-
-    const onRequest1 = (request: {
-        filter: string;
-        pagination: {
-            sortBy: string;
-            descending: boolean;
-            page: number;
-            rowsPerPage: number;
-            rowsNumber: number;
-        };
-    }) => {
-        console.log(request);
-        pagination.value = request.pagination;
-
-        loading.value = true;
 
         const query = {
             size: request.pagination.rowsPerPage,
@@ -109,7 +64,7 @@ export const useGenericDataTable = (config: GenericCrudTableConfig) => {
             .delete(row.id)
             .then((response) => {
                 // todo put this event on event hooks
-                load({});
+                load();
             })
             .catch((error) => {
                 error.value = 'Error en delete';
@@ -131,8 +86,5 @@ export const useGenericDataTable = (config: GenericCrudTableConfig) => {
         onEdit,
         onDelete,
         onRequest,
-
-        load1,
-        onRequest1,
     };
 };

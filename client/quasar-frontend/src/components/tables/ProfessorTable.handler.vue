@@ -8,9 +8,8 @@ import { defineComponent, PropType, computed, ref, toRef, Ref } from 'vue';
 // import { CrudTableConfig } from '../crudTableGeneric/models/table.model';
 // import GCrudDataTable from '../crudTableGeneric/view/GCrudDataTable.vue';
 
-import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model'
+import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
-
 
 export default defineComponent({
     components: { GenericCrudDataTable },
@@ -24,22 +23,24 @@ export default defineComponent({
             service: professorService,
             fields: [
                 {
-                    name: 'id',
-                },
-                {
                     name: 'name',
+                    label: 'Nombre',
                 },
                 {
                     name: 'lastName',
+                    label: 'Apellidos',
                 },
                 {
                     name: 'department',
+                    label: 'Departamento',
                 },
                 {
                     name: 'scientificDegree',
+                    label: 'Grado Científico',
                 },
                 {
                     name: 'teachingCategory',
+                    label: 'Categoría Docente',
                 },
             ],
             actions: {

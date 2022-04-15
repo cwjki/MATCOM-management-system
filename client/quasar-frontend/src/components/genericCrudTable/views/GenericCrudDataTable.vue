@@ -8,8 +8,14 @@
         table-header-class="bg-secondary text-white"
         row-key="id"
         v-model:pagination="pagination"
-        @request="onRequest1"
+        @request="onRequest"
         :filter="filter"
+        :loading-label="'Cargando ...'"
+        :rows-per-page-label="'Filas'"
+        :no-data-label="'No hay datos'"
+        :no-results-label="'No hay resultados'"
+        :pagination-label="(a, b, c) => `${a}-${b} ${'de'} ${c}`"
+        :rows-per-page-options="[]"
     >
         <!-- add new row btn  and search bar-->
         <template v-slot:top-right v-if="actions && actions.create">
@@ -86,12 +92,9 @@ export default defineComponent({
             onCreate,
             onEdit,
             onDelete,
-
-            load1,
-            onRequest1,
         } = useGenericDataTable(props.config);
 
-        load1();
+        load();
 
         return {
             loading,
@@ -107,9 +110,6 @@ export default defineComponent({
             onCreate,
             onEdit,
             onDelete,
-
-            load1,
-            onRequest1,
         };
     },
 });
