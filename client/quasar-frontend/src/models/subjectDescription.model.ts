@@ -1,8 +1,8 @@
 export interface SubjectDescriptionModel {
-    classType: number;
     id: number;
+    subject: string;
+    classType: string;
     numberOfGroups: number;
     numberOfHours: number;
-    subject: number;
-    timePeriod: number;
+    timePeriod: string;
 }

@@ -1,9 +1,9 @@
 export interface SubjectModel {
     id: number;
-    career: number;
-    department: number;
+    career: string;
+    department: string;
     name: string;
     numberOfHours: number;
-    semester: number;
-    studyPlan: number;
+    semester: string;
+    studyPlan: string;
 }
