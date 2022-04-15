@@ -21,7 +21,7 @@ export const transformQuasarColumn = (
             ? [
                   {
                       name: 'csactions',
-                      label: 'Actions',
+                      label: 'Acciones',
                       field: 'csactions',
                       align: 'center',
                   } as quasarColumn,

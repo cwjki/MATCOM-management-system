@@ -1,24 +1,41 @@
 <template>
-    <q-table
-        title="Departamentos"
-        :loading="loading"
-        :rows="rows"
-        :columns="columns"
-        table-header-class="bg-secondary text-white"
-        row-key="name"
-    />
+    <generic-crud-data-table :config="config" />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { departmentTable } from './departmentTableHooks';
+import { departmentService } from 'src/services';
+import { defineComponent, ref } from 'vue';
+import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
+import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
+
 export default defineComponent({
+    components: { GenericCrudDataTable },
     name: 'departmentHandler',
     props: {},
     emits: [],
     setup(props, { emit }) {
-        const { columns, rows, loading } = departmentTable();
-        return { columns, rows, loading };
+        const config = ref<GenericCrudTableConfig>({
+            name: 'Departamentos',
+            singularLabel: 'Departamento',
+            service: departmentService,
+            fields: [
+                {
+                    name: 'name',
+                    label: 'Nombre',
+                },
+                {
+                    name: 'career',
+                    label: 'Carrera',
+                },
+            ],
+            actions: {
+                create: true,
+                update: true,
+                delete: true,
+            },
+        });
+
+        return { config };
     },
 });
 </script>

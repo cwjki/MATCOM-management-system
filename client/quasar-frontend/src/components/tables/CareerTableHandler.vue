@@ -19,10 +19,12 @@ export default defineComponent({
             service: careerService,
             fields: [
                 {
-                    name: 'id',
+                    name: 'name',
+                    label: 'Nombre',
                 },
                 {
                     name: 'owner',
+                    label: 'Creador',
                 },
             ],
             actions: {
