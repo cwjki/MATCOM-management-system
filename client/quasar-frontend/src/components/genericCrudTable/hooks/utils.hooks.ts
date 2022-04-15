@@ -20,7 +20,7 @@ export const transformQuasarColumn = (
         ...(action
             ? [
                   {
-                      name: 'csaction',
+                      name: 'csactions',
                       label: 'Actions',
                       field: 'csactions',
                       align: 'center',

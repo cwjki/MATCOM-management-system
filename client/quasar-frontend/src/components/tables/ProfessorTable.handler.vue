@@ -1,12 +1,4 @@
 <template>
-    <!-- <q-table
-        title="Profesores"
-        :loading="loading"
-        :rows="rows"
-        :columns="columns"
-        table-header-class="bg-secondary text-white"
-        row-key="name"
-    /> -->
     <g-crud-data-table :config="config" />
 </template>
 
