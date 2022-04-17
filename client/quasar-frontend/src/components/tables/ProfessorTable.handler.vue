@@ -1,5 +1,11 @@
 <template>
-    <generic-crud-data-table :config="config" />
+    <generic-crud-data-table :config="config">
+        <template v-slot:g-table-name>
+            <p class="text-h5 text-secondary text-weight-bolder q-mb-none">
+                {{ config.name }}
+            </p>
+        </template>
+    </generic-crud-data-table>
 </template>
 
 <script lang="ts">

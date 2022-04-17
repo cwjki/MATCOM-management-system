@@ -26,4 +26,19 @@ export interface FieldModel {
 
     // false if dont show in the table
     column?: FieldColumn | false;
+
+    icon?: string;
+
+    // rules?: string[];
+
+    form?: {
+        responsiveOptions: {
+            xs?: number;
+            sm?: number;
+            md?: number;
+            lg?: number;
+            xl?: number;
+        };
+        defaultValue?: any;
+    };
 }
