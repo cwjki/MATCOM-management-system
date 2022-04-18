@@ -1,3 +1,4 @@
+from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
@@ -50,11 +51,22 @@ class TeachingGroupSerializer(ModelSerializer):
 
 
 class DepartmentSerializer(ModelSerializer):
-    career = serializers.CharField(source='career.name')
+    # career = serializers.CharField(source='career.name')
+    career_id = serializers.IntegerField(required=True, write_only=True)
+    career = serializers.SerializerMethodField()
+
+    def get_career(self, obj) -> dict:
+        if obj.career:
+            return{
+                "id": obj.career.id,
+                "name": obj.career.name
+            }
+        return None
 
     class Meta:
         model = Department
-        fields = ['id', 'name', 'career']
+        # fields = ['id', 'name', 'career']
+        fields = '__all__'
 
 
 class ClassTypeSerializer(ModelSerializer):
