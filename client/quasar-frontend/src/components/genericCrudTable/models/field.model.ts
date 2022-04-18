@@ -1,3 +1,6 @@
+import { AxiosPromise } from 'axios';
+import { ListResult } from 'src/services';
+
 export interface FieldColumn {
     align?: 'left' | ' right' | 'center';
     // (optional) tell QTable you want this column sortable
@@ -14,7 +17,7 @@ export interface FieldColumn {
     transform?: (row: any) => string;
 }
 
-export interface FieldModel {
+export interface FieldBasic {
     // name id of the field,
     name: string;
 
@@ -22,14 +25,14 @@ export interface FieldModel {
     label?: string;
 
     // text by default
-    type?: 'text' | 'number' | 'date' | ' image';
+    type?: 'text' | 'select';
 
     // false if dont show in the table
     column?: FieldColumn | false;
 
     icon?: string;
 
-    // rules?: string[];
+    rules?: string[];
 
     form?: {
         responsiveOptions: {
@@ -42,3 +45,15 @@ export interface FieldModel {
         defaultValue?: any;
     };
 }
+
+export interface FieldSelect extends FieldBasic {
+    type: 'select';
+    selectOptions: {
+        list: (query?: any) => AxiosPromise<ListResult<any>>;
+        label: string;
+        value: string;
+        multiple?: boolean;
+    };
+}
+
+export type FieldModel = FieldBasic | FieldSelect;

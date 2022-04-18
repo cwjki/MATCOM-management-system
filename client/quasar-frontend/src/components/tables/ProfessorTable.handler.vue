@@ -1,10 +1,10 @@
 <template>
     <generic-crud-data-table :config="config">
-        <template v-slot:g-table-name>
+        <!-- <template v-slot:g-table-name>
             <p class="text-h5 text-secondary text-weight-bolder q-mb-none">
                 {{ config.name }}
             </p>
-        </template>
+        </template> -->
     </generic-crud-data-table>
 </template>
 
@@ -31,22 +31,42 @@ export default defineComponent({
                 {
                     name: 'name',
                     label: 'Nombre',
+                    form: {
+                        responsiveOptions: {
+                            md: 12,
+                        },
+                    },
+                    rules: ['required'],
                 },
                 {
                     name: 'lastName',
                     label: 'Apellidos',
+                    form: {
+                        responsiveOptions: {
+                            md: 4,
+                        },
+                    },
+                    rules: ['required'],
                 },
                 {
                     name: 'department',
                     label: 'Departamento',
+                    form: {
+                        responsiveOptions: {
+                            md: 8,
+                        },
+                    },
+                    rules: ['required'],
                 },
                 {
                     name: 'scientificDegree',
                     label: 'Grado Científico',
+                    rules: ['required'],
                 },
                 {
                     name: 'teachingCategory',
                     label: 'Categoría Docente',
+                    rules: ['required'],
                 },
             ],
             actions: {

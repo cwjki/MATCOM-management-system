@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { departmentService } from 'src/services';
+import { careerService, departmentService } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
@@ -26,6 +26,18 @@ export default defineComponent({
                 {
                     name: 'career',
                     label: 'Carrera',
+                    column: {
+                        transform(row) {
+                            return `(${row.career.id}) - ${row.career.name}`;
+                        },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: careerService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
+                    rules: ['required'],
                 },
             ],
             actions: {

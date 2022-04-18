@@ -25,7 +25,7 @@
                     <q-btn
                         v-for="(link, i) in essentialLinks"
                         :key="i"
-                        :label="link.title"
+                        :label="$q.screen.gt.sm ? link.title : ''"
                         :icon="link.icon"
                         no-caps
                         @click="$router.push({ name: link.link })"

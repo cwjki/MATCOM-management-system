@@ -9,8 +9,12 @@ export const useCrud = (config: GenericCrudTableConfig) => {
         crudLoading,
         crudDialog,
         editeItem,
+        changeKey(key: string, value: any) {
+            editeItem.value[key] = value;
+            // alert('someone change me');
+        },
         prepareEdit(obj: any) {
-            editeItem.value = obj;
+            editeItem.value = { ...obj };
             crudDialog.value = true;
         },
         prepareCreate() {
@@ -20,7 +24,6 @@ export const useCrud = (config: GenericCrudTableConfig) => {
                     editeItem.value[f.name] = f.form.defaultValue;
                 }
             });
-
             crudDialog.value = true;
         },
     };

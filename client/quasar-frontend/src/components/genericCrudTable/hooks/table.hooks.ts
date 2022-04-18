@@ -1,6 +1,8 @@
+import { Notify } from 'quasar';
 import { Dictionary } from 'src/models/base';
 import { ref } from 'vue';
 import { GenericCrudTableConfig, RequestModel } from '../models/table.model';
+import { useSerializer } from './serializer.hooks';
 import { transformQuasarColumn } from './utils.hooks';
 
 export const useGenericDataTable = (config: GenericCrudTableConfig) => {
@@ -50,27 +52,6 @@ export const useGenericDataTable = (config: GenericCrudTableConfig) => {
             });
     };
 
-    const onCreate = () => {
-        alert('creating');
-    };
-
-    const onEdit = (row: Dictionary) => {
-        alert('editing' + row.id);
-    };
-
-    const onDelete = (row: Dictionary) => {
-        alert('deleting: ' + row.id);
-        config.service
-            .delete(row.id)
-            .then((response) => {
-                // todo put this event on event hooks
-                load();
-            })
-            .catch((error) => {
-                error.value = 'Error en delete';
-            });
-    };
-
     return {
         loading,
         rows,
@@ -82,9 +63,6 @@ export const useGenericDataTable = (config: GenericCrudTableConfig) => {
         filter,
 
         load,
-        onCreate,
-        onEdit,
-        onDelete,
         onRequest,
     };
 };

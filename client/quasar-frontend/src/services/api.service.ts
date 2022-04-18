@@ -55,7 +55,7 @@ export const CrudServiceFactory = <T = any>(url: string) => {
             return api.get<ListResult<T>>(url + buildQuery(query));
         },
         update(id: string, obj: Dictionary) {
-            return api.patch<T>(url + id, obj);
+            return api.patch<T>(url + id + '/', obj);
         },
         delete(id: string) {
             return api.delete<T>(url + id);
