@@ -121,7 +121,7 @@ class Subject(models.Model):
         StudyPlan, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self) -> str:
-        return str(self.name) + ' ' + '[' + str(self.studyPlan) + ']'
+        return str(self.name) + ' ' + '[' + str(self.career) + ']' + ' ' + '[' + str(self.studyPlan) + ']'
 
 
 class SubjectDescription(models.Model):
