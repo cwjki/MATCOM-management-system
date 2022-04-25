@@ -106,12 +106,16 @@ class TeachingCategorySerializer(ModelSerializer):
 
 
 class ProfessorSerializer(ModelSerializer):
+    department_id = serializers.IntegerField(required=True, write_only=True)
     department = serializers.SerializerMethodField()
-    scientific_degree = serializers.SerializerMethodField()
-    teaching_category = serializers.SerializerMethodField()
 
-    # career_id = serializers.IntegerField(required=True, write_only=True)
-    # career = serializers.SerializerMethodField()
+    scientific_degree_id = serializers.IntegerField(
+        required=True, write_only=True)
+    scientific_degree = serializers.SerializerMethodField()
+
+    teaching_category_id = serializers.IntegerField(
+        required=True, write_only=True)
+    teaching_category = serializers.SerializerMethodField()
 
     def get_department(self, obj) -> dict:
         if obj.department:
@@ -143,25 +147,81 @@ class ProfessorSerializer(ModelSerializer):
 
 
 class SubjectSerializer(ModelSerializer):
-    department = serializers.CharField(source='department.name')
-    career = serializers.CharField(source='career.name')
-    studyPlan = serializers.CharField(source='studyPlan.name')
+    department_id = serializers.IntegerField(required=True, write_only=True)
+    department = serializers.SerializerMethodField()
+
+    career_id = serializers.IntegerField(required=True, write_only=True)
+    career = serializers.SerializerMethodField()
+
+    study_plan_id = serializers.IntegerField(required=True, write_only=True)
+    study_plan = serializers.SerializerMethodField()
+
+    def get_study_plan(self, obj) -> dict:
+        if obj.study_plan:
+            return {
+                "id": obj.study_plan.id,
+                "name": obj.study_plan.name
+            }
+        return None
+
+    def get_career(self, obj) -> dict:
+        if obj.career:
+            return {
+                "id": obj.career.id,
+                "name": obj.career.name
+            }
+        return None
+
+    def get_department(self, obj) -> dict:
+        if obj.department:
+            return {
+                "id": obj.department.id,
+                "name": obj.department.name,
+            }
+        return None
 
     class Meta:
         model = Subject
-        fields = ['id', 'name', 'numberOfHours', 'semester',
-                  'career', 'department', 'studyPlan']
+        fields = '__all__'
 
 
 class SubjectDescriptionSerializer(ModelSerializer):
-    subject = serializers.CharField(source='subject.name')
-    classType = serializers.CharField(source='classType.name')
-    timePeriod = serializers.CharField(source='timePeriod.name')
+    subject_id = serializers.IntegerField(required=True, write_only=True)
+    subject = serializers.SerializerMethodField()
+
+    class_type_id = serializers.IntegerField(required=True, write_only=True)
+    class_type = serializers.SerializerMethodField()
+
+    time_period_id = serializers.IntegerField(required=True, write_only=True)
+    time_period = serializers.SerializerMethodField()
+
+    def get_subject(self, obj) -> dict:
+        if obj.subject:
+            return {
+                "id": obj.subject.id,
+                "name": obj.subject.name
+            }
+        return None
+
+    def get_class_type(self, obj) -> dict:
+        if obj.class_type:
+            return {
+                "id": obj.class_type.id,
+                "name": obj.class_type.name
+            }
+        return None
+
+    def get_time_period(self, obj) -> dict:
+        if obj.time_period:
+            return {
+                "id": obj.time_period.id,
+                "name": obj.time_period.name
+            }
+        return None
 
     class Meta:
         model = SubjectDescription
-        fields = ['id', 'numberOfHours', 'numberOfGroups', 'subject',
-                  'classType', 'timePeriod']
+        fields = '__all__'
 
 
 class TeachingAssignmentSerializer(ModelSerializer):
