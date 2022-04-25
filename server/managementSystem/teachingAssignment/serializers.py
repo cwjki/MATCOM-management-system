@@ -34,30 +34,37 @@ class CareerSerializer(ModelSerializer):
 
 
 class StudyPlanSerializer(ModelSerializer):
-    teachingGroups = serializers.StringRelatedField(many=True)
+    teaching_groups = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = StudyPlan
-        fields = ['id', 'name', 'since', 'until',
-                  'numberOfSemesters', 'teachingGroups']
+        fields = '__all__'
 
 
 class TeachingGroupSerializer(ModelSerializer):
-    studyPlan = serializers.CharField(source='studyPlan.name')
+    study_plan_id = serializers.IntegerField(required=True, write_only=True)
+    study_plan = serializers.SerializerMethodField()
+
+    def get_study_plan(self, obj) -> dict:
+        if obj.study_plan:
+            return {
+                "id": obj.study_plan.id,
+                "name": obj.study_plan.name
+            }
+        return None
 
     class Meta:
         model = TeachingGroup
-        fields = ['id', 'name', 'studyPlan']
+        fields = '__all__'
 
 
 class DepartmentSerializer(ModelSerializer):
-    # career = serializers.CharField(source='career.name')
     career_id = serializers.IntegerField(required=True, write_only=True)
     career = serializers.SerializerMethodField()
 
     def get_career(self, obj) -> dict:
         if obj.career:
-            return{
+            return {
                 "id": obj.career.id,
                 "name": obj.career.name
             }
@@ -65,49 +72,74 @@ class DepartmentSerializer(ModelSerializer):
 
     class Meta:
         model = Department
-        # fields = ['id', 'name', 'career']
         fields = '__all__'
 
 
 class ClassTypeSerializer(ModelSerializer):
     class Meta:
         model = ClassType
-        fields = ['id', 'name']
+        fields = '__all__'
 
 
 class TimePeriodSerializer(ModelSerializer):
     class Meta:
         model = TimePeriod
-        fields = ['id', 'name']
+        fields = '__all__'
 
 
 class SemesterSerializer(ModelSerializer):
     class Meta:
         model = Semester
-        fields = ['id', 'name']
+        fields = '__all__'
 
 
 class ScientificDegreeSerializer(ModelSerializer):
     class Meta:
         model = ScientificDegree
-        fields = ['id', 'name']
+        fields = '__all__'
 
 
 class TeachingCategorySerializer(ModelSerializer):
     class Meta:
         model = TeachingCategory
-        fields = ['id', 'name']
+        fields = '__all__'
 
 
 class ProfessorSerializer(ModelSerializer):
-    department = serializers.CharField(source='department.name')
-    scientificDegree = serializers.CharField(source='scientificDegree.name')
-    teachingCategory = serializers.CharField(source='teachingCategory.name')
+    department = serializers.SerializerMethodField()
+    scientific_degree = serializers.SerializerMethodField()
+    teaching_category = serializers.SerializerMethodField()
+
+    # career_id = serializers.IntegerField(required=True, write_only=True)
+    # career = serializers.SerializerMethodField()
+
+    def get_department(self, obj) -> dict:
+        if obj.department:
+            return {
+                "id": obj.department.id,
+                "name": obj.department.name,
+            }
+        return None
+
+    def get_scientific_degree(self, obj) -> dict:
+        if obj.scientific_degree:
+            return {
+                "id": obj.scientific_degree.id,
+                "name": obj.scientific_degree.name,
+            }
+        return None
+
+    def get_teaching_category(self, obj) -> dict:
+        if obj.teaching_category:
+            return {
+                "id": obj.teaching_category.id,
+                "name": obj.teaching_category.name,
+            }
+        return None
 
     class Meta:
         model = Professor
-        fields = ['id', 'name', 'lastName', 'department',
-                  'scientificDegree', 'teachingCategory']
+        fields = '__all__'
 
 
 class SubjectSerializer(ModelSerializer):

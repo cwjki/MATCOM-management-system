@@ -27,7 +27,7 @@ class StudyPlan(models.Model):
     name = models.CharField(max_length=50)
     since = models.DateField()
     until = models.DateField(null=True, blank=True)
-    numberOfSemesters = models.SmallIntegerField()
+    number_of_semesters = models.SmallIntegerField()
 
     def __str__(self) -> str:
         return str(self.name)
@@ -37,8 +37,8 @@ class TeachingGroup(models.Model):
     name = models.CharField(max_length=50)
 
     # Relationship
-    studyPlan = models.ForeignKey(
-        StudyPlan, related_name='teachingGroups', on_delete=models.PROTECT)
+    study_plan = models.ForeignKey(
+        StudyPlan, related_name='teaching_groups', on_delete=models.PROTECT)
 
     def __str__(self) -> str:
         return str(self.name)
@@ -91,25 +91,25 @@ class TimePeriod(models.Model):
 
 class Professor(models.Model):
     name = models.CharField(max_length=200)
-    lastName = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     # Relationships
-    scientificDegree = models.ForeignKey(
+    scientific_degree = models.ForeignKey(
         ScientificDegree, on_delete=models.PROTECT, null=True, blank=True)
-    teachingCategory = models.ForeignKey(
+    teaching_category = models.ForeignKey(
         TeachingCategory, on_delete=models.PROTECT, null=True, blank=True)
     department = models.ForeignKey(
         Department, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self) -> str:
-        return str(self.name) + ' ' + str(self.lastName)
+        return str(self.name) + ' ' + str(self.last_name)
 
 
 class Subject(models.Model):
     name = models.CharField(max_length=200)
-    numberOfHours = models.PositiveIntegerField()
+    number_of_hours = models.PositiveIntegerField()
     semester = models.PositiveSmallIntegerField()
 
     # Relationships
@@ -117,24 +117,24 @@ class Subject(models.Model):
         Career, on_delete=models.PROTECT, null=True, blank=True)
     department = models.ForeignKey(
         Department, on_delete=models.PROTECT, null=True, blank=True)
-    studyPlan = models.ForeignKey(
+    study_plan = models.ForeignKey(
         StudyPlan, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self) -> str:
-        return str(self.name) + ' ' + '[' + str(self.career) + ']' + ' ' + '[' + str(self.studyPlan) + ']'
+        return str(self.name) + ' ' + '[' + str(self.career) + ']' + ' ' + '[' + str(self.study_plan) + ']'
 
 
 class SubjectDescription(models.Model):
-    numberOfHours = models.PositiveIntegerField()
-    numberOfGroups = models.PositiveIntegerField()
+    number_of_hours = models.PositiveIntegerField()
+    number_of_groups = models.PositiveIntegerField()
 
     # Relationships
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    classType = models.ForeignKey(ClassType, on_delete=models.PROTECT)
-    timePeriod = models.ForeignKey(TimePeriod, on_delete=models.PROTECT)
+    class_type = models.ForeignKey(ClassType, on_delete=models.PROTECT)
+    time_period = models.ForeignKey(TimePeriod, on_delete=models.PROTECT)
 
     def __str__(self) -> str:
-        return '[' + str(self.subject) + '] ' + '[' + str(self.classType) + '] ' + '[' + str(self.timePeriod) + ']'
+        return '[' + str(self.subject) + '] ' + '[' + str(self.class_type) + '] ' + '[' + str(self.time_period) + ']'
 
 
 class TeachingAssignment(models.Model):
@@ -143,17 +143,17 @@ class TeachingAssignment(models.Model):
 
     # Relationships
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
-    subjectDescription = models.ForeignKey(
+    subject_description = models.ForeignKey(
         SubjectDescription, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return '[' + str(self.professor) + '] ' + '[' + str(self.subjectDescription) + ']'
+        return '[' + str(self.professor) + '] ' + '[' + str(self.subject_description) + ']'
 
 
 class CarmenTable(models.Model):
-    teachingGroup = models.ForeignKey(TeachingGroup, on_delete=models.CASCADE)
-    timePeriod = models.ForeignKey(TimePeriod, on_delete=models.CASCADE)
+    teaching_group = models.ForeignKey(TeachingGroup, on_delete=models.CASCADE)
+    time_period = models.ForeignKey(TimePeriod, on_delete=models.CASCADE)
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return '[' + str(self.teachingGroup) + '] ' + '[' + str(self.timePeriod) + ']' + '[' + str(self.semester) + ']'
+        return '[' + str(self.teaching_group) + '] ' + '[' + str(self.time_period) + ']' + '[' + str(self.semester) + ']'
