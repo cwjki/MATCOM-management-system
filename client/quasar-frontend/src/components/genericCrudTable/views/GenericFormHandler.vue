@@ -21,7 +21,7 @@
                 :class="`q-pa-sm q-pb-none ${getResponsive(field)}`"
                 :key="i"
             >
-                <generic-field-hanlder
+                <generic-field-handler
                     :field="field"
                     :editeItem="editeItem"
                     @onChangekey="$emit('onChangekey', field.name, $event)"
@@ -56,10 +56,10 @@
 import { FieldModel } from '../models/field.model';
 import { defineComponent, PropType, ref } from 'vue';
 import { Dictionary } from 'src/models/base';
-import GenericFieldHanlder from './GenericFieldHanlder.vue';
+import GenericFieldHandler from './GenericFieldHandler.vue';
 
 export default defineComponent({
-    components: { GenericFieldHanlder },
+    components: { GenericFieldHandler },
     props: {
         fields: {
             type: Array as PropType<FieldModel[]>,

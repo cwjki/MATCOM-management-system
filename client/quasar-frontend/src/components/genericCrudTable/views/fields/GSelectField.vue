@@ -25,9 +25,8 @@
 </template>
 
 <script lang="ts">
-import { FieldModel, FieldSelect } from '../../models/field.model';
+import { FieldSelect } from '../../models/field.model';
 import { defineComponent, PropType, ref } from 'vue';
-import { Dictionary } from 'src/models/base';
 
 export default defineComponent({
     emits: ['onChangekey'],

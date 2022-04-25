@@ -167,7 +167,6 @@ import { defineComponent, PropType } from 'vue';
 import { GenericCrudTableConfig } from '../models/table.model';
 import { useGenericDataTable } from '../hooks/table.hooks';
 import { useCrud } from '../hooks/crud.hooks';
-import { config } from 'process';
 import GenericFormHandler from './GenericFormHandler.vue';
 import { useSerializer } from '../hooks/serializer.hooks';
 import { Dictionary } from 'src/models/base';

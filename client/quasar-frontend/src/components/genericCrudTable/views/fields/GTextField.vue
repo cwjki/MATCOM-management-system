@@ -19,7 +19,6 @@
 <script lang="ts">
 import { FieldModel } from '../../models/field.model';
 import { defineComponent, PropType } from 'vue';
-import { Dictionary } from 'src/models/base';
 
 export default defineComponent({
     emits: ['onChangekey'],
