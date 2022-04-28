@@ -16,8 +16,8 @@ class Career(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     # Relationship
-    owner = models.ForeignKey(
-        'auth.User', related_name='careers', on_delete=models.CASCADE)
+    # owner = models.ForeignKey(
+    #     'auth.User', related_name='careers', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return str(self.name)

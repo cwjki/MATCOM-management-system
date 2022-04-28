@@ -17,25 +17,24 @@ class UserSerializer(ModelSerializer):
     snippets = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Snippet.objects.all())
 
-    careers = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Career.objects.all())
+    # careers = serializers.PrimaryKeyRelatedField(
+    #     many=True, queryset=Career.objects.all())
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'snippets', 'careers']
+        fields = '__all__'
 
 
 class CareerSerializer(ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    # owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Career
-        fields = ['id', 'name', 'owner']
+        fields = '__all__'
 
 
 class StudyPlanSerializer(ModelSerializer):
-    teaching_groups = serializers.StringRelatedField(many=True)
-
+    # teaching_groups = serializers.StringRelatedField(many=True)
     class Meta:
         model = StudyPlan
         fields = '__all__'
@@ -225,21 +224,71 @@ class SubjectDescriptionSerializer(ModelSerializer):
 
 
 class TeachingAssignmentSerializer(ModelSerializer):
-    professor = serializers.CharField(source='professor.name')
-    subjectDescription = serializers.CharField(
-        source='subjectDescription.subject')
+    professor_id = serializers.IntegerField(required=True, write_only=True)
+    professor = serializers.SerializerMethodField()
+
+    subject_description_id = serializers.IntegerField(
+        required=True, write_only=True)
+    subject_description = serializers.SerializerMethodField()
+
+    def get_professor(self, obj) -> dict:
+        if obj.professor:
+            return {
+                "id": obj.professor.id,
+                "name": obj.professor.name
+            }
+        return None
+
+    def get_subject_description(self, obj) -> dict:
+        if obj.subject_description:
+            return {
+                "id": obj.subject_description.id,
+                "name": obj.subject_description.name
+            }
+        return None
 
     class Meta:
         model = TeachingAssignment
-        fields = ['id', 'percent', 'group', 'subjectDescription',
-                  'professor']
+        fields = '__all__'
 
 
 class CarmenTableSerializer(ModelSerializer):
-    teachingGroup = serializers.CharField(source='teachingGroup.name')
-    timePeriod = serializers.CharField(source='timePeriod.name')
-    semester = serializers.CharField(source='semester.name')
+    teaching_group_id = serializers.IntegerField(
+        required=True, write_only=True)
+    teaching_group = serializers.SerializerMethodField()
+
+    time_period_id = serializers.IntegerField(
+        required=True, write_only=True)
+    time_period = serializers.SerializerMethodField()
+
+    semester_id = serializers.IntegerField(
+        required=True, write_only=True)
+    semester = serializers.SerializerMethodField()
+
+    def get_teaching_group(self, obj) -> dict:
+        if obj.teaching_group:
+            return {
+                "id": obj.teaching_group.id,
+                "name": obj.teaching_group.name
+            }
+        return None
+
+    def get_time_period(self, obj) -> dict:
+        if obj.time_period:
+            return {
+                "id": obj.time_period.id,
+                "name": obj.time_period.name
+            }
+        return None
+
+    def get_semester(self, obj) -> dict:
+        if obj.semester:
+            return {
+                "id": obj.semester.id,
+                "name": obj.semester.name
+            }
+        return None
 
     class Meta:
         model = CarmenTable
-        fields = ['id', 'teachingGroup', 'timePeriod', 'semester']
+        fields = '__all__'
