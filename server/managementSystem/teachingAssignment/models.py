@@ -147,7 +147,7 @@ class TeachingAssignment(models.Model):
         SubjectDescription, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return '[' + str(self.professor) + '] ' + '[' + str(self.subject_description) + ']'
+        return '[' + str(self.professor) + '] ' + '[' + str(self.subject_description) + ']' + '[Grupo ' + str(self.group) + ']'
 
 
 class CarmenTable(models.Model):
