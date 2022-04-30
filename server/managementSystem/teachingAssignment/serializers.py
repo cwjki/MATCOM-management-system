@@ -243,7 +243,11 @@ class TeachingAssignmentSerializer(ModelSerializer):
         if obj.subject_description:
             return {
                 "id": obj.subject_description.id,
-                "name": obj.subject_description.name
+                "name": obj.subject_description.subject.name,
+                "class_type": obj.subject_description.class_type.name,
+                "time_period": obj.subject_description.time_period.name,
+                "number_of_hours": obj.subject_description.number_of_hours,
+                "number_of_groups": obj.subject_description.number_of_groups
             }
         return None
 
