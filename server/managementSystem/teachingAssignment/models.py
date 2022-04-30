@@ -41,7 +41,7 @@ class TeachingGroup(models.Model):
         StudyPlan, related_name='teaching_groups', on_delete=models.PROTECT)
 
     def __str__(self) -> str:
-        return str(self.name)
+        return  '[' +  str(self.name) + ']' + ' [' + str(self.study_plan) + ']'
 
 
 class Department(models.Model):
