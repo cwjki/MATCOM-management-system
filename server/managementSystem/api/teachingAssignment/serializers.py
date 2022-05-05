@@ -1,4 +1,3 @@
-from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
