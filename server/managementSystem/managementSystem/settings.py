@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 
-    'api.teachingAssignment.apps.TeachingAssignmentConfig',
+    'api.teachingAssignmentAPI.apps.TeachingAssignmentAPIConfig',
 ]
 
 MIDDLEWARE = [

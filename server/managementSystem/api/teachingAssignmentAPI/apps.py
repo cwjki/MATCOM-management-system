@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class TeachingAssignmentConfig(AppConfig):
+class TeachingAssignmentAPIConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'api.teachingAssignment'
+    name = 'api.teachingAssignmentAPI'

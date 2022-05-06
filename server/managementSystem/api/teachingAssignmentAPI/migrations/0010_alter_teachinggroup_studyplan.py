@@ -7,13 +7,14 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('teachingAssignment', '0009_rename_teachingplanning_subjectdescription_and_more'),
+        ('teachingAssignmentAPI',
+         '0009_rename_teachingplanning_subjectdescription_and_more'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='teachinggroup',
             name='studyPlan',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='teachingGroups', to='teachingAssignment.studyplan'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='teachingGroups', to='teachingAssignmentAPI.studyplan'),
         ),
     ]

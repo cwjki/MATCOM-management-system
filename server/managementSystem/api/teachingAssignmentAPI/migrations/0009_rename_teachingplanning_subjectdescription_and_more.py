@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('teachingAssignment', '0008_semester_carmentable'),
+        ('teachingAssignmentAPI', '0008_semester_carmentable'),
     ]
 
     operations = [

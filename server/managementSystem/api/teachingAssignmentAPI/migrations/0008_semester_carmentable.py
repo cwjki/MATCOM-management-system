@@ -7,7 +7,8 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('teachingAssignment', '0007_subject_alter_snippet_options_teachingplanning_and_more'),
+        ('teachingAssignmentAPI',
+         '0007_subject_alter_snippet_options_teachingplanning_and_more'),
     ]
 
     operations = [
@@ -22,9 +23,9 @@ class Migration(migrations.Migration):
             name='CarmenTable',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('schoolYear', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignment.schoolyear')),
-                ('semester', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignment.semester')),
-                ('yearPeriod', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignment.yearperiod')),
+                ('schoolYear', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignmentAPI.schoolyear')),
+                ('semester', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignmentAPI.semester')),
+                ('yearPeriod', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignmentAPI.yearperiod')),
             ],
         ),
     ]

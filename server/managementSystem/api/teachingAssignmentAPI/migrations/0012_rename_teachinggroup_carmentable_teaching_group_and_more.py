@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('teachingAssignment', '0011_rename_studyplan_teachinggroup_study_plan'),
+        ('teachingAssignmentAPI', '0011_rename_studyplan_teachinggroup_study_plan'),
     ]
 
     operations = [
@@ -79,6 +79,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='teachinggroup',
             name='study_plan',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='teaching_groups', to='teachingAssignment.studyplan'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='teaching_groups', to='teachingAssignmentAPI.studyplan'),
         ),
     ]

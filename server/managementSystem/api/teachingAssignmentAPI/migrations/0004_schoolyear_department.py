@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('teachingAssignment', '0003_studyplan'),
+        ('teachingAssignmentAPI', '0003_studyplan'),
     ]
 
     operations = [
@@ -16,7 +16,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=200)),
-                ('studyPlan', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='teachingAssignment.studyplan')),
+                ('studyPlan', models.ForeignKey(
+                    on_delete=django.db.models.deletion.PROTECT, to='teachingAssignmentAPI.studyplan')),
             ],
         ),
         migrations.CreateModel(
@@ -24,7 +25,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=200)),
-                ('career', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='teachingAssignment.career')),
+                ('career', models.ForeignKey(
+                    on_delete=django.db.models.deletion.PROTECT, to='teachingAssignmentAPI.career')),
             ],
         ),
     ]

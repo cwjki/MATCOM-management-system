@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('teachingAssignment', '0006_professor'),
+        ('teachingAssignmentAPI', '0006_professor'),
     ]
 
     operations = [
@@ -18,9 +18,9 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=200)),
                 ('numberOfHours', models.PositiveIntegerField()),
                 ('semester', models.PositiveSmallIntegerField()),
-                ('career', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='teachingAssignment.career')),
-                ('department', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='teachingAssignment.department')),
-                ('studyPlan', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='teachingAssignment.studyplan')),
+                ('career', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='teachingAssignmentAPI.career')),
+                ('department', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='teachingAssignmentAPI.department')),
+                ('studyPlan', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='teachingAssignmentAPI.studyplan')),
             ],
         ),
         migrations.AlterModelOptions(
@@ -33,9 +33,9 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('numberOfHours', models.PositiveIntegerField()),
                 ('numberOfGroups', models.PositiveIntegerField()),
-                ('classType', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='teachingAssignment.classtype')),
-                ('subject', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignment.subject')),
-                ('yearPeriod', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='teachingAssignment.yearperiod')),
+                ('classType', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='teachingAssignmentAPI.classtype')),
+                ('subject', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignmentAPI.subject')),
+                ('yearPeriod', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='teachingAssignmentAPI.yearperiod')),
             ],
         ),
         migrations.CreateModel(
@@ -44,8 +44,8 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('percent', models.IntegerField(default=1)),
                 ('group', models.IntegerField()),
-                ('professor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignment.professor')),
-                ('teachingPlanning', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignment.teachingplanning')),
+                ('professor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignmentAPI.professor')),
+                ('teachingPlanning', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='teachingAssignmentAPI.teachingplanning')),
             ],
         ),
     ]
