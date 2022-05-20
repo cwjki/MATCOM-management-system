@@ -3,6 +3,8 @@ import { CarmenTableModel } from 'src/models/carmenTable.model';
 import { DepartmentModel } from 'src/models/department.model';
 import { ProfessorModel } from 'src/models/professor.model';
 import { ScientificDegreeModel } from 'src/models/scientificDegree.model';
+import { SemesterModel } from 'src/models/semester.model';
+import { StudyPlanModel } from 'src/models/studyPlan.model';
 import { SubjectModel } from 'src/models/subject.model';
 import { SubjectDescriptionModel } from 'src/models/subjectDescription.model';
 import { TeachingAssignmentModel } from 'src/models/teachingAssignment.model';
@@ -19,6 +21,8 @@ export const RESOURCES = {
     carmenTable: '/carmen-table/',
     teachingCategory: '/teaching-categories/',
     scientificDegree: '/scientific-degrees/',
+    semester: '/semesters/',
+    studyPlan: '/study-plans',
 };
 
 export const careerService = CrudServiceFactory<CareerModel>(RESOURCES.careers);
@@ -50,3 +54,11 @@ export const teachingCategoryService =
 
 export const scientificDegreeService =
     CrudServiceFactory<ScientificDegreeModel>(RESOURCES.scientificDegree);
+
+export const studyPlanService = CrudServiceFactory<StudyPlanModel>(
+    RESOURCES.studyPlan
+);
+
+export const semesterService = CrudServiceFactory<SemesterModel>(
+    RESOURCES.semester
+);

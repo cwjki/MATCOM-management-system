@@ -41,7 +41,7 @@ class TeachingGroup(models.Model):
         StudyPlan, related_name='teaching_groups', on_delete=models.PROTECT)
 
     def __str__(self) -> str:
-        return  '[' +  str(self.name) + ']' + ' [' + str(self.study_plan) + ']'
+        return '[' + str(self.name) + ']' + ' [' + str(self.study_plan) + ']'
 
 
 class Department(models.Model):
@@ -110,7 +110,7 @@ class Professor(models.Model):
 class Subject(models.Model):
     name = models.CharField(max_length=200)
     number_of_hours = models.PositiveIntegerField()
-    semester = models.PositiveSmallIntegerField()
+    # semester = models.PositiveSmallIntegerField()
 
     # Relationships
     career = models.ForeignKey(
@@ -119,6 +119,8 @@ class Subject(models.Model):
         Department, on_delete=models.PROTECT, null=True, blank=True)
     study_plan = models.ForeignKey(
         StudyPlan, on_delete=models.PROTECT, null=True, blank=True)
+    semester = models.ForeignKey(
+        Semester, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self) -> str:
         return str(self.name) + ' ' + '[' + str(self.career) + ']' + ' ' + '[' + str(self.study_plan) + ']'

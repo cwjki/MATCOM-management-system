@@ -1,3 +1,5 @@
+from asyncore import write
+from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
@@ -153,6 +155,17 @@ class SubjectSerializer(ModelSerializer):
 
     study_plan_id = serializers.IntegerField(required=True, write_only=True)
     study_plan = serializers.SerializerMethodField()
+
+    semester_id = serializers.IntegerField(required=True, write_only=True)
+    semester = serializers.SerializerMethodField()
+
+    def get_semester(self, obj) -> dict:
+        if obj.semester:
+            return {
+                "id": obj.semester.id,
+                "name": obj.semester.name
+            }
+        return None
 
     def get_study_plan(self, obj) -> dict:
         if obj.study_plan:
