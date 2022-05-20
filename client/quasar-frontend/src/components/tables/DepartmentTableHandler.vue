@@ -28,7 +28,7 @@ export default defineComponent({
                     label: 'Carrera',
                     column: {
                         transform(row) {
-                            return `(${row.career.id}) - ${row.career.name}`;
+                            return `${row.career.name}`;
                         },
                     },
                     type: 'select',

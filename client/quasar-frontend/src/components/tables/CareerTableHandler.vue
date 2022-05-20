@@ -22,10 +22,6 @@ export default defineComponent({
                     name: 'name',
                     label: 'Nombre',
                 },
-                {
-                    name: 'owner',
-                    label: 'Creador',
-                },
             ],
             actions: {
                 create: true,

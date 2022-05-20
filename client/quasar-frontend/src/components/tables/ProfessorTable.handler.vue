@@ -9,7 +9,12 @@
 </template>
 
 <script lang="ts">
-import { professorService } from 'src/services';
+import {
+    departmentService,
+    professorService,
+    scientificDegreeService,
+    teachingCategoryService,
+} from 'src/services';
 import { defineComponent, PropType, computed, ref, toRef, Ref } from 'vue';
 // import { CrudTableConfig } from '../crudTableGeneric/models/table.model';
 // import GCrudDataTable from '../crudTableGeneric/view/GCrudDataTable.vue';
@@ -39,7 +44,7 @@ export default defineComponent({
                     rules: ['required'],
                 },
                 {
-                    name: 'lastName',
+                    name: 'last_name',
                     label: 'Apellidos',
                     form: {
                         responsiveOptions: {
@@ -51,21 +56,49 @@ export default defineComponent({
                 {
                     name: 'department',
                     label: 'Departamento',
-                    form: {
-                        responsiveOptions: {
-                            md: 8,
+                    column: {
+                        transform(row) {
+                            return `${row.department.name}`;
                         },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: departmentService.list,
+                        value: 'id',
+                        label: 'name',
                     },
                     rules: ['required'],
                 },
                 {
-                    name: 'scientificDegree',
+                    name: 'scientific_degree',
                     label: 'Grado Científico',
+                    column: {
+                        transform(row) {
+                            return `${row.scientific_degree.name}`;
+                        },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: scientificDegreeService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
                     rules: ['required'],
                 },
                 {
-                    name: 'teachingCategory',
+                    name: 'teaching_category',
                     label: 'Categoría Docente',
+                    column: {
+                        transform(row) {
+                            return `${row.teaching_category.name}`;
+                        },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: teachingCategoryService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
                     rules: ['required'],
                 },
             ],
