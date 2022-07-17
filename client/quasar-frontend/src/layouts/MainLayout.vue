@@ -22,7 +22,7 @@
                 </q-toolbar-title>
 
                 <q-btn
-                    label="Pagina Principal"
+                    label="Página Principal"
                     icon="home"
                     no-caps
                     @click="$router.push({ name: 'home' })"
@@ -52,15 +52,13 @@
                                 </q-item-section> -->
 
                                 <q-item-section>
-                                <q-btn
-                                    class="full-with"
-                                    color="primary"
-                                    :icon="link.icon"
-                                    no-caps
-                                    >{{
-                                        $q.screen.gt.sm ? link.title : ''
-                                    }}</q-btn
-                                >
+                                    <q-btn color="primary" no-caps align="left">
+                                        <q-icon
+                                            :name="link.icon"
+                                            class="q-mr-md"
+                                        />
+                                        {{ $q.screen.gt.sm ? link.title : '' }}
+                                    </q-btn>
                                 </q-item-section>
 
                                 <!-- <q-item-section>
@@ -96,12 +94,6 @@ import { defineComponent, ref } from 'vue';
 import EssentialLink from 'components/EssentialLink.vue';
 
 const linksList = [
-    {
-        title: 'Home',
-        caption: 'quasar.dev',
-        icon: 'home',
-        link: 'home',
-    },
     {
         title: 'Profesores',
         caption: 'quasar.dev',
