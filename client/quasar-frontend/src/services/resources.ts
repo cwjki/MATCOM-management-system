@@ -4,6 +4,8 @@ import { DepartmentModel } from 'src/models/department.model';
 import { ProfessorModel } from 'src/models/professor.model';
 import { ScientificDegreeModel } from 'src/models/scientificDegree.model';
 import { SemesterModel } from 'src/models/semester.model';
+import { ClassTypeModel } from 'src/models/classType.model';
+import { TimePeriodModel } from 'src/models/timePeriod.model';
 import { StudyPlanModel } from 'src/models/studyPlan.model';
 import { SubjectModel } from 'src/models/subject.model';
 import { SubjectDescriptionModel } from 'src/models/subjectDescription.model';
@@ -17,12 +19,14 @@ export const RESOURCES = {
     departments: '/departments/',
     subjects: '/subjects/',
     subjectDescriptions: '/subject-descriptions/',
-    teachingAssignment: '/teaching-assignments/',
+    teachingAssignments: '/teaching-assignments/',
     carmenTable: '/carmen-table/',
     teachingCategory: '/teaching-categories/',
     scientificDegree: '/scientific-degrees/',
-    semester: '/semesters/',
-    studyPlan: '/study-plans',
+    semesters: '/semesters/',
+    studyPlans: '/study-plans/',
+    classTypes: '/class-types/',
+    timePeriods: '/time-periods/',
 };
 
 export const careerService = CrudServiceFactory<CareerModel>(RESOURCES.careers);
@@ -43,7 +47,7 @@ export const subjectDescriptionService =
     CrudServiceFactory<SubjectDescriptionModel>(RESOURCES.subjectDescriptions);
 
 export const teachingAssignmentService =
-    CrudServiceFactory<TeachingAssignmentModel>(RESOURCES.teachingAssignment);
+    CrudServiceFactory<TeachingAssignmentModel>(RESOURCES.teachingAssignments);
 
 export const carmenTableService = CrudServiceFactory<CarmenTableModel>(
     RESOURCES.carmenTable
@@ -56,9 +60,17 @@ export const scientificDegreeService =
     CrudServiceFactory<ScientificDegreeModel>(RESOURCES.scientificDegree);
 
 export const studyPlanService = CrudServiceFactory<StudyPlanModel>(
-    RESOURCES.studyPlan
+    RESOURCES.studyPlans
 );
 
 export const semesterService = CrudServiceFactory<SemesterModel>(
-    RESOURCES.semester
+    RESOURCES.semesters
+);
+
+export const classTypeService = CrudServiceFactory<ClassTypeModel>(
+    RESOURCES.classTypes
+);
+
+export const timePeriodService = CrudServiceFactory<TimePeriodModel>(
+    RESOURCES.timePeriods
 );
