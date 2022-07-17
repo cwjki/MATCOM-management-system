@@ -21,21 +21,61 @@
                     Matcom
                 </q-toolbar-title>
 
+                <q-btn
+                    label="Pagina Principal"
+                    icon="home"
+                    no-caps
+                    @click="$router.push({ name: 'home' })"
+                />
+
                 <div>
-                    <q-btn
-                        v-for="(link, i) in essentialLinks"
-                        :key="i"
-                        :label="$q.screen.gt.sm ? link.title : ''"
-                        :icon="link.icon"
-                        no-caps
-                        @click="$router.push({ name: link.link })"
-                        :flat="$router.currentRoute.value.name !== link.link"
-                    />
+                    <q-btn-dropdown label="Actividades" no-caps>
+                        <q-list>
+                            <q-item
+                                clickable
+                                v-ripple
+                                v-for="(link, i) in essentialLinks"
+                                :key="i"
+                                no-caps
+                                @click="$router.push({ name: link.link })"
+                                :flat="
+                                    $router.currentRoute.value.name !==
+                                    link.link
+                                "
+                            >
+                                <!-- <q-item-section avatar>
+                                    <q-avatar
+                                        :icon="link.icon"
+                                        color="primary"
+                                        text-color="white"
+                                    />
+                                </q-item-section> -->
+
+                                <q-item-section>
+                                <q-btn
+                                    class="full-with"
+                                    color="primary"
+                                    :icon="link.icon"
+                                    no-caps
+                                    >{{
+                                        $q.screen.gt.sm ? link.title : ''
+                                    }}</q-btn
+                                >
+                                </q-item-section>
+
+                                <!-- <q-item-section>
+                                    {{
+                                        $q.screen.gt.sm ? link.title : ''
+                                    }}
+                                </q-item-section> -->
+                            </q-item>
+                        </q-list>
+                    </q-btn-dropdown>
                 </div>
             </q-toolbar>
         </q-header>
 
-        <q-drawer v-model="leftDrawerOpen" bordered>
+        <!-- <q-drawer v-model="leftDrawerOpen" bordered>
             <q-list>
                 <EssentialLink
                     v-for="link in essentialLinks"
@@ -43,7 +83,7 @@
                     v-bind="link"
                 />
             </q-list>
-        </q-drawer>
+        </q-drawer> -->
 
         <q-page-container>
             <router-view />

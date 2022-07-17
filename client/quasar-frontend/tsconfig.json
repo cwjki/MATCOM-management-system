@@ -1,6 +1,7 @@
 {
-  "extends": "@quasar/app-webpack/tsconfig-preset",
-  "compilerOptions": {
-    "baseUrl": "."
-  }
+    "extends": "@quasar/app-webpack/tsconfig-preset",
+    "compilerOptions": {
+        "jsx": "preserve",
+        "baseUrl": "."
+    }
 }

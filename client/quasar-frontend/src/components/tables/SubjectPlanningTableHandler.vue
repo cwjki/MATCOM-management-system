@@ -7,6 +7,7 @@ import {
     classTypeService,
     subjectDescriptionService,
     subjectService,
+    timePeriodService,
 } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
@@ -58,10 +59,12 @@ export default defineComponent({
                 {
                     name: 'number_of_groups',
                     label: 'Grupos',
+                    rules: ['required'],
                 },
                 {
                     name: 'number_of_hours',
                     label: 'Horas',
+                    rules: ['required'],
                 },
                 {
                     name: 'timePeriod',
@@ -71,6 +74,13 @@ export default defineComponent({
                             return `${row.time_period.name}`;
                         },
                     },
+                    type: 'select',
+                    selectOptions: {
+                        list: timePeriodService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
+                    rules: ['required'],
                 },
             ],
             actions: {
