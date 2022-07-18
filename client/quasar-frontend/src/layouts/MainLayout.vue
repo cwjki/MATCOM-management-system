@@ -125,13 +125,13 @@ const linksList = [
     {
         title: 'Categoría Escolar',
         caption: 'quasar.dev',
-        icon: 'date_range',
+        icon: 'star_rate',
         link: 'teaching-category',
     },
     {
         title: 'Grado Científico',
         caption: 'quasar.dev',
-        icon: 'date_range',
+        icon: 'stars',
         link: 'scientific-degree',
     },
 ];
