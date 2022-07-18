@@ -146,6 +146,12 @@ const dropdownList1 = [
         link: 'time-periods',
     },
     {
+        title: 'Semestres',
+        caption: 'quasar.dev',
+        icon: 'calendar_month',
+        link: 'semesters',
+    },
+    {
         title: 'Categorías Escolares',
         caption: 'quasar.dev',
         icon: 'star_rate',

@@ -33,12 +33,17 @@ const routes: RouteRecordRaw[] = [
             {
                 path: 'study-plans',
                 name: 'study-plans',
-                component: () => import('pages/StudyPlan.vue'),
+                component: () => import('pages/StudyPlans.vue'),
+            },
+            {
+                path: 'semesters',
+                name: 'semesters',
+                component: () => import('pages/Semesters.vue'),
             },
             {
                 path: 'teaching-groups',
                 name: 'teaching-groups',
-                component: () => import('pages/TeachingGroup.vue'),
+                component: () => import('pages/TeachingGroups.vue'),
             },
             {
                 path: 'teaching-category',
@@ -48,7 +53,7 @@ const routes: RouteRecordRaw[] = [
             {
                 path: 'scientific-degree',
                 name: 'scientific-degree',
-                component: () => import('pages/ScientificDegree.vue'),
+                component: () => import('pages/ScientificDegrees.vue'),
             },
             {
                 path: 'departments',
