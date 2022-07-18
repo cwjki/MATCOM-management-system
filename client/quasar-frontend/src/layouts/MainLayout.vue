@@ -116,6 +116,12 @@ const linksList = [
         icon: 'auto_stories',
         link: 'class-types',
     },
+    {
+        title: 'Períodos de tiempo',
+        caption: 'quasar.dev',
+        icon: 'auto_stories',
+        link: 'time-periods',
+    },
 ];
 
 export default defineComponent({

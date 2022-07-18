@@ -1,15 +1,17 @@
 <template>
     <q-page padding>
-        <class-type-table-handler />
+        <time-period-table-handler />
+        <!-- <div class="bg-secondary full-width" style="height: 100px"></div> -->
     </q-page>
 </template>
 
 <script lang="ts">
+import TimePeriodTableHandler from 'src/components/tables/TimePeriodsTableHandler.vue';
 import { defineComponent } from 'vue';
-import ClassTypeTableHandler from 'src/components/tables/ClassTypesTableHandler.vue';
+
 export default defineComponent({
     components: {
-        ClassTypeTableHandler,
+        TimePeriodTableHandler,
     },
     setup(props, { emit }) {
         return {};
