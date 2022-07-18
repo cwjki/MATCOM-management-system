@@ -128,6 +128,12 @@ const dropdownList1 = [
         link: 'class-types',
     },
     {
+        title: 'Planes de estudio',
+        caption: 'quasar.dev',
+        icon: 'date_range',
+        link: 'study-plans',
+    },
+    {
         title: 'Períodos de tiempo',
         caption: 'quasar.dev',
         icon: 'date_range',
