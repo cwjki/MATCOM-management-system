@@ -146,6 +146,12 @@ const dropdownList1 = [
         link: 'time-periods',
     },
     {
+        title: 'Tabla de Carmen',
+        caption: 'quasar.dev',
+        icon: 'calendar_view_week',
+        link: 'carmen-table',
+    },
+    {
         title: 'Semestres',
         caption: 'quasar.dev',
         icon: 'calendar_month',
@@ -183,6 +189,12 @@ const dropdownList2 = [
         caption: 'quasar.dev',
         icon: 'feed',
         link: 'subject-plannings',
+    },
+    {
+        title: 'Asignación de Docencia',
+        caption: 'quasar.dev',
+        icon: 'feed',
+        link: 'teaching-assignments',
     },
 ];
 

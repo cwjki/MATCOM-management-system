@@ -29,6 +29,7 @@ export const RESOURCES = {
     classTypes: '/class-types/',
     timePeriods: '/time-periods/',
     teachingGroups: '/teaching-groups/',
+    teachingAssignment: '/teaching-assignments/',
 };
 
 export const careerService = CrudServiceFactory<CareerModel>(RESOURCES.careers);
@@ -80,3 +81,5 @@ export const timePeriodService = CrudServiceFactory<TimePeriodModel>(
 export const teachingGroupService = CrudServiceFactory<TeachingGroupModel>(
     RESOURCES.teachingGroups
 );
+
+
