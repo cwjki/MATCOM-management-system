@@ -29,12 +29,41 @@
                 />
 
                 <div>
+                    <q-btn-dropdown label="Nomencladores" no-caps>
+                        <q-list>
+                            <q-item
+                                clickable
+                                v-ripple
+                                v-for="(link, i) in essentialLinks1"
+                                :key="i"
+                                no-caps
+                                @click="$router.push({ name: link.link })"
+                                :flat="
+                                    $router.currentRoute.value.name !==
+                                    link.link
+                                "
+                            >
+                                <q-item-section>
+                                    <q-btn color="primary" no-caps align="left">
+                                        <q-icon
+                                            :name="link.icon"
+                                            class="q-mr-md"
+                                        />
+                                        {{ $q.screen.gt.sm ? link.title : '' }}
+                                    </q-btn>
+                                </q-item-section>
+                            </q-item>
+                        </q-list>
+                    </q-btn-dropdown>
+                </div>
+
+                <div>
                     <q-btn-dropdown label="Actividades" no-caps>
                         <q-list>
                             <q-item
                                 clickable
                                 v-ripple
-                                v-for="(link, i) in essentialLinks"
+                                v-for="(link, i) in essentialLinks2"
                                 :key="i"
                                 no-caps
                                 @click="$router.push({ name: link.link })"
@@ -79,13 +108,7 @@
 import { defineComponent, ref } from 'vue';
 import EssentialLink from 'components/EssentialLink.vue';
 
-const linksList = [
-    {
-        title: 'Profesores',
-        caption: 'quasar.dev',
-        icon: 'face',
-        link: 'professors',
-    },
+const dropdownList1 = [
     {
         title: 'Carreras',
         caption: 'quasar.dev',
@@ -97,18 +120,6 @@ const linksList = [
         caption: 'quasar.dev',
         icon: 'door_front',
         link: 'departments',
-    },
-    {
-        title: 'Asignaturas',
-        caption: 'quasar.dev',
-        icon: 'auto_stories',
-        link: 'subjects',
-    },
-    {
-        title: 'Planificación de Asignaturas',
-        caption: 'quasar.dev',
-        icon: 'feed',
-        link: 'subject-plannings',
     },
     {
         title: 'Actividades de clase',
@@ -123,16 +134,37 @@ const linksList = [
         link: 'time-periods',
     },
     {
-        title: 'Categoría Escolar',
+        title: 'Categorías Escolares',
         caption: 'quasar.dev',
         icon: 'star_rate',
         link: 'teaching-category',
     },
     {
-        title: 'Grado Científico',
+        title: 'Grados Científicos',
         caption: 'quasar.dev',
         icon: 'stars',
         link: 'scientific-degree',
+    },
+];
+
+const dropdownList2 = [
+    {
+        title: 'Profesores',
+        caption: 'quasar.dev',
+        icon: 'face',
+        link: 'professors',
+    },
+    {
+        title: 'Asignaturas',
+        caption: 'quasar.dev',
+        icon: 'auto_stories',
+        link: 'subjects',
+    },
+    {
+        title: 'Planificación de Asignaturas',
+        caption: 'quasar.dev',
+        icon: 'feed',
+        link: 'subject-plannings',
     },
 ];
 
@@ -147,7 +179,8 @@ export default defineComponent({
         const leftDrawerOpen = ref(false);
         const imageLogo = require('src/assets/logo.jpg');
         return {
-            essentialLinks: linksList,
+            essentialLinks1: dropdownList1,
+            essentialLinks2: dropdownList2,
             leftDrawerOpen,
             imageLogo,
             toggleLeftDrawer() {
