@@ -1,11 +1,5 @@
 <template>
-    <generic-crud-data-table :config="config">
-        <!-- <template v-slot:g-table-name>
-            <p class="text-h5 text-secondary text-weight-bolder q-mb-none">
-                {{ config.name }}
-            </p>
-        </template> -->
-    </generic-crud-data-table>
+    <generic-crud-data-table :config="config" />
 </template>
 
 <script lang="ts">
@@ -15,10 +9,7 @@ import {
     scientificDegreeService,
     teachingCategoryService,
 } from 'src/services';
-import { defineComponent, PropType, computed, ref, toRef, Ref } from 'vue';
-// import { CrudTableConfig } from '../crudTableGeneric/models/table.model';
-// import GCrudDataTable from '../crudTableGeneric/view/GCrudDataTable.vue';
-
+import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
 
@@ -36,6 +27,7 @@ export default defineComponent({
                 {
                     name: 'name',
                     label: 'Nombre',
+                    type: 'text',
                     form: {
                         responsiveOptions: {
                             md: 12,
@@ -46,6 +38,7 @@ export default defineComponent({
                 {
                     name: 'last_name',
                     label: 'Apellidos',
+                    type: 'text',
                     form: {
                         responsiveOptions: {
                             md: 4,

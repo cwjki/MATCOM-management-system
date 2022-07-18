@@ -22,6 +22,7 @@ export default defineComponent({
                 {
                     name: 'name',
                     label: 'Categoría Escolar ',
+                    type: 'text',
                 },
             ],
             actions: {

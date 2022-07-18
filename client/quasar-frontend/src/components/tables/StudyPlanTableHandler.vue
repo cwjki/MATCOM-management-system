@@ -3,42 +3,45 @@
 </template>
 
 <script lang="ts">
-import { careerService, departmentService } from 'src/services';
+import { studyPlanService } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
 
 export default defineComponent({
     components: { GenericCrudDataTable },
-    name: 'departmentHandler',
+    name: 'studyPlanHandler',
     props: {},
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Departamentos',
-            singularLabel: 'Departamento',
-            service: departmentService,
+            name: 'Planes de estudio',
+            singularLabel: 'Plan de estudio',
+            service: studyPlanService,
             fields: [
                 {
                     name: 'name',
                     label: 'Nombre',
                     type: 'text',
+
                 },
                 {
-                    name: 'career',
-                    label: 'Carrera',
-                    column: {
-                        transform(row) {
-                            return `${row.career.name}`;
-                        },
-                    },
-                    type: 'select',
-                    selectOptions: {
-                        list: careerService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
-                    rules: ['required'],
+                    name: 'since',
+                    label: 'Desde',
+                    type: 'text',
+
+                },
+                {
+                    name: 'until',
+                    label: 'Hasta',
+                    type: 'text',
+
+                },
+                {
+                    name: 'number_of_semesters',
+                    label: 'Cantidad de semestres',
+                    type: 'text',
+
                 },
             ],
             actions: {

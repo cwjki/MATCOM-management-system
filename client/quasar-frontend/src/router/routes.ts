@@ -31,14 +31,34 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('pages/TimePeriods.vue'),
             },
             {
+                path: 'study-plans',
+                name: 'study-plans',
+                component: () => import('pages/StudyPlans.vue'),
+            },
+            {
+                path: 'semesters',
+                name: 'semesters',
+                component: () => import('pages/Semesters.vue'),
+            },
+            {
+                path: 'teaching-groups',
+                name: 'teaching-groups',
+                component: () => import('pages/TeachingGroups.vue'),
+            },
+            {
                 path: 'teaching-category',
                 name: 'teaching-category',
                 component: () => import('pages/TeachingCategory.vue'),
             },
             {
+                path: 'carmen-table',
+                name: 'carmen-table',
+                component: () => import('pages/CarmenTable.vue'),
+            },
+            {
                 path: 'scientific-degree',
                 name: 'scientific-degree',
-                component: () => import('pages/ScientificDegree.vue'),
+                component: () => import('pages/ScientificDegrees.vue'),
             },
             {
                 path: 'departments',
@@ -54,6 +74,11 @@ const routes: RouteRecordRaw[] = [
                 path: 'subject-plannings',
                 name: 'subject-plannings',
                 component: () => import('pages/SubjectPlannings.vue'),
+            },
+            {
+                path: 'teaching-assignments',
+                name: 'teaching-assignments',
+                component: () => import('pages/TeachingAssignments.vue'),
             },
         ],
     },

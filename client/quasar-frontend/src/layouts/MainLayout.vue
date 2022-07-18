@@ -128,10 +128,34 @@ const dropdownList1 = [
         link: 'class-types',
     },
     {
+        title: 'Planes de estudio',
+        caption: 'quasar.dev',
+        icon: 'font_download',
+        link: 'study-plans',
+    },
+    {
+        title: 'Grupos',
+        caption: 'quasar.dev',
+        icon: 'groups',
+        link: 'teaching-groups',
+    },
+    {
         title: 'Períodos de tiempo',
         caption: 'quasar.dev',
         icon: 'date_range',
         link: 'time-periods',
+    },
+    {
+        title: 'Tabla de Carmen',
+        caption: 'quasar.dev',
+        icon: 'calendar_view_week',
+        link: 'carmen-table',
+    },
+    {
+        title: 'Semestres',
+        caption: 'quasar.dev',
+        icon: 'calendar_month',
+        link: 'semesters',
     },
     {
         title: 'Categorías Escolares',
@@ -165,6 +189,12 @@ const dropdownList2 = [
         caption: 'quasar.dev',
         icon: 'feed',
         link: 'subject-plannings',
+    },
+    {
+        title: 'Asignación de Docencia',
+        caption: 'quasar.dev',
+        icon: 'feed',
+        link: 'teaching-assignments',
     },
 ];
 

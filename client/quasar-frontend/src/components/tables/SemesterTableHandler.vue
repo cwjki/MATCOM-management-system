@@ -3,42 +3,26 @@
 </template>
 
 <script lang="ts">
-import { careerService, departmentService } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
+import { semesterService } from 'src/services';
 
 export default defineComponent({
+    name: 'classTypeHandler',
     components: { GenericCrudDataTable },
-    name: 'departmentHandler',
     props: {},
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Departamentos',
-            singularLabel: 'Departamento',
-            service: departmentService,
+            name: 'Semestres',
+            singularLabel: 'Semestre',
+            service: semesterService,
             fields: [
                 {
                     name: 'name',
-                    label: 'Nombre',
+                    label: 'Semestre',
                     type: 'text',
-                },
-                {
-                    name: 'career',
-                    label: 'Carrera',
-                    column: {
-                        transform(row) {
-                            return `${row.career.name}`;
-                        },
-                    },
-                    type: 'select',
-                    selectOptions: {
-                        list: careerService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
-                    rules: ['required'],
                 },
             ],
             actions: {

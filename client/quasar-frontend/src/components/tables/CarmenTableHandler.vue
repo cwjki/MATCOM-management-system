@@ -4,11 +4,10 @@
 
 <script lang="ts">
 import {
-    careerService,
-    departmentService,
+    carmenTableService,
+    timePeriodService,
     semesterService,
-    studyPlanService,
-    subjectService,
+    teachingGroupService,
 } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
@@ -16,64 +15,30 @@ import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable
 
 export default defineComponent({
     components: { GenericCrudDataTable },
-    name: 'subjectHandler',
+    name: 'carmenHandler',
     props: {},
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Asignaturas',
-            singularLabel: 'Asignatura',
-            service: subjectService,
+            name: 'Tabla de Carmen',
+            singularLabel: 'Tabla',
+            service: carmenTableService,
             fields: [
                 {
-                    name: 'name',
-                    label: 'Nombre',
-                    type: 'text',
-                },
-                {
-                    name: 'study_plan',
-                    label: 'Plan de Estudio',
+                    name: 'teaching_grupo',
+                    label: 'Curso',
                     column: {
                         transform(row) {
-                            return `${row.study_plan.name}`;
+                            return `${row.teaching_group.name}`;
                         },
                     },
                     type: 'select',
                     selectOptions: {
-                        list: studyPlanService.list,
+                        list: teachingGroupService.list,
                         value: 'id',
                         label: 'name',
                     },
-                },
-                {
-                    name: 'career',
-                    label: 'Carrera',
-                    column: {
-                        transform(row) {
-                            return `${row.career.name}`;
-                        },
-                    },
-                    type: 'select',
-                    selectOptions: {
-                        list: careerService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
-                },
-                {
-                    name: 'department',
-                    label: 'Departamento',
-                    column: {
-                        transform(row) {
-                            return `${row.department.name}`;
-                        },
-                    },
-                    type: 'select',
-                    selectOptions: {
-                        list: departmentService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
+                    rules: ['required'],
                 },
                 {
                     name: 'semester',
@@ -89,11 +54,23 @@ export default defineComponent({
                         value: 'id',
                         label: 'name',
                     },
+                    rules: ['required'],
                 },
                 {
-                    name: 'number_of_hours',
-                    label: 'Horas',
-                    type: 'text',
+                    name: 'time_period',
+                    label: 'Período de tiempo',
+                    column: {
+                        transform(row) {
+                            return `${row.time_period.name}`;
+                        },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: timePeriodService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
+                    rules: ['required'],
                 },
             ],
             actions: {
