@@ -46,6 +46,11 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('pages/TeachingGroups.vue'),
             },
             {
+                path: 'teaching-category',
+                name: 'teaching-category',
+                component: () => import('pages/TeachingCategory.vue'),
+            },
+            {
                 path: 'carmen-table',
                 name: 'carmen-table',
                 component: () => import('pages/CarmenTable.vue'),

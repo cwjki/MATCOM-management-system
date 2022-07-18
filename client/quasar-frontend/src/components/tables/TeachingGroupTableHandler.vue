@@ -22,6 +22,7 @@ export default defineComponent({
                 {
                     name: 'name',
                     label: 'Nombre',
+                    type: 'text',
                 },
                 {
                     name: 'study_plan',

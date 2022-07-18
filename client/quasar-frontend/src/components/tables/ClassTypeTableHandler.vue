@@ -22,6 +22,7 @@ export default defineComponent({
                 {
                     name: 'name',
                     label: 'Actividad',
+                    type: 'text',
                 },
             ],
             actions: {

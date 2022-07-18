@@ -22,18 +22,26 @@ export default defineComponent({
                 {
                     name: 'name',
                     label: 'Nombre',
+                    type: 'text',
+
                 },
                 {
                     name: 'since',
                     label: 'Desde',
+                    type: 'text',
+
                 },
                 {
                     name: 'until',
                     label: 'Hasta',
+                    type: 'text',
+
                 },
                 {
                     name: 'number_of_semesters',
                     label: 'Cantidad de semestres',
+                    type: 'text',
+
                 },
             ],
             actions: {

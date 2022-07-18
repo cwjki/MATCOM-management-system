@@ -59,11 +59,14 @@ export default defineComponent({
                 {
                     name: 'number_of_groups',
                     label: 'Grupos',
+                    type: 'text',
+
                     rules: ['required'],
                 },
                 {
                     name: 'number_of_hours',
                     label: 'Horas',
+                    type: 'text',
                     rules: ['required'],
                 },
                 {

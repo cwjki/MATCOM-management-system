@@ -22,6 +22,7 @@ export default defineComponent({
                 {
                     name: 'name',
                     label: 'Grado Científico ',
+                    type: 'text',
                 },
             ],
             actions: {

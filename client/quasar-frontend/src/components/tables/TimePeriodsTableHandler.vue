@@ -22,6 +22,7 @@ export default defineComponent({
                 {
                     name: 'name',
                     label: 'Período de tiempo',
+                    type: 'text',
                 },
             ],
             actions: {

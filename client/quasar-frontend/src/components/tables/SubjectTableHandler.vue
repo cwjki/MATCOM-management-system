@@ -28,6 +28,7 @@ export default defineComponent({
                 {
                     name: 'name',
                     label: 'Nombre',
+                    type: 'text',
                 },
                 {
                     name: 'study_plan',
@@ -92,6 +93,7 @@ export default defineComponent({
                 {
                     name: 'number_of_hours',
                     label: 'Horas',
+                    type: 'text',
                 },
             ],
             actions: {

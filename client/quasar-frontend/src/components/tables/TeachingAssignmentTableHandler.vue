@@ -92,10 +92,14 @@ export default defineComponent({
                 {
                     name: 'percent',
                     label: 'Porciento',
+                    type: 'text',
+
                 },
                 {
                     name: 'group',
                     label: 'Grupo',
+                    type: 'text',
+
                 },
 
             ],
