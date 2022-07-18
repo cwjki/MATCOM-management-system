@@ -6,22 +6,22 @@
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
-import { careerService } from 'src/services';
+import { classTypeService } from 'src/services';
 
 export default defineComponent({
-    name: 'careerHandler',
+    name: 'classTypeHandler',
     components: { GenericCrudDataTable },
     props: {},
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Carreras',
-            singularLabel: 'Carrera',
-            service: careerService,
+            name: 'Actividades de clases',
+            singularLabel: 'Actividad de clase',
+            service: classTypeService,
             fields: [
                 {
                     name: 'name',
-                    label: 'Nombre',
+                    label: 'Actividad',
                 },
             ],
             actions: {

@@ -21,6 +21,11 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('pages/Careers.vue'),
             },
             {
+                path: 'class-types',
+                name: 'class-types',
+                component: () => import('pages/ClassTypes.vue'),
+            },
+            {
                 path: 'departments',
                 name: 'departments',
                 component: () => import('pages/Departments.vue'),

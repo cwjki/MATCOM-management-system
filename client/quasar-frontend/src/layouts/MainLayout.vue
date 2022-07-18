@@ -43,14 +43,6 @@
                                     link.link
                                 "
                             >
-                                <!-- <q-item-section avatar>
-                                    <q-avatar
-                                        :icon="link.icon"
-                                        color="primary"
-                                        text-color="white"
-                                    />
-                                </q-item-section> -->
-
                                 <q-item-section>
                                     <q-btn color="primary" no-caps align="left">
                                         <q-icon
@@ -60,12 +52,6 @@
                                         {{ $q.screen.gt.sm ? link.title : '' }}
                                     </q-btn>
                                 </q-item-section>
-
-                                <!-- <q-item-section>
-                                    {{
-                                        $q.screen.gt.sm ? link.title : ''
-                                    }}
-                                </q-item-section> -->
                             </q-item>
                         </q-list>
                     </q-btn-dropdown>
@@ -121,8 +107,14 @@ const linksList = [
     {
         title: 'Planificación de Asignaturas',
         caption: 'quasar.dev',
-        icon: 'auto_stories',
+        icon: 'feed',
         link: 'subject-plannings',
+    },
+    {
+        title: 'Actividades de clase',
+        caption: 'quasar.dev',
+        icon: 'auto_stories',
+        link: 'class-types',
     },
 ];
 
