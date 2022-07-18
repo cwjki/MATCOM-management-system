@@ -122,6 +122,18 @@ const linksList = [
         icon: 'date_range',
         link: 'time-periods',
     },
+    {
+        title: 'Categoría Escolar',
+        caption: 'quasar.dev',
+        icon: 'date_range',
+        link: 'teaching-category',
+    },
+    {
+        title: 'Grado Científico',
+        caption: 'quasar.dev',
+        icon: 'date_range',
+        link: 'scientific-degree',
+    },
 ];
 
 export default defineComponent({

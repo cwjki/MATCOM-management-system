@@ -31,6 +31,16 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('pages/TimePeriods.vue'),
             },
             {
+                path: 'teaching-category',
+                name: 'teaching-category',
+                component: () => import('pages/TeachingCategory.vue'),
+            },
+            {
+                path: 'scientific-degree',
+                name: 'scientific-degree',
+                component: () => import('pages/ScientificDegree.vue'),
+            },
+            {
                 path: 'departments',
                 name: 'departments',
                 component: () => import('pages/Departments.vue'),
