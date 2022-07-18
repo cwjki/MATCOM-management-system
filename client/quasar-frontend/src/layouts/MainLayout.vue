@@ -113,13 +113,13 @@ const linksList = [
     {
         title: 'Actividades de clase',
         caption: 'quasar.dev',
-        icon: 'auto_stories',
+        icon: 'class',
         link: 'class-types',
     },
     {
         title: 'Períodos de tiempo',
         caption: 'quasar.dev',
-        icon: 'auto_stories',
+        icon: 'date_range',
         link: 'time-periods',
     },
 ];

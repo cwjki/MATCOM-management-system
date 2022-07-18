@@ -1,7 +1,6 @@
 <template>
     <q-page padding>
         <time-period-table-handler />
-        <!-- <div class="bg-secondary full-width" style="height: 100px"></div> -->
     </q-page>
 </template>
 
