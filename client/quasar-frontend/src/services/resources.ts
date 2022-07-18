@@ -12,6 +12,7 @@ import { SubjectDescriptionModel } from 'src/models/subjectDescription.model';
 import { TeachingAssignmentModel } from 'src/models/teachingAssignment.model';
 import { TeachingCategoryModel } from 'src/models/teachingCategory.model';
 import { CrudServiceFactory } from './api.service';
+import { TeachingGroupModel } from 'src/models/teachingGroup.model';
 
 export const RESOURCES = {
     profesors: '/professors/',
@@ -27,6 +28,7 @@ export const RESOURCES = {
     studyPlans: '/study-plans/',
     classTypes: '/class-types/',
     timePeriods: '/time-periods/',
+    teachingGroups: '/teaching-groups/',
 };
 
 export const careerService = CrudServiceFactory<CareerModel>(RESOURCES.careers);
@@ -73,4 +75,8 @@ export const classTypeService = CrudServiceFactory<ClassTypeModel>(
 
 export const timePeriodService = CrudServiceFactory<TimePeriodModel>(
     RESOURCES.timePeriods
+);
+
+export const teachingGroupService = CrudServiceFactory<TeachingGroupModel>(
+    RESOURCES.teachingGroups
 );

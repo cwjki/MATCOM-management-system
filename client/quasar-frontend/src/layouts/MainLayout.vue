@@ -130,8 +130,14 @@ const dropdownList1 = [
     {
         title: 'Planes de estudio',
         caption: 'quasar.dev',
-        icon: 'date_range',
+        icon: 'font_download',
         link: 'study-plans',
+    },
+    {
+        title: 'Grupos',
+        caption: 'quasar.dev',
+        icon: 'groups',
+        link: 'teaching-groups',
     },
     {
         title: 'Períodos de tiempo',
