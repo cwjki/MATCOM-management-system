@@ -1,17 +1,15 @@
 <template>
     <q-page padding>
-        <carmen-table-handler />
-        <!-- <div class="bg-secondary full-width" style="height: 100px"></div> -->
+        <teaching-group-table-handler />
     </q-page>
 </template>
 
 <script lang="ts">
-import CarmenTableHandler from 'src/components/tables/CarmenTableHandler.vue';
 import { defineComponent } from 'vue';
-
+import TeachingGroupTableHandler from 'src/components/tables/teachingAssignments/TeachingGroupTableHandler.vue';
 export default defineComponent({
     components: {
-        CarmenTableHandler,
+        TeachingGroupTableHandler,
     },
     setup(props, { emit }) {
         return {};

@@ -1,15 +1,15 @@
 <template>
     <q-page padding>
-        <scientific-degree-table-handler />
+        <semester-table-handler />
     </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ScientificDegreeTableHandler from 'src/components/tables/ScientificDegreeTableHandler.vue';
+import SemesterTableHandler from 'src/components/tables/teachingAssignments/SemesterTableHandler.vue';
 export default defineComponent({
     components: {
-        ScientificDegreeTableHandler,
+        SemesterTableHandler,
     },
     setup(props, { emit }) {
         return {};

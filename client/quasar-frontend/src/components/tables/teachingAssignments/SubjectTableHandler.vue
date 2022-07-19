@@ -4,47 +4,61 @@
 
 <script lang="ts">
 import {
+    careerService,
     departmentService,
-    professorService,
-    scientificDegreeService,
-    teachingCategoryService,
+    semesterService,
+    studyPlanService,
+    subjectService,
 } from 'src/services';
 import { defineComponent, ref } from 'vue';
-import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
-import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
+import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
+import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
 
 export default defineComponent({
     components: { GenericCrudDataTable },
-    name: 'professorHandler',
+    name: 'subjectHandler',
     props: {},
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Profesores',
-            singularLabel: 'Profesor',
-            service: professorService,
+            name: 'Asignaturas',
+            singularLabel: 'Asignatura',
+            service: subjectService,
             fields: [
                 {
                     name: 'name',
                     label: 'Nombre',
                     type: 'text',
-                    form: {
-                        responsiveOptions: {
-                            md: 12,
-                        },
-                    },
-                    rules: ['required'],
                 },
                 {
-                    name: 'last_name',
-                    label: 'Apellidos',
-                    type: 'text',
-                    form: {
-                        responsiveOptions: {
-                            md: 4,
+                    name: 'study_plan',
+                    label: 'Plan de Estudio',
+                    column: {
+                        transform(row) {
+                            return `${row.study_plan.name}`;
                         },
                     },
-                    rules: ['required'],
+                    type: 'select',
+                    selectOptions: {
+                        list: studyPlanService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
+                },
+                {
+                    name: 'career',
+                    label: 'Carrera',
+                    column: {
+                        transform(row) {
+                            return `${row.career.name}`;
+                        },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: careerService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
                 },
                 {
                     name: 'department',
@@ -60,39 +74,26 @@ export default defineComponent({
                         value: 'id',
                         label: 'name',
                     },
-                    rules: ['required'],
                 },
                 {
-                    name: 'scientific_degree',
-                    label: 'Grado Científico',
+                    name: 'semester',
+                    label: 'Semestre',
                     column: {
                         transform(row) {
-                            return `${row.scientific_degree.name}`;
+                            return `${row.semester.name}`;
                         },
                     },
                     type: 'select',
                     selectOptions: {
-                        list: scientificDegreeService.list,
+                        list: semesterService.list,
                         value: 'id',
                         label: 'name',
                     },
-                    rules: ['required'],
                 },
                 {
-                    name: 'teaching_category',
-                    label: 'Categoría Docente',
-                    column: {
-                        transform(row) {
-                            return `${row.teaching_category.name}`;
-                        },
-                    },
-                    type: 'select',
-                    selectOptions: {
-                        list: teachingCategoryService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
-                    rules: ['required'],
+                    name: 'number_of_hours',
+                    label: 'Horas',
+                    type: 'text',
                 },
             ],
             actions: {
@@ -101,6 +102,7 @@ export default defineComponent({
                 delete: true,
             },
         });
+
         return { config };
     },
 });

@@ -1,17 +1,17 @@
 <template>
     <q-page padding>
-        <subject-table-handler />
+        <carmen-table-handler />
         <!-- <div class="bg-secondary full-width" style="height: 100px"></div> -->
     </q-page>
 </template>
 
 <script lang="ts">
-import SubjectTableHandler from 'src/components/tables/SubjectTableHandler.vue';
+import CarmenTableHandler from 'src/components/tables/teachingAssignments/CarmenTableHandler.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     components: {
-        SubjectTableHandler,
+        CarmenTableHandler,
     },
     setup(props, { emit }) {
         return {};

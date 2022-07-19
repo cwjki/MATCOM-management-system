@@ -4,24 +4,24 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
-import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
-import { semesterService } from 'src/services';
+import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
+import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
+import { timePeriodService } from 'src/services';
 
 export default defineComponent({
-    name: 'classTypeHandler',
+    name: 'timePeriodHandler',
     components: { GenericCrudDataTable },
     props: {},
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Semestres',
-            singularLabel: 'Semestre',
-            service: semesterService,
+            name: 'Períodos de tiempo',
+            singularLabel: 'Período de tiempo',
+            service: timePeriodService,
             fields: [
                 {
                     name: 'name',
-                    label: 'Semestre',
+                    label: 'Período de tiempo',
                     type: 'text',
                 },
             ],

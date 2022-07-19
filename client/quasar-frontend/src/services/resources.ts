@@ -1,18 +1,18 @@
-import { CareerModel } from 'src/models/career.model';
-import { CarmenTableModel } from 'src/models/carmenTable.model';
-import { DepartmentModel } from 'src/models/department.model';
-import { ProfessorModel } from 'src/models/professor.model';
-import { ScientificDegreeModel } from 'src/models/scientificDegree.model';
-import { SemesterModel } from 'src/models/semester.model';
-import { ClassTypeModel } from 'src/models/classType.model';
-import { TimePeriodModel } from 'src/models/timePeriod.model';
-import { StudyPlanModel } from 'src/models/studyPlan.model';
-import { SubjectModel } from 'src/models/subject.model';
-import { SubjectDescriptionModel } from 'src/models/subjectDescription.model';
-import { TeachingAssignmentModel } from 'src/models/teachingAssignment.model';
-import { TeachingCategoryModel } from 'src/models/teachingCategory.model';
+import { CareerModel } from 'src/models/teachingAssignments/career.model';
+import { CarmenTableModel } from 'src/models/teachingAssignments/carmenTable.model';
+import { DepartmentModel } from 'src/models/teachingAssignments/department.model';
+import { ProfessorModel } from 'src/models/teachingAssignments/professor.model';
+import { ScientificDegreeModel } from 'src/models/teachingAssignments/scientificDegree.model';
+import { SemesterModel } from 'src/models/teachingAssignments/semester.model';
+import { ClassTypeModel } from 'src/models/teachingAssignments/classType.model';
+import { TimePeriodModel } from 'src/models/teachingAssignments/timePeriod.model';
+import { StudyPlanModel } from 'src/models/teachingAssignments/studyPlan.model';
+import { SubjectModel } from 'src/models/teachingAssignments/subject.model';
+import { SubjectDescriptionModel } from 'src/models/teachingAssignments/subjectDescription.model';
+import { TeachingAssignmentModel } from 'src/models/teachingAssignments/teachingAssignment.model';
+import { TeachingCategoryModel } from 'src/models/teachingAssignments/teachingCategory.model';
+import { TeachingGroupModel } from 'src/models/teachingAssignments/teachingGroup.model';
 import { CrudServiceFactory } from './api.service';
-import { TeachingGroupModel } from 'src/models/teachingGroup.model';
 
 export const RESOURCES = {
     profesors: '/professors/',
@@ -81,5 +81,3 @@ export const timePeriodService = CrudServiceFactory<TimePeriodModel>(
 export const teachingGroupService = CrudServiceFactory<TeachingGroupModel>(
     RESOURCES.teachingGroups
 );
-
-

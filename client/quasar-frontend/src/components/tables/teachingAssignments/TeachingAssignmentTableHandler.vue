@@ -9,8 +9,8 @@ import {
     teachingAssignmentService,
 } from 'src/services';
 import { defineComponent, ref } from 'vue';
-import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
-import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
+import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
+import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
 
 export default defineComponent({
     components: { GenericCrudDataTable },

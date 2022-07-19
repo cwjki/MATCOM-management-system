@@ -1,15 +1,16 @@
 <template>
     <q-page padding>
-        <semester-table-handler />
+        <time-period-table-handler />
     </q-page>
 </template>
 
 <script lang="ts">
+import TimePeriodTableHandler from 'src/components/tables/teachingAssignments/TimePeriodsTableHandler.vue';
 import { defineComponent } from 'vue';
-import SemesterTableHandler from 'src/components/tables/SemesterTableHandler.vue';
+
 export default defineComponent({
     components: {
-        SemesterTableHandler,
+        TimePeriodTableHandler,
     },
     setup(props, { emit }) {
         return {};

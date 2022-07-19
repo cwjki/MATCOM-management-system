@@ -4,24 +4,24 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
-import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
-import { teachingCategoryService } from 'src/services';
+import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
+import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
+import { semesterService } from 'src/services';
 
 export default defineComponent({
-    name: 'teachingCategoryHandler',
+    name: 'classTypeHandler',
     components: { GenericCrudDataTable },
     props: {},
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Categorías Escolares',
-            singularLabel: 'Categoría Escolar',
-            service: teachingCategoryService,
+            name: 'Semestres',
+            singularLabel: 'Semestre',
+            service: semesterService,
             fields: [
                 {
                     name: 'name',
-                    label: 'Categoría Escolar ',
+                    label: 'Semestre',
                     type: 'text',
                 },
             ],

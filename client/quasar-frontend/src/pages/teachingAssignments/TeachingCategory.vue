@@ -1,15 +1,15 @@
 <template>
     <q-page padding>
-        <class-type-table-handler />
+        <teaching-category-table-handler />
     </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ClassTypeTableHandler from 'src/components/tables/ClassTypeTableHandler.vue';
+import TeachingCategoryTableHandler from 'src/components/tables/teachingAssignments/TeachingCategoryTableHandler.vue';
 export default defineComponent({
     components: {
-        ClassTypeTableHandler,
+        TeachingCategoryTableHandler,
     },
     setup(props, { emit }) {
         return {};

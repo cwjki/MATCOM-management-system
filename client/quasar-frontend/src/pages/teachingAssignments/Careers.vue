@@ -1,15 +1,17 @@
 <template>
     <q-page padding>
-        <teaching-category-table-handler />
+        <career-table-handler />
+        <!-- <div class="bg-secondary full-width" style="height: 100px"></div> -->
     </q-page>
 </template>
 
 <script lang="ts">
+import CareerTableHandler from 'src/components/tables/teachingAssignments/CareerTableHandler.vue';
 import { defineComponent } from 'vue';
-import TeachingCategoryTableHandler from 'src/components/tables/TeachingCategoryTableHandler.vue';
+
 export default defineComponent({
     components: {
-        TeachingCategoryTableHandler,
+        CareerTableHandler,
     },
     setup(props, { emit }) {
         return {};

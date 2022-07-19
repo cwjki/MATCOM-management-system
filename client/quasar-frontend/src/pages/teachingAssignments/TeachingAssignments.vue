@@ -1,17 +1,16 @@
 <template>
     <q-page padding>
-        <department-table-handler />
-        <!-- <div class="bg-secondary full-width" style="height: 100px"></div> -->
+        <teaching-assignment-table-handler />
     </q-page>
 </template>
 
 <script lang="ts">
-import DepartmentTableHandler from 'src/components/tables/DepartmentTableHandler.vue';
+import TeachingAssignmentTableHandler from 'src/components/tables/teachingAssignments/TeachingAssignmentTableHandler.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     components: {
-        DepartmentTableHandler,
+        TeachingAssignmentTableHandler,
     },
     setup(props, { emit }) {
         return {};

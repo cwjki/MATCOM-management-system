@@ -4,24 +4,24 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { GenericCrudTableConfig } from '../genericCrudTable/models/table.model';
-import GenericCrudDataTable from '../genericCrudTable/views/GenericCrudDataTable.vue';
-import { classTypeService } from 'src/services';
+import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
+import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
+import { scientificDegreeService } from 'src/services';
 
 export default defineComponent({
-    name: 'classTypeHandler',
+    name: 'scientificDegreeHandler',
     components: { GenericCrudDataTable },
     props: {},
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Actividades de clases',
-            singularLabel: 'Actividad de clase',
-            service: classTypeService,
+            name: 'Grados Científicos',
+            singularLabel: 'Grado Científico',
+            service: scientificDegreeService,
             fields: [
                 {
                     name: 'name',
-                    label: 'Actividad',
+                    label: 'Grado Científico ',
                     type: 'text',
                 },
             ],
