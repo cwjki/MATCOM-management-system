@@ -10,7 +10,7 @@
         <g-text-field
             :editeItem="editeItem"
             :field="field"
-            v-else-if="field.type === 'text'"
+            v-else-if="field.type === 'text' || field.type ==='date'"
             :rules="getRulesFromField(field)"
             @onChangekey="$emit('onChangekey', $event)"
         />

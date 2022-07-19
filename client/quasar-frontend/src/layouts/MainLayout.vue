@@ -116,12 +116,6 @@ const dropdownList1 = [
         link: 'careers',
     },
     {
-        title: 'Departamentos',
-        caption: 'quasar.dev',
-        icon: 'door_front',
-        link: 'departments',
-    },
-    {
         title: 'Actividades de clase',
         caption: 'quasar.dev',
         icon: 'class',
@@ -145,12 +139,7 @@ const dropdownList1 = [
         icon: 'date_range',
         link: 'time-periods',
     },
-    {
-        title: 'Tabla de Carmen',
-        caption: 'quasar.dev',
-        icon: 'calendar_view_week',
-        link: 'carmen-table',
-    },
+
     {
         title: 'Semestres',
         caption: 'quasar.dev',
@@ -173,6 +162,18 @@ const dropdownList1 = [
 
 const dropdownList2 = [
     {
+        title: 'Departamentos',
+        caption: 'quasar.dev',
+        icon: 'door_front',
+        link: 'departments',
+    },
+    {
+        title: 'Tabla de Carmen',
+        caption: 'quasar.dev',
+        icon: 'calendar_view_week',
+        link: 'carmen-table',
+    },
+    {
         title: 'Profesores',
         caption: 'quasar.dev',
         icon: 'face',
@@ -193,7 +194,7 @@ const dropdownList2 = [
     {
         title: 'Asignación de Docencia',
         caption: 'quasar.dev',
-        icon: 'feed',
+        icon: 'assignment_turned_in',
         link: 'teaching-assignments',
     },
 ];

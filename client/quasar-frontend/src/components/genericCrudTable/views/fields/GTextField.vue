@@ -2,7 +2,10 @@
     <div class="full-width">
         <q-input
             outlined
+            :v-model="field.type"
+            :type="field.type"
             :label="field.label || field.name"
+            :stack-label="true"
             color="primary"
             hide-bottom-space
             :rules="rules"
