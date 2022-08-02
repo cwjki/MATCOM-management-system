@@ -3,7 +3,7 @@ from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
-from .models import Snippet, Career, StudyPlan, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable, TimePeriod
+from .models import Snippet, Career, StudyPlan, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable, TimePeriod, Student, Thesis
 
 
 class SnippetSerializer(ModelSerializer):
@@ -307,4 +307,39 @@ class CarmenTableSerializer(ModelSerializer):
 
     class Meta:
         model = CarmenTable
+        fields = '__all__'
+
+
+# ----------- Thesis Tribunals ------------
+class StudentSerializer(ModelSerializer):
+    class Meta:
+        model = Student
+        fields = '__all__'
+
+
+class ThesisSerializer(ModelSerializer):
+    tutor_id = serializers.IntegerField(required=True, write_only=True)
+    tutors = serializers.SerializerMethodField()
+
+    cotutor_id = serializers.IntegerField(required=True, write_only=True)
+    cotutors = serializers.SerializerMethodField()
+
+    def get_tutors(self, obj) -> dict:
+        if obj.tutors:
+            return {
+                "id": obj.tutors.id,
+                "name": obj.tutors.name,
+            }
+        return None
+
+    def get_cotutors(self, obj) -> dict:
+        if obj.cotutors:
+            return {
+                "id": obj.cotutors.id,
+                "name": obj.cotutors.name,
+            }
+        return None
+
+    class Meta:
+        model = Thesis
         fields = '__all__'

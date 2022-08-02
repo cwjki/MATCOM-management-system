@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 
 
@@ -159,3 +160,26 @@ class CarmenTable(models.Model):
 
     def __str__(self) -> str:
         return '[' + str(self.teaching_group) + '] ' + '[' + str(self.time_period) + ']' + '[' + str(self.semester) + ']'
+
+# ---------- Thesis Tribunals ----------
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+        return str(self.name) + ' ' + str(self.last_name)
+    
+
+class Thesis(models.Model):
+    title = models.CharField(max_length=200)
+
+    # Relationships
+    tutors = models.ForeignKey(
+        Professor, related_name='tutors', on_delete=models.CASCADE)
+    cotutors = models.ForeignKey(
+        Professor, related_name='cotutors', on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return str(self.title)
