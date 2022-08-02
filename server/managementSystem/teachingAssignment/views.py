@@ -2,8 +2,8 @@ from rest_framework import permissions, viewsets
 from rest_framework import filters
 from django.contrib.auth.models import User
 
-from .models import Career, StudyPlan, TeachingGroup, Department, ClassType, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable, Student, Thesis
-from .serializers import UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, SemesterSerializer, CarmenTableSerializer, StudentSerializer, ThesisSerializer
+from .models import Career, StudyPlan, TeachingGroup, Department, ClassType, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable, Student, Thesis, ThesisCommittee
+from .serializers import UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, SemesterSerializer, CarmenTableSerializer, StudentSerializer, ThesisSerializer, ThesisCommitteeSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -224,4 +224,16 @@ class ThesisViewSet(viewsets.ModelViewSet):
     serializer_class = ThesisSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['tutor__name']
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class ThesisCommitteeViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for thesis committee table.
+    """
+    queryset = ThesisCommittee.objects.all()
+    serializer_class = ThesisCommitteeSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['student__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]

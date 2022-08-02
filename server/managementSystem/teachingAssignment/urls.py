@@ -58,6 +58,9 @@ router.register(r'thesis', views.ThesisViewSet,
                 basename="thesis")
 
 
+router.register(r'thesis-committee', views.ThesisCommitteeViewSet,
+                basename="thesis-committe")
+
 # router.register(r'snippets', views.SnippetViewSet,
 #                 basename="snippets")
 
