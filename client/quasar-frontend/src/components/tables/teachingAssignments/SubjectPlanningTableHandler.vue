@@ -41,7 +41,7 @@ export default defineComponent({
                     rules: ['required'],
                 },
                 {
-                    name: 'classType',
+                    name: 'class_type',
                     label: 'Actividad de Clase',
                     column: {
                         transform(row) {
@@ -70,7 +70,7 @@ export default defineComponent({
                     rules: ['required'],
                 },
                 {
-                    name: 'timePeriod',
+                    name: 'time_period',
                     label: 'Período de Tiempo',
                     column: {
                         transform(row) {

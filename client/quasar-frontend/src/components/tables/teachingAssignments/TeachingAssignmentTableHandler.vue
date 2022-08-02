@@ -24,7 +24,7 @@ export default defineComponent({
             service: teachingAssignmentService,
             fields: [
                 {
-                    name: 'subject',
+                    name: 'subject_description',
                     label: 'Asignatura',
                     column: {
                         transform(row) {
@@ -86,7 +86,7 @@ export default defineComponent({
                     selectOptions: {
                         list: professorService.list,
                         value: 'id',
-                        label: 'name',
+                        label: 'name'
                     },
                 },
                 {

@@ -12,6 +12,9 @@ import { SubjectDescriptionModel } from 'src/models/teachingAssignments/subjectD
 import { TeachingAssignmentModel } from 'src/models/teachingAssignments/teachingAssignment.model';
 import { TeachingCategoryModel } from 'src/models/teachingAssignments/teachingCategory.model';
 import { TeachingGroupModel } from 'src/models/teachingAssignments/teachingGroup.model';
+import { StudentModel } from 'src/models/thesisCommittee/students.model';
+import { ThesisModel } from 'src/models/thesisCommittee/thesis.model';
+import { ThesisCommitteeModel } from 'src/models/thesisCommittee/thesisCommittee.model';
 import { CrudServiceFactory } from './api.service';
 
 export const RESOURCES = {
@@ -30,6 +33,10 @@ export const RESOURCES = {
     timePeriods: '/time-periods/',
     teachingGroups: '/teaching-groups/',
     teachingAssignment: '/teaching-assignments/',
+
+    students: '/students/',
+    thesis: '/thesis/',
+    thesisCommittee: '/thesis-committee/',
 };
 
 export const careerService = CrudServiceFactory<CareerModel>(RESOURCES.careers);
@@ -80,4 +87,14 @@ export const timePeriodService = CrudServiceFactory<TimePeriodModel>(
 
 export const teachingGroupService = CrudServiceFactory<TeachingGroupModel>(
     RESOURCES.teachingGroups
+);
+
+export const studentService = CrudServiceFactory<StudentModel>(
+    RESOURCES.students
+);
+
+export const thesisService = CrudServiceFactory<ThesisModel>(RESOURCES.thesis);
+
+export const thesisCommitteeService = CrudServiceFactory<ThesisCommitteeModel>(
+    RESOURCES.thesisCommittee
 );
