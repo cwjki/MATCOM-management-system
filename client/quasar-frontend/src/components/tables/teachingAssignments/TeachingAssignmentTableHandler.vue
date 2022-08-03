@@ -35,7 +35,7 @@ export default defineComponent({
                     selectOptions: {
                         list: subjectDescriptionService.list,
                         value: 'id',
-                        label: 'name',
+                        label: 'id',
                     },
                 },
                 {
@@ -86,7 +86,7 @@ export default defineComponent({
                     selectOptions: {
                         list: professorService.list,
                         value: 'id',
-                        label: 'name'
+                        label: 'name',
                     },
                 },
                 {

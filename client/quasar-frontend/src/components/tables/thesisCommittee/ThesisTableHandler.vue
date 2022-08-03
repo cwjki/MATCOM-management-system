@@ -35,7 +35,9 @@ export default defineComponent({
                     label: 'Estudiante',
                     column: {
                         transform(row) {
-                            return `${row.student.name}`;
+                            return `${
+                                row.student.name + ' ' + row.student.last_name
+                            }`;
                         },
                     },
                     type: 'select',
@@ -51,7 +53,9 @@ export default defineComponent({
                     label: 'Tutor',
                     column: {
                         transform(row) {
-                            return `${row.tutor.name}`;
+                            return `${
+                                row.tutor.name + ' ' + row.tutor.last_name
+                            }`;
                         },
                     },
                     type: 'select',
@@ -67,7 +71,9 @@ export default defineComponent({
                     label: 'Cotutor',
                     column: {
                         transform(row) {
-                            return `${row.cotutor.name}`;
+                            return `${
+                                row.cotutor.name + ' ' + row.cotutor.last_name
+                            }`;
                         },
                     },
                     type: 'select',
