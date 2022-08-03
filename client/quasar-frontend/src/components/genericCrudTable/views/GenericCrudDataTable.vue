@@ -223,7 +223,7 @@ export default defineComponent({
                         });
                         crudLoading.value = false;
                         crudDialog.value = false;
-                    }, 2000);
+                    }, 200);
                 })
                 .catch((e) => {
                     Notify.create({

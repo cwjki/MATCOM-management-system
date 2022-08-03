@@ -1,14 +1,16 @@
 <template>
     <q-page padding>
-        <p class="text-h5 text-secondary">Welcome</p>
-        <div class="bg-primary full-width" style="height: 100px"></div>
+        <class-type-table-handler />
     </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-
+import ClassTypeTableHandler from 'src/components/tables/teachingAssignments/ClassTypeTableHandler.vue';
 export default defineComponent({
+    components: {
+        ClassTypeTableHandler,
+    },
     setup(props, { emit }) {
         return {};
     },

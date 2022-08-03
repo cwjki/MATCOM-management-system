@@ -51,6 +51,16 @@ router.register(r'carmen-table', views.CarmenTableViewSet,
 router.register(r'semesters', views.SemesterViewSet,
                 basename="semesters")
 
+router.register(r'students', views.StudentViewSet,
+                basename="students")
+
+router.register(r'thesis', views.ThesisViewSet,
+                basename="thesis")
+
+
+router.register(r'thesis-committee', views.ThesisCommitteeViewSet,
+                basename="thesis-committe")
+
 # router.register(r'snippets', views.SnippetViewSet,
 #                 basename="snippets")
 

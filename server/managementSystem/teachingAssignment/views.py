@@ -2,8 +2,8 @@ from rest_framework import permissions, viewsets
 from rest_framework import filters
 from django.contrib.auth.models import User
 
-from .models import Career, StudyPlan, TeachingGroup, Department, ClassType, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable
-from .serializers import UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, SemesterSerializer, CarmenTableSerializer
+from .models import Career, Student, StudyPlan, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable
+from .serializers import StudentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, SemesterSerializer, CarmenTableSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -200,4 +200,40 @@ class CarmenTableViewSet(viewsets.ModelViewSet):
     serializer_class = CarmenTableSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['teachingGroup__name']
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class StudentViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for students table.
+    """
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class ThesisViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for thesis table.
+    """
+    queryset = Thesis.objects.all()
+    serializer_class = ThesisSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['tutor__name']
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class ThesisCommitteeViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for thesis committee table.
+    """
+    queryset = ThesisCommittee.objects.all()
+    serializer_class = ThesisCommitteeSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['student__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]

@@ -85,6 +85,35 @@
                         </q-list>
                     </q-btn-dropdown>
                 </div>
+
+                <div>
+                    <q-btn-dropdown label="Tribunal de Tesis" no-caps>
+                        <q-list>
+                            <q-item
+                                clickable
+                                v-ripple
+                                v-for="(link, i) in thesisCommitteeLinks"
+                                :key="i"
+                                no-caps
+                                @click="$router.push({ name: link.link })"
+                                :flat="
+                                    $router.currentRoute.value.name !==
+                                    link.link
+                                "
+                            >
+                                <q-item-section>
+                                    <q-btn color="primary" no-caps align="left">
+                                        <q-icon
+                                            :name="link.icon"
+                                            class="q-mr-md"
+                                        />
+                                        {{ $q.screen.gt.sm ? link.title : '' }}
+                                    </q-btn>
+                                </q-item-section>
+                            </q-item>
+                        </q-list>
+                    </q-btn-dropdown>
+                </div>
             </q-toolbar>
         </q-header>
 
@@ -116,12 +145,6 @@ const dropdownList1 = [
         link: 'careers',
     },
     {
-        title: 'Departamentos',
-        caption: 'quasar.dev',
-        icon: 'door_front',
-        link: 'departments',
-    },
-    {
         title: 'Actividades de clase',
         caption: 'quasar.dev',
         icon: 'class',
@@ -145,12 +168,7 @@ const dropdownList1 = [
         icon: 'date_range',
         link: 'time-periods',
     },
-    {
-        title: 'Tabla de Carmen',
-        caption: 'quasar.dev',
-        icon: 'calendar_view_week',
-        link: 'carmen-table',
-    },
+
     {
         title: 'Semestres',
         caption: 'quasar.dev',
@@ -173,6 +191,18 @@ const dropdownList1 = [
 
 const dropdownList2 = [
     {
+        title: 'Departamentos',
+        caption: 'quasar.dev',
+        icon: 'door_front',
+        link: 'departments',
+    },
+    {
+        title: 'Tabla de Carmen',
+        caption: 'quasar.dev',
+        icon: 'calendar_view_week',
+        link: 'carmen-table',
+    },
+    {
         title: 'Profesores',
         caption: 'quasar.dev',
         icon: 'face',
@@ -193,8 +223,29 @@ const dropdownList2 = [
     {
         title: 'Asignación de Docencia',
         caption: 'quasar.dev',
-        icon: 'feed',
+        icon: 'assignment_turned_in',
         link: 'teaching-assignments',
+    },
+];
+
+const thesisCommitteeLinks = [
+    {
+        title: 'Estudiantes',
+        caption: 'quasar.dev',
+        icon: 'door_front',
+        link: 'students',
+    },
+    {
+        title: 'Tesis',
+        caption: 'quasar.dev',
+        icon: 'door_front',
+        link: 'thesis',
+    },
+    {
+        title: 'Tribunal de Tesis',
+        caption: 'quasar.dev',
+        icon: 'door_front',
+        link: 'thesis-committee',
     },
 ];
 
@@ -211,6 +262,7 @@ export default defineComponent({
         return {
             essentialLinks1: dropdownList1,
             essentialLinks2: dropdownList2,
+            thesisCommitteeLinks: thesisCommitteeLinks,
             leftDrawerOpen,
             imageLogo,
             toggleLeftDrawer() {

@@ -1,14 +1,17 @@
 <template>
     <q-page padding>
-        <p class="text-h5 text-secondary">Welcome</p>
-        <div class="bg-primary full-width" style="height: 100px"></div>
+        <time-period-table-handler />
     </q-page>
 </template>
 
 <script lang="ts">
+import TimePeriodTableHandler from 'src/components/tables/teachingAssignments/TimePeriodsTableHandler.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+    components: {
+        TimePeriodTableHandler,
+    },
     setup(props, { emit }) {
         return {};
     },
