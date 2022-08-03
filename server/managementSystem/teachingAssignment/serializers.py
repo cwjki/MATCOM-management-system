@@ -247,7 +247,8 @@ class TeachingAssignmentSerializer(ModelSerializer):
         if obj.professor:
             return {
                 "id": obj.professor.id,
-                "name": obj.professor.name
+                "name": obj.professor.name,
+                "last_name": obj.professor.last_name
             }
         return None
 
@@ -285,7 +286,8 @@ class CarmenTableSerializer(ModelSerializer):
         if obj.teaching_group:
             return {
                 "id": obj.teaching_group.id,
-                "name": obj.teaching_group.name
+                "name": obj.teaching_group.name,
+                "study_plan": obj.teaching_group.study_plan.name
             }
         return None
 
