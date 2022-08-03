@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Career, ClassType, Department, Professor, TeachingGroup, ScientificDegree, StudyPlan, Subject, TeachingAssignment, TeachingCategory, SubjectDescription, TimePeriod, Semester, CarmenTable, Student, Thesis, ThesisCommittee
+from .models import Career, ClassType, Department, Professor, Student, TeachingGroup, ScientificDegree, StudyPlan, Subject, TeachingAssignment, TeachingCategory, SubjectDescription, Thesis, ThesisCommittee, TimePeriod, Semester, CarmenTable
 
 admin.site.register(Career)
 admin.site.register(StudyPlan)

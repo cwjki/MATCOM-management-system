@@ -3,7 +3,7 @@ from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
-from .models import Snippet, Career, StudyPlan, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable, TimePeriod, Student, Thesis, ThesisCommittee
+from .models import Snippet, Career, Student, StudyPlan, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable, Thesis, ThesisCommittee, TimePeriod
 
 
 class SnippetSerializer(ModelSerializer):

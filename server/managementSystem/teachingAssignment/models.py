@@ -1,4 +1,3 @@
-from pyexpat import model
 from django.db import models
 
 
@@ -176,7 +175,7 @@ class Thesis(models.Model):
     title = models.CharField(max_length=200)
 
     # Relationships
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    # student = models.ForeignKey(Student, on_delete=models.CASCADE)
     tutor = models.ForeignKey(
         Professor, related_name='tutor', on_delete=models.CASCADE)
     cotutor = models.ForeignKey(

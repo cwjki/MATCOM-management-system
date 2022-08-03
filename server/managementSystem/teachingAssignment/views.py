@@ -2,8 +2,8 @@ from rest_framework import permissions, viewsets
 from rest_framework import filters
 from django.contrib.auth.models import User
 
-from .models import Career, StudyPlan, TeachingGroup, Department, ClassType, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable, Student, Thesis, ThesisCommittee
-from .serializers import UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, SemesterSerializer, CarmenTableSerializer, StudentSerializer, ThesisSerializer, ThesisCommitteeSerializer
+from .models import Career, Student, StudyPlan, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable
+from .serializers import StudentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, SemesterSerializer, CarmenTableSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
