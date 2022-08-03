@@ -34,7 +34,7 @@
                             <q-item
                                 clickable
                                 v-ripple
-                                v-for="(link, i) in essentialLinks1"
+                                v-for="(link, i) in teachingAssignmentLinks1"
                                 :key="i"
                                 no-caps
                                 @click="$router.push({ name: link.link })"
@@ -58,12 +58,12 @@
                 </div>
 
                 <div>
-                    <q-btn-dropdown label="Actividades" no-caps>
+                    <q-btn-dropdown label="Asignación de Docencia" no-caps>
                         <q-list>
                             <q-item
                                 clickable
                                 v-ripple
-                                v-for="(link, i) in essentialLinks2"
+                                v-for="(link, i) in teachingAssignmentLinks2"
                                 :key="i"
                                 no-caps
                                 @click="$router.push({ name: link.link })"
@@ -137,7 +137,7 @@
 import { defineComponent, ref } from 'vue';
 import EssentialLink from 'components/EssentialLink.vue';
 
-const dropdownList1 = [
+const teachingAssignmentLinks1 = [
     {
         title: 'Carreras',
         caption: 'quasar.dev',
@@ -189,7 +189,7 @@ const dropdownList1 = [
     },
 ];
 
-const dropdownList2 = [
+const teachingAssignmentLinks2 = [
     {
         title: 'Departamentos',
         caption: 'quasar.dev',
@@ -232,19 +232,19 @@ const thesisCommitteeLinks = [
     {
         title: 'Estudiantes',
         caption: 'quasar.dev',
-        icon: 'door_front',
+        icon: 'group',
         link: 'students',
     },
     {
         title: 'Tesis',
         caption: 'quasar.dev',
-        icon: 'door_front',
+        icon: 'workspace_premium',
         link: 'thesis',
     },
     {
         title: 'Tribunal de Tesis',
         caption: 'quasar.dev',
-        icon: 'door_front',
+        icon: 'gavel',
         link: 'thesis-committee',
     },
 ];
@@ -260,8 +260,8 @@ export default defineComponent({
         const leftDrawerOpen = ref(false);
         const imageLogo = require('src/assets/logo.jpg');
         return {
-            essentialLinks1: dropdownList1,
-            essentialLinks2: dropdownList2,
+            teachingAssignmentLinks1: teachingAssignmentLinks1,
+            teachingAssignmentLinks2: teachingAssignmentLinks2,
             thesisCommitteeLinks: thesisCommitteeLinks,
             leftDrawerOpen,
             imageLogo,
