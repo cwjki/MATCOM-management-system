@@ -235,6 +235,18 @@ const thesisCommitteeLinks = [
         icon: 'door_front',
         link: 'students',
     },
+    {
+        title: 'Tesis',
+        caption: 'quasar.dev',
+        icon: 'door_front',
+        link: 'thesis',
+    },
+    {
+        title: 'Tribunal de Tesis',
+        caption: 'quasar.dev',
+        icon: 'door_front',
+        link: 'thesis-committee',
+    },
 ];
 
 export default defineComponent({
