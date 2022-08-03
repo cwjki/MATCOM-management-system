@@ -85,6 +85,35 @@
                         </q-list>
                     </q-btn-dropdown>
                 </div>
+
+                <div>
+                    <q-btn-dropdown label="Tribunal de Tesis" no-caps>
+                        <q-list>
+                            <q-item
+                                clickable
+                                v-ripple
+                                v-for="(link, i) in thesisCommitteeLinks"
+                                :key="i"
+                                no-caps
+                                @click="$router.push({ name: link.link })"
+                                :flat="
+                                    $router.currentRoute.value.name !==
+                                    link.link
+                                "
+                            >
+                                <q-item-section>
+                                    <q-btn color="primary" no-caps align="left">
+                                        <q-icon
+                                            :name="link.icon"
+                                            class="q-mr-md"
+                                        />
+                                        {{ $q.screen.gt.sm ? link.title : '' }}
+                                    </q-btn>
+                                </q-item-section>
+                            </q-item>
+                        </q-list>
+                    </q-btn-dropdown>
+                </div>
             </q-toolbar>
         </q-header>
 
@@ -199,6 +228,15 @@ const dropdownList2 = [
     },
 ];
 
+const thesisCommitteeLinks = [
+    {
+        title: 'Estudiantes',
+        caption: 'quasar.dev',
+        icon: 'door_front',
+        link: 'students',
+    },
+];
+
 export default defineComponent({
     name: 'MainLayout',
 
@@ -212,6 +250,7 @@ export default defineComponent({
         return {
             essentialLinks1: dropdownList1,
             essentialLinks2: dropdownList2,
+            thesisCommitteeLinks: thesisCommitteeLinks,
             leftDrawerOpen,
             imageLogo,
             toggleLeftDrawer() {

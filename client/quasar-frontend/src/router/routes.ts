@@ -102,6 +102,12 @@ const routes: RouteRecordRaw[] = [
                         'src/pages/teachingAssignments/TeachingAssignments.vue'
                     ),
             },
+            {
+                path: 'students',
+                name: 'students',
+                component: () =>
+                    import('src/pages/thesisCommittee/Students.vue'),
+            },
         ],
     },
 
