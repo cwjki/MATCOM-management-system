@@ -332,6 +332,7 @@ class ThesisSerializer(ModelSerializer):
             return {
                 "id": obj.tutor.id,
                 "name": obj.tutor.name,
+                "last_name": obj.tutor.last_name,
             }
         return None
 
@@ -340,6 +341,7 @@ class ThesisSerializer(ModelSerializer):
             return {
                 "id": obj.cotutor.id,
                 "name": obj.cotutor.name,
+                "last_name": obj.cotutor.last_name,
             }
         return None
 
@@ -372,6 +374,9 @@ class ThesisCommitteeSerializer(ModelSerializer):
             return {
                 "id": obj.thesis.id,
                 "title": obj.thesis.title,
+                "student": obj.thesis.student.name + ' ' + obj.thesis.student.last_name,
+                "tutor": obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name,
+                "cotutor": obj.thesis.cotutor.name + ' ' + obj.thesis.cotutor.last_name,
             }
         return None
 

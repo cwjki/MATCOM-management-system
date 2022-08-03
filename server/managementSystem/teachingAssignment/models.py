@@ -196,4 +196,4 @@ class ThesisCommittee(models.Model):
         Professor, related_name='secretary', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return str(self.thesis + ' ' + str(self.opponent) + ' ' + str(self.secretary))
+        return str(self.thesis) + ' ' + str(self.opponent) + ' ' + str(self.secretary)
