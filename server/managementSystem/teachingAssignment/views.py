@@ -163,7 +163,7 @@ class SubjectViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['name']
+    search_fields = ['name', 'career__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
