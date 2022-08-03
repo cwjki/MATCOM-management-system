@@ -41,6 +41,33 @@ export default defineComponent({
                     rules: ['required'],
                 },
                 {
+                    name: 'student',
+                    label: 'Estudiante',
+                    column: {
+                        transform(row) {
+                            return `${row.thesis.student}`;
+                        },
+                    },
+                },
+                {
+                    name: 'tutor',
+                    label: 'Tutor',
+                    column: {
+                        transform(row) {
+                            return `${row.thesis.tutor}`;
+                        },
+                    },
+                },
+                {
+                    name: 'cotutor',
+                    label: 'Cotutor',
+                    column: {
+                        transform(row) {
+                            return `${row.thesis.cotutor}`;
+                        },
+                    },
+                },
+                {
                     name: 'opponent',
                     label: 'Oponente',
                     column: {
