@@ -79,7 +79,7 @@ export default defineComponent({
                     label: 'Profesor',
                     column: {
                         transform(row) {
-                            return `${row.professor.name}`;
+                            return `${row.professor.name + ' ' + row.professor.last_name}`;
                         },
                     },
                     type: 'select',
