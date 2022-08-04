@@ -2,8 +2,8 @@ from rest_framework import permissions, viewsets
 from rest_framework import filters
 from django.contrib.auth.models import User
 
-from .models import Career, Student, StudyPlan, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable
-from .serializers import StudentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, SemesterSerializer, CarmenTableSerializer
+from .models import Career, CarmenTable, Student, StudyPlan, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, SubjectDescription, TeachingAssignment, Semester
+from .serializers import CarmenTableSerializer, StudentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, SemesterSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -163,7 +163,7 @@ class SubjectViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['name']
+    search_fields = ['name', 'career__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 

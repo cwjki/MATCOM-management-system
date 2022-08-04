@@ -25,7 +25,7 @@ export default defineComponent({
             service: carmenTableService,
             fields: [
                 {
-                    name: 'teaching_grupo',
+                    name: 'teaching_group',
                     label: 'Curso',
                     column: {
                         transform(row) {
@@ -39,6 +39,15 @@ export default defineComponent({
                         label: 'name',
                     },
                     rules: ['required'],
+                },
+                {
+                    name: 'study_plan',
+                    label: 'Plan de estudio',
+                    column: {
+                        transform(row) {
+                            return `${row.study_plan.name}`;
+                        },
+                    },
                 },
                 {
                     name: 'semester',
