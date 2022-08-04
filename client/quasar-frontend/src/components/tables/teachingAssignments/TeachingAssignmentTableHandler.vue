@@ -39,6 +39,21 @@ export default defineComponent({
                     },
                 },
                 {
+                    name: 'subject_description',
+                    label: 'Asignatura',
+                    column: {
+                        transform(row) {
+                            return `${row.subject_description.name}`;
+                        },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: subjectDescriptionService.list,
+                        value: 'id',
+                        label: 'id',
+                    },
+                },
+                {
                     name: 'class_type',
                     label: 'Actividad de clase',
                     column: {

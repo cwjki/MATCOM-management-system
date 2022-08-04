@@ -24,22 +24,6 @@ export default defineComponent({
                     label: 'Nombre',
                     type: 'text',
                 },
-                {
-                    name: 'study_plan',
-                    label: 'Plan de estudio',
-                    column: {
-                        transform(row) {
-                            return `${row.study_plan.name}`;
-                        },
-                    },
-                    type: 'select',
-                    selectOptions: {
-                        list: studyPlanService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
-                    rules: ['required'],
-                },
             ],
             actions: {
                 create: true,

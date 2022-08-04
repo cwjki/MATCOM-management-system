@@ -45,7 +45,7 @@ export default defineComponent({
                     label: 'Plan de estudio',
                     column: {
                         transform(row) {
-                            return `${row.teaching_group.study_plan}`;
+                            return `${row.study_plan.name}`;
                         },
                     },
                 },
