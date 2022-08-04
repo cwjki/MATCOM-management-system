@@ -126,6 +126,15 @@ class Subject(models.Model):
         return str(self.name) + ' ' + '[' + str(self.career) + ']' + ' ' + '[' + str(self.study_plan) + ']'
 
 
+class CarmenTable(models.Model):
+    teaching_group = models.ForeignKey(TeachingGroup, on_delete=models.CASCADE)
+    time_period = models.ForeignKey(TimePeriod, on_delete=models.CASCADE)
+    semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return '[' + str(self.teaching_group) + '] ' + '[' + str(self.time_period) + ']' + '[' + str(self.semester) + ']'
+
+
 class SubjectDescription(models.Model):
     number_of_hours = models.PositiveIntegerField()
     number_of_groups = models.PositiveIntegerField()
@@ -152,15 +161,7 @@ class TeachingAssignment(models.Model):
         return '[' + str(self.professor) + '] ' + '[' + str(self.subject_description) + ']' + '[Grupo ' + str(self.group) + ']'
 
 
-class CarmenTable(models.Model):
-    teaching_group = models.ForeignKey(TeachingGroup, on_delete=models.CASCADE)
-    time_period = models.ForeignKey(TimePeriod, on_delete=models.CASCADE)
-    semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
-
-    def __str__(self) -> str:
-        return '[' + str(self.teaching_group) + '] ' + '[' + str(self.time_period) + ']' + '[' + str(self.semester) + ']'
-
-# ---------- Thesis Tribunals ----------
+# ---------- Thesis Committee ----------
 
 
 class Student(models.Model):
