@@ -3,7 +3,7 @@ from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
-from .models import Snippet, Career, Student, StudyPlan, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, CarmenTable, Thesis, ThesisCommittee, TimePeriod
+from .models import Snippet, Career, Student, StudyPlan, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, Thesis, ThesisCommittee, TimePeriod, CarmenTable
 
 
 class SnippetSerializer(ModelSerializer):
@@ -42,16 +42,16 @@ class StudyPlanSerializer(ModelSerializer):
 
 
 class TeachingGroupSerializer(ModelSerializer):
-    study_plan_id = serializers.IntegerField(required=True, write_only=True)
-    study_plan = serializers.SerializerMethodField()
+    # study_plan_id = serializers.IntegerField(required=True, write_only=True)
+    # study_plan = serializers.SerializerMethodField()
 
-    def get_study_plan(self, obj) -> dict:
-        if obj.study_plan:
-            return {
-                "id": obj.study_plan.id,
-                "name": obj.study_plan.name
-            }
-        return None
+    # def get_study_plan(self, obj) -> dict:
+    #     if obj.study_plan:
+    #         return {
+    #             "id": obj.study_plan.id,
+    #             "name": obj.study_plan.name
+    #         }
+    #     return None
 
     class Meta:
         model = TeachingGroup
@@ -282,12 +282,15 @@ class CarmenTableSerializer(ModelSerializer):
         required=True, write_only=True)
     semester = serializers.SerializerMethodField()
 
+    study_plan_id = serializers.IntegerField(
+        required=True, write_only=True)
+    study_plan = serializers.SerializerMethodField()
+
     def get_teaching_group(self, obj) -> dict:
         if obj.teaching_group:
             return {
                 "id": obj.teaching_group.id,
-                "name": obj.teaching_group.name,
-                "study_plan": obj.teaching_group.study_plan.name
+                "name": obj.teaching_group.name
             }
         return None
 
@@ -304,6 +307,14 @@ class CarmenTableSerializer(ModelSerializer):
             return {
                 "id": obj.semester.id,
                 "name": obj.semester.name
+            }
+        return None
+
+    def get_study_plan(self, obj) -> dict:
+        if obj.study_plan:
+            return {
+                "id": obj.study_plan.id,
+                "name": obj.study_plan.name
             }
         return None
 

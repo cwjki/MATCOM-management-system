@@ -36,12 +36,8 @@ class StudyPlan(models.Model):
 class TeachingGroup(models.Model):
     name = models.CharField(max_length=50)
 
-    # Relationship
-    study_plan = models.ForeignKey(
-        StudyPlan, related_name='teaching_groups', on_delete=models.PROTECT)
-
     def __str__(self) -> str:
-        return '[' + str(self.name) + ']' + ' [' + str(self.study_plan) + ']'
+        return str(self.name)
 
 
 class Department(models.Model):
@@ -130,9 +126,10 @@ class CarmenTable(models.Model):
     teaching_group = models.ForeignKey(TeachingGroup, on_delete=models.CASCADE)
     time_period = models.ForeignKey(TimePeriod, on_delete=models.CASCADE)
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
+    study_plan = models.ForeignKey(StudyPlan, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return '[' + str(self.teaching_group) + '] ' + '[' + str(self.time_period) + ']' + '[' + str(self.semester) + ']'
+        return '[' + str(self.teaching_group) + '] ' + '[' + str(self.study_plan) + '] ' + '[' + str(self.time_period) + ']' + '[' + str(self.semester) + ']'
 
 
 class SubjectDescription(models.Model):
