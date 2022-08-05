@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import {
+    carmenTableService,
     classTypeService,
     subjectDescriptionService,
     subjectService,
@@ -37,6 +38,22 @@ export default defineComponent({
                         list: subjectService.list,
                         value: 'id',
                         label: 'name',
+                    },
+                    rules: ['required'],
+                },
+                {
+                    name: 'scholar_year',
+                    label: 'Año',
+                    column: {
+                        transform(row) {
+                            return `${row.scholar_year.teaching_group}`;
+                        },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: carmenTableService.list,
+                        value: 'id',
+                        label: 'teaching_group',
                     },
                     rules: ['required'],
                 },
