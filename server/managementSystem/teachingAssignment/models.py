@@ -140,6 +140,7 @@ class SubjectDescription(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     class_type = models.ForeignKey(ClassType, on_delete=models.PROTECT)
     time_period = models.ForeignKey(TimePeriod, on_delete=models.PROTECT)
+    scholar_year = models.ForeignKey(CarmenTable, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return '[' + str(self.subject) + '] ' + '[' + str(self.class_type) + '] ' + '[' + str(self.time_period) + ']'

@@ -3,7 +3,7 @@ from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
-from .models import Snippet, Career, Student, StudyPlan, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, SubjectDescription, TeachingAssignment, Semester, Thesis, ThesisCommittee, TimePeriod, CarmenTable
+from .models import CarmenTable, Snippet, Career, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, Thesis, ThesisCommittee, TimePeriod
 
 
 class SnippetSerializer(ModelSerializer):
@@ -206,6 +206,9 @@ class SubjectDescriptionSerializer(ModelSerializer):
     time_period_id = serializers.IntegerField(required=True, write_only=True)
     time_period = serializers.SerializerMethodField()
 
+    scholar_year_id = serializers.IntegerField(required=True, write_only=True)
+    scholar_year = serializers.SerializerMethodField()
+
     def get_subject(self, obj) -> dict:
         if obj.subject:
             return {
@@ -227,6 +230,17 @@ class SubjectDescriptionSerializer(ModelSerializer):
             return {
                 "id": obj.time_period.id,
                 "name": obj.time_period.name
+            }
+        return None
+
+    def get_scholar_year(self, obj) -> dict:
+        if obj.scholar_year:
+            return {
+                "id": obj.scholar_year.id,
+                "teaching_group": obj.scholar_year.teaching_group.name,
+                "time_period": obj.scholar_year.time_period.name,
+                "study_plan": obj.scholar_year.study_plan.name,
+                "semester": obj.scholar_year.semester.name,
             }
         return None
 
