@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import {
+    carmenTableService,
     professorService,
     subjectDescriptionService,
     teachingAssignmentService,
@@ -39,18 +40,12 @@ export default defineComponent({
                     },
                 },
                 {
-                    name: 'subject_description',
-                    label: 'Asignatura',
+                    name: 'scholar_year',
+                    label: 'Año',
                     column: {
                         transform(row) {
-                            return `${row.subject_description.name}`;
+                            return `${row.subject_description.scholar_year}`;
                         },
-                    },
-                    type: 'select',
-                    selectOptions: {
-                        list: subjectDescriptionService.list,
-                        value: 'id',
-                        label: 'id',
                     },
                 },
                 {
@@ -94,7 +89,11 @@ export default defineComponent({
                     label: 'Profesor',
                     column: {
                         transform(row) {
-                            return `${row.professor.name + ' ' + row.professor.last_name}`;
+                            return `${
+                                row.professor.name +
+                                ' ' +
+                                row.professor.last_name
+                            }`;
                         },
                     },
                     type: 'select',
