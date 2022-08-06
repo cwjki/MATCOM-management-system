@@ -134,6 +134,16 @@ class ProfessorSerializer(ModelSerializer):
         required=True, write_only=True)
     teaching_category = serializers.SerializerMethodField()
 
+    faculty = serializers.SerializerMethodField()
+
+    def get_faculty(self, obj) -> dict:
+        if obj.department:
+            return {
+                "id": obj.department.faculty.id,
+                "name": obj.department.faculty.name,
+            }
+        return None
+
     def get_department(self, obj) -> dict:
         if obj.department:
             return {
