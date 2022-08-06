@@ -48,8 +48,6 @@ class TeachingGroup(models.Model):
         return str(self.name)
 
 
-
-
 class Department(models.Model):
     name = models.CharField(max_length=100)
 
