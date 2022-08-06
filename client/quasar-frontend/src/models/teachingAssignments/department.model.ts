@@ -1,5 +1,5 @@
 export interface DepartmentModel {
     id: number;
     name: string;
-    career: string;
+    faculty: string;
 }
