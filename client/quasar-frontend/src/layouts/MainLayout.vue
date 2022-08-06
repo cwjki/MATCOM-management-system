@@ -141,7 +141,7 @@ const teachingAssignmentLinks1 = [
     {
         title: 'Facultades',
         caption: 'quasar.dev',
-        icon: 'school',
+        icon: 'museum',
         link: 'faculties',
     },
     {
