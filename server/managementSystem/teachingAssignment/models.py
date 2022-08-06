@@ -11,11 +11,19 @@ class Snippet(models.Model):
         'auth.User', related_name='snippets', on_delete=models.CASCADE)
 
 
+class Faculty(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return str(self.name)
+
+
 class Career(models.Model):
     name = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
 
     # Relationship
+    faculty = models.ForeignKey(Faculty, on_delete=models.PROTECT)
     # owner = models.ForeignKey(
     #     'auth.User', related_name='careers', on_delete=models.CASCADE)
 
@@ -40,19 +48,14 @@ class TeachingGroup(models.Model):
         return str(self.name)
 
 
-class Faculty(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self) -> str:
-        return str(self.name)
 
 
 class Department(models.Model):
     name = models.CharField(max_length=100)
 
     # Relationship
-    career = models.ForeignKey(Career, on_delete=models.PROTECT)
-    
+    # career = models.ForeignKey(Career, on_delete=models.PROTECT)
+    faculty = models.ForeignKey(Faculty, on_delete=models.PROTECT)
 
     def __str__(self) -> str:
         return str(self.name)

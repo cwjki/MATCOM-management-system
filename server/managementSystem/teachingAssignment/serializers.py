@@ -28,6 +28,16 @@ class UserSerializer(ModelSerializer):
 
 class CareerSerializer(ModelSerializer):
     # owner = serializers.ReadOnlyField(source='owner.username')
+    faculty_id = serializers.IntegerField(required=True, write_only=True)
+    faculty = serializers.SerializerMethodField()
+
+    def get_faculty(self, obj) -> dict:
+        if obj.faculty:
+            return {
+                "id": obj.faculty.id,
+                "name": obj.faculty.name
+            }
+        return None
 
     class Meta:
         model = Career
@@ -59,16 +69,6 @@ class TeachingGroupSerializer(ModelSerializer):
 
 
 class FacultySerializer(ModelSerializer):
-    career_id = serializers.IntegerField(required=True, write_only=True)
-    career = serializers.SerializerMethodField()
-
-    def get_career(self, obj) -> dict:
-        if obj.career:
-            return {
-                "id": obj.career.id,
-                "name": obj.career.name
-            }
-        return None
 
     class Meta:
         model = Faculty
@@ -76,14 +76,14 @@ class FacultySerializer(ModelSerializer):
 
 
 class DepartmentSerializer(ModelSerializer):
-    career_id = serializers.IntegerField(required=True, write_only=True)
-    career = serializers.SerializerMethodField()
+    faculty_id = serializers.IntegerField(required=True, write_only=True)
+    faculty = serializers.SerializerMethodField()
 
-    def get_career(self, obj) -> dict:
-        if obj.career:
+    def get_faculty(self, obj) -> dict:
+        if obj.faculty:
             return {
-                "id": obj.career.id,
-                "name": obj.career.name
+                "id": obj.faculty.id,
+                "name": obj.faculty.name
             }
         return None
 
