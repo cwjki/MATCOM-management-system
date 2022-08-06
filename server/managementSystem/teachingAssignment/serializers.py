@@ -3,7 +3,7 @@ from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
-from .models import CarmenTable, Snippet, Career, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, Thesis, ThesisCommittee, TimePeriod
+from .models import CarmenTable, Faculty, Snippet, Career, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, Thesis, ThesisCommittee, TimePeriod
 
 
 class SnippetSerializer(ModelSerializer):
@@ -55,6 +55,23 @@ class TeachingGroupSerializer(ModelSerializer):
 
     class Meta:
         model = TeachingGroup
+        fields = '__all__'
+
+
+class FacultySerializer(ModelSerializer):
+    career_id = serializers.IntegerField(required=True, write_only=True)
+    career = serializers.SerializerMethodField()
+
+    def get_career(self, obj) -> dict:
+        if obj.career:
+            return {
+                "id": obj.career.id,
+                "name": obj.career.name
+            }
+        return None
+
+    class Meta:
+        model = Faculty
         fields = '__all__'
 
 

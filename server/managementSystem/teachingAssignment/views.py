@@ -2,8 +2,8 @@ from rest_framework import permissions, viewsets
 from rest_framework import filters
 from django.contrib.auth.models import User
 
-from .models import Career, CarmenTable, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester
-from .serializers import CarmenTableSerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer
+from .models import Career, CarmenTable, Faculty, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester
+from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -13,7 +13,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
+ 
 
 # class SnippetViewSet(viewsets.ModelViewSet):
 #     """
@@ -80,6 +80,17 @@ class TeachingGroupViewSet(viewsets.ModelViewSet):
     search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+
+class FacultyViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for faculty.
+    """
+    queryset = Faculty.objects.all()
+    serializer_class = FacultySerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'career__name']
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class DepartmentViewSet(viewsets.ModelViewSet):
     """
@@ -163,7 +174,7 @@ class SubjectViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['name', 'career__name']
+    search_fields = ['name', 'department__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 

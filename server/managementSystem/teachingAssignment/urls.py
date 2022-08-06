@@ -12,6 +12,9 @@ router.register(r'users', views.UserViewSet,
 router.register(r'careers', views.CareerViewSet,
                 basename="careers")
 
+router.register(r'faculties', views.FacultyViewSet,
+                basename="faculties")
+
 router.register(r'departments', views.DepartmentViewSet,
                 basename="departments")
 

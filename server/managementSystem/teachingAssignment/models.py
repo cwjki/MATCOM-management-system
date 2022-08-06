@@ -40,11 +40,19 @@ class TeachingGroup(models.Model):
         return str(self.name)
 
 
+class Faculty(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return str(self.name)
+
+
 class Department(models.Model):
     name = models.CharField(max_length=100)
 
     # Relationship
     career = models.ForeignKey(Career, on_delete=models.PROTECT)
+    
 
     def __str__(self) -> str:
         return str(self.name)
