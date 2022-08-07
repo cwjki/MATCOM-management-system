@@ -10,6 +10,7 @@ import { StudyPlanModel } from 'src/models/teachingAssignments/studyPlan.model';
 import { SubjectModel } from 'src/models/teachingAssignments/subject.model';
 import { SubjectDescriptionModel } from 'src/models/teachingAssignments/subjectDescription.model';
 import { TeachingAssignmentModel } from 'src/models/teachingAssignments/teachingAssignment.model';
+import { TeachingPlanningModel } from 'src/models/teachingAssignments/teachingPlanning.model';
 import { TeachingCategoryModel } from 'src/models/teachingAssignments/teachingCategory.model';
 import { TeachingGroupModel } from 'src/models/teachingAssignments/teachingGroup.model';
 import { StudentModel } from 'src/models/thesisCommittee/students.model';
@@ -35,6 +36,7 @@ export const RESOURCES = {
     timePeriods: '/time-periods/',
     teachingGroups: '/teaching-groups/',
     teachingAssignment: '/teaching-assignments/',
+    teachingPlanning: 'teaching-planning',
 
     students: '/students/',
     thesis: '/thesis/',
@@ -64,6 +66,9 @@ export const subjectDescriptionService =
 
 export const teachingAssignmentService =
     CrudServiceFactory<TeachingAssignmentModel>(RESOURCES.teachingAssignments);
+
+export const teachingPlanningService =
+    CrudServiceFactory<TeachingPlanningModel>(RESOURCES.teachingPlanning);
 
 export const carmenTableService = CrudServiceFactory<CarmenTableModel>(
     RESOURCES.carmenTable

@@ -109,6 +109,14 @@ const routes: RouteRecordRaw[] = [
                     ),
             },
             {
+                path: 'teaching-planning',
+                name: 'teaching-planning',
+                component: () =>
+                    import(
+                        'src/pages/teachingAssignments/TeachingPlanning.vue'
+                    ),
+            },
+            {
                 path: 'students',
                 name: 'students',
                 component: () =>

@@ -232,6 +232,12 @@ const teachingAssignmentLinks2 = [
         icon: 'assignment_turned_in',
         link: 'teaching-assignments',
     },
+    {
+        title: 'Planificación de Docencia',
+        caption: 'quasar.dev',
+        icon: 'assignment_turned_in',
+        link: 'teaching-planning',
+    },
 ];
 
 const thesisCommitteeLinks = [
