@@ -6,39 +6,23 @@
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
-import { careerService, facultyService } from 'src/services';
+import { facultyService } from 'src/services';
 
 export default defineComponent({
-    name: 'careerHandler',
+    name: 'facultyHandler',
     components: { GenericCrudDataTable },
     props: {},
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Carreras',
-            singularLabel: 'Carrera',
-            service: careerService,
+            name: 'Facultades',
+            singularLabel: 'Facultad',
+            service: facultyService,
             fields: [
                 {
                     name: 'name',
                     label: 'Nombre',
                     type: 'text',
-                },
-                {
-                    name: 'faculty',
-                    label: 'Facultad',
-                    column: {
-                        transform(row) {
-                            return `${row.faculty.name}`;
-                        },
-                    },
-                    type: 'select',
-                    selectOptions: {
-                        list: facultyService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
-                    rules: ['required'],
                 },
             ],
             actions: {
