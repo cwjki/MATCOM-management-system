@@ -3,7 +3,8 @@ from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
-from .models import CarmenTable, Snippet, Career, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, Thesis, ThesisCommittee, TimePeriod
+
+from .models import CarmenTable, Faculty, Snippet, Career, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, TeachingPlanning, Thesis, ThesisCommittee, TimePeriod
 
 
 class SnippetSerializer(ModelSerializer):
@@ -28,6 +29,16 @@ class UserSerializer(ModelSerializer):
 
 class CareerSerializer(ModelSerializer):
     # owner = serializers.ReadOnlyField(source='owner.username')
+    faculty_id = serializers.IntegerField(required=True, write_only=True)
+    faculty = serializers.SerializerMethodField()
+
+    def get_faculty(self, obj) -> dict:
+        if obj.faculty:
+            return {
+                "id": obj.faculty.id,
+                "name": obj.faculty.name
+            }
+        return None
 
     class Meta:
         model = Career
@@ -58,15 +69,22 @@ class TeachingGroupSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class DepartmentSerializer(ModelSerializer):
-    career_id = serializers.IntegerField(required=True, write_only=True)
-    career = serializers.SerializerMethodField()
+class FacultySerializer(ModelSerializer):
 
-    def get_career(self, obj) -> dict:
-        if obj.career:
+    class Meta:
+        model = Faculty
+        fields = '__all__'
+
+
+class DepartmentSerializer(ModelSerializer):
+    faculty_id = serializers.IntegerField(required=True, write_only=True)
+    faculty = serializers.SerializerMethodField()
+
+    def get_faculty(self, obj) -> dict:
+        if obj.faculty:
             return {
-                "id": obj.career.id,
-                "name": obj.career.name
+                "id": obj.faculty.id,
+                "name": obj.faculty.name
             }
         return None
 
@@ -116,6 +134,16 @@ class ProfessorSerializer(ModelSerializer):
     teaching_category_id = serializers.IntegerField(
         required=True, write_only=True)
     teaching_category = serializers.SerializerMethodField()
+
+    faculty = serializers.SerializerMethodField()
+
+    def get_faculty(self, obj) -> dict:
+        if obj.department:
+            return {
+                "id": obj.department.faculty.id,
+                "name": obj.department.faculty.name,
+            }
+        return None
 
     def get_department(self, obj) -> dict:
         if obj.department:
@@ -339,7 +367,17 @@ class CarmenTableSerializer(ModelSerializer):
         fields = '__all__'
 
 
-# ----------- Thesis Committee ------------
+class TeachingPlanningSerializer(ModelSerializer):
+    teaching_assignments = TeachingAssignmentSerializer(
+        read_only=True, many=True)
+
+    class Meta:
+        model = TeachingPlanning
+        fields = '__all__'
+
+        # ----------- Thesis Committee ------------
+
+
 class StudentSerializer(ModelSerializer):
     class Meta:
         model = Student

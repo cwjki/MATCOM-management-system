@@ -11,11 +11,19 @@ class Snippet(models.Model):
         'auth.User', related_name='snippets', on_delete=models.CASCADE)
 
 
+class Faculty(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return str(self.name)
+
+
 class Career(models.Model):
     name = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
 
     # Relationship
+    faculty = models.ForeignKey(Faculty, on_delete=models.PROTECT)
     # owner = models.ForeignKey(
     #     'auth.User', related_name='careers', on_delete=models.CASCADE)
 
@@ -44,7 +52,8 @@ class Department(models.Model):
     name = models.CharField(max_length=100)
 
     # Relationship
-    career = models.ForeignKey(Career, on_delete=models.PROTECT)
+    # career = models.ForeignKey(Career, on_delete=models.PROTECT)
+    faculty = models.ForeignKey(Faculty, on_delete=models.PROTECT)
 
     def __str__(self) -> str:
         return str(self.name)
@@ -159,8 +168,12 @@ class TeachingAssignment(models.Model):
         return '[' + str(self.professor) + '] ' + '[' + str(self.subject_description) + ']' + '[Grupo ' + str(self.group) + ']'
 
 
-# ---------- Thesis Committee ----------
+class TeachingPlanning(models.Model):
+    # Relationships
+    teaching_assignments = models.ManyToManyField(TeachingAssignment)
 
+
+# ---------- Thesis Committee ----------
 
 class Student(models.Model):
     name = models.CharField(max_length=200)
