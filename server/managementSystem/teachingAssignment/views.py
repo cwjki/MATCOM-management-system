@@ -1,9 +1,9 @@
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets, authentication
 from rest_framework import filters
 from django.contrib.auth.models import User
 
-from .models import Career, CarmenTable, Faculty, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester
-from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer
+from .models import Career, CarmenTable, Faculty, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester, TeachingPlanning
+from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -13,7 +13,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
- 
+
 
 # class SnippetViewSet(viewsets.ModelViewSet):
 #     """
@@ -38,6 +38,7 @@ class CareerViewSet(viewsets.ModelViewSet):
     serializer_class = CareerSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']
+
     # permission_classes = [
     #     permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
@@ -91,6 +92,7 @@ class FacultyViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['name', 'career__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
 
 class DepartmentViewSet(viewsets.ModelViewSet):
     """
@@ -199,6 +201,18 @@ class TeachingAssignmentViewSet(viewsets.ModelViewSet):
     serializer_class = TeachingAssignmentSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['professor__name', 'subjectDescription__name']
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class TeachingPlanningViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for teaching planning.
+    """
+    queryset = TeachingPlanning.objects.all()
+    serializer_class = TeachingPlanningSerializer
+    filter_backends = [filters.SearchFilter]
+    # search_fields = ['professor__name', 'subjectDescription__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 

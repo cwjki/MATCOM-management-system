@@ -3,7 +3,8 @@ from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.models import User
-from .models import CarmenTable, Faculty, Snippet, Career, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, Thesis, ThesisCommittee, TimePeriod
+
+from .models import CarmenTable, Faculty, Snippet, Career, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, TeachingPlanning, Thesis, ThesisCommittee, TimePeriod
 
 
 class SnippetSerializer(ModelSerializer):
@@ -366,7 +367,17 @@ class CarmenTableSerializer(ModelSerializer):
         fields = '__all__'
 
 
-# ----------- Thesis Committee ------------
+class TeachingPlanningSerializer(ModelSerializer):
+    teaching_assignments = TeachingAssignmentSerializer(
+        read_only=True, many=True)
+
+    class Meta:
+        model = TeachingPlanning
+        fields = '__all__'
+
+        # ----------- Thesis Committee ------------
+
+
 class StudentSerializer(ModelSerializer):
     class Meta:
         model = Student

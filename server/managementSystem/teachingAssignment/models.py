@@ -168,8 +168,12 @@ class TeachingAssignment(models.Model):
         return '[' + str(self.professor) + '] ' + '[' + str(self.subject_description) + ']' + '[Grupo ' + str(self.group) + ']'
 
 
-# ---------- Thesis Committee ----------
+class TeachingPlanning(models.Model):
+    # Relationships
+    teaching_assignments = models.ManyToManyField(TeachingAssignment)
 
+
+# ---------- Thesis Committee ----------
 
 class Student(models.Model):
     name = models.CharField(max_length=200)
