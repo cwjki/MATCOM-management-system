@@ -16,9 +16,11 @@ import { StudentModel } from 'src/models/thesisCommittee/students.model';
 import { ThesisModel } from 'src/models/thesisCommittee/thesis.model';
 import { ThesisCommitteeModel } from 'src/models/thesisCommittee/thesisCommittee.model';
 import { CrudServiceFactory } from './api.service';
+import { FacultyModel } from 'src/models/teachingAssignments/faculty.model';
 
 export const RESOURCES = {
     profesors: '/professors/',
+    faculties: '/faculties/',
     careers: '/careers/',
     departments: '/departments/',
     subjects: '/subjects/',
@@ -47,6 +49,10 @@ export const professorService = CrudServiceFactory<ProfessorModel>(
 
 export const subjectService = CrudServiceFactory<SubjectModel>(
     RESOURCES.subjects
+);
+
+export const facultyService = CrudServiceFactory<FacultyModel>(
+    RESOURCES.faculties
 );
 
 export const departmentService = CrudServiceFactory<DepartmentModel>(

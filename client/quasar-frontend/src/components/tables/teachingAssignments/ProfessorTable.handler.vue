@@ -47,6 +47,15 @@ export default defineComponent({
                     rules: ['required'],
                 },
                 {
+                    name: 'faculty',
+                    label: 'Facultad',
+                    column: {
+                        transform(row) {
+                            return `${row.faculty.name}`;
+                        },
+                    },
+                },
+                {
                     name: 'department',
                     label: 'Departamento',
                     column: {

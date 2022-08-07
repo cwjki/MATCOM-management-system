@@ -139,6 +139,12 @@ import EssentialLink from 'components/EssentialLink.vue';
 
 const teachingAssignmentLinks1 = [
     {
+        title: 'Facultades',
+        caption: 'quasar.dev',
+        icon: 'museum',
+        link: 'faculties',
+    },
+    {
         title: 'Carreras',
         caption: 'quasar.dev',
         icon: 'school',

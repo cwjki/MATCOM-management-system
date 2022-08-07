@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 from teachingAssignment import views
 
 
@@ -11,6 +12,9 @@ router.register(r'users', views.UserViewSet,
 
 router.register(r'careers', views.CareerViewSet,
                 basename="careers")
+
+router.register(r'faculties', views.FacultyViewSet,
+                basename="faculties")
 
 router.register(r'departments', views.DepartmentViewSet,
                 basename="departments")
@@ -45,6 +49,9 @@ router.register(r'subject-descriptions', views.SubjectDescriptionViewSet,
 router.register(r'teaching-assignments', views.TeachingAssignmentViewSet,
                 basename="teaching-assignments")
 
+router.register(r'teaching-planning', views.TeachingPlanningViewSet,
+                basename="teaching-planning")
+
 router.register(r'carmen-table', views.CarmenTableViewSet,
                 basename="carmen-table")
 
@@ -66,5 +73,6 @@ router.register(r'thesis-committee', views.ThesisCommitteeViewSet,
 
 # The API URLs are now determined automatically by the router
 urlpatterns = [
+    path('auth/', obtain_auth_token),
     path('', include(router.urls)),
 ]
