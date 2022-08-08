@@ -1,8 +1,8 @@
 import csv
 import os
 from django.core.management.base import BaseCommand, CommandError, CommandParser
-from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester
-from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer
+from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
+from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
 
 CURRENT_PATH = os.path.dirname(__file__)
 SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
@@ -13,6 +13,8 @@ STUDY_PLAN_DIR = os.path.join(CURRENT_PATH, '../../excels/study_plans.csv')
 DEPARTMENT_DIR = os.path.join(CURRENT_PATH, '../../excels/departments.csv')
 SEMESTER_DIR = os.path.join(CURRENT_PATH, '../../excels/semesters.csv')
 CLASS_TYPE_DIR = os.path.join(CURRENT_PATH, '../../excels/class_types.csv')
+TIME_PERIOD_DIR = os.path.join(CURRENT_PATH, '../../excels/time_periods.csv')
+CARMEN_TABLE_DIR = os.path.join(CURRENT_PATH, '../../excels/carmen_table.csv')
 TEACHING_GROUP_DIR = os.path.join(
     CURRENT_PATH, '../../excels/teaching_groups.csv')
 TEACHING_CATEGORY_DIR = os.path.join(
@@ -99,20 +101,34 @@ class Command(BaseCommand):
             data = [TeachingCategorySerializer(
                 teaching_category).data for teaching_category in queryset]
             file_path = TEACHING_CATEGORY_DIR
-        
+
         elif name == 'Semesters':
             queryset = Semester.objects.all()
             fieldnames = ['id', 'name']
             data = [SemesterSerializer(
                 semester).data for semester in queryset]
             file_path = SEMESTER_DIR
-        
+
         elif name == 'ClassTypes':
             queryset = ClassType.objects.all()
             fieldnames = ['id', 'name']
             data = [ClassTypeSerializer(
                 class_type).data for class_type in queryset]
             file_path = CLASS_TYPE_DIR
+
+        elif name == 'TimePeriods':
+            queryset = TimePeriod.objects.all()
+            fieldnames = ['id', 'name']
+            data = [TimePeriodSerializer(
+                time_period).data for time_period in queryset]
+            file_path = TIME_PERIOD_DIR
+
+        elif name == 'CarmenTable':
+            queryset = CarmenTable.objects.all()
+            fieldnames = ['id', 'teaching_group', 'study_plan', 'semester', 'time_period']
+            data = [CarmenTableSerializer(
+                carmen_table).data for carmen_table in queryset]
+            file_path = CARMEN_TABLE_DIR
 
         else:
             print("error")
