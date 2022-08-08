@@ -1,8 +1,8 @@
 import csv
 import os
 from django.core.management.base import BaseCommand, CommandError, CommandParser
-from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup
-from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer
+from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory
+from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer
 
 CURRENT_PATH = os.path.dirname(__file__)
 SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
@@ -10,8 +10,13 @@ PROFESSOR_DIR = os.path.join(CURRENT_PATH, '../../excels/professors.csv')
 FACULTY_DIR = os.path.join(CURRENT_PATH, '../../excels/faculties.csv')
 CAREER_DIR = os.path.join(CURRENT_PATH, '../../excels/careers.csv')
 STUDY_PLAN_DIR = os.path.join(CURRENT_PATH, '../../excels/study_plans.csv')
+DEPARTMENT_DIR = os.path.join(CURRENT_PATH, '../../excels/departments.csv')
 TEACHING_GROUP_DIR = os.path.join(
     CURRENT_PATH, '../../excels/teaching_groups.csv')
+TEACHING_CATEGORY_DIR = os.path.join(
+    CURRENT_PATH, '../../excels/teaching_categories.csv')
+SCIENTIFIC_DEGREE_DIR = os.path.join(
+    CURRENT_PATH, '../../excels/scientific_degrees.csv')
 
 
 class Command(BaseCommand):
@@ -71,6 +76,27 @@ class Command(BaseCommand):
             data = [TeachingGroupSerializer(
                 teaching_group).data for teaching_group in queryset]
             file_path = TEACHING_GROUP_DIR
+
+        elif name == 'Departments':
+            queryset = Department.objects.all()
+            fieldnames = ['id', 'name', 'faculty']
+            data = [DepartmentSerializer(
+                dapartment).data for dapartment in queryset]
+            file_path = DEPARTMENT_DIR
+
+        elif name == 'ScientificDegrees':
+            queryset = ScientificDegree.objects.all()
+            fieldnames = ['id', 'name']
+            data = [ScientificDegreeSerializer(
+                scientific_degree).data for scientific_degree in queryset]
+            file_path = SCIENTIFIC_DEGREE_DIR
+
+        elif name == 'TeachingCategories':
+            queryset = TeachingCategory.objects.all()
+            fieldnames = ['id', 'name']
+            data = [TeachingCategorySerializer(
+                teaching_category).data for teaching_category in queryset]
+            file_path = TEACHING_CATEGORY_DIR
 
         else:
             print("error")
