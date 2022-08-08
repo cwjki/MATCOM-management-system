@@ -8,6 +8,7 @@ CURRENT_PATH = os.path.dirname(__file__)
 SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
 PROFESSOR_DIR = os.path.join(CURRENT_PATH, '../../excels/professors.csv')
 FACULTY_DIR = os.path.join(CURRENT_PATH, '../../excels/faculties.csv')
+CAREER_DIR = os.path.join(CURRENT_PATH, '../../excels/careers.csv')
 
 
 class Command(BaseCommand):
@@ -46,6 +47,12 @@ class Command(BaseCommand):
             fieldnames = ['id', 'name', ]
             data = [FacultySerializer(faculty).data for faculty in queryset]
             file_path = FACULTY_DIR
+
+        elif name == 'Careers':
+            queryset = Career.objects.all()
+            fieldnames = ['id', 'name', 'faculty']
+            data = [CareerSerializer(career).data for career in queryset]
+            file_path = CAREER_DIR
 
         else:
             print("error")
