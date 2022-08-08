@@ -20,7 +20,7 @@ class Faculty(models.Model):
 
 class Career(models.Model):
     name = models.CharField(max_length=100)
-    created = models.DateTimeField(auto_now_add=True)
+    # created = models.DateTimeField(auto_now_add=True)
 
     # Relationship
     faculty = models.ForeignKey(Faculty, on_delete=models.PROTECT)
