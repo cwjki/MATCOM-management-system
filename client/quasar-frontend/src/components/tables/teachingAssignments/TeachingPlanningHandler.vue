@@ -21,7 +21,7 @@ export default defineComponent({
             fields: [
                 {
                     name: 'teaching_assignments',
-                    label: 'Id',
+                    label: 'id',
                     column: {
                         transform(row) {
                             return `${row.id}`;
