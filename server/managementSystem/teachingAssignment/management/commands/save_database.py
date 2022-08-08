@@ -1,12 +1,14 @@
 import csv
+from importlib.resources import path
 import os
 from pyexpat import model
 from django.core.management.base import BaseCommand, CommandError, CommandParser
-from ...models import Subject
-from ...serializers import SubjectSerializer
+from ...models import Professor, Subject
+from ...serializers import ProfessorSerializer, SubjectSerializer
 
 CURRENT_PATH = os.path.dirname(__file__)
 SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
+PROFESSOR_DIR = os.path.join(CURRENT_PATH, '../../excels/professors.csv')
 
 
 class Command(BaseCommand):
@@ -17,15 +19,15 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         model_name = options['model_name']
-        try:
-            fieldnames, data = self.get_fieldnames_and_data(model_name)
+        # try:
+        fieldnames, data, path = self.get_fieldnames_and_data(model_name)
 
-            with open(SUBJECTS_DIR, 'w', encoding='UTF8') as f:
+        with open(path, 'w', encoding='UTF8') as f:
                 writer = csv.DictWriter(f, fieldnames=fieldnames)
                 writer.writeheader()
                 writer.writerows(data)
-        except:
-            raise CommandError("Something went wrong")
+        # except:
+            # raise CommandError("Something went wrong")
 
     def get_fieldnames_and_data(self, name: str):
         if name == 'Subjects':
@@ -33,8 +35,17 @@ class Command(BaseCommand):
             fieldnames = ['id', 'name', 'department', 'career',
                           'study_plan', 'semester', 'number_of_hours']
             data = [SubjectSerializer(subject).data for subject in queryset]
+            path = SUBJECTS_DIR
+
+        elif name == 'Professors':
+            queryset = Professor.objects.all()
+            fieldnames = ['id', 'name', 'last_name', 'department', 'scientific_degree',
+                          'teaching_category', 'faculty']
+            data = [ProfessorSerializer(
+                professor).data for professor in queryset]
+            path = PROFESSOR_DIR
 
         else:
             print("error")
 
-        return fieldnames, data
+        return fieldnames, data, path
