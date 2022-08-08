@@ -1,8 +1,8 @@
 import csv
 import os
 from django.core.management.base import BaseCommand, CommandError, CommandParser
-from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory
-from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer
+from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester
+from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer
 
 CURRENT_PATH = os.path.dirname(__file__)
 SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
@@ -11,6 +11,8 @@ FACULTY_DIR = os.path.join(CURRENT_PATH, '../../excels/faculties.csv')
 CAREER_DIR = os.path.join(CURRENT_PATH, '../../excels/careers.csv')
 STUDY_PLAN_DIR = os.path.join(CURRENT_PATH, '../../excels/study_plans.csv')
 DEPARTMENT_DIR = os.path.join(CURRENT_PATH, '../../excels/departments.csv')
+SEMESTER_DIR = os.path.join(CURRENT_PATH, '../../excels/semesters.csv')
+CLASS_TYPE_DIR = os.path.join(CURRENT_PATH, '../../excels/class_types.csv')
 TEACHING_GROUP_DIR = os.path.join(
     CURRENT_PATH, '../../excels/teaching_groups.csv')
 TEACHING_CATEGORY_DIR = os.path.join(
@@ -97,6 +99,20 @@ class Command(BaseCommand):
             data = [TeachingCategorySerializer(
                 teaching_category).data for teaching_category in queryset]
             file_path = TEACHING_CATEGORY_DIR
+        
+        elif name == 'Semesters':
+            queryset = Semester.objects.all()
+            fieldnames = ['id', 'name']
+            data = [SemesterSerializer(
+                semester).data for semester in queryset]
+            file_path = SEMESTER_DIR
+        
+        elif name == 'ClassTypes':
+            queryset = ClassType.objects.all()
+            fieldnames = ['id', 'name']
+            data = [ClassTypeSerializer(
+                class_type).data for class_type in queryset]
+            file_path = CLASS_TYPE_DIR
 
         else:
             print("error")
