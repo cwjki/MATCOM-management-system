@@ -4,7 +4,6 @@
 
 <script lang="ts">
 import {
-    carmenTableService,
     professorService,
     subjectDescriptionService,
     teachingAssignmentService,
@@ -22,6 +21,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Asignaciones de docencia',
             singularLabel: 'Asignación de docencia',
+            filterLabel: 'Filtrar por Departamento',
             service: teachingAssignmentService,
             fields: [
                 {
@@ -37,7 +37,8 @@ export default defineComponent({
                         list: subjectDescriptionService.list,
                         value: 'id',
                         label: 'id',
-                        refactorValue: (value) => value ? value.subject.name : ''
+                        refactorValue: (value) =>
+                            value ? value.subject.name : '',
                     },
                 },
                 {

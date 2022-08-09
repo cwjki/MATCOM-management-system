@@ -1,6 +1,7 @@
 from rest_framework import permissions, viewsets, authentication
 from rest_framework import filters
 from django.contrib.auth.models import User
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Career, CarmenTable, Faculty, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester, TeachingPlanning
 from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer
@@ -162,8 +163,8 @@ class ProfessorViewSet(viewsets.ModelViewSet):
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['name', 'lastName', 'department__name',
-                     'scientificDegree__name', 'teachingCategory__name']
+    search_fields = ['name', 'last_name', 'department__name',
+                     'scientific_degree__name', 'teaching_category__name']
     filter_backends = [filters.SearchFilter]
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -175,8 +176,9 @@ class SubjectViewSet(viewsets.ModelViewSet):
     """
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['name', 'department__name']
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['department']
+    # search_fields = ['name', 'department__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -187,8 +189,8 @@ class SubjectDescriptionViewSet(viewsets.ModelViewSet):
     """
     queryset = SubjectDescription.objects.all()
     serializer_class = SubjectDescriptionSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['subject__name', 'classType__name']
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['subject__department', 'subject__study_plan']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -200,7 +202,7 @@ class TeachingAssignmentViewSet(viewsets.ModelViewSet):
     queryset = TeachingAssignment.objects.all()
     serializer_class = TeachingAssignmentSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['professor__name', 'subjectDescription__name']
+    search_fields = ['subject_description__subject__department__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 

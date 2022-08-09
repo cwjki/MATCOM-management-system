@@ -239,7 +239,11 @@ class SubjectDescriptionSerializer(ModelSerializer):
         if obj.subject:
             return {
                 "id": obj.subject.id,
-                "name": obj.subject.name
+                "name": obj.subject.name,
+                "department": obj.subject.department.name,
+                "career": obj.subject.career.name,
+                "study_plan": obj.subject.study_plan.name,
+                "semester": obj.subject.semester.name,
             }
         return None
 
