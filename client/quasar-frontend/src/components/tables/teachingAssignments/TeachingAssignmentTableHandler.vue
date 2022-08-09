@@ -37,6 +37,7 @@ export default defineComponent({
                         list: subjectDescriptionService.list,
                         value: 'id',
                         label: 'id',
+                        refactorValue: (value) => value ? value.subject.name : ''
                     },
                 },
                 {

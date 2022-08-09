@@ -11,7 +11,9 @@
             :loading="loading"
             :options="options"
             :option-value="field.selectOptions.value"
-            :option-label="field.selectOptions.label"
+            :option-label="
+                field.selectOptions.refactorValue || field.selectOptions.label
+            "
             @update:model-value="$emit('onChangekey', $event)"
             :model-value="editeItem[field.name]"
         >

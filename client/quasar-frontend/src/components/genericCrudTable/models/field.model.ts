@@ -52,6 +52,7 @@ export interface FieldSelect extends FieldBasic {
         list: (query?: any) => AxiosPromise<ListResult<any>>;
         label: string;
         value: string;
+        refactorValue?: (value: any) => string;
         multiple?: boolean;
     };
 }
