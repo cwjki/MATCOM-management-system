@@ -52,7 +52,7 @@
 
                 <q-input
                     v-model="filter"
-                    placeholder="Search"
+                    :placeholder="config.filterLabel"
                     dense
                     class="q-ml-md"
                     debounce="300"
