@@ -3,27 +3,14 @@ from rest_framework import filters
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import Career, CarmenTable, Faculty, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester, TeachingPlanning
-from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer
+from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer, MyTokenObtainPairSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
 # JSON Web Token Authentication
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-
-        # Add custom claims
-        token['username'] = user.username
-        # ...
-
-        return token
-
-
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
