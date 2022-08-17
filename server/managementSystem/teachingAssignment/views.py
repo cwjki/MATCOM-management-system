@@ -3,9 +3,16 @@ from rest_framework import filters
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
 
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 from .models import Career, CarmenTable, Faculty, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester, TeachingPlanning
-from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer
+from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer, MyTokenObtainPairSerializer
 from .permissions import IsOwnerOrReadOnly
+
+
+# JSON Web Token Authentication
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -39,10 +46,6 @@ class CareerViewSet(viewsets.ModelViewSet):
     serializer_class = CareerSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']
-
-    # permission_classes = [
-    #     permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-
     # def perform_create(self, serializer):
     #     serializer.save(owner=self.request.user)
 
