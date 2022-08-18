@@ -38,7 +38,18 @@ export default defineComponent({
                         value: 'id',
                         label: 'id',
                         refactorValue: (value) =>
-                            value ? value.subject.name : '',
+                            value
+                                ? `${
+                                      value.subject.name +
+                                      ' --- ' +
+                                      value.class_type.name +
+                                      ' --- ' +
+                                      value.scholar_year.teaching_group +
+                                      ' --- ' +
+                                      ' plan ' +
+                                      value.scholar_year.study_plan
+                                  }`
+                                : '',
                     },
                 },
                 {

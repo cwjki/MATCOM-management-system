@@ -46,7 +46,12 @@ export default defineComponent({
                     label: 'Año',
                     column: {
                         transform(row) {
-                            return `${row.scholar_year.teaching_group}`;
+                            return `${
+                                row.scholar_year.teaching_group +
+                                ' --- ' +
+                                ' plan ' +
+                                row.scholar_year.study_plan
+                            }`;
                         },
                     },
                     type: 'select',
@@ -54,6 +59,15 @@ export default defineComponent({
                         list: carmenTableService.list,
                         value: 'id',
                         label: 'teaching_group',
+                        refactorValue: (value) =>
+                            value
+                                ? `${
+                                      value.teaching_group.name +
+                                      ' --- ' +
+                                      ' plan ' +
+                                      value.study_plan.name
+                                  }`
+                                : '',
                     },
                     rules: ['required'],
                 },
