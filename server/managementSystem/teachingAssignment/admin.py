@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Career, ClassType, Department, Professor, Student, TeachingAssignment, TeachingGroup, ScientificDegree, StudyPlan, Subject, TeachingCategory, TeachingPlanning, Thesis, ThesisCommittee, TimePeriod, Semester, CarmenTable, SubjectDescription, Faculty
 
+
 admin.site.register(Career)
 admin.site.register(StudyPlan)
 admin.site.register(TeachingGroup)

@@ -3,7 +3,7 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.models import User
 
-from .models import CarmenTable, Faculty, Snippet, Career, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, TeachingPlanning, Thesis, ThesisCommittee, TimePeriod
+from .models import CarmenTable, Faculty, Career, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, TeachingPlanning, Thesis, ThesisCommittee, TimePeriod
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -20,21 +20,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         return token
 
 
-class SnippetSerializer(ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-
-    class Meta:
-        model = Snippet
-        fields = ['id', 'title', 'code', 'owner']
-
-
 class UserSerializer(ModelSerializer):
-    snippets = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Snippet.objects.all())
+    # snippets = serializers.PrimaryKeyRelatedField(
+    #     many=True, queryset=Snippet.objects.all())
 
     # careers = serializers.PrimaryKeyRelatedField(
     #     many=True, queryset=Career.objects.all())
-
     class Meta:
         model = User
         fields = '__all__'
