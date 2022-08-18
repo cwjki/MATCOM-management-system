@@ -310,6 +310,7 @@ class TeachingAssignmentSerializer(ModelSerializer):
                 "class_type": obj.subject_description.class_type.name,
                 "time_period": obj.subject_description.time_period.name,
                 "scholar_year": obj.subject_description.scholar_year.teaching_group.name,
+                "study_plan": obj.subject_description.scholar_year.study_plan.name,
                 "number_of_hours": obj.subject_description.number_of_hours,
                 "number_of_groups": obj.subject_description.number_of_groups
 
