@@ -19,10 +19,6 @@ export default defineComponent({
     props: {},
     emits: [],
     setup(props, { emit }) {
-        const list: ListResult<number> = {
-            results: [1, 2, 3],
-            count: 3,
-        };
         const config = ref<GenericCrudTableConfig>({
             name: 'Asignaciones de docencia',
             singularLabel: 'Asignación de docencia',
