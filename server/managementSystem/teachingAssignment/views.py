@@ -1,7 +1,14 @@
+from cgi import print_arguments
+import pkgutil
+from tokenize import group
 from rest_framework import permissions, viewsets, authentication
-from rest_framework import filters
+from rest_framework import filters, status
+from rest_framework.decorators import action
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
+
+from rest_framework.response import Response
+
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -195,6 +202,20 @@ class SubjectDescriptionViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['subject__department', 'subject__study_plan']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    @action(detail=True)
+    def get_groups(self, request, pk=None):
+        """
+        Return a list with the groups of the subject description.
+        """
+        try:
+            subject_description = SubjectDescription.objects.get(pk=pk)
+            groups = subject_description.number_of_groups
+            data = [i for i in range(1, groups + 1)]
+            return Response(data=data, status=status.HTTP_202_ACCEPTED)
+        except:
+            print('C')
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class TeachingAssignmentViewSet(viewsets.ModelViewSet):
