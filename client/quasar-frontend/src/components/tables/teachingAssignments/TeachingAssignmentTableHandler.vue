@@ -11,7 +11,6 @@ import {
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
-import { ListResult } from '../../../services/api.service';
 
 export default defineComponent({
     components: { GenericCrudDataTable },
@@ -37,11 +36,11 @@ export default defineComponent({
                     selectOptions: {
                         list: subjectDescriptionService.list,
                         value: 'id',
-                        label: 'id',
+                        label: 'subject_description',
                         refactorValue: (value) =>
                             value
                                 ? `${
-                                      value.subject.name +
+                                      value.subject +
                                       ' --- ' +
                                       value.class_type.name +
                                       ' --- ' +
@@ -52,6 +51,7 @@ export default defineComponent({
                                   }`
                                 : '',
                     },
+                    rules: ['required'],
                 },
                 {
                     name: 'scholar_year',
@@ -106,6 +106,8 @@ export default defineComponent({
                             return `${row.group}`;
                         },
                     },
+                    type: 'text',
+                    rules: ['required'],
                 },
                 {
                     name: 'professor',
@@ -129,6 +131,7 @@ export default defineComponent({
                                 ? `${value.name + ' ' + value.last_name}`
                                 : '',
                     },
+                    rules: ['required'],
                 },
                 {
                     name: 'percent',
@@ -138,6 +141,8 @@ export default defineComponent({
                             return `${row.percent}%`;
                         },
                     },
+                    type: 'text',
+                    rules: ['required'],
                 },
             ],
             actions: {

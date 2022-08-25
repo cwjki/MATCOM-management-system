@@ -38,6 +38,17 @@ export default defineComponent({
                         list: subjectService.list,
                         value: 'id',
                         label: 'name',
+                        refactorValue: (value) =>
+                            value
+                                ? `${
+                                      value.name +
+                                      ' --- ' +
+                                      value.career.name +
+                                      ' --- ' +
+                                      ' plan ' +
+                                      value.study_plan.name
+                                  }`
+                                : '',
                     },
                     rules: ['required'],
                 },

@@ -14,6 +14,7 @@ export const useCrud = (config: GenericCrudTableConfig) => {
             // alert('someone change me');
         },
         prepareEdit(obj: any) {
+            console.log({ ...obj });
             editeItem.value = { ...obj };
             crudDialog.value = true;
         },
