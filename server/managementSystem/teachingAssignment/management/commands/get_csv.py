@@ -1,5 +1,8 @@
 import os
 import csv
+from selectors import SelectSelector
+from traceback import format_exc
+from typing import List
 from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingAssignmentSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from django.core.management.base import BaseCommand, CommandError, CommandParser
@@ -40,7 +43,7 @@ CURRENT_PATH = os.path.dirname(__file__)
 SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
 
 
-class SubjectInfo:
+class TeachingAssignmentInfo:
     def __init__(self) -> None:
         self.subject_name = ''
         self.scholar_year = ''
@@ -48,6 +51,24 @@ class SubjectInfo:
         self.cp_professors = []
         self.faculty = ''
         self.course_type = 'CRD'
+
+
+class TeachingAssignmentInfoCollection:
+    def __init__(self) -> None:
+        self.teaching_assignments: List[TeachingAssignmentInfo] = []
+
+    def analize_row(self, teaching_assignment: dict):
+        pass
+
+    def contains(self, teaching_assignment: dict):
+        '''
+        Check if the teaching assignment already exists looking for the subject_name and scholar_year field.
+        Returns a tuple <True or False>, <Instance or None>
+        '''
+        for ta in self.teaching_assignments:
+            if ta.subject_name == teaching_assignment['subject_description']['name'] and ta.scholar_year == teaching_assignment['subject_description']['scholar_year']:
+                return True, ta
+            return False, None
 
 
 class Command(BaseCommand):
@@ -80,8 +101,9 @@ class Command(BaseCommand):
             teaching_assignment for teaching_assignment in data
             if teaching_assignment['subject_description']['department'] == department_name]
 
-        subjects = []
+        excel_data = TeachingAssignmentInfoCollection()
         for teaching_assigment in data:
+            excel_data.analize_row(teaching_assigment)
 
         return data
 
