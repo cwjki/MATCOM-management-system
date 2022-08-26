@@ -40,6 +40,16 @@ CURRENT_PATH = os.path.dirname(__file__)
 SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
 
 
+class SubjectInfo:
+    def __init__(self) -> None:
+        self.subject_name = ''
+        self.scholar_year = ''
+        self.conf_professors = []
+        self.cp_professors = []
+        self.faculty = ''
+        self.course_type = 'CRD'
+
+
 class Command(BaseCommand):
     help = 'Create a csv file with the Teaching Assignments'
 
@@ -70,4 +80,9 @@ class Command(BaseCommand):
             teaching_assignment for teaching_assignment in data
             if teaching_assignment['subject_description']['department'] == department_name]
 
+        subjects = []
+        for teaching_assigment in data:
+
         return data
+
+    # def filter_by_subject(self)
