@@ -307,6 +307,7 @@ class TeachingAssignmentSerializer(ModelSerializer):
             return {
                 "id": obj.subject_description.id,
                 "name": obj.subject_description.subject.name,
+                "department": obj.subject_description.subject.department.name,
                 "class_type": obj.subject_description.class_type.name,
                 "time_period": obj.subject_description.time_period.name,
                 "scholar_year": obj.subject_description.scholar_year.teaching_group.name,
