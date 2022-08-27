@@ -250,6 +250,7 @@ class SubjectDescriptionSerializer(ModelSerializer):
                 "career": obj.subject.career.name,
                 "study_plan": obj.subject.study_plan.name,
                 "semester": obj.subject.semester.name,
+                "total_hours": obj.subject.number_of_hours
             }
         return None
 
@@ -313,8 +314,8 @@ class TeachingAssignmentSerializer(ModelSerializer):
                 "scholar_year": obj.subject_description.scholar_year.teaching_group.name,
                 "study_plan": obj.subject_description.scholar_year.study_plan.name,
                 "number_of_hours": obj.subject_description.number_of_hours,
-                "number_of_groups": obj.subject_description.number_of_groups
-
+                "number_of_groups": obj.subject_description.number_of_groups,
+                "total_hours": obj.subject_description.subject.number_of_hours,
             }
         return None
 
