@@ -6,45 +6,20 @@ from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerial
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from django.core.management.base import BaseCommand, CommandError, CommandParser
 
-# my data rows as dictionary objects
-mydict = [
-    {
-        'Facultad': '',
-        'Tipo curso': '',
-        'Año': '',
-        'Asignatura': '',
-        'Horas': '',
-        'G': '',
-        'Profesor': ''
-    }
-]
-
-
-
-# writing to csv file
-with open(filename, 'w') as csvfile:
-    # creating a csv dict writer object
-    writer = csv.DictWriter(csvfile, fieldnames=fields)
-
-    # writing headers (field names)
-    writer.writeheader()
-
-    # writing data rows
-    writer.writerows(mydict)
-
 
 CURRENT_PATH = os.path.dirname(__file__)
-SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
+CSV_DIR = os.path.join(
+    CURRENT_PATH, '../../excels/result/AsignacionDocencia.csv')
 
 
 class TeachingAssignmentInfo:
     def __init__(self) -> None:
         self.subject_name = ''
         self.scholar_year = ''
-        self.conf_professors = []
+        self.conf_professors = ''
         self.conf_groups = 0
         self.conf_hours = 0
-        self.cp_professors = []
+        self.cp_professors = ''
         self.cp_groups = 0
         self.cp_hours = 0
         self.faculty = 'MATCOM'
@@ -103,13 +78,11 @@ class TeachingAssignmentInfoCollection:
         if class_type == 'Conferencia':
             ta.conf_groups = number_of_groups
             ta.conf_hours += professor_hours
-            ta.conf_professors.append(
-                f'C: {professor_name} ({professor_hours}) ({group})')
+            ta.conf_professors += f'C: {professor_name} ({professor_hours}) ({group})'
         elif class_type == 'Clase Práctica':
             ta.cp_groups = number_of_groups
             ta.cp_hours += professor_hours
-            ta.cp_professors.append(
-                f'CP: {professor_name} ({professor_hours}) ({group})')
+            ta.cp_professors += f'CP: {professor_name} ({professor_hours}) ({group})'
         else:
             pass
 
@@ -150,18 +123,16 @@ class Command(BaseCommand):
         ta_info.proccess_info(data)
 
         rows = self.construct_fields(ta_info)
+        fieldnames = ['Facultad', 'Tipo curso', 'Año',
+                      'Asignatura', 'Horas', 'G', 'Profesor']
 
-
-        with open(file_path, 'w', encoding='UTF8') as f:
+        with open(CSV_DIR, 'w', encoding='UTF8') as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
-            writer.writerows(data)
-
-
+            writer.writerows(rows)
 
     def construct_fields(self, ta_info: TeachingAssignmentInfoCollection):
         result: List[dict] = []
-
         for ta in ta_info.teaching_assignments:
             row: dict = {}
             row['Facultad'] = ta.faculty
@@ -170,17 +141,8 @@ class Command(BaseCommand):
             row['Asignatura'] = ta.subject_name
             row['Horas'] = ta.number_of_hours
             row['G'] = f'{ta.conf_groups}/{ta.cp_groups}'
-
-            professors = []
-            for profesor in ta.conf_professors:
-                professors += profesor + '\n'
-            for profesor in ta.cp_professors:
-                professors += profesor + '\n'
-
-            row['Profesor'] = professors
-
+            row['Profesor'] = ta.conf_professors + ta.cp_professors
             result.append(row)
-
         return result
 
     def filter_by_department(self, department_name):
@@ -197,5 +159,3 @@ class Command(BaseCommand):
             excel_data.analize_row(teaching_assigment)
 
         return data
-
-    # def filter_by_subject(self)
