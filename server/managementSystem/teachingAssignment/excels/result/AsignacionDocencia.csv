@@ -1,29 +1,9 @@
 Facultad,Tipo curso,Año,Asignatura,Horas,G,Profesor
-MATCOM,CRD,M1,Programación y Algoritmos,64.0,1/3,"C: Alejandro Mesejo Chiong (32.0) (1)
-CP: Daniela González Beltrán (32.0) (1)
-CP: Camila Pérez Mosquera (32.0) (2)
-CP: Sheyla Artiles (32.0) (3)
-"
-MATCOM,CRD,C3,Estadística,64.0,1/2,"C: Yanet García (32.0) (1)
-CP: Ernesto Borrego Rodríguez (32.0) (1)
-CP: Manuel Valiente (32.0) (2)
-"
-MATCOM,CRD,M1,Seminario de Problemas I,48.0,1/0,"C: Carlos Bouza Herrera (48.0) (1)
-"
-MATCOM,CRD,M2,Programación y Algoritmos,48.0,1/1,"C: Alejandro Mesejo Chiong (16.0) (1)
-CP: Sheyla Artiles (32.0) (1)
-"
-MATCOM,CRD,M3,Inferencia Estadística,80.0,1/1,"C: Vivian Sistaschs (48.0) (1)
-CP: Yanet García (32.0) (1)
-"
-MATCOM,CRD,M3,Matemática Numérica I,48.0,1/1,"C: Marta Lourdes Baguer Díaz-Romañach (32.0) (1)
-CP: Fernando Raul Rodriguez Flores (16.0) (1)
-"
-MATCOM,CRD,M3,Optimización Matemática I,64.0,1/1,"C: Aymée Marrero Severo (32.0) (1)
-CP: Gemayqzel Bouza Allende (32.0) (1)
-"
-MATCOM,CRD,C3,Modelos de Optimización,64.0,1/2,"C: Aymée Marrero Severo (16.0) (1)
-C: Fernando Raul Rodriguez Flores (16.0) (1)
-CP: Daniela González Beltrán (32.0) (1)
-CP: Camila Pérez Mosquera (32.0) (2)
-"
+MATCOM,CRD,M1,Programación y Algoritmos,64.0,1/3,C: Alejandro Mesejo Chiong (32.0) (1)CP: Daniela González Beltrán (32.0) (1)CP: Camila Pérez Mosquera (32.0) (2)CP: Sheyla Artiles (32.0) (3)
+MATCOM,CRD,C3,Estadística,64.0,1/2,C: Yanet García (32.0) (1)CP: Ernesto Borrego Rodríguez (32.0) (1)CP: Manuel Valiente (32.0) (2)
+MATCOM,CRD,M1,Seminario de Problemas I,48.0,1/0,C: Carlos Bouza Herrera (48.0) (1)
+MATCOM,CRD,M2,Programación y Algoritmos,48.0,1/1,C: Alejandro Mesejo Chiong (16.0) (1)CP: Sheyla Artiles (32.0) (1)
+MATCOM,CRD,M3,Inferencia Estadística,80.0,1/1,C: Vivian Sistaschs (48.0) (1)CP: Yanet García (32.0) (1)
+MATCOM,CRD,M3,Matemática Numérica I,48.0,1/1,C: Marta Lourdes Baguer Díaz-Romañach (32.0) (1)CP: Fernando Raul Rodriguez Flores (16.0) (1)
+MATCOM,CRD,M3,Optimización Matemática I,64.0,1/1,C: Aymée Marrero Severo (32.0) (1)CP: Gemayqzel Bouza Allende (32.0) (1)
+MATCOM,CRD,C3,Modelos de Optimización,64.0,1/2,C: Aymée Marrero Severo (16.0) (1)C: Fernando Raul Rodriguez Flores (16.0) (1)CP: Daniela González Beltrán (32.0) (1)CP: Camila Pérez Mosquera (32.0) (2)
