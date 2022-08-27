@@ -1,6 +1,7 @@
 import os
 import csv
 from typing import List
+from unittest import result
 from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingAssignmentSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from django.core.management.base import BaseCommand, CommandError, CommandParser
@@ -8,22 +9,17 @@ from django.core.management.base import BaseCommand, CommandError, CommandParser
 # my data rows as dictionary objects
 mydict = [
     {
-        'Facultad': 'COE',
-        'Tipo curso': '9.0',
-        'Año': 'Nikhil',
-        'Asignatura': '2',
-        'Horas': '4',
-        'G': '1/3',
-        'Profesor': 'Pepe'
+        'Facultad': '',
+        'Tipo curso': '',
+        'Año': '',
+        'Asignatura': '',
+        'Horas': '',
+        'G': '',
+        'Profesor': ''
     }
 ]
 
-# field names
-fields = ['Facultad', 'Tipo curso', 'Año',
-          'Asignatura', 'Horas', 'G', 'Profesor']
 
-# name of csv file
-filename = "university_records.csv"
 
 # writing to csv file
 with open(filename, 'w') as csvfile:
@@ -62,9 +58,7 @@ class TeachingAssignmentInfo:
             f'Grupos: {self.conf_groups}/{self.cp_groups} \n'
             f'Horas: {self.number_of_hours} \n'
             f'Profesores de C: {self.conf_professors} \n'
-            f'Profesores de CP: {self.cp_professors} \n \n'
-
-        )
+            f'Profesores de CP: {self.cp_professors} \n \n')
 
 
 class TeachingAssignmentInfoCollection:
@@ -72,22 +66,26 @@ class TeachingAssignmentInfoCollection:
         self.teaching_assignments: List[TeachingAssignmentInfo] = []
 
     def proccess_info(self, teaching_assignments: List[dict]):
+        '''Main function to analize all teaching assignments'''
         for teaching_assignment in teaching_assignments:
             self.analize_row(teaching_assignment)
         self.compute_total_hours()
 
     def compute_total_hours(self):
+        '''Compute the total hours of a subject'''
         for ta in self.teaching_assignments:
             conf_hours = ta.conf_hours / ta.conf_groups if ta.conf_groups != 0 else 0
             cp_hours = ta.cp_hours / ta.cp_groups if ta.cp_groups != 0 else 0
             ta.number_of_hours = conf_hours + cp_hours
 
     def analize_row(self, teaching_assignment: dict):
+        '''Compute and save all the important data of a teaching assignment'''
         # get data
         subject_name = teaching_assignment['subject_description']['name']
         scholar_year = teaching_assignment['subject_description']['scholar_year']
         class_type = teaching_assignment['subject_description']['class_type']
         number_of_hours = teaching_assignment['subject_description']['number_of_hours']
+        total_hours = teaching_assignment['subject_description']['total_hours']
         percent = teaching_assignment['percent']
         group = teaching_assignment['group']
         number_of_groups = teaching_assignment['subject_description']['number_of_groups']
@@ -103,18 +101,21 @@ class TeachingAssignmentInfoCollection:
 
         # add the data to the teaching asignment
         if class_type == 'Conferencia':
-            ta.conf_professors.append((professor_name, professor_hours, group))
             ta.conf_groups = number_of_groups
             ta.conf_hours += professor_hours
+            ta.conf_professors.append(
+                f'C: {professor_name} ({professor_hours}) ({group})')
         elif class_type == 'Clase Práctica':
-            ta.cp_professors.append((professor_name, professor_hours, group))
             ta.cp_groups = number_of_groups
             ta.cp_hours += professor_hours
+            ta.cp_professors.append(
+                f'CP: {professor_name} ({professor_hours}) ({group})')
         else:
             pass
 
         ta.subject_name = subject_name
         ta.scholar_year = scholar_year
+        ta.number_of_hours = total_hours
 
     def contains(self, teaching_assignment: dict):
         '''
@@ -145,14 +146,42 @@ class Command(BaseCommand):
         fieldnames = ['Facultad', 'Tipo curso', 'Año',
                       'Asignatura', 'Horas', 'G', 'Profesor']
 
-        t_a_info = TeachingAssignmentInfoCollection()
-        t_a_info.proccess_info(data)
-        t_a_info.print_info()
+        ta_info = TeachingAssignmentInfoCollection()
+        ta_info.proccess_info(data)
 
-        # with open(file_path, 'w', encoding='UTF8') as f:
-        #     writer = csv.DictWriter(f, fieldnames=fieldnames)
-        #     writer.writeheader()
-        #     writer.writerows(data)
+        rows = self.construct_fields(ta_info)
+
+
+        with open(file_path, 'w', encoding='UTF8') as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(data)
+
+
+
+    def construct_fields(self, ta_info: TeachingAssignmentInfoCollection):
+        result: List[dict] = []
+
+        for ta in ta_info.teaching_assignments:
+            row: dict = {}
+            row['Facultad'] = ta.faculty
+            row['Tipo curso'] = ta.course_type
+            row['Año'] = ta.scholar_year
+            row['Asignatura'] = ta.subject_name
+            row['Horas'] = ta.number_of_hours
+            row['G'] = f'{ta.conf_groups}/{ta.cp_groups}'
+
+            professors = []
+            for profesor in ta.conf_professors:
+                professors += profesor + '\n'
+            for profesor in ta.cp_professors:
+                professors += profesor + '\n'
+
+            row['Profesor'] = professors
+
+            result.append(row)
+
+        return result
 
     def filter_by_department(self, department_name):
         queryset = TeachingAssignment.objects.all()
