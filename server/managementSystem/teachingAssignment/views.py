@@ -1,7 +1,8 @@
-from cgi import print_arguments
-import pkgutil
-from tokenize import group
-from rest_framework import permissions, viewsets, authentication
+import imp
+import re
+from django.http import HttpResponse, HttpResponseNotFound
+
+from rest_framework import permissions, viewsets, authentication, generics, mixins
 from rest_framework import filters, status
 from rest_framework.decorators import action
 from django.contrib.auth.models import User
@@ -28,6 +29,25 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class DownloadCsvViewSet(viewsets.ModelViewSet):
+
+    def get(self, request):
+        file_location = ''
+
+        try:
+            with open(file_location, 'r') as f:
+                file_data = f.read()
+
+            response = HttpResponse(
+                file_data, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="foo.xsl"'
+
+        except IOError:
+            response = HttpResponseNotFound('<h1>File not found</h1>')
+
+        return response
 
 
 # class SnippetViewSet(viewsets.ModelViewSet):

@@ -68,6 +68,8 @@ router.register(r'thesis', views.ThesisViewSet,
 router.register(r'thesis-committee', views.ThesisCommitteeViewSet,
                 basename="thesis-committe")
 
+router.register(r'csv-download', views.DownloadCsvViewSet,
+                basename="csv-download")
 
 # The API URLs are now determined automatically by the router
 urlpatterns = [
