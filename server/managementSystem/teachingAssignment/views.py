@@ -1,21 +1,21 @@
-import imp
-import re
+import os
 from django.http import HttpResponse, HttpResponseNotFound
-
 from rest_framework import permissions, viewsets, authentication, generics, mixins
 from rest_framework import filters, status
 from rest_framework.decorators import action
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
-
 from rest_framework.response import Response
-
-
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import Career, CarmenTable, Faculty, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester, TeachingPlanning
 from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer, MyTokenObtainPairSerializer
 from .permissions import IsOwnerOrReadOnly
+
+
+CURRENT_PATH = os.path.dirname(__file__)
+FILE_DIR = os.path.join(
+    CURRENT_PATH, 'excels/result/AsignacionDocencia.csv')
 
 
 # JSON Web Token Authentication
@@ -31,13 +31,14 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
 
 
-class DownloadCsvViewSet(viewsets.ModelViewSet):
+class DownloadCsvViewSet(mixins.ListModelMixin, generics.GenericAPIView):
 
     def get(self, request):
-        file_location = ''
-
+        CURRENT_PATH = os.path.dirname(__file__)
+        FILE_DIR = os.path.join(
+            CURRENT_PATH, 'excels/result/AsignacionDocencia.csv')
         try:
-            with open(file_location, 'r') as f:
+            with open(FILE_DIR, 'r') as f:
                 file_data = f.read()
 
             response = HttpResponse(
