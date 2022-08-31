@@ -13,11 +13,6 @@ from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerial
 from .permissions import IsOwnerOrReadOnly
 
 
-CURRENT_PATH = os.path.dirname(__file__)
-FILE_DIR = os.path.join(
-    CURRENT_PATH, 'excels/result/AsignacionDocencia.csv')
-
-
 # JSON Web Token Authentication
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
@@ -31,19 +26,22 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
 
 
-class DownloadCsvViewSet(mixins.ListModelMixin, generics.GenericAPIView):
+class CSVDownloadView(mixins.ListModelMixin, generics.GenericAPIView):
+    """
+    This view handles the teaching assignments csv file download
+    """
 
     def get(self, request):
-        CURRENT_PATH = os.path.dirname(__file__)
-        FILE_DIR = os.path.join(
-            CURRENT_PATH, 'excels/result/AsignacionDocencia.csv')
+        current_path = os.path.dirname(__file__)
+        file_dir = os.path.join(
+            current_path, 'excels/result/teaching_assignments.csv')
         try:
-            with open(FILE_DIR, 'r') as f:
+            with open(file_dir, 'r') as f:
                 file_data = f.read()
 
             response = HttpResponse(
                 file_data, content_type='application/vnd.ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="foo.xsl"'
+            response['Content-Disposition'] = 'attachment; filename="Docencia.csv"'
 
         except IOError:
             response = HttpResponseNotFound('<h1>File not found</h1>')

@@ -1,15 +1,14 @@
 import os
 import csv
 from typing import List
-from unittest import result
-from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingAssignmentSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
-from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
+from ...serializers import TeachingAssignment
+from ...models import TeachingAssignmentSerializer
 from django.core.management.base import BaseCommand, CommandError, CommandParser
 
 
 CURRENT_PATH = os.path.dirname(__file__)
 CSV_DIR = os.path.join(
-    CURRENT_PATH, '../../excels/result/AsignacionDocencia.csv')
+    CURRENT_PATH, '../../excels/result/teaching_assignments.csv')
 
 
 class TeachingAssignmentInfo:
