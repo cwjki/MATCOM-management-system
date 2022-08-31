@@ -13,6 +13,9 @@ router.register(r'users', views.UserViewSet,
 router.register(r'careers', views.CareerViewSet,
                 basename="careers")
 
+router.register(r'careers-csv', views.CareerCSVViewSet,
+                basename="careers-csv")
+
 router.register(r'faculties', views.FacultyViewSet,
                 basename="faculties")
 

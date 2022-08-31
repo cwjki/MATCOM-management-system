@@ -1,3 +1,5 @@
+from dataclasses import field
+from pyexpat import model
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -47,6 +49,19 @@ class CareerSerializer(ModelSerializer):
     class Meta:
         model = Career
         fields = '__all__'
+
+
+class CareerSerializerCSV(ModelSerializer):
+    faculty = serializers.SerializerMethodField()
+
+    def get_faculty(self, obj) -> dict:
+        if obj.faculty:
+            return obj.faculty.name
+        return None
+
+    class Meta:
+        model = Career
+        exclude = ['id']
 
 
 class StudyPlanSerializer(ModelSerializer):

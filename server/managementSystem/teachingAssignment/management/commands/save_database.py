@@ -2,7 +2,7 @@ import csv
 import os
 from django.core.management.base import BaseCommand, CommandError, CommandParser
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
-from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
+from ...serializers import CareerSerializerCSV, ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
 
 CURRENT_PATH = os.path.dirname(__file__)
 SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
@@ -62,8 +62,8 @@ class Command(BaseCommand):
 
         elif name == 'Careers':
             queryset = Career.objects.all()
-            fieldnames = ['id', 'name', 'faculty']
-            data = [CareerSerializer(career).data for career in queryset]
+            fieldnames = ['name', 'faculty']
+            data = [CareerSerializerCSV(career).data for career in queryset]
             file_path = CAREER_DIR
 
         elif name == 'StudyPlans':
@@ -125,7 +125,8 @@ class Command(BaseCommand):
 
         elif name == 'CarmenTable':
             queryset = CarmenTable.objects.all()
-            fieldnames = ['id', 'teaching_group', 'study_plan', 'semester', 'time_period']
+            fieldnames = ['id', 'teaching_group',
+                          'study_plan', 'semester', 'time_period']
             data = [CarmenTableSerializer(
                 carmen_table).data for carmen_table in queryset]
             file_path = CARMEN_TABLE_DIR
