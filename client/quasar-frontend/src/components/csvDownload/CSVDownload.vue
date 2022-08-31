@@ -1,6 +1,6 @@
 <template>
     <div class="dropdown-menu mr-auto" aria-labelledby="navbarDropdown">
-        <button class="dropdown-item" v-on:click="downloadCsv()">
+        <button class="dropdown-item" v-on:click="csvDownload()">
             Asignación de Docencia CSV
         </button>
     </div>
@@ -12,20 +12,26 @@ import { axios } from 'src/boot/axios';
 
 export default defineComponent({
     setup(props) {
-        const downloadCsv = ({ state }) => {
+        const csvDownload = () => {
             return axios({
-                url: '',
+                url: 'http://127.0.0.1:8000/csv-download/',
                 method: 'GET',
                 responseType: 'blob',
-                headers: getHeaders(state.accessToken),
             }).then((response) => {
                 console.log(response);
-                saveAs(new Blob([response.data]), 'newfile.csv');
+                const File = window.URL.createObjectURL(
+                    new Blob([response.data])
+                );
+                const docUrl = document.createElement('a');
+                docUrl.href = File;
+                docUrl.setAttribute('download', 'Docencia.csv');
+                document.body.appendChild(docUrl);
+                docUrl.click();
             });
         };
 
         return {
-            downloadCsv,
+            csvDownload,
         };
     },
 });
