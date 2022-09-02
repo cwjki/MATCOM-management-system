@@ -77,3 +77,34 @@ class TeachingCategorySerializerCSV(ModelSerializer):
     class Meta:
         model = TeachingCategory
         exclude = ['id']
+
+
+class ProfessorSerializerCSV(ModelSerializer):
+    faculty = serializers.SerializerMethodField()
+    department = serializers.SerializerMethodField()
+    scientific_degree = serializers.SerializerMethodField()
+    teaching_category = serializers.SerializerMethodField()
+
+    def get_faculty(self, obj) -> dict:
+        if obj.department:
+            return obj.department.faculty.name
+        return None
+
+    def get_department(self, obj) -> dict:
+        if obj.department:
+            return obj.department.name
+        return None
+
+    def get_scientific_degree(self, obj) -> dict:
+        if obj.scientific_degree:
+            return obj.scientific_degree.name
+        return None
+
+    def get_teaching_category(self, obj) -> dict:
+        if obj.teaching_category:
+            return obj.teaching_category.name
+        return None
+
+    class Meta:
+        model = Professor
+        exclude = ['id']

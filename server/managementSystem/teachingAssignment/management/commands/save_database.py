@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand, CommandError, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
-from ...serializers_csv import CareerSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
+from ...serializers_csv import CareerSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
 
 
 CURRENT_PATH = os.path.dirname(__file__)
@@ -51,9 +51,9 @@ class Command(BaseCommand):
 
         elif name == 'Professors':
             queryset = Professor.objects.all()
-            fieldnames = ['id', 'name', 'last_name', 'department', 'scientific_degree',
+            fieldnames = ['name', 'last_name', 'department', 'scientific_degree',
                           'teaching_category', 'faculty']
-            data = [ProfessorSerializer(
+            data = [ProfessorSerializerCSV(
                 professor).data for professor in queryset]
             file_path = PROFESSOR_DIR
 

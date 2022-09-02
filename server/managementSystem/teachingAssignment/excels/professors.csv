@@ -1,19 +1,23 @@
-id,name,last_name,department,scientific_degree,teaching_category,faculty
-5,Marta Lourdes,Baguer Díaz-Romañach,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 3, 'name': 'Doctor en Ciencias'}","{'id': 1, 'name': 'Profesor Titular'}","{'id': 1, 'name': 'MATCOM'}"
-6,Angela,León Mecías,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 3, 'name': 'Doctor en Ciencias'}","{'id': 1, 'name': 'Profesor Titular'}","{'id': 1, 'name': 'MATCOM'}"
-7,Alejandro,Mesejo Chiong,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 3, 'name': 'Doctor en Ciencias'}","{'id': 1, 'name': 'Profesor Titular'}","{'id': 1, 'name': 'MATCOM'}"
-8,Aymée,Marrero Severo,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 3, 'name': 'Doctor en Ciencias'}","{'id': 1, 'name': 'Profesor Titular'}","{'id': 1, 'name': 'MATCOM'}"
-9,Sira,Allende Alonso,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 3, 'name': 'Doctor en Ciencias'}","{'id': 1, 'name': 'Profesor Titular'}","{'id': 1, 'name': 'MATCOM'}"
-10,Gemayqzel,Bouza Allende,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 3, 'name': 'Doctor en Ciencias'}","{'id': 1, 'name': 'Profesor Titular'}","{'id': 1, 'name': 'MATCOM'}"
-11,Alina,Ruiz Johnes,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 3, 'name': 'Doctor en Ciencias'}","{'id': 1, 'name': 'Profesor Titular'}","{'id': 1, 'name': 'MATCOM'}"
-12,Carlos,Bouza Herrera,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 3, 'name': 'Doctor en Ciencias'}","{'id': 1, 'name': 'Profesor Titular'}","{'id': 1, 'name': 'MATCOM'}"
-13,José,Valdes Castro,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 3, 'name': 'Doctor en Ciencias'}","{'id': 1, 'name': 'Profesor Titular'}","{'id': 1, 'name': 'MATCOM'}"
-14,Vivian,Sistaschs,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 3, 'name': 'Doctor en Ciencias'}","{'id': 1, 'name': 'Profesor Titular'}","{'id': 1, 'name': 'MATCOM'}"
-17,Damian,Valdés Santiago,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 2, 'name': 'Master en Ciencias'}","{'id': 4, 'name': 'Asistente'}","{'id': 1, 'name': 'MATCOM'}"
-18,Camila,Pérez Mosquera,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 2, 'name': 'Master en Ciencias'}","{'id': 6, 'name': 'Instructor'}","{'id': 1, 'name': 'MATCOM'}"
-19,Fernando Raul,Rodriguez Flores,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 2, 'name': 'Master en Ciencias'}","{'id': 4, 'name': 'Asistente'}","{'id': 1, 'name': 'MATCOM'}"
-20,Marelys,Crespo Navas,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 2, 'name': 'Master en Ciencias'}","{'id': 4, 'name': 'Asistente'}","{'id': 1, 'name': 'MATCOM'}"
-21,Yanet,García,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 2, 'name': 'Master en Ciencias'}","{'id': 5, 'name': 'Auxiliar'}","{'id': 1, 'name': 'MATCOM'}"
-22,Daniela,González Beltrán,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 1, 'name': 'Licenciado'}","{'id': 3, 'name': 'Adiestrado'}","{'id': 1, 'name': 'MATCOM'}"
-23,Elyanis,García Pola,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 1, 'name': 'Licenciado'}","{'id': 6, 'name': 'Instructor'}","{'id': 1, 'name': 'MATCOM'}"
-24,Ernesto,Borrego Rodríguez,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 1, 'name': 'Licenciado'}","{'id': 6, 'name': 'Instructor'}","{'id': 1, 'name': 'MATCOM'}"
+name,last_name,department,scientific_degree,teaching_category,faculty
+Marta Lourdes,Baguer Díaz-Romañach,Matemática Aplicada,Doctor en Ciencias,Profesor Titular,MATCOM
+Angela,León Mecías,Matemática Aplicada,Doctor en Ciencias,Profesor Titular,MATCOM
+Alejandro,Mesejo Chiong,Matemática Aplicada,Doctor en Ciencias,Profesor Titular,MATCOM
+Aymée,Marrero Severo,Matemática Aplicada,Doctor en Ciencias,Profesor Titular,MATCOM
+Sira,Allende Alonso,Matemática Aplicada,Doctor en Ciencias,Profesor Titular,MATCOM
+Gemayqzel,Bouza Allende,Matemática Aplicada,Doctor en Ciencias,Profesor Titular,MATCOM
+Alina,Ruiz Johnes,Matemática Aplicada,Doctor en Ciencias,Profesor Titular,MATCOM
+Carlos,Bouza Herrera,Matemática Aplicada,Doctor en Ciencias,Profesor Titular,MATCOM
+José,Valdes Castro,Matemática Aplicada,Doctor en Ciencias,Profesor Titular,MATCOM
+Vivian,Sistaschs,Matemática Aplicada,Doctor en Ciencias,Profesor Titular,MATCOM
+Damian,Valdés Santiago,Matemática Aplicada,Master en Ciencias,Asistente,MATCOM
+Camila,Pérez Mosquera,Matemática Aplicada,Master en Ciencias,Instructor,MATCOM
+Fernando Raul,Rodriguez Flores,Matemática Aplicada,Master en Ciencias,Asistente,MATCOM
+Marelys,Crespo Navas,Matemática Aplicada,Master en Ciencias,Asistente,MATCOM
+Yanet,García,Matemática Aplicada,Master en Ciencias,Auxiliar,MATCOM
+Daniela,González Beltrán,Matemática Aplicada,Licenciado,Adiestrado,MATCOM
+Elyanis,García Pola,Matemática Aplicada,Licenciado,Instructor,MATCOM
+Ernesto,Borrego Rodríguez,Matemática Aplicada,Licenciado,Instructor,MATCOM
+Rocío,Ortiz,Matemática Aplicada,Estudiante,Alumno Ayudante,MATCOM
+Marcos,Torres,Matemática Aplicada,Estudiante,Alumno Ayudante,MATCOM
+Manuel,Valiente,Matemática Aplicada,Estudiante,Alumno Ayudante,MATCOM
+Sheyla,Artiles,Matemática Aplicada,Estudiante,Alumno Ayudante,MATCOM
