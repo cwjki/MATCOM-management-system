@@ -30,10 +30,11 @@ class Command(BaseCommand):
     help = 'Save database data in excels'
 
     def add_arguments(self, parser: CommandParser) -> None:
-        return parser.add_argument('model_name', type=str)
+        return parser.add_argument('-m', '--model', type=str)
 
     def handle(self, *args, **options):
-        model_name = options['model_name']
+        model_name = options['model'] if options['model'] else 'All'
+
         fieldnames, data, file_path = self.get_fieldnames_and_data(model_name)
 
         with open(file_path, 'w', encoding='UTF8') as f:
