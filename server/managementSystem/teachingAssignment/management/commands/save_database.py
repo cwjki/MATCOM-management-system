@@ -1,8 +1,11 @@
 import csv
 import os
 from django.core.management.base import BaseCommand, CommandError, CommandParser
+
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
-from ...serializers import CareerSerializerCSV, ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
+from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
+from ...serializers_csv import CareerSerializerCSV, StudyPlanSerializerCSV, TeachingGroupSerializerCSV
+
 
 CURRENT_PATH = os.path.dirname(__file__)
 SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
@@ -68,16 +71,16 @@ class Command(BaseCommand):
 
         elif name == 'StudyPlans':
             queryset = StudyPlan.objects.all()
-            fieldnames = ['id', 'name',
+            fieldnames = ['name',
                           'number_of_semesters', 'until', 'since']
-            data = [StudyPlanSerializer(
+            data = [StudyPlanSerializerCSV(
                 study_plan).data for study_plan in queryset]
             file_path = STUDY_PLAN_DIR
 
         elif name == 'TeachingGroups':
             queryset = TeachingGroup.objects.all()
-            fieldnames = ['id', 'name']
-            data = [TeachingGroupSerializer(
+            fieldnames = ['name']
+            data = [TeachingGroupSerializerCSV(
                 teaching_group).data for teaching_group in queryset]
             file_path = TEACHING_GROUP_DIR
 
