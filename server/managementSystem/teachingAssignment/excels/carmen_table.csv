@@ -1,10 +1,10 @@
-id,teaching_group,study_plan,semester,time_period
-1,"{'id': 7, 'name': 'C1'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}","{'id': 1, 'name': 'enero - julio'}"
-2,"{'id': 8, 'name': 'C2'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 3, 'name': '3'}","{'id': 1, 'name': 'enero - julio'}"
-3,"{'id': 9, 'name': 'C3'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}","{'id': 1, 'name': 'enero - julio'}"
-4,"{'id': 10, 'name': 'C4'}","{'id': 10, 'name': 'E'}","{'id': 7, 'name': '7'}","{'id': 1, 'name': 'enero - julio'}"
-5,"{'id': 11, 'name': 'C5'}","{'id': 11, 'name': 'D'}","{'id': 9, 'name': '9'}","{'id': 1, 'name': 'enero - julio'}"
-6,"{'id': 13, 'name': 'M1'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}","{'id': 1, 'name': 'enero - julio'}"
-7,"{'id': 14, 'name': 'M2'}","{'id': 10, 'name': 'E'}","{'id': 3, 'name': '3'}","{'id': 1, 'name': 'enero - julio'}"
-8,"{'id': 15, 'name': 'M3'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}","{'id': 1, 'name': 'enero - julio'}"
-9,"{'id': 16, 'name': 'M4'}","{'id': 10, 'name': 'E'}","{'id': 7, 'name': '7'}","{'id': 1, 'name': 'enero - julio'}"
+teaching_group,study_plan,semester,time_period
+C1,E,1,enero - julio
+C2,E (COVID),3,enero - julio
+C3,E,5,enero - julio
+C4,E,7,enero - julio
+C5,D,9,enero - julio
+M1,E,1,enero - julio
+M2,E,3,enero - julio
+M3,E,5,enero - julio
+M4,E,7,enero - julio

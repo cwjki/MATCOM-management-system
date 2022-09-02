@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand, CommandError, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
-from ...serializers_csv import CareerSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, SubjectSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
+from ...serializers_csv import CareerSerializerCSV, CarmenTableSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, SubjectSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
 
 
 CURRENT_PATH = os.path.dirname(__file__)
@@ -128,9 +128,9 @@ class Command(BaseCommand):
 
         elif name == 'CarmenTable':
             queryset = CarmenTable.objects.all()
-            fieldnames = ['id', 'teaching_group',
+            fieldnames = ['teaching_group',
                           'study_plan', 'semester', 'time_period']
-            data = [CarmenTableSerializer(
+            data = [CarmenTableSerializerCSV(
                 carmen_table).data for carmen_table in queryset]
             file_path = CARMEN_TABLE_DIR
 

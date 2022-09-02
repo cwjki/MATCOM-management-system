@@ -139,3 +139,34 @@ class SubjectSerializerCSV(ModelSerializer):
     class Meta:
         model = Subject
         exclude = ['id']
+
+
+class CarmenTableSerializerCSV(ModelSerializer):
+    teaching_group = serializers.SerializerMethodField()
+    time_period = serializers.SerializerMethodField()
+    semester = serializers.SerializerMethodField()
+    study_plan = serializers.SerializerMethodField()
+
+    def get_teaching_group(self, obj) -> dict:
+        if obj.teaching_group:
+            return obj.teaching_group.name
+        return None
+
+    def get_time_period(self, obj) -> dict:
+        if obj.time_period:
+            return obj.time_period.name
+        return None
+
+    def get_semester(self, obj) -> dict:
+        if obj.semester:
+            return obj.semester.name
+        return None
+
+    def get_study_plan(self, obj) -> dict:
+        if obj.study_plan:
+            return obj.study_plan.name
+        return None
+
+    class Meta:
+        model = CarmenTable
+        exclude = ['id']
