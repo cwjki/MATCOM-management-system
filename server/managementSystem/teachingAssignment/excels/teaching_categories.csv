@@ -1,6 +1,7 @@
-id,name
-1,Profesor Titular
-3,Adiestrado
-4,Asistente
-5,Auxiliar
-6,Instructor
+name
+Profesor Titular
+Adiestrado
+Asistente
+Auxiliar
+Instructor
+Alumno Ayudante

@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand, CommandError, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
-from ...serializers_csv import CareerSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
+from ...serializers_csv import CareerSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
 
 
 CURRENT_PATH = os.path.dirname(__file__)
@@ -93,15 +93,15 @@ class Command(BaseCommand):
 
         elif name == 'ScientificDegrees':
             queryset = ScientificDegree.objects.all()
-            fieldnames = ['id', 'name']
-            data = [ScientificDegreeSerializer(
+            fieldnames = ['name']
+            data = [ScientificDegreeSerializerCSV(
                 scientific_degree).data for scientific_degree in queryset]
             file_path = SCIENTIFIC_DEGREE_DIR
 
         elif name == 'TeachingCategories':
             queryset = TeachingCategory.objects.all()
-            fieldnames = ['id', 'name']
-            data = [TeachingCategorySerializer(
+            fieldnames = ['name']
+            data = [TeachingCategorySerializerCSV(
                 teaching_category).data for teaching_category in queryset]
             file_path = TEACHING_CATEGORY_DIR
 

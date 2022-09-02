@@ -1,5 +1,6 @@
-id,name
-1,Licenciado
-2,Master en Ciencias
-3,Doctor en Ciencias
-4,Ingeniero
+name
+Licenciado
+Master en Ciencias
+Doctor en Ciencias
+Ingeniero
+Estudiante

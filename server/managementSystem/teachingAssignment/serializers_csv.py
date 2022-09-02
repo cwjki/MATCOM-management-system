@@ -65,3 +65,15 @@ class SemesterSerializerCSV(ModelSerializer):
     class Meta:
         model = Semester
         exclude = ['id']
+
+
+class ScientificDegreeSerializerCSV(ModelSerializer):
+    class Meta:
+        model = ScientificDegree
+        exclude = ['id']
+
+
+class TeachingCategorySerializerCSV(ModelSerializer):
+    class Meta:
+        model = TeachingCategory
+        exclude = ['id']
