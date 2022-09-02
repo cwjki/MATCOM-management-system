@@ -53,3 +53,15 @@ class ClassTypeSerializerCSV(ModelSerializer):
     class Meta:
         model = ClassType
         exclude = ['id']
+
+
+class TimePeriodSerializerCSV(ModelSerializer):
+    class Meta:
+        model = TimePeriod
+        exclude = ['id']
+
+
+class SemesterSerializerCSV(ModelSerializer):
+    class Meta:
+        model = Semester
+        exclude = ['id']

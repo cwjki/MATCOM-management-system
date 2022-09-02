@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand, CommandError, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
-from ...serializers_csv import CareerSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, StudyPlanSerializerCSV, TeachingGroupSerializerCSV
+from ...serializers_csv import CareerSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
 
 
 CURRENT_PATH = os.path.dirname(__file__)
@@ -107,8 +107,8 @@ class Command(BaseCommand):
 
         elif name == 'Semesters':
             queryset = Semester.objects.all()
-            fieldnames = ['id', 'name']
-            data = [SemesterSerializer(
+            fieldnames = ['name']
+            data = [SemesterSerializerCSV(
                 semester).data for semester in queryset]
             file_path = SEMESTER_DIR
 
@@ -121,8 +121,8 @@ class Command(BaseCommand):
 
         elif name == 'TimePeriods':
             queryset = TimePeriod.objects.all()
-            fieldnames = ['id', 'name']
-            data = [TimePeriodSerializer(
+            fieldnames = ['name']
+            data = [TimePeriodSerializerCSV(
                 time_period).data for time_period in queryset]
             file_path = TIME_PERIOD_DIR
 
