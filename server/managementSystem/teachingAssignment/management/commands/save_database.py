@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand, CommandError, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
-from ...serializers_csv import CareerSerializerCSV, StudyPlanSerializerCSV, TeachingGroupSerializerCSV
+from ...serializers_csv import CareerSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, StudyPlanSerializerCSV, TeachingGroupSerializerCSV
 
 
 CURRENT_PATH = os.path.dirname(__file__)
@@ -59,8 +59,8 @@ class Command(BaseCommand):
 
         elif name == 'Faculties':
             queryset = Faculty.objects.all()
-            fieldnames = ['id', 'name', ]
-            data = [FacultySerializer(faculty).data for faculty in queryset]
+            fieldnames = ['name', ]
+            data = [FacultySerializerCSV(faculty).data for faculty in queryset]
             file_path = FACULTY_DIR
 
         elif name == 'Careers':
@@ -86,8 +86,8 @@ class Command(BaseCommand):
 
         elif name == 'Departments':
             queryset = Department.objects.all()
-            fieldnames = ['id', 'name', 'faculty']
-            data = [DepartmentSerializer(
+            fieldnames = ['name', 'faculty']
+            data = [DepartmentSerializerCSV(
                 dapartment).data for dapartment in queryset]
             file_path = DEPARTMENT_DIR
 
@@ -114,8 +114,8 @@ class Command(BaseCommand):
 
         elif name == 'ClassTypes':
             queryset = ClassType.objects.all()
-            fieldnames = ['id', 'name']
-            data = [ClassTypeSerializer(
+            fieldnames = ['name']
+            data = [ClassTypeSerializerCSV(
                 class_type).data for class_type in queryset]
             file_path = CLASS_TYPE_DIR
 

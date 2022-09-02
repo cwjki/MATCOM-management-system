@@ -57,16 +57,6 @@ class StudyPlanSerializer(ModelSerializer):
 
 
 class TeachingGroupSerializer(ModelSerializer):
-    # study_plan_id = serializers.IntegerField(required=True, write_only=True)
-    # study_plan = serializers.SerializerMethodField()
-
-    # def get_study_plan(self, obj) -> dict:
-    #     if obj.study_plan:
-    #         return {
-    #             "id": obj.study_plan.id,
-    #             "name": obj.study_plan.name
-    #         }
-    #     return None
 
     class Meta:
         model = TeachingGroup

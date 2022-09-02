@@ -1,6 +1,6 @@
-id,name,faculty
-1,Matemática Aplicada,"{'id': 1, 'name': 'MATCOM'}"
-3,Programación y Sistemas de Información,"{'id': 1, 'name': 'MATCOM'}"
-4,Inteligencia Artificial y Sistemas Computacionales,"{'id': 1, 'name': 'MATCOM'}"
-10,Matemática,"{'id': 1, 'name': 'MATCOM'}"
-12,Otro,"{'id': 4, 'name': 'Otro'}"
+name,faculty
+Matemática Aplicada,MATCOM
+Programación y Sistemas de Información,MATCOM
+Inteligencia Artificial y Sistemas Computacionales,MATCOM
+Matemática,MATCOM
+Otro,Otro

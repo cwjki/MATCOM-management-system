@@ -27,3 +27,29 @@ class TeachingGroupSerializerCSV(ModelSerializer):
     class Meta:
         model = TeachingGroup
         exclude = ['id']
+
+
+class FacultySerializerCSV(ModelSerializer):
+
+    class Meta:
+        model = Faculty
+        exclude = ['id']
+
+
+class DepartmentSerializerCSV(ModelSerializer):
+    faculty = serializers.SerializerMethodField()
+
+    def get_faculty(self, obj) -> dict:
+        if obj.faculty:
+            return obj.faculty.name
+        return None
+
+    class Meta:
+        model = Department
+        exclude = ['id']
+
+
+class ClassTypeSerializerCSV(ModelSerializer):
+    class Meta:
+        model = ClassType
+        exclude = ['id']
