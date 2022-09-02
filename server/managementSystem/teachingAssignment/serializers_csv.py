@@ -108,3 +108,34 @@ class ProfessorSerializerCSV(ModelSerializer):
     class Meta:
         model = Professor
         exclude = ['id']
+
+
+class SubjectSerializerCSV(ModelSerializer):
+    department = serializers.SerializerMethodField()
+    career = serializers.SerializerMethodField()
+    study_plan = serializers.SerializerMethodField()
+    semester = serializers.SerializerMethodField()
+
+    def get_semester(self, obj) -> dict:
+        if obj.semester:
+            return obj.semester.name
+        return None
+
+    def get_study_plan(self, obj) -> dict:
+        if obj.study_plan:
+            return obj.study_plan.name
+        return None
+
+    def get_career(self, obj) -> dict:
+        if obj.career:
+            return obj.career.name
+        return None
+
+    def get_department(self, obj) -> dict:
+        if obj.department:
+            return obj.department.name
+        return None
+
+    class Meta:
+        model = Subject
+        exclude = ['id']

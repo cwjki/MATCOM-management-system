@@ -1,74 +1,75 @@
-id,name,department,career,study_plan,semester,number_of_hours
-8,Inteligencia Artificial,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 11, 'name': 'D'}","{'id': 9, 'name': '9'}",64
-9,Sistemas de Información,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 11, 'name': 'D'}","{'id': 9, 'name': '9'}",64
-10,Didáctica de la Educación Superior,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 11, 'name': 'D'}","{'id': 9, 'name': '9'}",16
-11,Historia de la Computación,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 11, 'name': 'D'}","{'id': 9, 'name': '9'}",16
-12,Problemas Sociales de la Ciencia y la Tecnología,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 7, 'name': '7'}",32
-13,Sistemas Distribuidos,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 7, 'name': '7'}",64
-14,Diseño y Análisis de Algoritmos,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 7, 'name': '7'}",64
-15,Aprendizaje de Máquinas,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 7, 'name': '7'}",64
-16,Metodología de la Investigación,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 7, 'name': '7'}",32
-17,Historia de la Computación,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 7, 'name': '7'}",16
-18,Estadística,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}",64
-19,Modelos de Optimización,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}",64
-20,Compilación,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}",64
-21,Ingeniería de Software,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",64
-22,Lenguajes de Programación,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",64
-23,Sistemas de Recuperación de la Información,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",64
-24,Redes de Computadoras,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",64
-25,Simulación,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",64
-26,Inteligencia Artificial,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",64
-27,Modelos Matemáticos Aplicados,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}",32
-28,Base de Datos II,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",64
-29,Programación Declarativa,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}",64
-30,Filosofía y Sociedad,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",32
-31,Economía,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",54
-32,Historia de Cuba,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 2, 'name': '2'}",50
-33,Educación Física I,"{'id': 12, 'name': 'Otro'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",28
-34,Educación Física II,"{'id': 12, 'name': 'Otro'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 2, 'name': '2'}",28
-35,Análisis Matemático I,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",96
-36,Análisis Matemático II,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 2, 'name': '2'}",80
-37,Álgebra I,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",80
-38,Álgebra II,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 2, 'name': '2'}",96
-39,Lógica,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",64
-40,Programación,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",192
-41,Economía Política,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 3, 'name': '3'}",56
-42,Historia de Cuba,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 3, 'name': '3'}",56
-43,Educación Física II,"{'id': 12, 'name': 'Otro'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 3, 'name': '3'}",28
-44,Análisis Matemático II,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 3, 'name': '3'}",96
-45,Álgebra II,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 3, 'name': '3'}",80
-46,Programación II,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 3, 'name': '3'}",96
-47,Matemática Discreta I,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 3, 'name': '3'}",64
-48,Teoría Política,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 4, 'name': '4'}",48
-49,Educación Física 3,"{'id': 12, 'name': 'Otro'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 4, 'name': '4'}",28
-50,Ecuaciones Diferenciales Ordinarias,"{'id': 10, 'name': 'Matemática'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 4, 'name': '4'}",64
-51,Matemática Numérica,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 4, 'name': '4'}",64
-52,Matemática Discreta II,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 4, 'name': '4'}",64
-53,Estructura de Datos y Algoritmos I,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 4, 'name': '4'}",64
-54,Arquitectura de Computadoras,"{'id': 4, 'name': 'Inteligencia Artificial y Sistemas Computacionales'}","{'id': 2, 'name': 'Ciencias de la Computación'}","{'id': 12, 'name': 'E (COVID)'}","{'id': 4, 'name': '4'}",64
-55,Programación y Algoritmos,"{'id': 3, 'name': 'Programación y Sistemas de Información'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",64
-56,Introducción al Análisis Matemático,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",96
-57,Introducción al Álgebra,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",96
-58,Geometría Analítica,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",80
-59,Introducción a la Matemática,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 1, 'name': '1'}",32
-60,Funciones de una Variable Real,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 2, 'name': '2'}",128
-61,Álgebra Lineal,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 2, 'name': '2'}",96
-62,Funciones de Varias Variables,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 3, 'name': '3'}",128
-63,Complementos de Álgebra Lineal,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 3, 'name': '3'}",96
-64,Representación de Funciones,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 4, 'name': '4'}",128
-65,Estructuras Algebráicas,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 4, 'name': '4'}",96
-66,Teoría de las Probabilidades,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 4, 'name': '4'}",80
-67,Funciones de Variable Compleja,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}",80
-68,Matemática Numérica I,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}",96
-69,Inferencia Estadística,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}",96
-70,Optimización Matemática I,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}",64
-71,Ecuaciones Diferenciales Ordinarias,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 5, 'name': '5'}",96
-72,Topología,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",64
-73,Optimización Matemática II,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",64
-74,Matemática Numérica II,"{'id': 1, 'name': 'Matemática Aplicada'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",96
-75,Ecuaciones en Derivadas Parciales,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",80
-76,Mecánica,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 6, 'name': '6'}",64
-77,Geometría Diferencial,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 7, 'name': '7'}",80
-78,Medida e Integración,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 7, 'name': '7'}",64
-79,Historia de la Matemática,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 7, 'name': '7'}",64
-80,Análisis Funcional,"{'id': 10, 'name': 'Matemática'}","{'id': 1, 'name': 'Matemática'}","{'id': 10, 'name': 'E'}","{'id': 8, 'name': '8'}",84
+name,department,career,study_plan,semester,number_of_hours
+Inteligencia Artificial,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,D,9,64
+Sistemas de Información,Programación y Sistemas de Información,Ciencias de la Computación,D,9,64
+Didáctica de la Educación Superior,Programación y Sistemas de Información,Ciencias de la Computación,D,9,16
+Historia de la Computación,Programación y Sistemas de Información,Ciencias de la Computación,D,9,16
+Problemas Sociales de la Ciencia y la Tecnología,Matemática,Ciencias de la Computación,E,7,32
+Sistemas Distribuidos,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,7,64
+Diseño y Análisis de Algoritmos,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,7,64
+Aprendizaje de Máquinas,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,7,64
+Metodología de la Investigación,Programación y Sistemas de Información,Ciencias de la Computación,E,7,32
+Historia de la Computación,Programación y Sistemas de Información,Ciencias de la Computación,E,7,16
+Estadística,Matemática Aplicada,Ciencias de la Computación,E,5,64
+Modelos de Optimización,Matemática Aplicada,Ciencias de la Computación,E,5,64
+Compilación,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,5,64
+Ingeniería de Software,Programación y Sistemas de Información,Ciencias de la Computación,E,6,64
+Lenguajes de Programación,Programación y Sistemas de Información,Ciencias de la Computación,E,6,64
+Sistemas de Recuperación de la Información,Programación y Sistemas de Información,Ciencias de la Computación,E,6,64
+Redes de Computadoras,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,6,64
+Simulación,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,6,64
+Inteligencia Artificial,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,6,64
+Modelos Matemáticos Aplicados,Matemática Aplicada,Ciencias de la Computación,E,5,32
+Base de Datos II,Programación y Sistemas de Información,Ciencias de la Computación,E,6,64
+Programación Declarativa,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,5,64
+Filosofía y Sociedad,Matemática,Ciencias de la Computación,E,1,32
+Economía,Matemática,Ciencias de la Computación,E,1,54
+Historia de Cuba,Matemática,Ciencias de la Computación,E,2,50
+Educación Física I,Otro,Ciencias de la Computación,E,1,28
+Educación Física II,Otro,Ciencias de la Computación,E,2,28
+Análisis Matemático I,Matemática,Ciencias de la Computación,E,1,96
+Análisis Matemático II,Matemática,Ciencias de la Computación,E,2,80
+Álgebra I,Matemática,Ciencias de la Computación,E,1,80
+Álgebra II,Matemática,Ciencias de la Computación,E,2,96
+Lógica,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,1,64
+Programación,Programación y Sistemas de Información,Ciencias de la Computación,E,1,192
+Economía Política,Matemática,Ciencias de la Computación,E (COVID),3,56
+Historia de Cuba,Matemática,Ciencias de la Computación,E (COVID),3,56
+Educación Física II,Otro,Ciencias de la Computación,E (COVID),3,28
+Análisis Matemático II,Matemática,Ciencias de la Computación,E (COVID),3,96
+Álgebra II,Matemática,Ciencias de la Computación,E (COVID),3,80
+Programación II,Programación y Sistemas de Información,Ciencias de la Computación,E (COVID),3,96
+Matemática Discreta I,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E (COVID),3,64
+Teoría Política,Matemática,Ciencias de la Computación,E (COVID),4,48
+Educación Física 3,Otro,Ciencias de la Computación,E (COVID),4,28
+Ecuaciones Diferenciales Ordinarias,Matemática,Ciencias de la Computación,E (COVID),4,64
+Matemática Numérica,Matemática Aplicada,Ciencias de la Computación,E (COVID),4,64
+Matemática Discreta II,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E (COVID),4,64
+Estructura de Datos y Algoritmos I,Programación y Sistemas de Información,Ciencias de la Computación,E (COVID),4,64
+Arquitectura de Computadoras,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E (COVID),4,64
+Programación y Algoritmos,Matemática Aplicada,Matemática,E,1,64
+Introducción al Análisis Matemático,Matemática,Matemática,E,1,96
+Introducción al Álgebra,Matemática,Matemática,E,1,96
+Geometría Analítica,Matemática,Matemática,E,1,80
+Introducción a la Matemática,Matemática,Matemática,E,1,32
+Funciones de una Variable Real,Matemática,Matemática,E,2,128
+Álgebra Lineal,Matemática,Matemática,E,2,96
+Funciones de Varias Variables,Matemática,Matemática,E,3,128
+Complementos de Álgebra Lineal,Matemática,Matemática,E,3,96
+Representación de Funciones,Matemática,Matemática,E,4,128
+Estructuras Algebráicas,Matemática,Matemática,E,4,96
+Teoría de las Probabilidades,Matemática,Matemática,E,4,80
+Funciones de Variable Compleja,Matemática,Matemática,E,5,80
+Matemática Numérica I,Matemática Aplicada,Matemática,E,5,96
+Inferencia Estadística,Matemática Aplicada,Matemática,E,5,96
+Optimización Matemática I,Matemática Aplicada,Matemática,E,5,64
+Ecuaciones Diferenciales Ordinarias,Matemática,Matemática,E,5,96
+Topología,Matemática,Matemática,E,6,64
+Optimización Matemática II,Matemática Aplicada,Matemática,E,6,64
+Matemática Numérica II,Matemática Aplicada,Matemática,E,6,96
+Ecuaciones en Derivadas Parciales,Matemática,Matemática,E,6,80
+Mecánica,Matemática,Matemática,E,6,64
+Geometría Diferencial,Matemática,Matemática,E,7,80
+Medida e Integración,Matemática,Matemática,E,7,64
+Historia de la Matemática,Matemática,Matemática,E,7,64
+Análisis Funcional,Matemática,Matemática,E,8,84
+Seminario de Problemas I,Matemática Aplicada,Matemática,E,2,42
