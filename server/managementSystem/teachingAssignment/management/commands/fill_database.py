@@ -1,5 +1,6 @@
 import csv
 import os
+from unicodedata import name
 from django.core.management.base import BaseCommand, CommandError, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
@@ -19,11 +20,22 @@ class Command(BaseCommand):
         if model_name == 'All':
             self.fill_all()
         else:
-            self.get_model_data(model_name)
+            self.fill_model(model_name)
 
     def fill_all(self):
         print('All')
         pass
+
+    def fill_model(self, model_name: str):
+        data = self.get_model_data(model_name)
+        print(data)
+
+        if model_name == 'Careers':
+            for career_data in data:
+                name = career_data['name']
+                faculty = Faculty.objects.get(name=career_data['faculty'])
+                career = Career(name=name, faculty=faculty)
+                career.save()
 
     def get_model_data(self, model_name: str):
         data: list[dict] = []
@@ -44,8 +56,6 @@ class Command(BaseCommand):
                     for i, fieldname in enumerate(fieldnames):
                         field[fieldname] = row[i]
                     data.append(field)
-
-        print(data)
         return data
 
     def get_file_dir(self, model_name: str):
