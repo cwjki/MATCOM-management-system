@@ -65,6 +65,32 @@ class Command(BaseCommand):
                 department = Department(name=name, faculty=faculty)
                 department.save()
 
+        elif model_name == 'Faculties':
+            for obj in data:
+                name = obj['name']
+                faculty = Faculty(name=name)
+                faculty.save()
+
+        elif model_name == 'Professors':
+            for obj in data:
+                name = obj['name']
+                last_name = obj['last_name']
+                # faculty = Faculty.objects.get(name=obj['faculty'])
+                department = Department.objects.get(name=obj['department'])
+                scientific_degree = ScientificDegree.objects.get(
+                    name=obj['scientific_degree'])
+                teaching_category = TeachingCategory.objects.get(
+                    name=obj['teaching_category'])
+
+                professor = Professor(
+                    name=name,
+                    last_name=last_name,
+                    department=department,
+                    scientific_degree=scientific_degree,
+                    teaching_category=teaching_category
+                )
+                professor.save()
+
     def get_model_data(self, model_name: str):
         data: list[dict] = []
         file_dir = self.get_file_dir(model_name)
