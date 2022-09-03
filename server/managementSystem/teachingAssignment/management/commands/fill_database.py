@@ -52,6 +52,19 @@ class Command(BaseCommand):
                 )
                 carmenTable.save()
 
+        elif model_name == 'ClassTypes':
+            for obj in data:
+                name = obj['name']
+                class_type = ClassType(name=name)
+                class_type.save()
+
+        elif model_name == 'Departments':
+            for obj in data:
+                name = obj['name']
+                faculty = Faculty.objects.get(name=obj['faculty'])
+                department = Department(name=name, faculty=faculty)
+                department.save()
+
     def get_model_data(self, model_name: str):
         data: list[dict] = []
         file_dir = self.get_file_dir(model_name)
