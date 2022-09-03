@@ -91,6 +91,33 @@ class Command(BaseCommand):
                 )
                 professor.save()
 
+        elif model_name == 'ScientificDegrees':
+            for obj in data:
+                name = obj['name']
+                scientific_degree = ScientificDegree(name=name)
+                scientific_degree.save()
+
+        elif model_name == 'Semesters':
+            for obj in data:
+                name = obj['name']
+                semester = Semester(name=name)
+                semester.save()
+
+        elif model_name == 'StudyPlans':
+            for obj in data:
+                name = obj['name']
+                number_of_semesters = obj['number_of_semesters']
+                since = obj['since']
+                until = obj['until'] if obj['until'] != '' else None
+
+                study_plan = StudyPlan(
+                    name=name,
+                    number_of_semesters=number_of_semesters,
+                    until=until,
+                    since=since
+                )
+                study_plan.save()
+
     def get_model_data(self, model_name: str):
         data: list[dict] = []
         file_dir = self.get_file_dir(model_name)
