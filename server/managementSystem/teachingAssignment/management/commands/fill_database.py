@@ -28,14 +28,29 @@ class Command(BaseCommand):
 
     def fill_model(self, model_name: str):
         data = self.get_model_data(model_name)
-        print(data)
 
         if model_name == 'Careers':
-            for career_data in data:
-                name = career_data['name']
-                faculty = Faculty.objects.get(name=career_data['faculty'])
+            for obj in data:
+                name = obj['name']
+                faculty = Faculty.objects.get(name=obj['faculty'])
                 career = Career(name=name, faculty=faculty)
                 career.save()
+
+        elif model_name == 'CarmenTable':
+            for obj in data:
+                semester = Semester.objects.get(name=obj['semester'])
+                study_plan = StudyPlan.objects.get(name=obj['study_plan'])
+                time_period = TimePeriod.objects.get(name=obj['time_period'])
+                teaching_group = TeachingGroup.objects.get(
+                    name=obj['teaching_group'])
+
+                carmenTable = CarmenTable(
+                    teaching_group=teaching_group,
+                    study_plan=study_plan,
+                    semester=semester,
+                    time_period=time_period
+                )
+                carmenTable.save()
 
     def get_model_data(self, model_name: str):
         data: list[dict] = []
