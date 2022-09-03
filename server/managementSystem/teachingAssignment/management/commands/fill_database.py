@@ -45,5 +45,45 @@ class Command(BaseCommand):
         pass
 
     def fill_model(self, model_name: str):
-        print(model_name)
-        pass
+        data: list[dict] = []
+
+        if model_name == 'Careers':
+            fieldnames = []
+            with open(CAREER_DIR, mode='r') as csv_file:
+                csv_reader = csv.reader(csv_file)
+                for count, row in enumerate(csv_reader):
+                    if count == 0:
+                        fieldnames = row
+                    else:
+                        field: dict = {}
+                        for i, fieldname in enumerate(fieldnames):
+                            field[fieldname] = row[i]
+                        data.append(field)
+
+        elif model_name == 'CarmenTable':
+            fieldnames = []
+            with open(CARMEN_TABLE_DIR, mode='r') as csv_file:
+                csv_reader = csv.reader(csv_file)
+                for count, row in enumerate(csv_reader):
+                    if count == 0:
+                        fieldnames = row
+                    else:
+                        field: dict = {}
+                        for i, fieldname in enumerate(fieldnames):
+                            field[fieldname] = row[i]
+                        data.append(field)
+
+        elif model_name == 'ClassTypes':
+            fieldnames = []
+            with open(CLASS_TYPE_DIR, mode='r') as csv_file:
+                csv_reader = csv.reader(csv_file)
+                for count, row in enumerate(csv_reader):
+                    if count == 0:
+                        fieldnames = row
+                    else:
+                        field: dict = {}
+                        for i, fieldname in enumerate(fieldnames):
+                            field[fieldname] = row[i]
+                        data.append(field)
+
+            print(data)
