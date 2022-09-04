@@ -23,8 +23,14 @@ class Command(BaseCommand):
             self.fill_model(model_name)
 
     def fill_all(self):
-        print('All')
-        pass
+        models_names = ['ClassTypes', 'Faculties',
+                        'ScientificDegrees', 'TeachingCategories',
+                        'Semesters', 'TeachingGroups', 'TimePeriods'
+                        'Careers', 'StudyPlan', 'CarmenTable', 'Departments'
+                        'Subjects', 'Professors']
+
+        for model_name in models_names:
+            self.fill_model(model_name)
 
     def fill_model(self, model_name: str):
         data = self.get_model_data(model_name)
