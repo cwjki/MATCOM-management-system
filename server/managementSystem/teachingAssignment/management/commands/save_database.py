@@ -7,25 +7,6 @@ from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerial
 from ...serializers_csv import CareerSerializerCSV, CarmenTableSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, SubjectSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
 
 
-CURRENT_PATH = os.path.dirname(__file__)
-SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
-PROFESSOR_DIR = os.path.join(CURRENT_PATH, '../../excels/professors.csv')
-FACULTY_DIR = os.path.join(CURRENT_PATH, '../../excels/faculties.csv')
-CAREER_DIR = os.path.join(CURRENT_PATH, '../../excels/careers.csv')
-STUDY_PLAN_DIR = os.path.join(CURRENT_PATH, '../../excels/study_plans.csv')
-DEPARTMENT_DIR = os.path.join(CURRENT_PATH, '../../excels/departments.csv')
-SEMESTER_DIR = os.path.join(CURRENT_PATH, '../../excels/semesters.csv')
-CLASS_TYPE_DIR = os.path.join(CURRENT_PATH, '../../excels/class_types.csv')
-TIME_PERIOD_DIR = os.path.join(CURRENT_PATH, '../../excels/time_periods.csv')
-CARMEN_TABLE_DIR = os.path.join(CURRENT_PATH, '../../excels/carmen_table.csv')
-TEACHING_GROUP_DIR = os.path.join(
-    CURRENT_PATH, '../../excels/teaching_groups.csv')
-TEACHING_CATEGORY_DIR = os.path.join(
-    CURRENT_PATH, '../../excels/teaching_categories.csv')
-SCIENTIFIC_DEGREE_DIR = os.path.join(
-    CURRENT_PATH, '../../excels/scientific_degrees.csv')
-
-
 class Command(BaseCommand):
     help = 'Save database data in excels'
 
@@ -35,18 +16,34 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         model_name = options['model'] if options['model'] else 'All'
 
-        fieldnames, data, file_path = self.get_fieldnames_and_data(model_name)
+        if model_name == 'All':
+            self.save_all()
+        else:
+            self.save_model(model_name)
 
-        with open(file_path, 'w', encoding='UTF8') as f:
+    def save_all(self):
+        models_names = ['ClassTypes', 'Faculties',
+                        'ScientificDegrees', 'TeachingCategories',
+                        'Semesters', 'TeachingGroups', 'TimePeriods',
+                        'Careers', 'StudyPlans', 'CarmenTable', 'Departments',
+                        'Subjects', 'Professors']
+
+        for model_name in models_names:
+            self.save_model(model_name)
+
+    def save_model(self, model_name: str):
+        file_dir = self.get_file_dir(model_name)
+
+        if file_dir == 'error':
+            print(f'Error, not valid model_name: {model_name}, try again')
+            return
+
+        fieldnames, data = self.get_fieldnames_and_data(model_name)
+
+        with open(file_dir, 'w', encoding='UTF8') as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(data)
-
-    def save_all(self, model_name: str):
-        pass
-
-    def save_model(self, model_name: str):
-        pass
 
     def get_fieldnames_and_data(self, model_name: str):
         if model_name == 'Subjects':
@@ -54,7 +51,6 @@ class Command(BaseCommand):
             fieldnames = ['name', 'department', 'career',
                           'study_plan', 'semester', 'number_of_hours']
             data = [SubjectSerializerCSV(subject).data for subject in queryset]
-            file_path = SUBJECTS_DIR
 
         elif model_name == 'Professors':
             queryset = Professor.objects.all()
@@ -62,19 +58,16 @@ class Command(BaseCommand):
                           'teaching_category', 'faculty']
             data = [ProfessorSerializerCSV(
                 professor).data for professor in queryset]
-            file_path = PROFESSOR_DIR
 
         elif model_name == 'Faculties':
             queryset = Faculty.objects.all()
             fieldnames = ['name', ]
             data = [FacultySerializerCSV(faculty).data for faculty in queryset]
-            file_path = FACULTY_DIR
 
         elif model_name == 'Careers':
             queryset = Career.objects.all()
             fieldnames = ['name', 'faculty']
             data = [CareerSerializerCSV(career).data for career in queryset]
-            file_path = CAREER_DIR
 
         elif model_name == 'StudyPlans':
             queryset = StudyPlan.objects.all()
@@ -82,56 +75,48 @@ class Command(BaseCommand):
                           'number_of_semesters', 'until', 'since']
             data = [StudyPlanSerializerCSV(
                 study_plan).data for study_plan in queryset]
-            file_path = STUDY_PLAN_DIR
 
         elif model_name == 'TeachingGroups':
             queryset = TeachingGroup.objects.all()
             fieldnames = ['name']
             data = [TeachingGroupSerializerCSV(
                 teaching_group).data for teaching_group in queryset]
-            file_path = TEACHING_GROUP_DIR
 
         elif model_name == 'Departments':
             queryset = Department.objects.all()
             fieldnames = ['name', 'faculty']
             data = [DepartmentSerializerCSV(
                 dapartment).data for dapartment in queryset]
-            file_path = DEPARTMENT_DIR
 
         elif model_name == 'ScientificDegrees':
             queryset = ScientificDegree.objects.all()
             fieldnames = ['name']
             data = [ScientificDegreeSerializerCSV(
                 scientific_degree).data for scientific_degree in queryset]
-            file_path = SCIENTIFIC_DEGREE_DIR
 
         elif model_name == 'TeachingCategories':
             queryset = TeachingCategory.objects.all()
             fieldnames = ['name']
             data = [TeachingCategorySerializerCSV(
                 teaching_category).data for teaching_category in queryset]
-            file_path = TEACHING_CATEGORY_DIR
 
         elif model_name == 'Semesters':
             queryset = Semester.objects.all()
             fieldnames = ['name']
             data = [SemesterSerializerCSV(
                 semester).data for semester in queryset]
-            file_path = SEMESTER_DIR
 
         elif model_name == 'ClassTypes':
             queryset = ClassType.objects.all()
             fieldnames = ['name']
             data = [ClassTypeSerializerCSV(
                 class_type).data for class_type in queryset]
-            file_path = CLASS_TYPE_DIR
 
         elif model_name == 'TimePeriods':
             queryset = TimePeriod.objects.all()
             fieldnames = ['name']
             data = [TimePeriodSerializerCSV(
                 time_period).data for time_period in queryset]
-            file_path = TIME_PERIOD_DIR
 
         elif model_name == 'CarmenTable':
             queryset = CarmenTable.objects.all()
@@ -139,8 +124,60 @@ class Command(BaseCommand):
                           'study_plan', 'semester', 'time_period']
             data = [CarmenTableSerializerCSV(
                 carmen_table).data for carmen_table in queryset]
-            file_path = CARMEN_TABLE_DIR
-        else:
-            print("error")
 
-        return fieldnames, data, file_path
+        return fieldnames, data
+
+    def get_file_dir(self, model_name: str):
+        CURRENT_PATH = os.path.dirname(__file__)
+        SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
+        PROFESSOR_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/professors.csv')
+        FACULTY_DIR = os.path.join(CURRENT_PATH, '../../excels/faculties.csv')
+        CAREER_DIR = os.path.join(CURRENT_PATH, '../../excels/careers.csv')
+        STUDY_PLAN_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/study_plans.csv')
+        DEPARTMENT_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/departments.csv')
+        SEMESTER_DIR = os.path.join(CURRENT_PATH, '../../excels/semesters.csv')
+        CLASS_TYPE_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/class_types.csv')
+        TIME_PERIOD_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/time_periods.csv')
+        CARMEN_TABLE_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/carmen_table.csv')
+        TEACHING_GROUP_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/teaching_groups.csv')
+        TEACHING_CATEGORY_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/teaching_categories.csv')
+        SCIENTIFIC_DEGREE_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/scientific_degrees.csv')
+
+        if model_name == 'Careers':
+            file_dir = CAREER_DIR
+        elif model_name == 'CarmenTable':
+            file_dir = CARMEN_TABLE_DIR
+        elif model_name == 'ClassTypes':
+            file_dir = CLASS_TYPE_DIR
+        elif model_name == 'Departments':
+            file_dir = DEPARTMENT_DIR
+        elif model_name == 'Faculties':
+            file_dir = FACULTY_DIR
+        elif model_name == 'Professors':
+            file_dir = PROFESSOR_DIR
+        elif model_name == 'ScientificDegrees':
+            file_dir = SCIENTIFIC_DEGREE_DIR
+        elif model_name == 'Semesters':
+            file_dir = SEMESTER_DIR
+        elif model_name == 'StudyPlans':
+            file_dir = STUDY_PLAN_DIR
+        elif model_name == 'Subjects':
+            file_dir = SUBJECTS_DIR
+        elif model_name == 'TeachingCategories':
+            file_dir = TEACHING_CATEGORY_DIR
+        elif model_name == 'TeachingGroups':
+            file_dir = TEACHING_GROUP_DIR
+        elif model_name == 'TimePeriods':
+            file_dir = TIME_PERIOD_DIR
+        else:
+            file_dir = 'error'
+        return file_dir
