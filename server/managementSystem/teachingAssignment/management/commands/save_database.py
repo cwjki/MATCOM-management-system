@@ -42,15 +42,21 @@ class Command(BaseCommand):
             writer.writeheader()
             writer.writerows(data)
 
-    def get_fieldnames_and_data(self, name: str):
-        if name == 'Subjects':
+    def save_all(self, model_name: str):
+        pass
+
+    def save_model(self, model_name: str):
+        pass
+
+    def get_fieldnames_and_data(self, model_name: str):
+        if model_name == 'Subjects':
             queryset = Subject.objects.all()
             fieldnames = ['name', 'department', 'career',
                           'study_plan', 'semester', 'number_of_hours']
             data = [SubjectSerializerCSV(subject).data for subject in queryset]
             file_path = SUBJECTS_DIR
 
-        elif name == 'Professors':
+        elif model_name == 'Professors':
             queryset = Professor.objects.all()
             fieldnames = ['name', 'last_name', 'department', 'scientific_degree',
                           'teaching_category', 'faculty']
@@ -58,19 +64,19 @@ class Command(BaseCommand):
                 professor).data for professor in queryset]
             file_path = PROFESSOR_DIR
 
-        elif name == 'Faculties':
+        elif model_name == 'Faculties':
             queryset = Faculty.objects.all()
             fieldnames = ['name', ]
             data = [FacultySerializerCSV(faculty).data for faculty in queryset]
             file_path = FACULTY_DIR
 
-        elif name == 'Careers':
+        elif model_name == 'Careers':
             queryset = Career.objects.all()
             fieldnames = ['name', 'faculty']
             data = [CareerSerializerCSV(career).data for career in queryset]
             file_path = CAREER_DIR
 
-        elif name == 'StudyPlans':
+        elif model_name == 'StudyPlans':
             queryset = StudyPlan.objects.all()
             fieldnames = ['name',
                           'number_of_semesters', 'until', 'since']
@@ -78,63 +84,62 @@ class Command(BaseCommand):
                 study_plan).data for study_plan in queryset]
             file_path = STUDY_PLAN_DIR
 
-        elif name == 'TeachingGroups':
+        elif model_name == 'TeachingGroups':
             queryset = TeachingGroup.objects.all()
             fieldnames = ['name']
             data = [TeachingGroupSerializerCSV(
                 teaching_group).data for teaching_group in queryset]
             file_path = TEACHING_GROUP_DIR
 
-        elif name == 'Departments':
+        elif model_name == 'Departments':
             queryset = Department.objects.all()
             fieldnames = ['name', 'faculty']
             data = [DepartmentSerializerCSV(
                 dapartment).data for dapartment in queryset]
             file_path = DEPARTMENT_DIR
 
-        elif name == 'ScientificDegrees':
+        elif model_name == 'ScientificDegrees':
             queryset = ScientificDegree.objects.all()
             fieldnames = ['name']
             data = [ScientificDegreeSerializerCSV(
                 scientific_degree).data for scientific_degree in queryset]
             file_path = SCIENTIFIC_DEGREE_DIR
 
-        elif name == 'TeachingCategories':
+        elif model_name == 'TeachingCategories':
             queryset = TeachingCategory.objects.all()
             fieldnames = ['name']
             data = [TeachingCategorySerializerCSV(
                 teaching_category).data for teaching_category in queryset]
             file_path = TEACHING_CATEGORY_DIR
 
-        elif name == 'Semesters':
+        elif model_name == 'Semesters':
             queryset = Semester.objects.all()
             fieldnames = ['name']
             data = [SemesterSerializerCSV(
                 semester).data for semester in queryset]
             file_path = SEMESTER_DIR
 
-        elif name == 'ClassTypes':
+        elif model_name == 'ClassTypes':
             queryset = ClassType.objects.all()
             fieldnames = ['name']
             data = [ClassTypeSerializerCSV(
                 class_type).data for class_type in queryset]
             file_path = CLASS_TYPE_DIR
 
-        elif name == 'TimePeriods':
+        elif model_name == 'TimePeriods':
             queryset = TimePeriod.objects.all()
             fieldnames = ['name']
             data = [TimePeriodSerializerCSV(
                 time_period).data for time_period in queryset]
             file_path = TIME_PERIOD_DIR
 
-        elif name == 'CarmenTable':
+        elif model_name == 'CarmenTable':
             queryset = CarmenTable.objects.all()
             fieldnames = ['teaching_group',
                           'study_plan', 'semester', 'time_period']
             data = [CarmenTableSerializerCSV(
                 carmen_table).data for carmen_table in queryset]
             file_path = CARMEN_TABLE_DIR
-
         else:
             print("error")
 
