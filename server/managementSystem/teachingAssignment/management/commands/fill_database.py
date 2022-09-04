@@ -1,11 +1,8 @@
 import csv
 import os
-from unicodedata import name
 from django.core.management.base import BaseCommand, CommandError, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
-from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
-from ...serializers_csv import CareerSerializerCSV, CarmenTableSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, SubjectSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
 
 
 class Command(BaseCommand):
@@ -25,8 +22,8 @@ class Command(BaseCommand):
     def fill_all(self):
         models_names = ['ClassTypes', 'Faculties',
                         'ScientificDegrees', 'TeachingCategories',
-                        'Semesters', 'TeachingGroups', 'TimePeriods'
-                        'Careers', 'StudyPlan', 'CarmenTable', 'Departments'
+                        'Semesters', 'TeachingGroups', 'TimePeriods',
+                        'Careers', 'StudyPlans', 'CarmenTable', 'Departments',
                         'Subjects', 'Professors']
 
         for model_name in models_names:
@@ -166,7 +163,7 @@ class Command(BaseCommand):
         file_dir = self.get_file_dir(model_name)
 
         if file_dir == 'error':
-            print('Error, not valid model_name, try again')
+            print(f'Error, not valid model_name: {model_name}, try again')
             return
 
         fieldnames = []
