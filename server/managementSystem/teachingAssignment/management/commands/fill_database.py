@@ -118,6 +118,43 @@ class Command(BaseCommand):
                 )
                 study_plan.save()
 
+        elif model_name == 'Subjects':
+            for obj in data:
+                name = obj['name']
+                number_of_hours = obj['number_of_hours']
+                department = Department.objects.get(name=obj['department'])
+                career = Career.objects.get(name=obj['career'])
+                study_plan = StudyPlan.objects.get(name=obj['study_plan'])
+                semester = Semester.objects.get(name=obj['semester'])
+
+                subject = Subject(
+                    name=name,
+                    department=department,
+                    career=career,
+                    study_plan=study_plan,
+                    semester=semester,
+                    number_of_hours=number_of_hours
+                )
+                subject.save()
+
+        elif model_name == 'TeachingCategories':
+            for obj in data:
+                name = obj['name']
+                teaching_category = TeachingCategory(name=name)
+                teaching_category.save()
+
+        elif model_name == 'TeachingGroups':
+            for obj in data:
+                name = obj['name']
+                teaching_groups = TeachingGroup(name=name)
+                teaching_groups.save()
+
+        elif model_name == 'TimePeriods':
+            for obj in data:
+                name = obj['name']
+                time_period = TimePeriod(name=name)
+                time_period.save()
+
     def get_model_data(self, model_name: str):
         data: list[dict] = []
         file_dir = self.get_file_dir(model_name)
