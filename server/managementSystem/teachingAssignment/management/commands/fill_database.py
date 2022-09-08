@@ -1,8 +1,9 @@
 import csv
+from imp import new_module
 import os
 from django.core.management.base import BaseCommand, CommandError, CommandParser
 
-from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
+from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 
 
 class Command(BaseCommand):
@@ -158,6 +159,33 @@ class Command(BaseCommand):
                 time_period = TimePeriod(name=name)
                 time_period.save()
 
+        elif model_name == 'SubjectDescriptions':
+            for obj in data:
+                subject = obj['subject']
+                number_of_hours = obj['number_of_hours']
+                number_of_groups = obj['number_of_groups']
+                career = Career.objects.get(name=obj['career'])
+                class_type = ClassType.objects.get(name=obj['class_type'])
+                time_period = TimePeriod.objects.get(name=obj['time_period'])
+                study_plan = StudyPlan.objects.get(name=obj['study_plan'])
+                teaching_group = TeachingGroup.objects.get(
+                    name=obj['scholar_year'])
+
+                scholar_year = CarmenTable.objects.get(
+                    teaching_group=teaching_group)
+                subject = Subject.objects.filter(
+                    name=subject).filter(career=career).filter(study_plan=study_plan)[0]
+
+                subject_description = SubjectDescription(
+                    subject=subject,
+                    class_type=class_type,
+                    time_period=time_period,
+                    scholar_year=scholar_year,
+                    number_of_hours=number_of_hours,
+                    number_of_groups=number_of_groups
+                )
+                subject_description.save()
+
     def get_model_data(self, model_name: str):
         data: list[dict] = []
         file_dir = self.get_file_dir(model_name)
@@ -203,6 +231,8 @@ class Command(BaseCommand):
             CURRENT_PATH, '../../excels/teaching_categories.csv')
         SCIENTIFIC_DEGREE_DIR = os.path.join(
             CURRENT_PATH, '../../excels/scientific_degrees.csv')
+        SUBJECT_DESCRIPTION_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/subject_descriptions.csv')
 
         if model_name == 'Careers':
             file_dir = CAREER_DIR
@@ -230,6 +260,8 @@ class Command(BaseCommand):
             file_dir = TEACHING_GROUP_DIR
         elif model_name == 'TimePeriods':
             file_dir = TIME_PERIOD_DIR
+        elif model_name == 'SubjectDescriptions':
+            file_dir = SUBJECT_DESCRIPTION_DIR
         else:
             file_dir = 'error'
         return file_dir
