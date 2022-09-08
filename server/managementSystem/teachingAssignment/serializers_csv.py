@@ -170,3 +170,101 @@ class CarmenTableSerializerCSV(ModelSerializer):
     class Meta:
         model = CarmenTable
         exclude = ['id']
+
+
+class SubjectDescriptionSerializerCSV(ModelSerializer):
+    subject = serializers.SerializerMethodField()
+    study_plan = serializers.SerializerMethodField()
+    career = serializers.SerializerMethodField()
+    class_type = serializers.SerializerMethodField()
+    time_period = serializers.SerializerMethodField()
+    scholar_year = serializers.SerializerMethodField()
+
+    def get_subject(self, obj) -> dict:
+        if obj.subject:
+            return obj.subject.name
+        return None
+
+    def get_study_plan(self, obj) -> dict:
+        if obj.subject:
+            return obj.subject.study_plan.name
+        return None
+
+    def get_career(self, obj) -> dict:
+        if obj.subject:
+            return obj.subject.career.name
+        return None
+
+    def get_class_type(self, obj) -> dict:
+        if obj.class_type:
+            return obj.class_type.name
+        return None
+
+    def get_time_period(self, obj) -> dict:
+        if obj.time_period:
+            return obj.time_period.name
+        return None
+
+    def get_scholar_year(self, obj) -> dict:
+        if obj.scholar_year:
+            return obj.scholar_year.teaching_group.name
+        return None
+
+    class Meta:
+        model = SubjectDescription
+        exclude = ['id']
+
+
+class TeachingAssignmentSerializerCSV(ModelSerializer):
+    professor_name = serializers.SerializerMethodField()
+    professor_last_name = serializers.SerializerMethodField()
+    subject = serializers.SerializerMethodField()
+    career = serializers.SerializerMethodField()
+    scholar_year = serializers.SerializerMethodField()
+    study_plan = serializers.SerializerMethodField()
+    class_type = serializers.SerializerMethodField()
+    time_period = serializers.SerializerMethodField()
+
+    def get_professor_name(self, obj) -> dict:
+        if obj.professor:
+            return obj.professor.name
+        return None
+
+    def get_professor_last_name(self, obj) -> dict:
+        if obj.professor:
+            return obj.professor.last_name
+        return None
+
+    def get_subject(self, obj) -> dict:
+        if obj.subject_description:
+            return obj.subject_description.subject.name
+        return None
+
+    def get_study_plan(self, obj) -> dict:
+        if obj.subject_description:
+            return obj.subject_description.subject.study_plan.name
+        return None
+
+    def get_career(self, obj) -> dict:
+        if obj.subject_description:
+            return obj.subject_description.subject.career.name
+        return None
+
+    def get_scholar_year(self, obj) -> dict:
+        if obj.subject_description:
+            return obj.subject_description.scholar_year.teaching_group.name
+        return None
+
+    def get_class_type(self, obj) -> dict:
+        if obj.subject_description:
+            return obj.subject_description.class_type.name
+        return None
+
+    def get_time_period(self, obj) -> dict:
+        if obj.subject_description:
+            return obj.subject_description.time_period.name
+        return None
+
+    class Meta:
+        model = TeachingAssignment
+        exclude = ['id', 'professor', 'subject_description']
