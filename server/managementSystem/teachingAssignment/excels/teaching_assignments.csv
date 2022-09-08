@@ -1,0 +1,21 @@
+professor_name,professor_last_name,subject,class_type,time_period,scholar_year,percent,group
+Alejandro,Mesejo Chiong,Programación y Algoritmos,Conferencia,enero - julio,M1,100,1
+Daniela,González Beltrán,Programación y Algoritmos,Clase Práctica,enero - julio,M1,100,1
+Camila,Pérez Mosquera,Programación y Algoritmos,Clase Práctica,enero - julio,M1,100,2
+Sheyla,Artiles,Programación y Algoritmos,Clase Práctica,enero - julio,M1,100,3
+Yanet,García,Estadística,Conferencia,enero - julio,C3,100,1
+Ernesto,Borrego Rodríguez,Estadística,Clase Práctica,enero - julio,C3,100,1
+Carlos,Bouza Herrera,Seminario de Problemas I,Conferencia,enero - julio,M1,100,1
+Alejandro,Mesejo Chiong,Programación y Algoritmos,Conferencia,enero - julio,M2,100,1
+Sheyla,Artiles,Programación y Algoritmos,Clase Práctica,enero - julio,M2,100,1
+Vivian,Sistaschs,Inferencia Estadística,Conferencia,enero - julio,M3,100,1
+Yanet,García,Inferencia Estadística,Clase Práctica,enero - julio,M3,100,1
+Marta Lourdes,Baguer Díaz-Romañach,Matemática Numérica I,Conferencia,enero - julio,M3,100,1
+Fernando Raul,Rodriguez Flores,Matemática Numérica I,Clase Práctica,enero - julio,M3,100,1
+Manuel,Valiente,Estadística,Clase Práctica,enero - julio,C3,100,2
+Aymée,Marrero Severo,Optimización Matemática I,Conferencia,enero - julio,M3,100,1
+Gemayqzel,Bouza Allende,Optimización Matemática I,Clase Práctica,enero - julio,M3,100,1
+Aymée,Marrero Severo,Modelos de Optimización,Conferencia,enero - julio,C3,50,1
+Fernando Raul,Rodriguez Flores,Modelos de Optimización,Conferencia,enero - julio,C3,50,1
+Daniela,González Beltrán,Modelos de Optimización,Clase Práctica,enero - julio,C3,100,1
+Camila,Pérez Mosquera,Modelos de Optimización,Clase Práctica,enero - julio,C3,100,2
