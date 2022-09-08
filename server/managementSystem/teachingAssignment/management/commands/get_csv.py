@@ -3,7 +3,7 @@ import csv
 from typing import List
 from ...serializers import TeachingAssignment
 from ...models import TeachingAssignmentSerializer
-from django.core.management.base import BaseCommand, CommandError, CommandParser
+from django.core.management.base import BaseCommand, CommandParser
 
 
 CURRENT_PATH = os.path.dirname(__file__)

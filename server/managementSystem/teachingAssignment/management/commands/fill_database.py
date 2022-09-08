@@ -1,9 +1,6 @@
-from cgi import print_arguments
 import csv
-from imp import new_module
 import os
-from traceback import print_tb
-from django.core.management.base import BaseCommand, CommandError, CommandParser
+from django.core.management.base import BaseCommand, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 
