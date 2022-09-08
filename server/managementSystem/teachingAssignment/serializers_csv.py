@@ -170,3 +170,65 @@ class CarmenTableSerializerCSV(ModelSerializer):
     class Meta:
         model = CarmenTable
         exclude = ['id']
+
+
+class SubjectDescriptionSerializerCSV(ModelSerializer):
+    subject = serializers.SerializerMethodField()
+    study_plan = serializers.SerializerMethodField()
+    career = serializers.SerializerMethodField()
+    class_type = serializers.SerializerMethodField()
+    time_period = serializers.SerializerMethodField()
+    # scholar_year = serializers.SerializerMethodField()
+
+    def get_subject(self, obj) -> dict:
+        if obj.subject:
+            return obj.subject.name
+        return None
+
+    def get_study_plan(self, obj) -> dict:
+        if obj.subject:
+            return obj.subject.study_plan.name
+        return None
+
+    def get_career(self, obj) -> dict:
+        if obj.subject:
+            return obj.subject.career.name
+        return None
+
+    # def get_subject(self, obj) -> dict:
+    #     if obj.subject:
+    #         return {
+    #             "id": obj.subject.id,
+    #             "name": obj.subject.name,
+    #             "department": obj.subject.department.name,
+    #             "career": obj.subject.career.name,
+    #             "study_plan": obj.subject.study_plan.name,
+    #             "semester": obj.subject.semester.name,
+    #             "total_hours": obj.subject.number_of_hours
+    #         }
+    #     return None
+
+    def get_class_type(self, obj) -> dict:
+        if obj.class_type:
+            return obj.class_type.name
+        return None
+
+    def get_time_period(self, obj) -> dict:
+        if obj.time_period:
+            return obj.time_period.name
+        return None
+
+    # def get_scholar_year(self, obj) -> dict:
+    #     if obj.scholar_year:
+    #         return {
+    #             "id": obj.scholar_year.id,
+    #             "teaching_group": obj.scholar_year.teaching_group.name,
+    #             "time_period": obj.scholar_year.time_period.name,
+    #             "study_plan": obj.scholar_year.study_plan.name,
+    #             "semester": obj.scholar_year.semester.name,
+    #         }
+    #     return None
+
+    class Meta:
+        model = SubjectDescription
+        exclude = ['id']

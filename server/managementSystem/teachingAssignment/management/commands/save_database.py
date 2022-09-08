@@ -2,9 +2,9 @@ import csv
 import os
 from django.core.management.base import BaseCommand, CommandError, CommandParser
 
-from ...models import Professor, Subject, Faculty, Career, StudyPlan, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
+from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from ...serializers import ProfessorSerializer, SubjectSerializer, FacultySerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ScientificDegreeSerializer, TeachingCategorySerializer, ClassTypeSerializer, SemesterSerializer, TimePeriodSerializer, CarmenTableSerializer
-from ...serializers_csv import CareerSerializerCSV, CarmenTableSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, SubjectSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
+from ...serializers_csv import CareerSerializerCSV, CarmenTableSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, SubjectDescriptionSerializerCSV, SubjectSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
 
 
 class Command(BaseCommand):
@@ -125,6 +125,13 @@ class Command(BaseCommand):
             data = [CarmenTableSerializerCSV(
                 carmen_table).data for carmen_table in queryset]
 
+        elif model_name == 'SubjectDescriptions':
+            queryset = SubjectDescription.objects.all()
+            fieldnames = ['subject', 'career', 'study_plan', 'class_type', 'time_period',
+                          'number_of_groups', 'scholar_year', 'number_of_hours']
+            data = [SubjectDescriptionSerializerCSV(
+                subject_description).data for subject_description in queryset]
+
         return fieldnames, data
 
     def get_file_dir(self, model_name: str):
@@ -151,6 +158,8 @@ class Command(BaseCommand):
             CURRENT_PATH, '../../excels/teaching_categories.csv')
         SCIENTIFIC_DEGREE_DIR = os.path.join(
             CURRENT_PATH, '../../excels/scientific_degrees.csv')
+        SUBJECT_DESCRIPTION_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/subject_descriptions.csv')
 
         if model_name == 'Careers':
             file_dir = CAREER_DIR
@@ -178,6 +187,8 @@ class Command(BaseCommand):
             file_dir = TEACHING_GROUP_DIR
         elif model_name == 'TimePeriods':
             file_dir = TIME_PERIOD_DIR
+        elif model_name == 'SubjectDescriptions':
+            file_dir = SUBJECT_DESCRIPTION_DIR
         else:
             file_dir = 'error'
         return file_dir
