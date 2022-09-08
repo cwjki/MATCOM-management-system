@@ -219,7 +219,9 @@ class TeachingAssignmentSerializerCSV(ModelSerializer):
     professor_name = serializers.SerializerMethodField()
     professor_last_name = serializers.SerializerMethodField()
     subject = serializers.SerializerMethodField()
+    career = serializers.SerializerMethodField()
     scholar_year = serializers.SerializerMethodField()
+    study_plan = serializers.SerializerMethodField()
     class_type = serializers.SerializerMethodField()
     time_period = serializers.SerializerMethodField()
 
@@ -236,6 +238,16 @@ class TeachingAssignmentSerializerCSV(ModelSerializer):
     def get_subject(self, obj) -> dict:
         if obj.subject_description:
             return obj.subject_description.subject.name
+        return None
+
+    def get_study_plan(self, obj) -> dict:
+        if obj.subject_description:
+            return obj.subject_description.subject.study_plan.name
+        return None
+
+    def get_career(self, obj) -> dict:
+        if obj.subject_description:
+            return obj.subject_description.subject.career.name
         return None
 
     def get_scholar_year(self, obj) -> dict:

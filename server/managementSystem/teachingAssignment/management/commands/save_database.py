@@ -134,7 +134,7 @@ class Command(BaseCommand):
 
         elif model_name == 'TeachingAssignments':
             queryset = TeachingAssignment.objects.all()
-            fieldnames = ['professor_name', 'professor_last_name',
+            fieldnames = ['professor_name', 'professor_last_name', 'career', 'study_plan',
                           'subject', 'class_type', 'time_period', 'scholar_year', 'percent', 'group']
             data = [TeachingAssignmentSerializerCSV(
                 teaching_assignment).data for teaching_assignment in queryset]
