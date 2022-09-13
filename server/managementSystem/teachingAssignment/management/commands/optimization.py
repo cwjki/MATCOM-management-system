@@ -27,6 +27,15 @@ class Command(BaseCommand):
         queryset = Professor.objects.all()
         professors = [professor.id for professor in queryset]
 
+        # Create a list of cost of each assignment
+        cost1 = [1] * 22
+        cost = []
+        for i in range(0, 15):
+            cost.append(cost1)
+
+        cost = makeDict([subjects, professors], cost, 0)
+        print(cost[1][1])
+
         # Creates the problem variable to contain the problem data
         problem = LpProblem("Teaching_Assignment_Problem", LpMaximize)
 
@@ -34,7 +43,11 @@ class Command(BaseCommand):
         teachingAssignments = [(subject, professor)
                                for subject in subjects for professor in professors]
 
-        print(teachingAssignments)
+        # Set teachingAssignments to take either 1 or 0 values (professor taking the class)
+        ta = LpVariable.dicts("TeachingAssignments",
+                              (subjects, professors), 0, None, LpInteger)
 
-        # teachingAssignments = LpVariable.dicts(
-        #     "TeachingAssignments", professors, lowBound=0, upBound=1, cat='Integer')
+        # Define Objective Function
+        problem += (
+            lpSum(ta[s][p] * cost[s][p] for (s, p) in teachingAssignments)
+        )
