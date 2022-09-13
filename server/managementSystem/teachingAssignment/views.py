@@ -31,7 +31,6 @@ class CSVDownloadView(mixins.ListModelMixin, generics.GenericAPIView):
     """
     This view handles the teaching assignments csv file download
     """
-
     def get(self, request):
         current_path = os.path.dirname(__file__)
         file_dir = os.path.join(
