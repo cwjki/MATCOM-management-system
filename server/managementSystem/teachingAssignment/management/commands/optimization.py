@@ -1,4 +1,5 @@
 import random
+from unittest import result
 from pulp import *
 from django.core.management.base import BaseCommand, CommandParser
 
@@ -37,7 +38,7 @@ class Command(BaseCommand):
                 cost[i][j] = r
 
         # The cost data is made into a dictionary
-        cost = makeDict([subjects, professors], cost)
+        costs = makeDict([subjects, professors], cost)
 
         # Creates the problem variable to contain the problem data
         problem = LpProblem("Teaching_Assignment_Problem", LpMaximize)
@@ -47,10 +48,35 @@ class Command(BaseCommand):
                                for subject in subjects for professor in professors]
 
         # Set teachingAssignments to take either 1 or 0 values (professor taking the class)
-        ta = LpVariable.dicts("TeachingAssignments",
-                              (subjects, professors), 0, None, LpInteger)
+        ta = LpVariable.dicts("TeachingAssignment",
+                              (subjects, professors), 0, 1, LpInteger)
 
         # Define Objective Function
         problem += (
-            lpSum(ta[s][p] * cost[s][p] for (s, p) in teachingAssignments)
+            lpSum(ta[s][p] * costs[s][p] for (s, p) in teachingAssignments)
         )
+
+        # Define the constrains
+
+        # Number of professor per subject
+        for s in subjects:
+            problem += (
+                lpSum([ta[s][p] for p in professors]) == subject_groups[s],
+                f'Number_of_professors_for_subject {s}',
+            )
+
+        # Maximum number of hours a teacher can have
+        for p in professors:
+            problem += (
+                lpSum([ta[s][p] for s in subjects]) <= 4,
+                f'Maximum_number_of_hours_for_professor {p}',
+            )
+
+        # The problem is solved using PuLP's choice of Solver
+        problem.solve()
+
+        result = [v for v in problem.variables() if v.varValue == 1]
+        print(result)
+
+        # The optimised objective function value is printed to the screen
+        print("Value of Objective Function = ", value(problem.objective))
