@@ -1,3 +1,4 @@
+import random
 from pulp import *
 from django.core.management.base import BaseCommand, CommandParser
 
@@ -28,13 +29,15 @@ class Command(BaseCommand):
         professors = [professor.id for professor in queryset]
 
         # Create a list of cost of each assignment
-        cost1 = [1] * 22
-        cost = []
-        for i in range(0, 15):
-            cost.append(cost1)
+        rows, cols = (15, 22)
+        cost = [[0] * cols] * rows
+        for i in range(0, rows):
+            for j in range(0, cols):
+                r = random.randrange(10)
+                cost[i][j] = r
 
-        cost = makeDict([subjects, professors], cost, 0)
-        print(cost[1][1])
+        # The cost data is made into a dictionary
+        cost = makeDict([subjects, professors], cost)
 
         # Creates the problem variable to contain the problem data
         problem = LpProblem("Teaching_Assignment_Problem", LpMaximize)
