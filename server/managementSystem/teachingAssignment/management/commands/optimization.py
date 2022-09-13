@@ -48,7 +48,7 @@ class Command(BaseCommand):
                                for subject in subjects for professor in professors]
 
         # Set teachingAssignments to take either 1 or 0 values (professor taking the class)
-        ta = LpVariable.dicts("TeachingAssignment",
+        ta = LpVariable.dicts("ta",
                               (subjects, professors), 0, 1, LpInteger)
 
         # Define Objective Function
@@ -75,8 +75,20 @@ class Command(BaseCommand):
         # The problem is solved using PuLP's choice of Solver
         problem.solve()
 
-        result = [v for v in problem.variables() if v.varValue == 1]
-        print(result)
+        results = [v.name for v in problem.variables() if v.varValue == 1]
+        print(results)
 
         # The optimised objective function value is printed to the screen
         print("Value of Objective Function = ", value(problem.objective))
+
+
+    def get_result_ids(self, result: list) -> list:
+        '''
+        Return a list of tuples '(subject_id, professor_id)' from the result list
+        '''
+        ids = []
+        for ta in result:
+            ta = [int(s) for s in ta.split('_') if s.isdigit()]
+            ids.append((ta[0], ta[1]))
+
+        return ids
