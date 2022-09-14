@@ -75,5 +75,6 @@ router.register(r'thesis-committee', views.ThesisCommitteeViewSet,
 urlpatterns = [
     path('auth/', obtain_auth_token),
     path('csv-download/', views.CSVDownloadView.as_view()),
+    path('generate-solution-ta/', views.GenerateSolutionTAView.as_view()),
     path('', include(router.urls)),
 ]

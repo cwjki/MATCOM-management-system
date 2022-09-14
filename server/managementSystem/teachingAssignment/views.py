@@ -1,4 +1,7 @@
+import imp
 import os
+from unittest import result
+from urllib import response
 from django.http import HttpResponse, HttpResponseNotFound
 from rest_framework import permissions, viewsets, authentication, generics, mixins
 from rest_framework import filters, status
@@ -12,9 +15,11 @@ from .models import Career, CarmenTable, Faculty, Student, StudyPlan, SubjectDes
 from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer, MyTokenObtainPairSerializer
 from .serializers_csv import CareerSerializerCSV
 from .permissions import IsOwnerOrReadOnly
-
+from .optimization.optimization import OptimizationModel
 
 # JSON Web Token Authentication
+
+
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
@@ -50,18 +55,18 @@ class CSVDownloadView(mixins.ListModelMixin, generics.GenericAPIView):
         return response
 
 
-# class SnippetViewSet(viewsets.ModelViewSet):
-#     """
-#     This viewset automatically provides `list`, `create`, `retrieve`,
-#     `update` and `destroy` actions for snippets.
-#     """
-#     queryset = Snippet.objects.all()
-#     serializer_class = SnippetSerializer
-#     permission_classes = [
-#         permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+class GenerateSolutionTAView(mixins.ListModelMixin, generics.GenericAPIView):
+    queryset = []
 
-#     def perform_create(self, serializer):
-#         serializer.save(owner=self.request.user)
+    def get(self, request):
+        subject_qs = SubjectDescription.objects.all()
+        professor_qs = Professor.objects.all()
+
+        model = OptimizationModel(subject_qs, professor_qs)
+        results = model.solve()
+
+        response = Response(data=results)
+        return response
 
 
 class CareerViewSet(viewsets.ModelViewSet):
