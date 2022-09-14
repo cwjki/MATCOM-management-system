@@ -1,5 +1,3 @@
-
-
 import random
 from pulp import *
 
@@ -26,10 +24,10 @@ class OptimizationModel():
         '''
         Return a list of tuples '(subject_id, professor_id)' from the result list
         '''
-        ids = []
+        ids = {}
         for ta in results:
             ta = [int(s) for s in ta.split('_') if s.isdigit()]
-            ids.append((ta[0], ta[1]))
+            ids[ta[0]] = ta[1]
         return ids
 
     def compute_costs(self):
@@ -86,4 +84,5 @@ class OptimizationModel():
 
         results = [v.name for v in problem.variables() if v.varValue == 1]
         results = self.get_result_ids(results)
-        return results, value(problem.objective)
+        results['score'] = value(problem.objective)
+        return results
