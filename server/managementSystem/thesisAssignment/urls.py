@@ -17,5 +17,5 @@ router.register(r'thesis-committee', views.ThesisCommitteeViewSet,
 
 # The API URLs are now determined automatically by the router
 urlpatterns = [
-    path('thesis/', include(router.urls)),
+    path('', include(router.urls)),
 ]
