@@ -35,12 +35,11 @@ export const RESOURCES = {
     classTypes: '/teaching-assignment/class-types/',
     timePeriods: '/teaching-assignment/time-periods/',
     teachingGroups: '/teaching-assignment/teaching-groups/',
-    teachingAssignment: '/teaching-assignment/teaching-assignments/',
-    teachingPlanning: '/teaching-assignmentteaching-planning',
+    teachingPlanning: '/teaching-assignment/teaching-planning',
 
     places: '/thesis-assignment/places/',
     thesis: '/thesis-assignment/thesis/',
-    thesisCommittee: '/thesis-assignment/thesis-committee/',
+    thesisCommittees: '/thesis-assignment/thesis-committees/',
 };
 
 export const careerService = CrudServiceFactory<CareerModel>(RESOURCES.careers);
@@ -105,5 +104,5 @@ export const placeService = CrudServiceFactory<PlaceModel>(RESOURCES.places);
 export const thesisService = CrudServiceFactory<ThesisModel>(RESOURCES.thesis);
 
 export const thesisCommitteeService = CrudServiceFactory<ThesisCommitteeModel>(
-    RESOURCES.thesisCommittee
+    RESOURCES.thesisCommittees
 );

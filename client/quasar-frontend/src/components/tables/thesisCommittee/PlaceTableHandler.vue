@@ -15,8 +15,8 @@ export default defineComponent({
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Lugares',
-            singularLabel: 'Lugar',
+            name: 'Locales',
+            singularLabel: 'Local',
             service: placeService,
             fields: [
                 {

@@ -242,10 +242,10 @@ const teachingAssignmentLinks2 = [
 
 const thesisCommitteeLinks = [
     {
-        title: 'Estudiantes',
+        title: 'Locales',
         caption: 'quasar.dev',
-        icon: 'group',
-        link: 'students',
+        icon: 'pin_drop',
+        link: 'places',
     },
     {
         title: 'Tesis',
