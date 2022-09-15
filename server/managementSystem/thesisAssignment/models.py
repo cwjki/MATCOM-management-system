@@ -1,9 +1,15 @@
-from pyexpat import model
 from django.db import models
 from teachingAssignment.models import Professor
 
 
 class Place(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return str(self.name)
+
+
+class Keyword(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self) -> str:
@@ -19,6 +25,7 @@ class Thesis(models.Model):
         Professor, related_name='cotutor', on_delete=models.CASCADE)
     cotutors = models.ManyToManyField(
         Professor, related_name='tutors')
+    keywords = models.ManyToManyField(Keyword, related_name='keywords')
 
     def __str__(self) -> str:
         return str(self.title + ' ' + str(self.student))

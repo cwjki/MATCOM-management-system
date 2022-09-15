@@ -8,6 +8,9 @@ router = DefaultRouter()
 router.register(r'places', views.PlaceViewSet,
                 basename="places")
 
+router.register(r'keywords', views.KeywordViewSet,
+                basename="keywords")
+
 router.register(r'thesis', views.ThesisViewSet,
                 basename="thesis")
 

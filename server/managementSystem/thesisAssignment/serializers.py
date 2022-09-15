@@ -1,8 +1,9 @@
+from ast import keyword
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from teachingAssignment.serializers import ProfessorSerializer
-from .models import Place, Thesis, ThesisCommittee
+from .models import Keyword, Place, Thesis, ThesisCommittee
 
 
 class PlaceSerializer(ModelSerializer):
@@ -11,11 +12,18 @@ class PlaceSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class KeywordSerializer(ModelSerializer):
+    class Meta:
+        model = Keyword
+        fields = '__all__'
+
+
 class ThesisSerializer(ModelSerializer):
     tutor_id = serializers.IntegerField(required=True, write_only=True)
     tutor = serializers.SerializerMethodField()
 
     cotutors = serializers.SerializerMethodField()
+    keywords = serializers.SerializerMethodField()
 
     def get_tutor(self, obj) -> dict:
         if obj.tutor:
@@ -34,6 +42,17 @@ class ThesisSerializer(ModelSerializer):
                     "id": tutor.id,
                     "name": tutor.name,
                     "last_name": tutor.last_name,
+                })
+            return data
+        return None
+
+    def get_keywords(self, obj) -> dict:
+        if obj.keywords:
+            data = []
+            for keyword in obj.keywords.all():
+                data.append({
+                    "id": keyword.id,
+                    "name": keyword.name,
                 })
             return data
         return None
