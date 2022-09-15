@@ -7,7 +7,6 @@ import {
     thesisCommitteeService,
     thesisService,
     professorService,
-    studentService,
 } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';

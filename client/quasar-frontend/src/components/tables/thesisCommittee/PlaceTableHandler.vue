@@ -3,21 +3,21 @@
 </template>
 
 <script lang="ts">
-import { studentService } from 'src/services';
+import { placeService } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
 
 export default defineComponent({
     components: { GenericCrudDataTable },
-    name: 'studentHandler',
+    name: 'placeHandler',
     props: {},
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Estudiantes',
-            singularLabel: 'Estudiante',
-            service: studentService,
+            name: 'Lugares',
+            singularLabel: 'Lugar',
+            service: placeService,
             fields: [
                 {
                     name: 'name',
@@ -26,17 +26,6 @@ export default defineComponent({
                     form: {
                         responsiveOptions: {
                             md: 12,
-                        },
-                    },
-                    rules: ['required'],
-                },
-                {
-                    name: 'last_name',
-                    label: 'Apellidos',
-                    type: 'text',
-                    form: {
-                        responsiveOptions: {
-                            md: 4,
                         },
                     },
                     rules: ['required'],

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { thesisService, professorService, studentService } from 'src/services';
+import { thesisService, professorService } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
@@ -33,18 +33,11 @@ export default defineComponent({
                 {
                     name: 'student',
                     label: 'Estudiante',
-                    column: {
-                        transform(row) {
-                            return `${
-                                row.student.name + ' ' + row.student.last_name
-                            }`;
+                    type: 'text',
+                    form: {
+                        responsiveOptions: {
+                            md: 12,
                         },
-                    },
-                    type: 'select',
-                    selectOptions: {
-                        list: studentService.list,
-                        value: 'id',
-                        label: 'name',
                     },
                     rules: ['required'],
                 },

@@ -13,7 +13,7 @@ import { TeachingAssignmentModel } from 'src/models/teachingAssignments/teaching
 import { TeachingPlanningModel } from 'src/models/teachingAssignments/teachingPlanning.model';
 import { TeachingCategoryModel } from 'src/models/teachingAssignments/teachingCategory.model';
 import { TeachingGroupModel } from 'src/models/teachingAssignments/teachingGroup.model';
-import { StudentModel } from 'src/models/thesisCommittee/students.model';
+import { PlaceModel } from 'src/models/thesisCommittee/place.model';
 import { ThesisModel } from 'src/models/thesisCommittee/thesis.model';
 import { ThesisCommitteeModel } from 'src/models/thesisCommittee/thesisCommittee.model';
 import { CrudServiceFactory } from './api.service';
@@ -38,7 +38,7 @@ export const RESOURCES = {
     teachingAssignment: '/teaching-assignment/teaching-assignments/',
     teachingPlanning: '/teaching-assignmentteaching-planning',
 
-    students: '/thesis-assignment/students/',
+    places: '/thesis-assignment/places/',
     thesis: '/thesis-assignment/thesis/',
     thesisCommittee: '/thesis-assignment/thesis-committee/',
 };
@@ -100,9 +100,7 @@ export const teachingGroupService = CrudServiceFactory<TeachingGroupModel>(
     RESOURCES.teachingGroups
 );
 
-export const studentService = CrudServiceFactory<StudentModel>(
-    RESOURCES.students
-);
+export const placeService = CrudServiceFactory<PlaceModel>(RESOURCES.places);
 
 export const thesisService = CrudServiceFactory<ThesisModel>(RESOURCES.thesis);
 
