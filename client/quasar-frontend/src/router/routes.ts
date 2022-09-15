@@ -122,6 +122,12 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('src/pages/thesisCommittee/Place.vue'),
             },
             {
+                path: 'keywords',
+                name: 'keywords',
+                component: () =>
+                    import('src/pages/thesisCommittee/Keyword.vue'),
+            },
+            {
                 path: 'thesis',
                 name: 'thesis',
                 component: () => import('src/pages/thesisCommittee/Thesis.vue'),

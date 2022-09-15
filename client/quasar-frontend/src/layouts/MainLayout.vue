@@ -248,15 +248,21 @@ const thesisCommitteeLinks = [
         link: 'places',
     },
     {
+        title: 'Palabras Claves',
+        caption: 'quasar.dev',
+        icon: 'manage_search',
+        link: 'keywords',
+    },
+    {
         title: 'Tesis',
         caption: 'quasar.dev',
-        icon: 'workspace_premium',
+        icon: 'description',
         link: 'thesis',
     },
     {
         title: 'Tribunal de Tesis',
         caption: 'quasar.dev',
-        icon: 'gavel',
+        icon: 'groups',
         link: 'thesis-committee',
     },
 ];

@@ -14,6 +14,7 @@ import { TeachingPlanningModel } from 'src/models/teachingAssignments/teachingPl
 import { TeachingCategoryModel } from 'src/models/teachingAssignments/teachingCategory.model';
 import { TeachingGroupModel } from 'src/models/teachingAssignments/teachingGroup.model';
 import { PlaceModel } from 'src/models/thesisCommittee/place.model';
+import { KeywordModel } from 'src/models/thesisCommittee/keyword.model';
 import { ThesisModel } from 'src/models/thesisCommittee/thesis.model';
 import { ThesisCommitteeModel } from 'src/models/thesisCommittee/thesisCommittee.model';
 import { CrudServiceFactory } from './api.service';
@@ -38,6 +39,7 @@ export const RESOURCES = {
     teachingPlanning: '/teaching-assignment/teaching-planning',
 
     places: '/thesis-assignment/places/',
+    keywords: '/thesis-assignment/keywords/',
     thesis: '/thesis-assignment/thesis/',
     thesisCommittees: '/thesis-assignment/thesis-committees/',
 };
@@ -100,6 +102,10 @@ export const teachingGroupService = CrudServiceFactory<TeachingGroupModel>(
 );
 
 export const placeService = CrudServiceFactory<PlaceModel>(RESOURCES.places);
+
+export const keywordService = CrudServiceFactory<KeywordModel>(
+    RESOURCES.keywords
+);
 
 export const thesisService = CrudServiceFactory<ThesisModel>(RESOURCES.thesis);
 
