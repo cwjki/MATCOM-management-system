@@ -15,8 +15,8 @@ class Thesis(models.Model):
     student = models.CharField(max_length=200)
 
     # Relationships
-    tutor = models.ForeignKey(
-        Professor, related_name='tutor', on_delete=models.CASCADE)
+    tutors = models.ManyToManyField(
+        Professor, related_name='tutors')
     cotutor = models.ForeignKey(
         Professor, related_name='cotutor', on_delete=models.CASCADE)
 

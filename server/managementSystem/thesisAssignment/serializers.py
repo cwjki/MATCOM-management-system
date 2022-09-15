@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
+
+from teachingAssignment.serializers import ProfessorSerializer
 from .models import Place, Thesis, ThesisCommittee
 
 
@@ -10,19 +12,21 @@ class PlaceSerializer(ModelSerializer):
 
 
 class ThesisSerializer(ModelSerializer):
-    tutor_id = serializers.IntegerField(required=True, write_only=True)
-    tutor = serializers.SerializerMethodField()
+    tutors = serializers.SerializerMethodField()
 
     cotutor_id = serializers.IntegerField(required=True, write_only=True)
     cotutor = serializers.SerializerMethodField()
 
-    def get_tutor(self, obj) -> dict:
-        if obj.tutor:
-            return {
-                "id": obj.tutor.id,
-                "name": obj.tutor.name,
-                "last_name": obj.tutor.last_name,
-            }
+    def get_tutors(self, obj) -> dict:
+        if obj.tutors:
+            data = []
+            for tutor in obj.tutors.all():
+                data.append({
+                    "id": tutor.id,
+                    "name": tutor.name,
+                    "last_name": tutor.last_name,
+                })
+            return data
         return None
 
     def get_cotutor(self, obj) -> dict:
