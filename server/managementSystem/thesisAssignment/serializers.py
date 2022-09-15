@@ -52,6 +52,9 @@ class ThesisCommitteeSerializer(ModelSerializer):
     president_id = serializers.IntegerField(required=True, write_only=True)
     president = serializers.SerializerMethodField()
 
+    place_id = serializers.IntegerField(required=True, write_only=True)
+    place = serializers.SerializerMethodField()
+
     def get_thesis(self, obj) -> dict:
         if obj.thesis:
             return {
@@ -59,7 +62,7 @@ class ThesisCommitteeSerializer(ModelSerializer):
                 "title": obj.thesis.title,
                 "student": obj.thesis.student,
                 "tutor": obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name,
-                "cotutor": obj.thesis.cotutor.name + ' ' + obj.thesis.cotutor.last_name,
+                "cotutor": obj.thesis.cotutor.name + ' ' + obj.thesis.cotutor.last_name
             }
         return None
 
@@ -68,7 +71,7 @@ class ThesisCommitteeSerializer(ModelSerializer):
             return {
                 "id": obj.opponent.id,
                 "name": obj.opponent.name,
-                "last_name": obj.opponent.last_name,
+                "last_name": obj.opponent.last_name
             }
         return None
 
@@ -77,7 +80,7 @@ class ThesisCommitteeSerializer(ModelSerializer):
             return {
                 "id": obj.secretary.id,
                 "name": obj.secretary.name,
-                "last_name": obj.secretary.last_name,
+                "last_name": obj.secretary.last_name
             }
         return None
 
@@ -86,7 +89,15 @@ class ThesisCommitteeSerializer(ModelSerializer):
             return {
                 "id": obj.president.id,
                 "name": obj.president.name,
-                "last_name": obj.president.last_name,
+                "last_name": obj.president.last_name
+            }
+        return None
+
+    def get_place(self, obj) -> dict:
+        if obj.place:
+            return {
+                "id": obj.place.id,
+                "name": obj.place.name
             }
         return None
 

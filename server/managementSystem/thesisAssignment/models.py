@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from teachingAssignment.models import Professor
 
@@ -25,7 +26,7 @@ class Thesis(models.Model):
 
 class ThesisCommittee(models.Model):
     date = models.DateField(null=True, blank=True)
-    time = models.DateTimeField(null=True, blank=True)
+    time = models.TimeField(null=True, blank=True)
 
     # Relationships
     place = models.ForeignKey(Place, on_delete=models.DO_NOTHING)
