@@ -38,5 +38,4 @@ class ThesisCommitteeViewSet(viewsets.ModelViewSet):
     queryset = ThesisCommittee.objects.all()
     serializer_class = ThesisCommitteeSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['student__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]

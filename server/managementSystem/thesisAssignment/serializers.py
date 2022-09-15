@@ -68,7 +68,7 @@ class ThesisCommitteeSerializer(ModelSerializer):
             return {
                 "id": obj.opponent.id,
                 "name": obj.opponent.name,
-                "last_name": obj.secretary.last_name,
+                "last_name": obj.opponent.last_name,
             }
         return None
 
