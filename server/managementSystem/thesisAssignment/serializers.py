@@ -12,15 +12,24 @@ class PlaceSerializer(ModelSerializer):
 
 
 class ThesisSerializer(ModelSerializer):
-    tutors = serializers.SerializerMethodField()
+    tutor_id = serializers.IntegerField(required=True, write_only=True)
+    tutor = serializers.SerializerMethodField()
 
-    cotutor_id = serializers.IntegerField(required=True, write_only=True)
-    cotutor = serializers.SerializerMethodField()
+    cotutors = serializers.SerializerMethodField()
 
-    def get_tutors(self, obj) -> dict:
-        if obj.tutors:
+    def get_tutor(self, obj) -> dict:
+        if obj.tutor:
+            return {
+                "id": obj.tutor.id,
+                "name": obj.tutor.name,
+                "last_name": obj.tutor.last_name,
+            }
+        return None
+
+    def get_cotutors(self, obj) -> dict:
+        if obj.cotutors:
             data = []
-            for tutor in obj.tutors.all():
+            for tutor in obj.cotutors.all():
                 data.append({
                     "id": tutor.id,
                     "name": tutor.name,
@@ -29,23 +38,14 @@ class ThesisSerializer(ModelSerializer):
             return data
         return None
 
-    def get_cotutor(self, obj) -> dict:
-        if obj.cotutor:
-            return {
-                "id": obj.cotutor.id,
-                "name": obj.cotutor.name,
-                "last_name": obj.cotutor.last_name,
-            }
-        return None
-
     class Meta:
         model = Thesis
         fields = '__all__'
 
 
 class ThesisCommitteeSerializer(ModelSerializer):
-    thesis_id = serializers.IntegerField(required=True, write_only=True)
-    thesis = serializers.SerializerMethodField()
+    # thesis_id = serializers.IntegerField(required=True, write_only=True)
+    # thesis = serializers.SerializerMethodField()
 
     opponent_id = serializers.IntegerField(required=True, write_only=True)
     opponent = serializers.SerializerMethodField()
@@ -59,16 +59,18 @@ class ThesisCommitteeSerializer(ModelSerializer):
     place_id = serializers.IntegerField(required=True, write_only=True)
     place = serializers.SerializerMethodField()
 
-    def get_thesis(self, obj) -> dict:
-        if obj.thesis:
-            return {
-                "id": obj.thesis.id,
-                "title": obj.thesis.title,
-                "student": obj.thesis.student,
-                "tutor": obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name,
-                "cotutor": obj.thesis.cotutor.name + ' ' + obj.thesis.cotutor.last_name
-            }
-        return None
+    thesis = ThesisSerializer()
+
+    # def get_thesis(self, obj) -> dict:
+    #     if obj.thesis:
+    #         return {
+    #             "id": obj.thesis.id,
+    #             "title": obj.thesis.title,
+    #             "student": obj.thesis.student,
+    #             "tutor": obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name,
+    #             "cotutors": obj.thesis.cotutors
+    #         }
+    #     return None
 
     def get_opponent(self, obj) -> dict:
         if obj.opponent:

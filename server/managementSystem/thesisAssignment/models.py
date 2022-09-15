@@ -15,10 +15,10 @@ class Thesis(models.Model):
     student = models.CharField(max_length=200)
 
     # Relationships
-    tutors = models.ManyToManyField(
-        Professor, related_name='tutors')
-    cotutor = models.ForeignKey(
+    tutor = models.ForeignKey(
         Professor, related_name='cotutor', on_delete=models.CASCADE)
+    cotutors = models.ManyToManyField(
+        Professor, related_name='tutors')
 
     def __str__(self) -> str:
         return str(self.title + ' ' + str(self.student))
