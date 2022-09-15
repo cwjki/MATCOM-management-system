@@ -5,14 +5,14 @@ from thesisAssignment import views
 # Create a router and register our viewsets with it
 router = DefaultRouter()
 
-router.register(r'students', views.StudentViewSet,
-                basename="students")
+router.register(r'places', views.PlaceViewSet,
+                basename="places")
 
 router.register(r'thesis', views.ThesisViewSet,
                 basename="thesis")
 
-router.register(r'thesis-committee', views.ThesisCommitteeViewSet,
-                basename="thesis-committe")
+router.register(r'thesis-committees', views.ThesisCommitteeViewSet,
+                basename="thesis-committes")
 
 
 # The API URLs are now determined automatically by the router

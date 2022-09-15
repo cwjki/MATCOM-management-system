@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from .models import Student, Thesis, ThesisCommittee
+from .models import Place, Thesis, ThesisCommittee
 
 
-class StudentSerializer(ModelSerializer):
+class PlaceSerializer(ModelSerializer):
     class Meta:
-        model = Student
+        model = Place
         fields = '__all__'
 
 
@@ -15,9 +15,6 @@ class ThesisSerializer(ModelSerializer):
 
     cotutor_id = serializers.IntegerField(required=True, write_only=True)
     cotutor = serializers.SerializerMethodField()
-
-    student_id = serializers.IntegerField(required=True, write_only=True)
-    student = serializers.SerializerMethodField()
 
     def get_tutor(self, obj) -> dict:
         if obj.tutor:
@@ -37,15 +34,6 @@ class ThesisSerializer(ModelSerializer):
             }
         return None
 
-    def get_student(self, obj) -> dict:
-        if obj.student:
-            return {
-                "id": obj.student.id,
-                "name": obj.student.name,
-                "last_name": obj.student.last_name,
-            }
-        return None
-
     class Meta:
         model = Thesis
         fields = '__all__'
@@ -61,12 +49,15 @@ class ThesisCommitteeSerializer(ModelSerializer):
     secretary_id = serializers.IntegerField(required=True, write_only=True)
     secretary = serializers.SerializerMethodField()
 
+    president_id = serializers.IntegerField(required=True, write_only=True)
+    president = serializers.SerializerMethodField()
+
     def get_thesis(self, obj) -> dict:
         if obj.thesis:
             return {
                 "id": obj.thesis.id,
                 "title": obj.thesis.title,
-                "student": obj.thesis.student.name + ' ' + obj.thesis.student.last_name,
+                "student": obj.thesis.student,
                 "tutor": obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name,
                 "cotutor": obj.thesis.cotutor.name + ' ' + obj.thesis.cotutor.last_name,
             }
@@ -87,6 +78,15 @@ class ThesisCommitteeSerializer(ModelSerializer):
                 "id": obj.secretary.id,
                 "name": obj.secretary.name,
                 "last_name": obj.secretary.last_name,
+            }
+        return None
+
+    def get_president(self, obj) -> dict:
+        if obj.president:
+            return {
+                "id": obj.president.id,
+                "name": obj.president.name,
+                "last_name": obj.president.last_name,
             }
         return None
 

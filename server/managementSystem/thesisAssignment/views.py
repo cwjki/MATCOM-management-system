@@ -2,17 +2,17 @@ from rest_framework import viewsets, authentication, generics, mixins
 from rest_framework import filters, status
 
 
-from .models import Student, Thesis, ThesisCommittee
-from .serializers import StudentSerializer, ThesisSerializer, ThesisCommitteeSerializer
+from .models import Place, Thesis, ThesisCommittee
+from .serializers import PlaceSerializer, ThesisSerializer, ThesisCommitteeSerializer
 
 
-class StudentViewSet(viewsets.ModelViewSet):
+class PlaceViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions for students table.
+    `update` and `destroy` actions for place table.
     """
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
+    queryset = Place.objects.all()
+    serializer_class = PlaceSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
