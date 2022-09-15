@@ -60,13 +60,16 @@ export default defineComponent({
                     rules: ['required'],
                 },
                 {
-                    name: 'cotutor',
-                    label: 'Cotutor',
+                    name: 'cotutors',
+                    label: 'Cotutor(es)',
                     column: {
                         transform(row) {
-                            return `${
-                                row.cotutor.name + ' ' + row.cotutor.last_name
-                            }`;
+                            var result = '';
+                            row.cotutors.forEach((tutor: any) => {
+                                result +=
+                                    tutor.name + ' ' + tutor.last_name + ', ';
+                            });
+                            return `${result}`;
                         },
                     },
                     type: 'select',

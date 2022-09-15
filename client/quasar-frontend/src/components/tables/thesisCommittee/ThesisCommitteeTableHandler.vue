@@ -80,9 +80,17 @@ export default defineComponent({
                     label: 'Tutor(es)',
                     column: {
                         transform(row) {
-                            return `${
-                                row.thesis.tutor + ',' + row.thesis.cotutor
-                            }`;
+                            var result =
+                                row.thesis.tutor.name +
+                                ' ' +
+                                row.thesis.tutor.last_name +
+                                ', ';
+
+                            row.thesis.cotutors.forEach((tutor: any) => {
+                                result +=
+                                    tutor.name + ' ' + tutor.last_name + ', ';
+                            });
+                            return `${result}`;
                         },
                     },
                 },
