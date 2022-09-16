@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { thesisService, professorService } from 'src/services';
+import { thesisService, professorService, keywordService } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
@@ -77,6 +77,28 @@ export default defineComponent({
                         list: professorService.list,
                         value: 'id',
                         label: 'name',
+                        multiple: true,
+                    },
+                    rules: ['required'],
+                },
+                {
+                    name: 'keywords',
+                    label: 'Palabras Claves',
+                    column: {
+                        transform(row) {
+                            var result = '';
+                            row.keywords.forEach((keyword: any) => {
+                                result += keyword.name + ', ';
+                            });
+                            return `${result}`;
+                        },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: keywordService.list,
+                        value: 'id',
+                        label: 'name',
+                        multiple: true,
                     },
                     rules: ['required'],
                 },
