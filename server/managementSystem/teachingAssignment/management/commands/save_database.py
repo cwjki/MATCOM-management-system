@@ -1,4 +1,3 @@
-from ast import keyword
 import csv
 import os
 from django.core.management.base import BaseCommand, CommandParser
@@ -6,7 +5,7 @@ from django.core.management.base import BaseCommand, CommandParser
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from ...serializers_csv import CareerSerializerCSV, CarmenTableSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, SubjectDescriptionSerializerCSV, SubjectSerializerCSV, TeachingAssignmentSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
 from thesisAssignment.models import Place, Keyword, Thesis, ThesisCommittee
-from thesisAssignment.serializers_csv import PlaceSerializerCSV, KeywordSerializerCSV
+from thesisAssignment.serializers_csv import PlaceSerializerCSV, KeywordSerializerCSV, ThesisCommitteeSerializerCSV, ThesisSerializerCSV
 
 
 class Command(BaseCommand):
@@ -154,6 +153,20 @@ class Command(BaseCommand):
             data = [KeywordSerializerCSV(
                 keyword).data for keyword in queryset]
 
+        elif model_name == 'Thesis':
+            queryset = Thesis.objects.all()
+            fieldnames = ['title', 'student',
+                          'tutor', 'cotutors', 'keywords']
+            data = [ThesisSerializerCSV(
+                thesis).data for thesis in queryset]
+
+        elif model_name == 'ThesisCommittee':
+            queryset = ThesisCommittee.objects.all()
+            fieldnames = ['date', 'time', 'thesis', 'place',
+                          'opponent', 'secretary', 'president']
+            data = [ThesisCommitteeSerializerCSV(
+                thesis_committee).data for thesis_committee in queryset]
+
         return fieldnames, data
 
     def get_file_dir(self, model_name: str):
@@ -188,6 +201,10 @@ class Command(BaseCommand):
             CURRENT_PATH, '../../excels/places.csv')
         KEYWORD_DIR = os.path.join(
             CURRENT_PATH, '../../excels/keywords.csv')
+        THESIS_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/thesis.csv')
+        THESIS_COMMITTEE_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/thesis_committee.csv')
 
         if model_name == 'Careers':
             file_dir = CAREER_DIR
@@ -223,6 +240,10 @@ class Command(BaseCommand):
             file_dir = PLACE_DIR
         elif model_name == 'Keywords':
             file_dir = KEYWORD_DIR
+        elif model_name == 'Thesis':
+            file_dir = THESIS_DIR
+        elif model_name == 'ThesisCommittee':
+            file_dir = THESIS_COMMITTEE_DIR
         else:
             file_dir = 'error'
         return file_dir

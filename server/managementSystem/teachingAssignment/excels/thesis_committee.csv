@@ -1,0 +1,2 @@
+date,time,thesis,place,opponent,secretary,president
+2022-09-16,22:35:39,"OrderedDict([('tutor', {'name': 'Marta Lourdes', 'last_name': 'Baguer Díaz-Romañach'}), ('cotutors', [{'name': 'Angela', 'last_name': 'León Mecías'}, {'name': 'Alejandro', 'last_name': 'Mesejo Chiong'}]), ('keywords', [{'name': 'machine learning'}]), ('title', 'Tesis 1'), ('student', 'Estudiante 1')])",{'name': 'Aula posgrado'},"{'name': 'Camila', 'last_name': 'Pérez Mosquera'}","{'name': 'Yanet', 'last_name': 'García'}","{'name': 'Vivian', 'last_name': 'Sistaschs'}"
