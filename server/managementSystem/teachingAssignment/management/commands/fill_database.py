@@ -3,6 +3,7 @@ import os
 from django.core.management.base import BaseCommand, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
+from thesisAssignment.models import Place, Keyword, Thesis, ThesisCommittee
 
 
 class Command(BaseCommand):
@@ -215,6 +216,14 @@ class Command(BaseCommand):
                 )
                 teaching_assignment.save()
 
+        elif model_name == 'Places':
+            for obj in data:
+                name = obj['name']
+                place = Place(name=name)
+                place.save()
+        
+        
+
     def get_model_data(self, model_name: str):
         data: list[dict] = []
         file_dir = self.get_file_dir(model_name)
@@ -264,6 +273,8 @@ class Command(BaseCommand):
             CURRENT_PATH, '../../excels/subject_descriptions.csv')
         TEACHING_ASSIGNMENT_DIR = os.path.join(
             CURRENT_PATH, '../../excels/teaching_assignments.csv')
+        PLACE_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/places.csv')
 
         if model_name == 'Careers':
             file_dir = CAREER_DIR
@@ -295,6 +306,8 @@ class Command(BaseCommand):
             file_dir = SUBJECT_DESCRIPTION_DIR
         elif model_name == 'TeachingAssignments':
             file_dir = TEACHING_ASSIGNMENT_DIR
+        elif model_name == 'Places':
+            file_dir = PLACE_DIR
 
         else:
             file_dir = 'error'
