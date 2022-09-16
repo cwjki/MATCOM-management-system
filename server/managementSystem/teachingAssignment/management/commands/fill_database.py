@@ -221,8 +221,12 @@ class Command(BaseCommand):
                 name = obj['name']
                 place = Place(name=name)
                 place.save()
-        
-        
+
+        elif model_name == 'Keywords':
+            for obj in data:
+                name = obj['name']
+                keyword = Keyword(name=name)
+                keyword.save()
 
     def get_model_data(self, model_name: str):
         data: list[dict] = []
@@ -275,6 +279,12 @@ class Command(BaseCommand):
             CURRENT_PATH, '../../excels/teaching_assignments.csv')
         PLACE_DIR = os.path.join(
             CURRENT_PATH, '../../excels/places.csv')
+        KEYWORD_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/keywords.csv')
+        THESIS_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/thesis.csv')
+        THESIS_COMMITTEE_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/thesis_committee.csv')
 
         if model_name == 'Careers':
             file_dir = CAREER_DIR
@@ -308,6 +318,12 @@ class Command(BaseCommand):
             file_dir = TEACHING_ASSIGNMENT_DIR
         elif model_name == 'Places':
             file_dir = PLACE_DIR
+        elif model_name == 'Keywords':
+            file_dir = KEYWORD_DIR
+        elif model_name == 'Thesis':
+            file_dir = THESIS_DIR
+        elif model_name == 'ThesisCommittee':
+            file_dir = THESIS_COMMITTEE_DIR
 
         else:
             file_dir = 'error'
