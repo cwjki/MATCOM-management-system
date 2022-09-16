@@ -1,7 +1,4 @@
-import imp
 import os
-from unittest import result
-from urllib import response
 from django.http import HttpResponse, HttpResponseNotFound
 from rest_framework import permissions, viewsets, authentication, generics, mixins
 from rest_framework import filters, status
@@ -11,8 +8,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .models import Career, CarmenTable, Faculty, Student, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, Thesis, ThesisCommittee, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester, TeachingPlanning
-from .serializers import CarmenTableSerializer, FacultySerializer, StudentSerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, ThesisCommitteeSerializer, ThesisSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer, MyTokenObtainPairSerializer
+from .models import Career, CarmenTable, Faculty, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester, TeachingPlanning
+from .serializers import CarmenTableSerializer, FacultySerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer, MyTokenObtainPairSerializer
 from .serializers_csv import CareerSerializerCSV
 from .permissions import IsOwnerOrReadOnly
 from .optimization.optimization import OptimizationModel
@@ -290,37 +287,37 @@ class CarmenTableViewSet(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class StudentViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions for students table.
-    """
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['name']
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+# class StudentViewSet(viewsets.ModelViewSet):
+#     """
+#     This viewset automatically provides `list`, `create`, `retrieve`,
+#     `update` and `destroy` actions for students table.
+#     """
+#     queryset = Student.objects.all()
+#     serializer_class = StudentSerializer
+#     filter_backends = [filters.SearchFilter]
+#     search_fields = ['name']
+#     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class ThesisViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions for thesis table.
-    """
-    queryset = Thesis.objects.all()
-    serializer_class = ThesisSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['tutor__name']
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+# class ThesisViewSet(viewsets.ModelViewSet):
+#     """
+#     This viewset automatically provides `list`, `create`, `retrieve`,
+#     `update` and `destroy` actions for thesis table.
+#     """
+#     queryset = Thesis.objects.all()
+#     serializer_class = ThesisSerializer
+#     filter_backends = [filters.SearchFilter]
+#     search_fields = ['tutor__name']
+#     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class ThesisCommitteeViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions for thesis committee table.
-    """
-    queryset = ThesisCommittee.objects.all()
-    serializer_class = ThesisCommitteeSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['student__name']
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+# class ThesisCommitteeViewSet(viewsets.ModelViewSet):
+#     """
+#     This viewset automatically provides `list`, `create`, `retrieve`,
+#     `update` and `destroy` actions for thesis committee table.
+#     """
+#     queryset = ThesisCommittee.objects.all()
+#     serializer_class = ThesisCommitteeSerializer
+#     filter_backends = [filters.SearchFilter]
+#     search_fields = ['student__name']
+#     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]

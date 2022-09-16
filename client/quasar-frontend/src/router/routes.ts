@@ -117,10 +117,15 @@ const routes: RouteRecordRaw[] = [
                     ),
             },
             {
-                path: 'students',
-                name: 'students',
+                path: 'places',
+                name: 'places',
+                component: () => import('src/pages/thesisCommittee/Place.vue'),
+            },
+            {
+                path: 'keywords',
+                name: 'keywords',
                 component: () =>
-                    import('src/pages/thesisCommittee/Students.vue'),
+                    import('src/pages/thesisCommittee/Keyword.vue'),
             },
             {
                 path: 'thesis',

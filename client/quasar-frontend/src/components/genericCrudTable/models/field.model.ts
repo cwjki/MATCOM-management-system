@@ -25,7 +25,7 @@ export interface FieldBasic {
     label?: string;
 
     // text by default
-    type?: 'text' | 'select' | 'date';
+    type?: 'text' | 'select' | 'date' | 'time';
 
     // false if dont show in the table
     column?: FieldColumn | false;

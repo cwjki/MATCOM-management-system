@@ -7,7 +7,7 @@ import {
     thesisCommitteeService,
     thesisService,
     professorService,
-    studentService,
+    placeService,
 } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
@@ -24,6 +24,32 @@ export default defineComponent({
             singularLabel: 'Tribunal',
             service: thesisCommitteeService,
             fields: [
+                {
+                    name: 'date',
+                    label: 'Fecha',
+                    type: 'date',
+                },
+                {
+                    name: 'time',
+                    label: 'Hora',
+                    type: 'time',
+                },
+                {
+                    name: 'place',
+                    label: 'Lugar',
+                    column: {
+                        transform(row) {
+                            return `${row.place.name}`;
+                        },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: placeService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
+                    rules: ['required'],
+                },
                 {
                     name: 'thesis',
                     label: 'Título',
@@ -51,29 +77,32 @@ export default defineComponent({
                 },
                 {
                     name: 'tutor',
-                    label: 'Tutor',
+                    label: 'Tutor(es)',
                     column: {
                         transform(row) {
-                            return `${row.thesis.tutor}`;
+                            var result =
+                                row.thesis.tutor.name +
+                                ' ' +
+                                row.thesis.tutor.last_name +
+                                ', ';
+
+                            row.thesis.cotutors.forEach((tutor: any) => {
+                                result +=
+                                    tutor.name + ' ' + tutor.last_name + ', ';
+                            });
+                            return `${result}`;
                         },
                     },
                 },
                 {
-                    name: 'cotutor',
-                    label: 'Cotutor',
-                    column: {
-                        transform(row) {
-                            return `${row.thesis.cotutor}`;
-                        },
-                    },
-                },
-                {
-                    name: 'opponent',
-                    label: 'Oponente',
+                    name: 'president',
+                    label: 'Presidente',
                     column: {
                         transform(row) {
                             return `${
-                                row.opponent.name + ' ' + row.opponent.last_name
+                                row.president.name +
+                                ' ' +
+                                row.president.last_name
                             }`;
                         },
                     },
@@ -106,9 +135,22 @@ export default defineComponent({
                     rules: ['required'],
                 },
                 {
-                    name: 'date',
-                    label: 'Fecha',
-                    type: 'date',
+                    name: 'opponent',
+                    label: 'Oponente',
+                    column: {
+                        transform(row) {
+                            return `${
+                                row.opponent.name + ' ' + row.opponent.last_name
+                            }`;
+                        },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: professorService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
+                    rules: ['required'],
                 },
             ],
             actions: {

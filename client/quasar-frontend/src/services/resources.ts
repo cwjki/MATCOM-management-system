@@ -13,34 +13,35 @@ import { TeachingAssignmentModel } from 'src/models/teachingAssignments/teaching
 import { TeachingPlanningModel } from 'src/models/teachingAssignments/teachingPlanning.model';
 import { TeachingCategoryModel } from 'src/models/teachingAssignments/teachingCategory.model';
 import { TeachingGroupModel } from 'src/models/teachingAssignments/teachingGroup.model';
-import { StudentModel } from 'src/models/thesisCommittee/students.model';
+import { PlaceModel } from 'src/models/thesisCommittee/place.model';
+import { KeywordModel } from 'src/models/thesisCommittee/keyword.model';
 import { ThesisModel } from 'src/models/thesisCommittee/thesis.model';
 import { ThesisCommitteeModel } from 'src/models/thesisCommittee/thesisCommittee.model';
 import { CrudServiceFactory } from './api.service';
 import { FacultyModel } from 'src/models/teachingAssignments/faculty.model';
 
 export const RESOURCES = {
-    profesors: '/professors/',
-    faculties: '/faculties/',
-    careers: '/careers/',
-    departments: '/departments/',
-    subjects: '/subjects/',
-    subjectDescriptions: '/subject-descriptions/',
-    teachingAssignments: '/teaching-assignments/',
-    carmenTable: '/carmen-table/',
-    teachingCategory: '/teaching-categories/',
-    scientificDegree: '/scientific-degrees/',
-    semesters: '/semesters/',
-    studyPlans: '/study-plans/',
-    classTypes: '/class-types/',
-    timePeriods: '/time-periods/',
-    teachingGroups: '/teaching-groups/',
-    teachingAssignment: '/teaching-assignments/',
-    teachingPlanning: 'teaching-planning',
+    profesors: '/teaching-assignment/professors/',
+    faculties: '/teaching-assignment/faculties/',
+    careers: '/teaching-assignment/careers/',
+    departments: '/teaching-assignment/departments/',
+    subjects: '/teaching-assignment/subjects/',
+    subjectDescriptions: '/teaching-assignment/subject-descriptions/',
+    teachingAssignments: '/teaching-assignment/teaching-assignments/',
+    carmenTable: '/teaching-assignment/carmen-table/',
+    teachingCategory: '/teaching-assignment/teaching-categories/',
+    scientificDegree: '/teaching-assignment/scientific-degrees/',
+    semesters: '/teaching-assignment/semesters/',
+    studyPlans: '/teaching-assignment/study-plans/',
+    classTypes: '/teaching-assignment/class-types/',
+    timePeriods: '/teaching-assignment/time-periods/',
+    teachingGroups: '/teaching-assignment/teaching-groups/',
+    teachingPlanning: '/teaching-assignment/teaching-planning',
 
-    students: '/students/',
-    thesis: '/thesis/',
-    thesisCommittee: '/thesis-committee/',
+    places: '/thesis-assignment/places/',
+    keywords: '/thesis-assignment/keywords/',
+    thesis: '/thesis-assignment/thesis/',
+    thesisCommittees: '/thesis-assignment/thesis-committees/',
 };
 
 export const careerService = CrudServiceFactory<CareerModel>(RESOURCES.careers);
@@ -100,12 +101,14 @@ export const teachingGroupService = CrudServiceFactory<TeachingGroupModel>(
     RESOURCES.teachingGroups
 );
 
-export const studentService = CrudServiceFactory<StudentModel>(
-    RESOURCES.students
+export const placeService = CrudServiceFactory<PlaceModel>(RESOURCES.places);
+
+export const keywordService = CrudServiceFactory<KeywordModel>(
+    RESOURCES.keywords
 );
 
 export const thesisService = CrudServiceFactory<ThesisModel>(RESOURCES.thesis);
 
 export const thesisCommitteeService = CrudServiceFactory<ThesisCommitteeModel>(
-    RESOURCES.thesisCommittee
+    RESOURCES.thesisCommittees
 );
