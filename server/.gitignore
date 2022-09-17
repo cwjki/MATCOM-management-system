@@ -106,7 +106,8 @@ env.bak/
 venv.bak/ 
 
 # Database models saved in excels
-.excels
+.excels/data
+.excels/data
 
 # mkdocs documentation 
 /site 

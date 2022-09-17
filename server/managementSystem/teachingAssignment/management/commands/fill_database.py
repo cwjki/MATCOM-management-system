@@ -312,40 +312,44 @@ class Command(BaseCommand):
 
     def get_file_dir(self, model_name: str):
         CURRENT_PATH = os.path.dirname(__file__)
-        SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
+        SUBJECTS_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/subjects.csv')
         PROFESSOR_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/professors.csv')
-        FACULTY_DIR = os.path.join(CURRENT_PATH, '../../excels/faculties.csv')
-        CAREER_DIR = os.path.join(CURRENT_PATH, '../../excels/careers.csv')
+            CURRENT_PATH, '../../excels/data/professors.csv')
+        FACULTY_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/faculties.csv')
+        CAREER_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/careers.csv')
         STUDY_PLAN_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/study_plans.csv')
+            CURRENT_PATH, '../../excels/data/study_plans.csv')
         DEPARTMENT_DIR = os.path.join(
             CURRENT_PATH, '../../excels/departments.csv')
-        SEMESTER_DIR = os.path.join(CURRENT_PATH, '../../excels/semesters.csv')
+        SEMESTER_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/semesters.csv')
         CLASS_TYPE_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/class_types.csv')
+            CURRENT_PATH, '../../excels/data/class_types.csv')
         TIME_PERIOD_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/time_periods.csv')
+            CURRENT_PATH, '../../excels/data/time_periods.csv')
         CARMEN_TABLE_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/carmen_table.csv')
+            CURRENT_PATH, '../../excels/data/carmen_table.csv')
         TEACHING_GROUP_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/teaching_groups.csv')
+            CURRENT_PATH, '../../excels/data/teaching_groups.csv')
         TEACHING_CATEGORY_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/teaching_categories.csv')
+            CURRENT_PATH, '../../excels/data/teaching_categories.csv')
         SCIENTIFIC_DEGREE_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/scientific_degrees.csv')
+            CURRENT_PATH, '../../excels/data/scientific_degrees.csv')
         SUBJECT_DESCRIPTION_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/subject_descriptions.csv')
+            CURRENT_PATH, '../../excels/data/subject_descriptions.csv')
         TEACHING_ASSIGNMENT_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/teaching_assignments.csv')
+            CURRENT_PATH, '../../excels/data/teaching_assignments.csv')
         PLACE_DIR = os.path.join(
-            CURRENT_PATH, '../../../thesisAssignment/excels/places.csv')
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/places.csv')
         KEYWORD_DIR = os.path.join(
-            CURRENT_PATH, '../../../thesisAssignment/excels/keywords.csv')
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/keywords.csv')
         THESIS_DIR = os.path.join(
-            CURRENT_PATH, '../../../thesisAssignment/excels/thesis.csv')
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis.csv')
         THESIS_COMMITTEE_DIR = os.path.join(
-            CURRENT_PATH, '../../../thesisAssignment/excels/thesis_committee.csv')
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis_committee.csv')
 
         if model_name == 'Careers':
             file_dir = CAREER_DIR
