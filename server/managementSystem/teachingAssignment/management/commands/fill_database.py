@@ -1,5 +1,6 @@
 import csv
 import os
+
 from django.core.management.base import BaseCommand, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
@@ -227,6 +228,34 @@ class Command(BaseCommand):
                 name = obj['name']
                 keyword = Keyword(name=name)
                 keyword.save()
+
+        elif model_name == 'Thesis':
+            for obj in data:
+                title = obj['title']
+                student = obj['student']
+                tutor: dict = eval(obj['tutor'])
+                cotutors: list = eval(obj['cotutors'])
+                keywords: list = eval(obj['keywords'])
+
+                tutor = Professor.objects.filter(
+                    last_name=tutor['last_name']).filter(name=tutor['name'])[0]
+
+                thesis = Thesis(
+                    title=title,
+                    student=student,
+                    tutor=tutor
+                )
+                thesis.save()
+
+                # Handle many to many field relations Cotutors and Keywords
+                for ct in cotutors:
+                    cotutor = Professor.objects.filter(
+                        last_name=ct['last_name']).filter(name=ct['name'])[0]
+                    thesis.cotutors.add(cotutor)
+
+                for k in keywords:
+                    keyword = Keyword.objects.filter(name=k['name'])[0]
+                    thesis.keywords.add(keyword)
 
     def get_model_data(self, model_name: str):
         data: list[dict] = []
