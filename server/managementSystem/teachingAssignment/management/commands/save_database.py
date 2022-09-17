@@ -28,7 +28,7 @@ class Command(BaseCommand):
                         'Semesters', 'TeachingGroups', 'TimePeriods',
                         'Careers', 'StudyPlans', 'CarmenTable', 'Departments',
                         'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments',
-                        'Places', 'Keywords']
+                        'Places', 'Keywords', 'Thesis', 'ThesisCommittee']
 
         for model_name in models_names:
             self.save_model(model_name)

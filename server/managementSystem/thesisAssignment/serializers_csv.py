@@ -60,7 +60,15 @@ class ThesisCommitteeSerializerCSV(ModelSerializer):
     secretary = serializers.SerializerMethodField()
     president = serializers.SerializerMethodField()
     place = serializers.SerializerMethodField()
-    thesis = ThesisSerializerCSV()
+    thesis = serializers.SerializerMethodField()
+
+    def get_thesis(self, obj) -> dict:
+        if obj.thesis:
+            return {
+                "title": obj.thesis.title,
+                "student": obj.thesis.student
+            }
+        return None
 
     def get_opponent(self, obj) -> dict:
         if obj.opponent:

@@ -26,7 +26,8 @@ class Command(BaseCommand):
                         'ScientificDegrees', 'TeachingCategories',
                         'Semesters', 'TeachingGroups', 'TimePeriods',
                         'Careers', 'StudyPlans', 'CarmenTable', 'Departments',
-                        'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments']
+                        'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments',
+                        'Places', 'Keywords', 'Thesis', 'ThesisCommittee']
 
         for model_name in models_names:
             self.fill_model(model_name)
@@ -256,6 +257,37 @@ class Command(BaseCommand):
                 for k in keywords:
                     keyword = Keyword.objects.filter(name=k['name'])[0]
                     thesis.keywords.add(keyword)
+
+        elif model_name == 'ThesisCommittee':
+            for obj in data:
+                date = obj['date']
+                time = obj['time']
+                opponent: dict = eval(obj['opponent'])
+                secretary: dict = eval(obj['secretary'])
+                president: dict = eval(obj['president'])
+                thesis: dict = eval(obj['thesis'])
+                place: dict = eval(obj['place'])
+
+                place = Place.objects.get(name=place['name'])
+                opponent = Professor.objects.filter(
+                    last_name=opponent['last_name']).filter(name=opponent['name'])[0]
+                secretary = Professor.objects.filter(
+                    last_name=secretary['last_name']).filter(name=secretary['name'])[0]
+                president = Professor.objects.filter(
+                    last_name=president['last_name']).filter(name=president['name'])[0]
+                thesis = Thesis.objects.filter(
+                    student=thesis['student']).filter(title=thesis['title'])[0]
+
+                thesis_committee = ThesisCommittee(
+                    date=date,
+                    time=time,
+                    thesis=thesis,
+                    opponent=opponent,
+                    secretary=secretary,
+                    president=president,
+                    place=place
+                )
+                thesis_committee.save()
 
     def get_model_data(self, model_name: str):
         data: list[dict] = []

@@ -1,3 +1,3 @@
-title,student,tutor,cotutors,keywords,
-Tesis 1,Estudiante 1,"{'name': 'Marta Lourdes', 'last_name': 'Baguer Díaz-Romañach'}","[{'name': 'Angela', 'last_name': 'León Mecías'}, {'name': 'Alejandro', 'last_name': 'Mesejo Chiong'}]",[{'name': 'machine learning'}],
-Tesis 2,Estudiante 2,"{'name': 'Gemayqzel', 'last_name': 'Bouza Allende'}","[{'name': 'Marcos', 'last_name': 'Torres'}]","[{'name': 'machine learning'}, {'name': 'autogoal'}, {'name': 'autoML'}]",
+title,student,tutor,cotutors,keywords
+Tesis 1,Estudiante 1,"{'name': 'Marta Lourdes', 'last_name': 'Baguer Díaz-Romañach'}","[{'name': 'Angela', 'last_name': 'León Mecías'}, {'name': 'Alejandro', 'last_name': 'Mesejo Chiong'}]",[{'name': 'machine learning'}]
+Tesis 2,Estudiante 2,"{'name': 'Gemayqzel', 'last_name': 'Bouza Allende'}","[{'name': 'Marcos', 'last_name': 'Torres'}]","[{'name': 'machine learning'}, {'name': 'autogoal'}, {'name': 'autoML'}]"
