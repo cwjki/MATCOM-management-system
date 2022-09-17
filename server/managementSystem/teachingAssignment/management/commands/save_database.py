@@ -198,13 +198,13 @@ class Command(BaseCommand):
         TEACHING_ASSIGNMENT_DIR = os.path.join(
             CURRENT_PATH, '../../excels/teaching_assignments.csv')
         PLACE_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/places.csv')
+            CURRENT_PATH, '../../../thesisAssignment/excels/places.csv')
         KEYWORD_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/keywords.csv')
+            CURRENT_PATH, '../../../thesisAssignment/excels/keywords.csv')
         THESIS_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/thesis.csv')
+            CURRENT_PATH, '../../../thesisAssignment/excels/thesis.csv')
         THESIS_COMMITTEE_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/thesis_committee.csv')
+            CURRENT_PATH, '../../../thesisAssignment/excels/thesis_committee.csv')
 
         if model_name == 'Careers':
             file_dir = CAREER_DIR
