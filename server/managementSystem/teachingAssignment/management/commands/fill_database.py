@@ -323,7 +323,7 @@ class Command(BaseCommand):
         STUDY_PLAN_DIR = os.path.join(
             CURRENT_PATH, '../../excels/data/study_plans.csv')
         DEPARTMENT_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/departments.csv')
+            CURRENT_PATH, '../../excels/data/departments.csv')
         SEMESTER_DIR = os.path.join(
             CURRENT_PATH, '../../excels/data/semesters.csv')
         CLASS_TYPE_DIR = os.path.join(

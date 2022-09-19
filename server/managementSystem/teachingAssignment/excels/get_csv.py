@@ -1,14 +1,7 @@
-import os
 import csv
 from typing import List
-from ...serializers import TeachingAssignment
-from ...models import TeachingAssignmentSerializer
-from django.core.management.base import BaseCommand, CommandParser
-
-
-CURRENT_PATH = os.path.dirname(__file__)
-CSV_DIR = os.path.join(
-    CURRENT_PATH, '../../excels/result/teaching_assignments.csv')
+from ..models import TeachingAssignment
+from ..serializers import TeachingAssignmentSerializer
 
 
 class TeachingAssignmentInfo:
@@ -104,15 +97,13 @@ class TeachingAssignmentInfoCollection:
             print(ta)
 
 
-class Command(BaseCommand):
-    help = 'Create a csv file with the Teaching Assignments'
+class TA_CSV_GENERATOR():
+    def __init__(self, department_name, file_dir) -> None:
+        self.department = department_name
+        self.csv_dir = file_dir
 
-    def add_arguments(self, parser: CommandParser) -> None:
-        return parser.add_argument('department_name', type=str)
-
-    def handle(self, *args, **options):
-        # department_name = 'Matemática Aplicada'
-        department_name = options['department_name']
+    def generate_csv(self):
+        department_name = 'Matemática Aplicada'
         data = self.filter_by_department(department_name)
 
         fieldnames = ['Facultad', 'Tipo curso', 'Año',
@@ -125,7 +116,7 @@ class Command(BaseCommand):
         fieldnames = ['Facultad', 'Tipo curso', 'Año',
                       'Asignatura', 'Horas', 'G', 'Profesor']
 
-        with open(CSV_DIR, 'w', encoding='UTF8') as f:
+        with open(self.csv_dir, 'w', encoding='UTF8') as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(rows)

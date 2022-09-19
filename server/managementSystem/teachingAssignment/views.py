@@ -13,6 +13,7 @@ from .serializers import CarmenTableSerializer, FacultySerializer, SubjectDescri
 from .serializers_csv import CareerSerializerCSV
 from .permissions import IsOwnerOrReadOnly
 from .optimization.optimization import OptimizationModel
+from .excels.get_csv import TA_CSV_GENERATOR
 
 # JSON Web Token Authentication
 
@@ -37,7 +38,12 @@ class CSVDownloadView(mixins.ListModelMixin, generics.GenericAPIView):
     def get(self, request):
         current_path = os.path.dirname(__file__)
         file_dir = os.path.join(
-            current_path, 'excels/result/teaching_assignments.csv')
+            current_path, 'excels/download/teaching_assignments.csv')
+
+        csv_generator = TA_CSV_GENERATOR(
+            department_name='Matemática Aplicada', file_dir=file_dir)
+        csv_generator.generate_csv()
+
         try:
             with open(file_dir, 'r') as f:
                 file_data = f.read()
