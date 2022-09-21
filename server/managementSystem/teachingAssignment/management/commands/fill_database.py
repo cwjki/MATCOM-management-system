@@ -1,8 +1,10 @@
 import csv
 import os
+
 from django.core.management.base import BaseCommand, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
+from thesisAssignment.models import Place, Keyword, Thesis, ThesisCommittee
 
 
 class Command(BaseCommand):
@@ -24,7 +26,8 @@ class Command(BaseCommand):
                         'ScientificDegrees', 'TeachingCategories',
                         'Semesters', 'TeachingGroups', 'TimePeriods',
                         'Careers', 'StudyPlans', 'CarmenTable', 'Departments',
-                        'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments']
+                        'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments',
+                        'Places', 'Keywords', 'Thesis', 'ThesisCommittee']
 
         for model_name in models_names:
             self.fill_model(model_name)
@@ -215,6 +218,77 @@ class Command(BaseCommand):
                 )
                 teaching_assignment.save()
 
+        elif model_name == 'Places':
+            for obj in data:
+                name = obj['name']
+                place = Place(name=name)
+                place.save()
+
+        elif model_name == 'Keywords':
+            for obj in data:
+                name = obj['name']
+                keyword = Keyword(name=name)
+                keyword.save()
+
+        elif model_name == 'Thesis':
+            for obj in data:
+                title = obj['title']
+                student = obj['student']
+                tutor: dict = eval(obj['tutor'])
+                cotutors: list = eval(obj['cotutors'])
+                keywords: list = eval(obj['keywords'])
+
+                tutor = Professor.objects.filter(
+                    last_name=tutor['last_name']).filter(name=tutor['name'])[0]
+
+                thesis = Thesis(
+                    title=title,
+                    student=student,
+                    tutor=tutor
+                )
+                thesis.save()
+
+                # Handle many to many field relations Cotutors and Keywords
+                for ct in cotutors:
+                    cotutor = Professor.objects.filter(
+                        last_name=ct['last_name']).filter(name=ct['name'])[0]
+                    thesis.cotutors.add(cotutor)
+
+                for k in keywords:
+                    keyword = Keyword.objects.filter(name=k['name'])[0]
+                    thesis.keywords.add(keyword)
+
+        elif model_name == 'ThesisCommittee':
+            for obj in data:
+                date = obj['date']
+                time = obj['time']
+                opponent: dict = eval(obj['opponent'])
+                secretary: dict = eval(obj['secretary'])
+                president: dict = eval(obj['president'])
+                thesis: dict = eval(obj['thesis'])
+                place: dict = eval(obj['place'])
+
+                place = Place.objects.get(name=place['name'])
+                opponent = Professor.objects.filter(
+                    last_name=opponent['last_name']).filter(name=opponent['name'])[0]
+                secretary = Professor.objects.filter(
+                    last_name=secretary['last_name']).filter(name=secretary['name'])[0]
+                president = Professor.objects.filter(
+                    last_name=president['last_name']).filter(name=president['name'])[0]
+                thesis = Thesis.objects.filter(
+                    student=thesis['student']).filter(title=thesis['title'])[0]
+
+                thesis_committee = ThesisCommittee(
+                    date=date,
+                    time=time,
+                    thesis=thesis,
+                    opponent=opponent,
+                    secretary=secretary,
+                    president=president,
+                    place=place
+                )
+                thesis_committee.save()
+
     def get_model_data(self, model_name: str):
         data: list[dict] = []
         file_dir = self.get_file_dir(model_name)
@@ -238,32 +312,44 @@ class Command(BaseCommand):
 
     def get_file_dir(self, model_name: str):
         CURRENT_PATH = os.path.dirname(__file__)
-        SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
+        SUBJECTS_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/subjects.csv')
         PROFESSOR_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/professors.csv')
-        FACULTY_DIR = os.path.join(CURRENT_PATH, '../../excels/faculties.csv')
-        CAREER_DIR = os.path.join(CURRENT_PATH, '../../excels/careers.csv')
+            CURRENT_PATH, '../../excels/data/professors.csv')
+        FACULTY_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/faculties.csv')
+        CAREER_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/careers.csv')
         STUDY_PLAN_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/study_plans.csv')
+            CURRENT_PATH, '../../excels/data/study_plans.csv')
         DEPARTMENT_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/departments.csv')
-        SEMESTER_DIR = os.path.join(CURRENT_PATH, '../../excels/semesters.csv')
+            CURRENT_PATH, '../../excels/data/departments.csv')
+        SEMESTER_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/semesters.csv')
         CLASS_TYPE_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/class_types.csv')
+            CURRENT_PATH, '../../excels/data/class_types.csv')
         TIME_PERIOD_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/time_periods.csv')
+            CURRENT_PATH, '../../excels/data/time_periods.csv')
         CARMEN_TABLE_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/carmen_table.csv')
+            CURRENT_PATH, '../../excels/data/carmen_table.csv')
         TEACHING_GROUP_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/teaching_groups.csv')
+            CURRENT_PATH, '../../excels/data/teaching_groups.csv')
         TEACHING_CATEGORY_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/teaching_categories.csv')
+            CURRENT_PATH, '../../excels/data/teaching_categories.csv')
         SCIENTIFIC_DEGREE_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/scientific_degrees.csv')
+            CURRENT_PATH, '../../excels/data/scientific_degrees.csv')
         SUBJECT_DESCRIPTION_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/subject_descriptions.csv')
+            CURRENT_PATH, '../../excels/data/subject_descriptions.csv')
         TEACHING_ASSIGNMENT_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/teaching_assignments.csv')
+            CURRENT_PATH, '../../excels/data/teaching_assignments.csv')
+        PLACE_DIR = os.path.join(
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/places.csv')
+        KEYWORD_DIR = os.path.join(
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/keywords.csv')
+        THESIS_DIR = os.path.join(
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis.csv')
+        THESIS_COMMITTEE_DIR = os.path.join(
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis_committee.csv')
 
         if model_name == 'Careers':
             file_dir = CAREER_DIR
@@ -295,6 +381,14 @@ class Command(BaseCommand):
             file_dir = SUBJECT_DESCRIPTION_DIR
         elif model_name == 'TeachingAssignments':
             file_dir = TEACHING_ASSIGNMENT_DIR
+        elif model_name == 'Places':
+            file_dir = PLACE_DIR
+        elif model_name == 'Keywords':
+            file_dir = KEYWORD_DIR
+        elif model_name == 'Thesis':
+            file_dir = THESIS_DIR
+        elif model_name == 'ThesisCommittee':
+            file_dir = THESIS_COMMITTEE_DIR
 
         else:
             file_dir = 'error'

@@ -24,7 +24,7 @@ class Thesis(models.Model):
     tutor = models.ForeignKey(
         Professor, related_name='cotutor', on_delete=models.CASCADE)
     cotutors = models.ManyToManyField(
-        Professor, related_name='tutors')
+        Professor, blank=True, related_name='tutors')
     keywords = models.ManyToManyField(Keyword, related_name='keywords')
 
     def __str__(self) -> str:

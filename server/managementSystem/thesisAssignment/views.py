@@ -1,9 +1,12 @@
+import os
+from django.http import HttpResponse, HttpResponseNotFound
 from rest_framework import viewsets, authentication, generics, mixins
 from rest_framework import filters, status
 
 
 from .models import Keyword, Place, Thesis, ThesisCommittee
 from .serializers import KeywordSerializer, PlaceSerializer, ThesisSerializer, ThesisCommitteeSerializer
+from .excels.get_csv import TC_CSV_GENERATOR
 
 
 class PlaceViewSet(viewsets.ModelViewSet):
@@ -51,3 +54,30 @@ class ThesisCommitteeViewSet(viewsets.ModelViewSet):
     serializer_class = ThesisCommitteeSerializer
     filter_backends = [filters.SearchFilter]
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class CSVDownloadView(mixins.ListModelMixin, generics.GenericAPIView):
+    """
+    This view handles the thesis committee csv file download
+    """
+
+    def get(self, request):
+        current_path = os.path.dirname(__file__)
+        file_dir = os.path.join(
+            current_path, 'excels/download/thesis_committee.csv')
+
+        csv_generator = TC_CSV_GENERATOR(file_dir=file_dir)
+        csv_generator.generate_csv()
+
+        try:
+            with open(file_dir, 'r') as f:
+                file_data = f.read()
+
+            response = HttpResponse(
+                file_data, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="Tesis.csv"'
+
+        except IOError:
+            response = HttpResponseNotFound('<h1>File not found</h1>')
+
+        return response

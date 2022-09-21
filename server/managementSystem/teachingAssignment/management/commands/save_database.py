@@ -4,6 +4,8 @@ from django.core.management.base import BaseCommand, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from ...serializers_csv import CareerSerializerCSV, CarmenTableSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, SubjectDescriptionSerializerCSV, SubjectSerializerCSV, TeachingAssignmentSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
+from thesisAssignment.models import Place, Keyword, Thesis, ThesisCommittee
+from thesisAssignment.serializers_csv import PlaceSerializerCSV, KeywordSerializerCSV, ThesisCommitteeSerializerCSV, ThesisSerializerCSV
 
 
 class Command(BaseCommand):
@@ -25,7 +27,8 @@ class Command(BaseCommand):
                         'ScientificDegrees', 'TeachingCategories',
                         'Semesters', 'TeachingGroups', 'TimePeriods',
                         'Careers', 'StudyPlans', 'CarmenTable', 'Departments',
-                        'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments']
+                        'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments',
+                        'Places', 'Keywords', 'Thesis', 'ThesisCommittee']
 
         for model_name in models_names:
             self.save_model(model_name)
@@ -138,36 +141,74 @@ class Command(BaseCommand):
             data = [TeachingAssignmentSerializerCSV(
                 teaching_assignment).data for teaching_assignment in queryset]
 
+        elif model_name == 'Places':
+            queryset = Place.objects.all()
+            fieldnames = ['name']
+            data = [PlaceSerializerCSV(
+                place).data for place in queryset]
+
+        elif model_name == 'Keywords':
+            queryset = Keyword.objects.all()
+            fieldnames = ['name']
+            data = [KeywordSerializerCSV(
+                keyword).data for keyword in queryset]
+
+        elif model_name == 'Thesis':
+            queryset = Thesis.objects.all()
+            fieldnames = ['title', 'student',
+                          'tutor', 'cotutors', 'keywords']
+            data = [ThesisSerializerCSV(
+                thesis).data for thesis in queryset]
+
+        elif model_name == 'ThesisCommittee':
+            queryset = ThesisCommittee.objects.all()
+            fieldnames = ['date', 'time', 'thesis', 'place',
+                          'opponent', 'secretary', 'president']
+            data = [ThesisCommitteeSerializerCSV(
+                thesis_committee).data for thesis_committee in queryset]
+
         return fieldnames, data
 
     def get_file_dir(self, model_name: str):
         CURRENT_PATH = os.path.dirname(__file__)
-        SUBJECTS_DIR = os.path.join(CURRENT_PATH, '../../excels/subjects.csv')
+        SUBJECTS_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/subjects.csv')
         PROFESSOR_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/professors.csv')
-        FACULTY_DIR = os.path.join(CURRENT_PATH, '../../excels/faculties.csv')
-        CAREER_DIR = os.path.join(CURRENT_PATH, '../../excels/careers.csv')
+            CURRENT_PATH, '../../excels/data/professors.csv')
+        FACULTY_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/faculties.csv')
+        CAREER_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/careers.csv')
         STUDY_PLAN_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/study_plans.csv')
+            CURRENT_PATH, '../../excels/data/study_plans.csv')
         DEPARTMENT_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/departments.csv')
-        SEMESTER_DIR = os.path.join(CURRENT_PATH, '../../excels/semesters.csv')
+            CURRENT_PATH, '../../excels/data/departments.csv')
+        SEMESTER_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/semesters.csv')
         CLASS_TYPE_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/class_types.csv')
+            CURRENT_PATH, '../../excels/data/class_types.csv')
         TIME_PERIOD_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/time_periods.csv')
+            CURRENT_PATH, '../../excels/data/time_periods.csv')
         CARMEN_TABLE_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/carmen_table.csv')
+            CURRENT_PATH, '../../excels/data/carmen_table.csv')
         TEACHING_GROUP_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/teaching_groups.csv')
+            CURRENT_PATH, '../../excels/data/teaching_groups.csv')
         TEACHING_CATEGORY_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/teaching_categories.csv')
+            CURRENT_PATH, '../../excels/data/teaching_categories.csv')
         SCIENTIFIC_DEGREE_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/scientific_degrees.csv')
+            CURRENT_PATH, '../../excels/data/scientific_degrees.csv')
         SUBJECT_DESCRIPTION_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/subject_descriptions.csv')
+            CURRENT_PATH, '../../excels/data/subject_descriptions.csv')
         TEACHING_ASSIGNMENT_DIR = os.path.join(
-            CURRENT_PATH, '../../excels/teaching_assignments.csv')
+            CURRENT_PATH, '../../excels/data/teaching_assignments.csv')
+        PLACE_DIR = os.path.join(
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/places.csv')
+        KEYWORD_DIR = os.path.join(
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/keywords.csv')
+        THESIS_DIR = os.path.join(
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis.csv')
+        THESIS_COMMITTEE_DIR = os.path.join(
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis_committee.csv')
 
         if model_name == 'Careers':
             file_dir = CAREER_DIR
@@ -199,6 +240,14 @@ class Command(BaseCommand):
             file_dir = SUBJECT_DESCRIPTION_DIR
         elif model_name == 'TeachingAssignments':
             file_dir = TEACHING_ASSIGNMENT_DIR
+        elif model_name == 'Places':
+            file_dir = PLACE_DIR
+        elif model_name == 'Keywords':
+            file_dir = KEYWORD_DIR
+        elif model_name == 'Thesis':
+            file_dir = THESIS_DIR
+        elif model_name == 'ThesisCommittee':
+            file_dir = THESIS_COMMITTEE_DIR
         else:
             file_dir = 'error'
         return file_dir
