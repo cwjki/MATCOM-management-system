@@ -6,6 +6,7 @@ from rest_framework import filters, status
 
 from .models import Keyword, Place, Thesis, ThesisCommittee
 from .serializers import KeywordSerializer, PlaceSerializer, ThesisSerializer, ThesisCommitteeSerializer
+from .excels.get_csv import TC_CSV_GENERATOR
 
 
 class PlaceViewSet(viewsets.ModelViewSet):
@@ -64,15 +65,17 @@ class CSVDownloadView(mixins.ListModelMixin, generics.GenericAPIView):
         current_path = os.path.dirname(__file__)
         file_dir = os.path.join(
             current_path, 'excels/thesis_committee.csv')
-        print(file_dir)
-        print("AAAAA")
+
+        csv_generator = TC_CSV_GENERATOR(file_dir=file_dir)
+        csv_generator.generate_csv()
+
         try:
             with open(file_dir, 'r') as f:
                 file_data = f.read()
 
             response = HttpResponse(
                 file_data, content_type='application/vnd.ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="Docencia.csv"'
+            response['Content-Disposition'] = 'attachment; filename="Tesis.csv"'
 
         except IOError:
             response = HttpResponseNotFound('<h1>File not found</h1>')
