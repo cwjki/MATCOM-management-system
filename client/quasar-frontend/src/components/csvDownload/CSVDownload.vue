@@ -1,7 +1,7 @@
 <template>
     <div class="dropdown-menu mr-auto" aria-labelledby="navbarDropdown">
         <button class="dropdown-item" v-on:click="csvDownload()">
-            Asignación de Docencia CSV
+            Descargar csv de {{ fileName }}
         </button>
     </div>
 </template>
@@ -11,26 +11,31 @@ import { defineComponent } from '@vue/runtime-core';
 import { axios } from 'src/boot/axios';
 
 export default defineComponent({
+    props: ['url', 'fileName'],
+
     setup(props) {
+        const fileName = props.fileName;
+
         const csvDownload = () => {
             return axios({
-                url: 'http://127.0.0.1:8000/csv-download/',
+                url: props.url,
                 method: 'GET',
                 responseType: 'blob',
             }).then((response) => {
-                console.log(response);
                 const File = window.URL.createObjectURL(
                     new Blob([response.data])
                 );
                 const docUrl = document.createElement('a');
                 docUrl.href = File;
-                docUrl.setAttribute('download', 'Docencia.csv');
+                docUrl.setAttribute('download', fileName + '.csv');
                 document.body.appendChild(docUrl);
                 docUrl.click();
             });
         };
 
         return {
+            fileName,
+
             csvDownload,
         };
     },
