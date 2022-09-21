@@ -60,24 +60,21 @@ class ThesisCommitteeSerializerCSV(ModelSerializer):
     secretary = serializers.SerializerMethodField()
     president = serializers.SerializerMethodField()
     place = serializers.SerializerMethodField()
-    # thesis = serializers.SerializerMethodField()
+    thesis = serializers.SerializerMethodField()
 
-    thesis = ThesisSerializerCSV()
-
-    # def get_thesis(self, obj) -> dict:
-    #     if obj.thesis:
-    #         tutors = []
-    #         tutors.append(obj.thesis.tutor)
-    #         for cotutor in obj.thesis.cotutors:
-    #             tutors.append(cotutor)
-
-    #         print(type(tutors))
-    #         return {
-    #             "title": obj.thesis.title,
-    #             "student": obj.thesis.student,
-    #             "tutors": tutors
-    #         }
-    #     return None
+    def get_thesis(self, obj) -> dict:
+        if obj.thesis:
+            tutors = [obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name]
+            for cotutor in obj.thesis.cotutors.all():
+                tutors.append(cotutor.name + ' ' + cotutor.last_name)
+            keywords = [keyword.name for keyword in obj.thesis.keywords.all()]
+            return {
+                "title": obj.thesis.title,
+                "student": obj.thesis.student,
+                "tutors": tutors,
+                "keywords": keywords
+            }
+        return None
 
     def get_opponent(self, obj) -> dict:
         if obj.opponent:

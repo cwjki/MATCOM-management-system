@@ -64,7 +64,7 @@ class CSVDownloadView(mixins.ListModelMixin, generics.GenericAPIView):
     def get(self, request):
         current_path = os.path.dirname(__file__)
         file_dir = os.path.join(
-            current_path, 'excels/thesis_committee.csv')
+            current_path, 'excels/download/thesis_committee.csv')
 
         csv_generator = TC_CSV_GENERATOR(file_dir=file_dir)
         csv_generator.generate_csv()
