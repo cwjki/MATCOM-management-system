@@ -24,9 +24,9 @@ class TC_CSV_GENERATOR():
             row['Hora'] = thesis_committee['time']
             row['Lugar'] = thesis_committee['place']['name']
             row['Estudiantes'] = thesis_committee['thesis']['student']
-            row['Tutor(es)'] = ", ".join(thesis_committee['thesis']['tutors'])
+            row['Tutor(es)'] = "\n".join(thesis_committee['thesis']['tutors'])
             row['Tesis'] = thesis_committee['thesis']['title']
-            row['Palabras Claves'] = ", ".join(
+            row['Palabras Claves'] = "\n".join(
                 thesis_committee['thesis']['keywords'])
             row['Presidente'] = thesis_committee['president']['name'] + \
                 ' ' + thesis_committee['president']['last_name']

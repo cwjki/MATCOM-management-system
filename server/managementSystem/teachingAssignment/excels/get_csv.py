@@ -70,11 +70,11 @@ class TeachingAssignmentInfoCollection:
         if class_type == 'Conferencia':
             ta.conf_groups = number_of_groups
             ta.conf_hours += professor_hours
-            ta.conf_professors += f'C: {professor_name} ({professor_hours}) ({group})'
+            ta.conf_professors += f'C: {professor_name} ({professor_hours}) ({group}) \n'
         elif class_type == 'Clase Práctica':
             ta.cp_groups = number_of_groups
             ta.cp_hours += professor_hours
-            ta.cp_professors += f'CP: {professor_name} ({professor_hours}) ({group})'
+            ta.cp_professors += f'CP: {professor_name} ({professor_hours}) ({group}) \n'
         else:
             pass
 
