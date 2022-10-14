@@ -4,10 +4,10 @@
 
 <script lang="ts">
 import {
-    carmenTableService,
     classTypeService,
     subjectDescriptionService,
     subjectService,
+    teachingGroupService,
     timePeriodService,
 } from 'src/services';
 import { defineComponent, ref } from 'vue';
@@ -53,32 +53,18 @@ export default defineComponent({
                     rules: ['required'],
                 },
                 {
-                    name: 'scholar_year',
+                    name: 'teaching_group',
                     label: 'Año',
                     column: {
                         transform(row) {
-                            return `${
-                                row.scholar_year.teaching_group +
-                                ' --- ' +
-                                ' plan ' +
-                                row.scholar_year.study_plan
-                            }`;
+                            return `${row.teaching_group.name}`;
                         },
                     },
                     type: 'select',
                     selectOptions: {
-                        list: carmenTableService.list,
+                        list: teachingGroupService.list,
                         value: 'id',
-                        label: 'teaching_group',
-                        refactorValue: (value) =>
-                            value
-                                ? `${
-                                      value.teaching_group.name +
-                                      ' --- ' +
-                                      ' plan ' +
-                                      value.study_plan.name
-                                  }`
-                                : '',
+                        label: 'name',
                     },
                     rules: ['required'],
                 },
