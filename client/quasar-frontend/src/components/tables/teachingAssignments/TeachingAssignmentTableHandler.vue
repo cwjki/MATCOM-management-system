@@ -44,12 +44,14 @@ export default defineComponent({
                                       ' --- ' +
                                       value.class_type.name +
                                       ' --- ' +
-                                      value.scholar_year.teaching_group +
-                                      ' --- ' +
-                                      ' plan ' +
-                                      value.scholar_year.study_plan
+                                      value.teaching_group.name
+                                      //   ' --- ' +
+                                      //   ' plan ' +
+                                      //   value.subject.study_plan
                                   }`
                                 : '',
+
+                        // REVISAR ESTO ME DA BATEO EDITAR SI MUESTRO LOS CAMPOS CORRECTAMENTE
                     },
                     rules: ['required'],
                 },
@@ -58,7 +60,7 @@ export default defineComponent({
                     label: 'Año',
                     column: {
                         transform(row) {
-                            return `${row.subject_description.scholar_year}`;
+                            return `${row.subject_description.teaching_group}`;
                         },
                     },
                 },
