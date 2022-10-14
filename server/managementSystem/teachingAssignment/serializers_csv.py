@@ -178,7 +178,7 @@ class SubjectDescriptionSerializerCSV(ModelSerializer):
     career = serializers.SerializerMethodField()
     class_type = serializers.SerializerMethodField()
     time_period = serializers.SerializerMethodField()
-    scholar_year = serializers.SerializerMethodField()
+    teaching_group = serializers.SerializerMethodField()
 
     def get_subject(self, obj) -> dict:
         if obj.subject:
@@ -205,9 +205,9 @@ class SubjectDescriptionSerializerCSV(ModelSerializer):
             return obj.time_period.name
         return None
 
-    def get_scholar_year(self, obj) -> dict:
-        if obj.scholar_year:
-            return obj.scholar_year.teaching_group.name
+    def get_teaching_group(self, obj) -> dict:
+        if obj.teaching_group:
+            return obj.teaching_group.name
         return None
 
     class Meta:
@@ -220,7 +220,7 @@ class TeachingAssignmentSerializerCSV(ModelSerializer):
     professor_last_name = serializers.SerializerMethodField()
     subject = serializers.SerializerMethodField()
     career = serializers.SerializerMethodField()
-    scholar_year = serializers.SerializerMethodField()
+    teaching_group = serializers.SerializerMethodField()
     study_plan = serializers.SerializerMethodField()
     class_type = serializers.SerializerMethodField()
     time_period = serializers.SerializerMethodField()
@@ -250,9 +250,9 @@ class TeachingAssignmentSerializerCSV(ModelSerializer):
             return obj.subject_description.subject.career.name
         return None
 
-    def get_scholar_year(self, obj) -> dict:
+    def get_teaching_group(self, obj) -> dict:
         if obj.subject_description:
-            return obj.subject_description.scholar_year.teaching_group.name
+            return obj.subject_description.teaching_group.name
         return None
 
     def get_class_type(self, obj) -> dict:
