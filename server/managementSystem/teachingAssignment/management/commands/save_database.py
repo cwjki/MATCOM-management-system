@@ -130,14 +130,14 @@ class Command(BaseCommand):
         elif model_name == 'SubjectDescriptions':
             queryset = SubjectDescription.objects.all()
             fieldnames = ['subject', 'career', 'study_plan', 'class_type', 'time_period',
-                          'number_of_groups', 'scholar_year', 'number_of_hours']
+                          'number_of_groups', 'teaching_group', 'number_of_hours']
             data = [SubjectDescriptionSerializerCSV(
                 subject_description).data for subject_description in queryset]
 
         elif model_name == 'TeachingAssignments':
             queryset = TeachingAssignment.objects.all()
             fieldnames = ['professor_name', 'professor_last_name', 'career', 'study_plan',
-                          'subject', 'class_type', 'time_period', 'scholar_year', 'percent', 'group']
+                          'subject', 'class_type', 'time_period', 'teaching_group', 'percent', 'group']
             data = [TeachingAssignmentSerializerCSV(
                 teaching_assignment).data for teaching_assignment in queryset]
 

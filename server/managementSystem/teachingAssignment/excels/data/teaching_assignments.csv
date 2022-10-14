@@ -1,21 +1,3 @@
-professor_name,professor_last_name,career,study_plan,subject,class_type,time_period,scholar_year,percent,group
-Alejandro,Mesejo Chiong,Matemática,E,Programación y Algoritmos,Conferencia,enero - julio,M1,100,1
-Daniela,González Beltrán,Matemática,E,Programación y Algoritmos,Clase Práctica,enero - julio,M1,100,1
-Camila,Pérez Mosquera,Matemática,E,Programación y Algoritmos,Clase Práctica,enero - julio,M1,100,2
-Sheyla,Artiles,Matemática,E,Programación y Algoritmos,Clase Práctica,enero - julio,M1,100,3
-Yanet,García,Ciencias de la Computación,E,Estadística,Conferencia,enero - julio,C3,100,1
-Ernesto,Borrego Rodríguez,Ciencias de la Computación,E,Estadística,Clase Práctica,enero - julio,C3,100,1
-Carlos,Bouza Herrera,Matemática,E,Seminario de Problemas I,Conferencia,enero - julio,M1,100,1
-Alejandro,Mesejo Chiong,Matemática,E,Programación y Algoritmos,Conferencia,enero - julio,M2,100,1
-Sheyla,Artiles,Matemática,E,Programación y Algoritmos,Clase Práctica,enero - julio,M2,100,1
-Vivian,Sistaschs,Matemática,E,Inferencia Estadística,Conferencia,enero - julio,M3,100,1
-Yanet,García,Matemática,E,Inferencia Estadística,Clase Práctica,enero - julio,M3,100,1
-Marta Lourdes,Baguer Díaz-Romañach,Matemática,E,Matemática Numérica I,Conferencia,enero - julio,M3,100,1
-Fernando Raul,Rodriguez Flores,Matemática,E,Matemática Numérica I,Clase Práctica,enero - julio,M3,100,1
-Manuel,Valiente,Ciencias de la Computación,E,Estadística,Clase Práctica,enero - julio,C3,100,2
-Aymée,Marrero Severo,Matemática,E,Optimización Matemática I,Conferencia,enero - julio,M3,100,1
-Gemayqzel,Bouza Allende,Matemática,E,Optimización Matemática I,Clase Práctica,enero - julio,M3,100,1
-Aymée,Marrero Severo,Ciencias de la Computación,E,Modelos de Optimización,Conferencia,enero - julio,C3,50,1
-Fernando Raul,Rodriguez Flores,Ciencias de la Computación,E,Modelos de Optimización,Conferencia,enero - julio,C3,50,1
-Daniela,González Beltrán,Ciencias de la Computación,E,Modelos de Optimización,Clase Práctica,enero - julio,C3,100,1
-Camila,Pérez Mosquera,Ciencias de la Computación,E,Modelos de Optimización,Clase Práctica,enero - julio,C3,100,2
+professor_name,professor_last_name,career,study_plan,subject,class_type,time_period,teaching_group,percent,group
+Aymée,Marrero Severo,Ciencias de la Computación,E,Compilación,Conferencia,enero - julio,M1,125,23
+Sheyla,Artiles,Ciencias de la Computación,E,Compilación,Clase Práctica,enero - julio,C1,34,4

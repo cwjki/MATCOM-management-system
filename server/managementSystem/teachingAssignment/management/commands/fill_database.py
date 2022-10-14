@@ -171,10 +171,8 @@ class Command(BaseCommand):
                 time_period = TimePeriod.objects.get(name=obj['time_period'])
                 study_plan = StudyPlan.objects.get(name=obj['study_plan'])
                 teaching_group = TeachingGroup.objects.get(
-                    name=obj['scholar_year'])
+                    name=obj['teaching_group'])
 
-                scholar_year = CarmenTable.objects.get(
-                    teaching_group=teaching_group)
                 subject = Subject.objects.filter(
                     name=subject).filter(career=career).filter(study_plan=study_plan)[0]
 
@@ -182,7 +180,7 @@ class Command(BaseCommand):
                     subject=subject,
                     class_type=class_type,
                     time_period=time_period,
-                    scholar_year=scholar_year,
+                    teaching_group=teaching_group,
                     number_of_hours=number_of_hours,
                     number_of_groups=number_of_groups
                 )
@@ -199,14 +197,12 @@ class Command(BaseCommand):
                 class_type = ClassType.objects.get(name=obj['class_type'])
                 study_plan = StudyPlan.objects.get(name=obj['study_plan'])
                 teaching_group = TeachingGroup.objects.get(
-                    name=obj['scholar_year'])
-                scholar_year = CarmenTable.objects.get(
-                    teaching_group=teaching_group)
+                    name=obj['teaching_group'])
 
                 subject = Subject.objects.filter(name=subject_name).filter(
                     career=career).filter(study_plan=study_plan)[0]
                 subject_description = SubjectDescription.objects.filter(subject=subject).filter(
-                    scholar_year=scholar_year).filter(class_type=class_type)[0]
+                    teaching_group=teaching_group).filter(class_type=class_type)[0]
                 professor = Professor.objects.filter(
                     last_name=professor_last_name).filter(name=professor_name)[0]
 
