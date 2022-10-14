@@ -228,8 +228,9 @@ class SubjectDescriptionSerializer(ModelSerializer):
     time_period_id = serializers.IntegerField(required=True, write_only=True)
     time_period = serializers.SerializerMethodField()
 
-    scholar_year_id = serializers.IntegerField(required=True, write_only=True)
-    scholar_year = serializers.SerializerMethodField()
+    teaching_group_id = serializers.IntegerField(
+        required=True, write_only=True)
+    teaching_group = serializers.SerializerMethodField()
 
     def get_subject(self, obj) -> dict:
         if obj.subject:
@@ -260,14 +261,11 @@ class SubjectDescriptionSerializer(ModelSerializer):
             }
         return None
 
-    def get_scholar_year(self, obj) -> dict:
-        if obj.scholar_year:
+    def get_teaching_group(self, obj) -> dict:
+        if obj.teaching_group:
             return {
-                "id": obj.scholar_year.id,
-                "teaching_group": obj.scholar_year.teaching_group.name,
-                "time_period": obj.scholar_year.time_period.name,
-                "study_plan": obj.scholar_year.study_plan.name,
-                "semester": obj.scholar_year.semester.name,
+                "id": obj.teaching_group.id,
+                "name": obj.teaching_group.name
             }
         return None
 

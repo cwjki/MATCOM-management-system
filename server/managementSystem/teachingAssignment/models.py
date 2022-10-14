@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 
 
@@ -137,9 +138,9 @@ class SubjectDescription(models.Model):
 
     # Relationships
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    class_type = models.ForeignKey(ClassType, on_delete=models.PROTECT)
-    time_period = models.ForeignKey(TimePeriod, on_delete=models.PROTECT)
-    scholar_year = models.ForeignKey(CarmenTable, on_delete=models.CASCADE)
+    class_type = models.ForeignKey(ClassType, on_delete=models.CASCADE)
+    time_period = models.ForeignKey(TimePeriod, on_delete=models.CASCADE)
+    teaching_group = models.ForeignKey(TeachingGroup, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return '[' + str(self.subject) + '] ' + '[' + str(self.class_type) + '] ' + '[' + str(self.time_period) + ']'
