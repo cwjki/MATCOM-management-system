@@ -1,11 +1,8 @@
-from ast import keyword
-from asyncore import write
-from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from teachingAssignment.serializers import ProfessorSerializer
-from .models import Keyword, Place, Thesis, ThesisCommittee
+from .models import Keyword, Place, Thesis, ThesisCommittee, ThesisDefense
 
 
 class PlaceSerializer(ModelSerializer):
@@ -82,17 +79,24 @@ class ThesisCommitteeSerializer(ModelSerializer):
 
     def get_thesis(self, obj) -> dict:
         if obj.thesis:
+
             cotutors = ''
             for cotutor in obj.thesis.cotutors.all():
                 cotutors += cotutor.name + ' ' + cotutor.last_name + ', '
             cotutors = cotutors[0: -2]
+
+            keywords = ''
+            for keyword in obj.thesis.keywords.all():
+                keywords += keyword.name + ', '
+            keywords = keywords[0: -2]
 
             return {
                 "id": obj.thesis.id,
                 "title": obj.thesis.title,
                 "student": obj.thesis.student,
                 "tutor": obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name,
-                "cotutors": cotutors
+                "cotutors": cotutors,
+                "keywords": keywords
             }
         return None
 
@@ -125,4 +129,52 @@ class ThesisCommitteeSerializer(ModelSerializer):
 
     class Meta:
         model = ThesisCommittee
+        fields = '__all__'
+
+
+class ThesisDefenseSerializer(ModelSerializer):
+
+    thesis_committee_id = serializers.IntegerField(
+        required=True, write_only=True)
+    thesis_committee = serializers.SerializerMethodField()
+
+    place_id = serializers.IntegerField(required=True, write_only=True)
+    place = serializers.SerializerMethodField()
+
+    def get_thesis_committee(self, obj) -> dict:
+        if obj.thesis_committee:
+
+            keywords = ''
+            for keyword in obj.thesis_committee.thesis.keywords.all():
+                keywords += keyword.name + ', '
+            keywords = keywords[0: -2]
+
+            cotutors = ''
+            for cotutor in obj.thesis_committee.thesis.cotutors.all():
+                cotutors += cotutor.name + ' ' + cotutor.last_name + ', '
+            cotutors = cotutors[0: -2]
+
+            return {
+                "id": obj.thesis_committee.id,
+                "secretary": obj.thesis_committee.secretary.name + ' ' + obj.thesis_committee.secretary.last_name,
+                "president": obj.thesis_committee.president.name + ' ' + obj.thesis_committee.president.last_name,
+                "opponent": obj.thesis_committee.opponent.name + ' ' + obj.thesis_committee.opponent.last_name,
+                "tutor": obj.thesis_committee.thesis.tutor.name + ' ' + obj.thesis_committee.thesis.tutor.last_name,
+                "thesis_title": obj.thesis_committee.thesis.title,
+                "cotutors": cotutors,
+                "keywords": keywords
+            }
+
+        return None
+
+    def get_place(self, obj) -> dict:
+        if obj.place:
+            return {
+                "id": obj.place.id,
+                "name": obj.place.name
+            }
+        return None
+
+    class Meta:
+        model = ThesisDefense
         fields = '__all__'

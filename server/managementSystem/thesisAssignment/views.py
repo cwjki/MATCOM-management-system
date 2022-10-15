@@ -4,8 +4,8 @@ from rest_framework import viewsets, authentication, generics, mixins
 from rest_framework import filters, status
 
 
-from .models import Keyword, Place, Thesis, ThesisCommittee
-from .serializers import KeywordSerializer, PlaceSerializer, ThesisSerializer, ThesisCommitteeSerializer
+from .models import Keyword, Place, Thesis, ThesisCommittee, ThesisDefense
+from .serializers import KeywordSerializer, PlaceSerializer, ThesisDefenseSerializer, ThesisSerializer, ThesisCommitteeSerializer
 from .excels.get_csv import TC_CSV_GENERATOR
 
 
@@ -52,6 +52,17 @@ class ThesisCommitteeViewSet(viewsets.ModelViewSet):
     """
     queryset = ThesisCommittee.objects.all()
     serializer_class = ThesisCommitteeSerializer
+    filter_backends = [filters.SearchFilter]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class ThesisDefenseViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for thesis defense table.
+    """
+    queryset = ThesisDefense.objects.all()
+    serializer_class = ThesisDefenseSerializer
     filter_backends = [filters.SearchFilter]
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

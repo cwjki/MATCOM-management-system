@@ -45,3 +45,14 @@ class ThesisCommittee(models.Model):
 
     def __str__(self) -> str:
         return str(self.thesis) + ' ' + str(self.opponent) + ' ' + str(self.secretary)
+
+
+class ThesisDefense(models.Model):
+    date = models.DateField(null=True, blank=True)
+    time = models.TimeField(null=True, blank=True)
+
+    thesis_committee = models.ForeignKey(
+        ThesisCommittee, on_delete=models.CASCADE)
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+
+    # Relationships

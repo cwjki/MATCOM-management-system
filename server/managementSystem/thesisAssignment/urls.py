@@ -17,6 +17,8 @@ router.register(r'thesis', views.ThesisViewSet,
 router.register(r'thesis-committees', views.ThesisCommitteeViewSet,
                 basename="thesis-committes")
 
+router.register(r'thesis-defense', views.ThesisDefenseViewSet,
+                basename="thesis-defense")
 
 # The API URLs are now determined automatically by the router
 urlpatterns = [
