@@ -9,9 +9,6 @@ media
 # Backup files # 
 *.bak 
 
-# Graphviz files #
-*.dot
-*.png
 
 # If you are using PyCharm # 
 # User-specific stuff
