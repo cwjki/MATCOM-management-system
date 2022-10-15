@@ -1,4 +1,6 @@
 from ast import keyword
+from asyncore import write
+from pkg_resources import require
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
@@ -75,18 +77,24 @@ class ThesisCommitteeSerializer(ModelSerializer):
     president_id = serializers.IntegerField(required=True, write_only=True)
     president = serializers.SerializerMethodField()
 
-    thesis = ThesisSerializer()
+    thesis_id = serializers.IntegerField(required=True, write_only=True)
+    thesis = serializers.SerializerMethodField()
 
-    # def get_thesis(self, obj) -> dict:
-    #     if obj.thesis:
-    #         return {
-    #             "id": obj.thesis.id,
-    #             "title": obj.thesis.title,
-    #             "student": obj.thesis.student,
-    #             "tutor": obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name,
-    #             "cotutors": obj.thesis.cotutors
-    #         }
-    #     return None
+    def get_thesis(self, obj) -> dict:
+        if obj.thesis:
+            cotutors = ''
+            for cotutor in obj.thesis.cotutors.all():
+                cotutors += cotutor.name + ' ' + cotutor.last_name + ', '
+            cotutors = cotutors[0: -2]
+
+            return {
+                "id": obj.thesis.id,
+                "title": obj.thesis.title,
+                "student": obj.thesis.student,
+                "tutor": obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name,
+                "cotutors": cotutors
+            }
+        return None
 
     def get_opponent(self, obj) -> dict:
         if obj.opponent:
@@ -114,7 +122,6 @@ class ThesisCommitteeSerializer(ModelSerializer):
                 "last_name": obj.president.last_name
             }
         return None
-
 
     class Meta:
         model = ThesisCommittee
