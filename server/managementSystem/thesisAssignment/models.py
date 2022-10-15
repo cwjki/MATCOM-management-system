@@ -32,11 +32,9 @@ class Thesis(models.Model):
 
 
 class ThesisCommittee(models.Model):
-    date = models.DateField(null=True, blank=True)
-    time = models.TimeField(null=True, blank=True)
-
+    #     date = models.DateField(null=True, blank=True)
+    #     time = models.TimeField(null=True, blank=True)
     # Relationships
-    place = models.ForeignKey(Place, on_delete=models.DO_NOTHING)
     thesis = models.ForeignKey(Thesis, on_delete=models.CASCADE)
     opponent = models.ForeignKey(
         Professor, related_name='opponent', on_delete=models.CASCADE)

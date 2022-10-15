@@ -59,7 +59,6 @@ class ThesisCommitteeSerializerCSV(ModelSerializer):
     opponent = serializers.SerializerMethodField()
     secretary = serializers.SerializerMethodField()
     president = serializers.SerializerMethodField()
-    place = serializers.SerializerMethodField()
     thesis = serializers.SerializerMethodField()
 
     def get_thesis(self, obj) -> dict:
@@ -97,13 +96,6 @@ class ThesisCommitteeSerializerCSV(ModelSerializer):
             return {
                 "name": obj.president.name,
                 "last_name": obj.president.last_name
-            }
-        return None
-
-    def get_place(self, obj) -> dict:
-        if obj.place:
-            return {
-                "name": obj.place.name
             }
         return None
 

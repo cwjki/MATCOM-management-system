@@ -75,9 +75,6 @@ class ThesisCommitteeSerializer(ModelSerializer):
     president_id = serializers.IntegerField(required=True, write_only=True)
     president = serializers.SerializerMethodField()
 
-    place_id = serializers.IntegerField(required=True, write_only=True)
-    place = serializers.SerializerMethodField()
-
     thesis = ThesisSerializer()
 
     # def get_thesis(self, obj) -> dict:
@@ -118,13 +115,6 @@ class ThesisCommitteeSerializer(ModelSerializer):
             }
         return None
 
-    def get_place(self, obj) -> dict:
-        if obj.place:
-            return {
-                "id": obj.place.id,
-                "name": obj.place.name
-            }
-        return None
 
     class Meta:
         model = ThesisCommittee
