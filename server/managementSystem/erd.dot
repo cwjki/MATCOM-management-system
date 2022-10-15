@@ -1,6 +1,6 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
-  // Created: 2022-10-08 22:58
+  // Created: 2022-10-15 03:03
   // Cli Options: -a
 
   fontname = "Roboto"
@@ -1118,7 +1118,7 @@ digraph model_graph {
     
     
       <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto"><B>scholar_year</B></FONT>
+      <FONT FACE="Roboto"><B>subject</B></FONT>
       </TD><TD ALIGN="LEFT">
       <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
       </TD></TR>
@@ -1126,7 +1126,7 @@ digraph model_graph {
     
     
       <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto"><B>subject</B></FONT>
+      <FONT FACE="Roboto"><B>teaching_group</B></FONT>
       </TD><TD ALIGN="LEFT">
       <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
       </TD></TR>
@@ -1515,8 +1515,8 @@ digraph model_graph {
   teachingAssignment_models_SubjectDescription -> teachingAssignment_models_TimePeriod
   [label=" time_period (subjectdescription)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  teachingAssignment_models_SubjectDescription -> teachingAssignment_models_CarmenTable
-  [label=" scholar_year (subjectdescription)"] [arrowhead=none, arrowtail=dot, dir=both];
+  teachingAssignment_models_SubjectDescription -> teachingAssignment_models_TeachingGroup
+  [label=" teaching_group (subjectdescription)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   teachingAssignment_models_TeachingAssignment -> teachingAssignment_models_Professor
   [label=" professor (teachingassignment)"] [arrowhead=none, arrowtail=dot, dir=both];
