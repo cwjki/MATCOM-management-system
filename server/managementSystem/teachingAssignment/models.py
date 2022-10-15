@@ -162,3 +162,6 @@ class TeachingAssignment(models.Model):
 class TeachingPlanning(models.Model):
     # Relationships
     teaching_assignments = models.ManyToManyField(TeachingAssignment)
+
+
+## Cmenrtario a ver si git se arregla
