@@ -25,32 +25,6 @@ export default defineComponent({
             service: thesisCommitteeService,
             fields: [
                 {
-                    name: 'date',
-                    label: 'Fecha',
-                    type: 'date',
-                },
-                {
-                    name: 'time',
-                    label: 'Hora',
-                    type: 'time',
-                },
-                {
-                    name: 'place',
-                    label: 'Lugar',
-                    column: {
-                        transform(row) {
-                            return `${row.place.name}`;
-                        },
-                    },
-                    type: 'select',
-                    selectOptions: {
-                        list: placeService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
-                    rules: ['required'],
-                },
-                {
                     name: 'thesis',
                     label: 'Título',
                     column: {
@@ -80,16 +54,17 @@ export default defineComponent({
                     label: 'Tutor(es)',
                     column: {
                         transform(row) {
-                            var result =
-                                row.thesis.tutor.name +
-                                ' ' +
-                                row.thesis.tutor.last_name +
-                                ', ';
+                            var result = row.thesis.tutor;
 
-                            row.thesis.cotutors.forEach((tutor: any) => {
-                                result +=
-                                    tutor.name + ' ' + tutor.last_name + ', ';
-                            });
+                            if (row.thesis.cotutors.length > 0) {
+                                result += ', ';
+                            }
+                            result += row.thesis.cotutors;
+
+                            // row.thesis.cotutors.forEach((tutor: any) => {
+                            //     result +=
+                            //         tutor.name + ' ' + tutor.last_name + ', ';
+                            // });
                             return `${result}`;
                         },
                     },

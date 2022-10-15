@@ -69,7 +69,7 @@ export default defineComponent({
                                 result +=
                                     tutor.name + ' ' + tutor.last_name + ', ';
                             });
-                            return `${result}`;
+                            return `${result.slice(0, -2)}`;
                         },
                     },
                     type: 'select',
@@ -90,7 +90,7 @@ export default defineComponent({
                             row.keywords.forEach((keyword: any) => {
                                 result += keyword.name + ', ';
                             });
-                            return `${result}`;
+                            return `${result.slice(0, -2)}`;
                         },
                     },
                     type: 'select',
