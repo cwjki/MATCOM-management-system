@@ -161,6 +161,7 @@ class ThesisDefenseSerializer(ModelSerializer):
                 "opponent": obj.thesis_committee.opponent.name + ' ' + obj.thesis_committee.opponent.last_name,
                 "tutor": obj.thesis_committee.thesis.tutor.name + ' ' + obj.thesis_committee.thesis.tutor.last_name,
                 "thesis_title": obj.thesis_committee.thesis.title,
+                "student": obj.thesis_committee.thesis.student,
                 "cotutors": cotutors,
                 "keywords": keywords
             }
