@@ -19,6 +19,7 @@ import { ThesisModel } from 'src/models/thesisCommittee/thesis.model';
 import { ThesisCommitteeModel } from 'src/models/thesisCommittee/thesisCommittee.model';
 import { CrudServiceFactory } from './api.service';
 import { FacultyModel } from 'src/models/teachingAssignments/faculty.model';
+import { ThesisDefenseModel } from 'src/models/thesisCommittee/thesisDefense.model';
 
 export const RESOURCES = {
     profesors: '/teaching-assignment/professors/',
@@ -42,6 +43,7 @@ export const RESOURCES = {
     keywords: '/thesis-assignment/keywords/',
     thesis: '/thesis-assignment/thesis/',
     thesisCommittees: '/thesis-assignment/thesis-committees/',
+    thesisDefenses: '/thesis-assignment/thesis-defense/',
 };
 
 export const careerService = CrudServiceFactory<CareerModel>(RESOURCES.careers);
@@ -111,4 +113,8 @@ export const thesisService = CrudServiceFactory<ThesisModel>(RESOURCES.thesis);
 
 export const thesisCommitteeService = CrudServiceFactory<ThesisCommitteeModel>(
     RESOURCES.thesisCommittees
+);
+
+export const thesisDefenseService = CrudServiceFactory<ThesisDefenseModel>(
+    RESOURCES.thesisDefenses
 );

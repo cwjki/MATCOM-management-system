@@ -133,10 +133,16 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('src/pages/thesisCommittee/Thesis.vue'),
             },
             {
-                path: 'thesis-committee',
-                name: 'thesis-committee',
+                path: 'thesis-committees',
+                name: 'thesis-committees',
                 component: () =>
                     import('src/pages/thesisCommittee/ThesisCommittee.vue'),
+            },
+            {
+                path: 'thesis-defenses',
+                name: 'thesis-defenses',
+                component: () =>
+                    import('src/pages/thesisCommittee/ThesisDefense.vue'),
             },
         ],
     },
