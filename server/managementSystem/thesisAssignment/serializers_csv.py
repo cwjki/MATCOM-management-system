@@ -110,25 +110,20 @@ class ThesisDefenseSerializerCSV(ModelSerializer):
 
     def get_thesis_committee(self, obj) -> dict:
         if obj.thesis_committee:
-
-            keywords = ''
-            for keyword in obj.thesis_committee.thesis.keywords.all():
-                keywords += keyword.name + ', '
-            keywords = keywords[0: -2]
-
-            cotutors = ''
+            tutors = [obj.thesis_committee.thesis.tutor.name +
+                      ' ' + obj.thesis_committee.thesis.tutor.last_name]
             for cotutor in obj.thesis_committee.thesis.cotutors.all():
-                cotutors += cotutor.name + ' ' + cotutor.last_name + ', '
-            cotutors = cotutors[0: -2]
+                tutors.append(cotutor.name + ' ' + cotutor.last_name)
+
+            keywords = [keyword.name for keyword in obj.thesis_committee.thesis.keywords.all()]
 
             return {
                 "secretary": obj.thesis_committee.secretary.name + ' ' + obj.thesis_committee.secretary.last_name,
                 "president": obj.thesis_committee.president.name + ' ' + obj.thesis_committee.president.last_name,
                 "opponent": obj.thesis_committee.opponent.name + ' ' + obj.thesis_committee.opponent.last_name,
-                "tutor": obj.thesis_committee.thesis.tutor.name + ' ' + obj.thesis_committee.thesis.tutor.last_name,
+                "tutors": tutors,
                 "thesis_title": obj.thesis_committee.thesis.title,
                 "student": obj.thesis_committee.thesis.student,
-                "cotutors": cotutors,
                 "keywords": keywords
             }
 

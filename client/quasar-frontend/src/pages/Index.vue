@@ -5,6 +5,7 @@
 
         <c-s-v-download :url="taUrl" :fileName="taFileName" />
         <c-s-v-download :url="tcUrl" :fileName="tcFileName" />
+        <c-s-v-download :url="tdUrl" :fileName="tdFileName" />
     </q-page>
 </template>
 
@@ -17,14 +18,20 @@ export default defineComponent({
 
     setup(props, { emit }) {
         const taUrl = 'http://127.0.0.1:8000/teaching-assignment/csv-download/';
-        const tcUrl = 'http://127.0.0.1:8000/thesis-assignment/csv-download/';
-        const taFileName = 'Docencia';
-        const tcFileName = 'Tesis';
+        const tcUrl =
+            'http://127.0.0.1:8000/thesis-assignment/thesis-committee-csv-download/';
+        const tdUrl =
+            'http://127.0.0.1:8000/thesis-assignment/thesis-defense-csv-download/';
+        const taFileName = 'Asignación de Docencia';
+        const tcFileName = 'Tribunales de Tesis';
+        const tdFileName = 'Defensas de Tesis';
         return {
             taUrl,
             tcUrl,
+            tdUrl,
             taFileName,
             tcFileName,
+            tdFileName,
         };
     },
 });

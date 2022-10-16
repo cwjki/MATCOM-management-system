@@ -1,5 +1,3 @@
-Estudiantes,Tutor(es),Presidente,Secretario,Oponente,Tesis,Palabras Claves
-Juan Carlos Casteleiro Wong,"Fernando Raul Rodriguez Flores, Daniela González Beltrán",Marta Lourdes Baguer Díaz-Romañach,Ernesto Borrego Rodríguez,Yanet García,Sistema de gestión para el funcionamiento de un departamento docente en la facultad de Matemática y Computación de la UH,desarrollo web
-Adrián Rodríguez Portales,Damian Valdés Santiago,Marcos Torres,Manuel Valiente,Sheyla Artiles,Construcción de una base wavelet biortogonal y discreta que permita la detección de patrones en imágenes de mamografía digital,"diseño de filtros de wavelet
-imágenes digitales
-transformada shapelet discreta"
+Estudiantes,Tesis,Tutor(es),Presidente,Secretario,Oponente,Palabras Claves
+Juan Carlos Casteleiro Wong,Sistema de gestión para el funcionamiento de un departamento docente en la facultad de Matemática y Computación de la UH,"Fernando Raul Rodriguez Flores, Daniela González Beltrán",Marta Lourdes Baguer Díaz-Romañach,Ernesto Borrego Rodríguez,Yanet García,desarrollo web
+Adrián Rodríguez Portales,Construcción de una base wavelet biortogonal y discreta que permita la detección de patrones en imágenes de mamografía digital,Damian Valdés Santiago,Marcos Torres,Manuel Valiente,Sheyla Artiles,"diseño de filtros de wavelet, imágenes digitales, transformada shapelet discreta"
