@@ -256,15 +256,11 @@ class Command(BaseCommand):
 
         elif model_name == 'ThesisCommittee':
             for obj in data:
-                date = obj['date']
-                time = obj['time']
                 opponent: dict = eval(obj['opponent'])
                 secretary: dict = eval(obj['secretary'])
                 president: dict = eval(obj['president'])
                 thesis: dict = eval(obj['thesis'])
-                place: dict = eval(obj['place'])
 
-                place = Place.objects.get(name=place['name'])
                 opponent = Professor.objects.filter(
                     last_name=opponent['last_name']).filter(name=opponent['name'])[0]
                 secretary = Professor.objects.filter(
@@ -275,13 +271,10 @@ class Command(BaseCommand):
                     student=thesis['student']).filter(title=thesis['title'])[0]
 
                 thesis_committee = ThesisCommittee(
-                    date=date,
-                    time=time,
                     thesis=thesis,
                     opponent=opponent,
                     secretary=secretary,
                     president=president,
-                    place=place
                 )
                 thesis_committee.save()
 
