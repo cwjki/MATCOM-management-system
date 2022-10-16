@@ -10,7 +10,6 @@ class TC_CSV_GENERATOR():
         self.model_name = model_name
 
     def generate_csv(self):
-
         if self.model_name == 'ThesisCommittees':
             queryset = ThesisCommittee.objects.all()
             data = [
