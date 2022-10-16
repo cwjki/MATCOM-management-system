@@ -14,17 +14,14 @@ class TC_CSV_GENERATOR():
             ThesisCommitteeSerializerCSV(thesis_committee).data
             for thesis_committee in queryset]
 
-        fieldnames = ['Día', 'Hora', 'Lugar', 'Estudiantes', 'Tutor(es)',
+        fieldnames = ['Estudiantes', 'Tutor(es)',
                       'Presidente', 'Secretario', 'Oponente', 'Tesis', 'Palabras Claves']
 
         rows: List[dict] = []
         for thesis_committee in data:
             row: dict = {}
-            row['Día'] = thesis_committee['date']
-            row['Hora'] = thesis_committee['time']
-            row['Lugar'] = thesis_committee['place']['name']
             row['Estudiantes'] = thesis_committee['thesis']['student']
-            row['Tutor(es)'] = "\n".join(thesis_committee['thesis']['tutors'])
+            row['Tutor(es)'] = ", ".join(thesis_committee['thesis']['tutors'])
             row['Tesis'] = thesis_committee['thesis']['title']
             row['Palabras Claves'] = "\n".join(
                 thesis_committee['thesis']['keywords'])
