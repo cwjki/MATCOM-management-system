@@ -4,7 +4,7 @@ import os
 from django.core.management.base import BaseCommand, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
-from thesisAssignment.models import Place, Keyword, Thesis, ThesisCommittee
+from thesisAssignment.models import Place, Keyword, Thesis, ThesisCommittee, ThesisDefense
 
 
 class Command(BaseCommand):
@@ -27,7 +27,7 @@ class Command(BaseCommand):
                         'Semesters', 'TeachingGroups', 'TimePeriods',
                         'Careers', 'StudyPlans', 'CarmenTable', 'Departments',
                         'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments',
-                        'Places', 'Keywords', 'Thesis', 'ThesisCommittee']
+                        'Places', 'Keywords', 'Thesis', 'ThesisCommittees', 'ThesisDefenses']
 
         for model_name in models_names:
             self.fill_model(model_name)
@@ -254,17 +254,13 @@ class Command(BaseCommand):
                     keyword = Keyword.objects.filter(name=k['name'])[0]
                     thesis.keywords.add(keyword)
 
-        elif model_name == 'ThesisCommittee':
+        elif model_name == 'ThesisCommittees':
             for obj in data:
-                date = obj['date']
-                time = obj['time']
                 opponent: dict = eval(obj['opponent'])
                 secretary: dict = eval(obj['secretary'])
                 president: dict = eval(obj['president'])
                 thesis: dict = eval(obj['thesis'])
-                place: dict = eval(obj['place'])
 
-                place = Place.objects.get(name=place['name'])
                 opponent = Professor.objects.filter(
                     last_name=opponent['last_name']).filter(name=opponent['name'])[0]
                 secretary = Professor.objects.filter(
@@ -275,15 +271,35 @@ class Command(BaseCommand):
                     student=thesis['student']).filter(title=thesis['title'])[0]
 
                 thesis_committee = ThesisCommittee(
-                    date=date,
-                    time=time,
                     thesis=thesis,
                     opponent=opponent,
                     secretary=secretary,
                     president=president,
-                    place=place
                 )
                 thesis_committee.save()
+
+        elif model_name == 'ThesisDefenses':
+            for obj in data:
+                date = obj['date']
+                time = obj['time']
+                thesis_committee: dict = eval(obj['thesis_committee'])
+                place: dict = eval(obj['place'])
+
+                place = Place.objects.filter(name=place['name'])[0]
+
+                thesis = Thesis.objects.filter(
+                    student=thesis_committee['student']).filter(title=thesis_committee['thesis_title'])[0]
+
+                thesis_committee = ThesisCommittee.objects.filter(
+                    thesis=thesis)[0]
+
+                thesis_defense = ThesisDefense(
+                    date=date,
+                    time=time,
+                    thesis_committee=thesis_committee,
+                    place=place
+                )
+                thesis_defense.save()
 
     def get_model_data(self, model_name: str):
         data: list[dict] = []
@@ -345,7 +361,9 @@ class Command(BaseCommand):
         THESIS_DIR = os.path.join(
             CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis.csv')
         THESIS_COMMITTEE_DIR = os.path.join(
-            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis_committee.csv')
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis_committees.csv')
+        THESIS_DEFENSE_DIR = os.path.join(
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis_defenses.csv')
 
         if model_name == 'Careers':
             file_dir = CAREER_DIR
@@ -383,8 +401,10 @@ class Command(BaseCommand):
             file_dir = KEYWORD_DIR
         elif model_name == 'Thesis':
             file_dir = THESIS_DIR
-        elif model_name == 'ThesisCommittee':
+        elif model_name == 'ThesisCommittees':
             file_dir = THESIS_COMMITTEE_DIR
+        elif model_name == 'ThesisDefenses':
+            file_dir = THESIS_DEFENSE_DIR
 
         else:
             file_dir = 'error'

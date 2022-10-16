@@ -1,3 +1,4 @@
 professor_name,professor_last_name,career,study_plan,subject,class_type,time_period,teaching_group,percent,group
-Aymée,Marrero Severo,Ciencias de la Computación,E,Compilación,Conferencia,enero - julio,M1,125,23
-Sheyla,Artiles,Ciencias de la Computación,E,Compilación,Clase Práctica,enero - julio,C1,34,4
+Aymée,Marrero Severo,Ciencias de la Computación,E (COVID),Matemática Numérica,Conferencia,enero - julio,M1,100,12
+Gemayqzel,Bouza Allende,Ciencias de la Computación,E (COVID),Matemática Numérica,Conferencia,enero - julio,M1,7,34
+Gemayqzel,Bouza Allende,Matemática,E,Programación y Algoritmos,Clase Práctica,enero - julio,C1,100,1

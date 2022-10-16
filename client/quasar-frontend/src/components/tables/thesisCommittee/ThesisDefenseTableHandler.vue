@@ -4,9 +4,8 @@
 
 <script lang="ts">
 import {
+    thesisDefenseService,
     thesisCommitteeService,
-    thesisService,
-    professorService,
     placeService,
 } from 'src/services';
 import { defineComponent, ref } from 'vue';
@@ -15,28 +14,56 @@ import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTa
 
 export default defineComponent({
     components: { GenericCrudDataTable },
-    name: 'thesisCommitteeHandler',
+    name: 'thesisDefenseHandler',
     props: {},
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Tribunales de Tesis',
-            singularLabel: 'Tribunal',
-            service: thesisCommitteeService,
+            name: 'Defensas de Tesis',
+            singularLabel: 'Defensa de Tesis',
+            service: thesisDefenseService,
             fields: [
                 {
-                    name: 'thesis',
-                    label: 'Título',
+                    name: 'date',
+                    label: 'Fecha',
+                    type: 'date',
+                    rules: ['required'],
+                },
+                {
+                    name: 'time',
+                    label: 'Hora',
+                    type: 'time',
+                    rules: ['required'],
+                },
+                {
+                    name: 'place',
+                    label: 'Lugar',
                     column: {
                         transform(row) {
-                            return `${row.thesis.title}`;
+                            return `${row.place.name}`;
                         },
                     },
                     type: 'select',
                     selectOptions: {
-                        list: thesisService.list,
+                        list: placeService.list,
                         value: 'id',
-                        label: 'title',
+                        label: 'name',
+                    },
+                    rules: ['required'],
+                },
+                {
+                    name: 'thesis_committee',
+                    label: 'Tesis',
+                    column: {
+                        transform(row) {
+                            return `${row.thesis_committee.thesis_title}`;
+                        },
+                    },
+                    type: 'select',
+                    selectOptions: {
+                        list: thesisCommitteeService.list,
+                        value: 'id',
+                        label: 'id',
                     },
                     rules: ['required'],
                 },
@@ -45,7 +72,7 @@ export default defineComponent({
                     label: 'Estudiante',
                     column: {
                         transform(row) {
-                            return `${row.thesis.student}`;
+                            return `${row.thesis_committee.student}`;
                         },
                     },
                 },
@@ -54,17 +81,11 @@ export default defineComponent({
                     label: 'Tutor(es)',
                     column: {
                         transform(row) {
-                            var result = row.thesis.tutor;
-
-                            if (row.thesis.cotutors.length > 0) {
+                            var result = row.thesis_committee.tutor;
+                            if (row.thesis_committee.cotutors.length > 0) {
                                 result += ', ';
                             }
-                            result += row.thesis.cotutors;
-
-                            // row.thesis.cotutors.forEach((tutor: any) => {
-                            //     result +=
-                            //         tutor.name + ' ' + tutor.last_name + ', ';
-                            // });
+                            result += row.thesis_committee.cotutors;
                             return `${result}`;
                         },
                     },
@@ -74,58 +95,36 @@ export default defineComponent({
                     label: 'Presidente',
                     column: {
                         transform(row) {
-                            return `${
-                                row.president.name +
-                                ' ' +
-                                row.president.last_name
-                            }`;
+                            return `${row.thesis_committee.president}`;
                         },
                     },
-                    type: 'select',
-                    selectOptions: {
-                        list: professorService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
-                    rules: ['required'],
                 },
                 {
                     name: 'secretary',
                     label: 'Secretario',
                     column: {
                         transform(row) {
-                            return `${
-                                row.secretary.name +
-                                ' ' +
-                                row.secretary.last_name
-                            }`;
+                            return `${row.thesis_committee.secretary}`;
                         },
                     },
-                    type: 'select',
-                    selectOptions: {
-                        list: professorService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
-                    rules: ['required'],
                 },
                 {
                     name: 'opponent',
                     label: 'Oponente',
                     column: {
                         transform(row) {
-                            return `${
-                                row.opponent.name + ' ' + row.opponent.last_name
-                            }`;
+                            return `${row.thesis_committee.opponent}`;
                         },
                     },
-                    type: 'select',
-                    selectOptions: {
-                        list: professorService.list,
-                        value: 'id',
-                        label: 'name',
+                },
+                {
+                    name: 'keywords',
+                    label: 'Palabras Claves',
+                    column: {
+                        transform(row) {
+                            return `${row.thesis_committee.keywords}`;
+                        },
                     },
-                    rules: ['required'],
                 },
             ],
             actions: {

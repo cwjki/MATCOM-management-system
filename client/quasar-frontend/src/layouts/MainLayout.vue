@@ -263,7 +263,13 @@ const thesisCommitteeLinks = [
         title: 'Tribunal de Tesis',
         caption: 'quasar.dev',
         icon: 'groups',
-        link: 'thesis-committee',
+        link: 'thesis-committees',
+    },
+    {
+        title: 'Defensa de Tesis',
+        caption: 'quasar.dev',
+        icon: 'calendar_month',
+        link: 'thesis-defenses',
     },
 ];
 

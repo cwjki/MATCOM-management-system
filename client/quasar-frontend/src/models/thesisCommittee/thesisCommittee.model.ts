@@ -3,4 +3,5 @@ export interface ThesisCommitteeModel {
     thesis: string;
     opponent: string;
     secretary: string;
+    president: string;
 }

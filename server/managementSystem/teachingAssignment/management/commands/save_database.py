@@ -4,8 +4,8 @@ from django.core.management.base import BaseCommand, CommandParser
 
 from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
 from ...serializers_csv import CareerSerializerCSV, CarmenTableSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, SubjectDescriptionSerializerCSV, SubjectSerializerCSV, TeachingAssignmentSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
-from thesisAssignment.models import Place, Keyword, Thesis, ThesisCommittee
-from thesisAssignment.serializers_csv import PlaceSerializerCSV, KeywordSerializerCSV, ThesisCommitteeSerializerCSV, ThesisSerializerCSV
+from thesisAssignment.models import Place, Keyword, Thesis, ThesisCommittee, ThesisDefense
+from thesisAssignment.serializers_csv import PlaceSerializerCSV, KeywordSerializerCSV, ThesisCommitteeSerializerCSV, ThesisSerializerCSV, ThesisDefenseSerializerCSV
 
 
 class Command(BaseCommand):
@@ -28,7 +28,7 @@ class Command(BaseCommand):
                         'Semesters', 'TeachingGroups', 'TimePeriods',
                         'Careers', 'StudyPlans', 'CarmenTable', 'Departments',
                         'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments',
-                        'Places', 'Keywords', 'Thesis', 'ThesisCommittee']
+                        'Places', 'Keywords', 'Thesis', 'ThesisCommittees', 'ThesisDefenses']
 
         for model_name in models_names:
             self.save_model(model_name)
@@ -160,11 +160,17 @@ class Command(BaseCommand):
             data = [ThesisSerializerCSV(
                 thesis).data for thesis in queryset]
 
-        elif model_name == 'ThesisCommittee':
+        elif model_name == 'ThesisCommittees':
             queryset = ThesisCommittee.objects.all()
-            fieldnames = ['date', 'time', 'thesis', 'place',
-                          'opponent', 'secretary', 'president']
+            fieldnames = ['thesis', 'opponent', 'secretary', 'president']
             data = [ThesisCommitteeSerializerCSV(
+                thesis_committee).data for thesis_committee in queryset]
+
+        elif model_name == 'ThesisDefenses':
+            queryset = ThesisDefense.objects.all()
+            fieldnames = ['date', 'time', 'place',
+                          'thesis_committee', 'student']
+            data = [ThesisDefenseSerializerCSV(
                 thesis_committee).data for thesis_committee in queryset]
 
         return fieldnames, data
@@ -208,7 +214,9 @@ class Command(BaseCommand):
         THESIS_DIR = os.path.join(
             CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis.csv')
         THESIS_COMMITTEE_DIR = os.path.join(
-            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis_committee.csv')
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis_committees.csv')
+        THESIS_DEFENSE_DIR = os.path.join(
+            CURRENT_PATH, '../../../thesisAssignment/excels/data/thesis_defenses.csv')
 
         if model_name == 'Careers':
             file_dir = CAREER_DIR
@@ -246,8 +254,10 @@ class Command(BaseCommand):
             file_dir = KEYWORD_DIR
         elif model_name == 'Thesis':
             file_dir = THESIS_DIR
-        elif model_name == 'ThesisCommittee':
+        elif model_name == 'ThesisCommittees':
             file_dir = THESIS_COMMITTEE_DIR
+        elif model_name == 'ThesisDefenses':
+            file_dir = THESIS_DEFENSE_DIR
         else:
             file_dir = 'error'
         return file_dir

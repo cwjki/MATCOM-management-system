@@ -1,9 +1,8 @@
-from ast import keyword
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from teachingAssignment.serializers import ProfessorSerializer
-from .models import Keyword, Place, Thesis, ThesisCommittee
+from .models import Keyword, Place, Thesis, ThesisCommittee, ThesisDefense
 
 
 class PlaceSerializer(ModelSerializer):
@@ -75,21 +74,31 @@ class ThesisCommitteeSerializer(ModelSerializer):
     president_id = serializers.IntegerField(required=True, write_only=True)
     president = serializers.SerializerMethodField()
 
-    place_id = serializers.IntegerField(required=True, write_only=True)
-    place = serializers.SerializerMethodField()
+    thesis_id = serializers.IntegerField(required=True, write_only=True)
+    thesis = serializers.SerializerMethodField()
 
-    thesis = ThesisSerializer()
+    def get_thesis(self, obj) -> dict:
+        if obj.thesis:
 
-    # def get_thesis(self, obj) -> dict:
-    #     if obj.thesis:
-    #         return {
-    #             "id": obj.thesis.id,
-    #             "title": obj.thesis.title,
-    #             "student": obj.thesis.student,
-    #             "tutor": obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name,
-    #             "cotutors": obj.thesis.cotutors
-    #         }
-    #     return None
+            cotutors = ''
+            for cotutor in obj.thesis.cotutors.all():
+                cotutors += cotutor.name + ' ' + cotutor.last_name + ', '
+            cotutors = cotutors[0: -2]
+
+            keywords = ''
+            for keyword in obj.thesis.keywords.all():
+                keywords += keyword.name + ', '
+            keywords = keywords[0: -2]
+
+            return {
+                "id": obj.thesis.id,
+                "title": obj.thesis.title,
+                "student": obj.thesis.student,
+                "tutor": obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name,
+                "cotutors": cotutors,
+                "keywords": keywords
+            }
+        return None
 
     def get_opponent(self, obj) -> dict:
         if obj.opponent:
@@ -118,6 +127,47 @@ class ThesisCommitteeSerializer(ModelSerializer):
             }
         return None
 
+    class Meta:
+        model = ThesisCommittee
+        fields = '__all__'
+
+
+class ThesisDefenseSerializer(ModelSerializer):
+
+    thesis_committee_id = serializers.IntegerField(
+        required=True, write_only=True)
+    thesis_committee = serializers.SerializerMethodField()
+
+    place_id = serializers.IntegerField(required=True, write_only=True)
+    place = serializers.SerializerMethodField()
+
+    def get_thesis_committee(self, obj) -> dict:
+        if obj.thesis_committee:
+
+            keywords = ''
+            for keyword in obj.thesis_committee.thesis.keywords.all():
+                keywords += keyword.name + ', '
+            keywords = keywords[0: -2]
+
+            cotutors = ''
+            for cotutor in obj.thesis_committee.thesis.cotutors.all():
+                cotutors += cotutor.name + ' ' + cotutor.last_name + ', '
+            cotutors = cotutors[0: -2]
+
+            return {
+                "id": obj.thesis_committee.id,
+                "secretary": obj.thesis_committee.secretary.name + ' ' + obj.thesis_committee.secretary.last_name,
+                "president": obj.thesis_committee.president.name + ' ' + obj.thesis_committee.president.last_name,
+                "opponent": obj.thesis_committee.opponent.name + ' ' + obj.thesis_committee.opponent.last_name,
+                "tutor": obj.thesis_committee.thesis.tutor.name + ' ' + obj.thesis_committee.thesis.tutor.last_name,
+                "thesis_title": obj.thesis_committee.thesis.title,
+                "student": obj.thesis_committee.thesis.student,
+                "cotutors": cotutors,
+                "keywords": keywords
+            }
+
+        return None
+
     def get_place(self, obj) -> dict:
         if obj.place:
             return {
@@ -127,5 +177,5 @@ class ThesisCommitteeSerializer(ModelSerializer):
         return None
 
     class Meta:
-        model = ThesisCommittee
+        model = ThesisDefense
         fields = '__all__'

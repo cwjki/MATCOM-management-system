@@ -129,6 +129,7 @@ class ProfessorSerializer(ModelSerializer):
         required=True, write_only=True)
     teaching_category = serializers.SerializerMethodField()
 
+    faculty_id = serializers.IntegerField(required=True, write_only=True)
     faculty = serializers.SerializerMethodField()
 
     def get_faculty(self, obj) -> dict:
