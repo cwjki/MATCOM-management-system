@@ -7,7 +7,7 @@ from ..serializers import TeachingAssignmentSerializer
 class TeachingAssignmentInfo:
     def __init__(self) -> None:
         self.subject_name = ''
-        self.scholar_year = ''
+        self.teaching_group = ''
         self.conf_professors = ''
         self.conf_groups = 0
         self.conf_hours = 0
@@ -21,7 +21,7 @@ class TeachingAssignmentInfo:
     def __repr__(self) -> str:
         return (
             f'Asignatura: {self.subject_name} \n'
-            f'Año: {self.scholar_year} \n'
+            f'Año: {self.teaching_group} \n'
             f'Grupos: {self.conf_groups}/{self.cp_groups} \n'
             f'Horas: {self.number_of_hours} \n'
             f'Profesores de C: {self.conf_professors} \n'
@@ -49,7 +49,7 @@ class TeachingAssignmentInfoCollection:
         '''Compute and save all the important data of a teaching assignment'''
         # get data
         subject_name = teaching_assignment['subject_description']['name']
-        scholar_year = teaching_assignment['subject_description']['scholar_year']
+        teaching_group = teaching_assignment['subject_description']['teaching_group']
         class_type = teaching_assignment['subject_description']['class_type']
         number_of_hours = teaching_assignment['subject_description']['number_of_hours']
         total_hours = teaching_assignment['subject_description']['total_hours']
@@ -79,16 +79,16 @@ class TeachingAssignmentInfoCollection:
             pass
 
         ta.subject_name = subject_name
-        ta.scholar_year = scholar_year
+        ta.teaching_group = teaching_group
         ta.number_of_hours = total_hours
 
     def contains(self, teaching_assignment: dict):
         '''
-        Check if the teaching assignment already exists looking for the subject_name and scholar_year field.
+        Check if the teaching assignment already exists looking for the subject_name and teaching_group field.
         Returns a tuple <True or False>, <Instance or None>
         '''
         for ta in self.teaching_assignments:
-            if ta.subject_name == teaching_assignment['subject_description']['name'] and ta.scholar_year == teaching_assignment['subject_description']['scholar_year']:
+            if ta.subject_name == teaching_assignment['subject_description']['name'] and ta.teaching_group == teaching_assignment['subject_description']['teaching_group']:
                 return True, ta
         return False, None
 
@@ -113,6 +113,7 @@ class TA_CSV_GENERATOR():
         ta_info.proccess_info(data)
 
         rows = self.construct_fields(ta_info)
+        print(data)
         fieldnames = ['Facultad', 'Tipo curso', 'Año',
                       'Asignatura', 'Horas', 'G', 'Profesor']
 
@@ -127,7 +128,7 @@ class TA_CSV_GENERATOR():
             row: dict = {}
             row['Facultad'] = ta.faculty
             row['Tipo curso'] = ta.course_type
-            row['Año'] = ta.scholar_year
+            row['Año'] = ta.teaching_group
             row['Asignatura'] = ta.subject_name
             row['Horas'] = ta.number_of_hours
             row['G'] = f'{ta.conf_groups}/{ta.cp_groups}'
