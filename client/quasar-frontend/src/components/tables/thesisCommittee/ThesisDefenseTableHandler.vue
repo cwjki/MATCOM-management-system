@@ -56,14 +56,16 @@ export default defineComponent({
                     label: 'Tesis',
                     column: {
                         transform(row) {
-                            return `${row.thesis_committee.thesis_title}`;
+                            return `${row.thesis_committee.thesis.title}`;
                         },
                     },
                     type: 'select',
                     selectOptions: {
                         list: thesisCommitteeService.list,
                         value: 'id',
-                        label: 'id',
+                        label: 'thesis_committee',
+                        refactorValue: (value) =>
+                            value.thesis ? `${value.thesis.title}` : '',
                     },
                     rules: ['required'],
                 },

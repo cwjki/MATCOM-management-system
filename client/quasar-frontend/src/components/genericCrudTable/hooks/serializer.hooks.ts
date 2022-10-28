@@ -14,8 +14,13 @@ export const useSerializer = (obj: Dictionary, fields: FieldModel[]) => {
                     if (!opt) {
                         alert(' i put a select field without a selectOpt');
                     } else if (obj[f.name]) {
-                        payload[f.name + '_id'] =
-                            obj[f.name][opt.selectOptions.value];
+                        if (opt.selectOptions.multiple) {
+                            payload[f.name + '_id'] = (
+                                obj[f.name] as any[]
+                            ).map((x) => x[opt.selectOptions.value]);
+                        } else
+                            payload[f.name + '_id'] =
+                                obj[f.name][opt.selectOptions.value];
                     }
                 } else payload[f.name] = obj[f.name];
             });

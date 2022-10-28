@@ -266,7 +266,7 @@ const thesisCommitteeLinks = [
         link: 'thesis-committees',
     },
     {
-        title: 'Defensa de Tesis',
+        title: 'Defensas de Tesis',
         caption: 'quasar.dev',
         icon: 'calendar_month',
         link: 'thesis-defenses',

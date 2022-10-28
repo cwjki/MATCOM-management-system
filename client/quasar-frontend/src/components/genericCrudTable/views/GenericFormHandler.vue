@@ -17,7 +17,7 @@
 
         <q-form class="full-width row justify-center" autofocus ref="myform">
             <q-card-section
-                v-for="(field, i) in fields"
+                v-for="(field, i) in fields.filter((x) => !!x.type)"
                 :class="`q-pa-sm q-pb-none ${getResponsive(field)}`"
                 :key="i"
             >

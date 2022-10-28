@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
+from teachingAssignment.models import Professor
+
 from .models import Keyword, Place, Thesis, ThesisCommittee, ThesisDefense
 
 
@@ -21,6 +23,10 @@ class ThesisSerializer(ModelSerializer):
     tutor = serializers.SerializerMethodField()
 
     cotutors = serializers.SerializerMethodField()
+    cotutors_id = serializers.PrimaryKeyRelatedField(
+        required=False, many=True, read_only=False, queryset=Professor.objects.all(), source='cotutors')
+    keywords_id = serializers.PrimaryKeyRelatedField(
+        required=False, many=True, read_only=False, queryset=Keyword.objects.all(), source='keywords')
     keywords = serializers.SerializerMethodField()
 
     def get_tutor(self, obj) -> dict:
@@ -42,7 +48,7 @@ class ThesisSerializer(ModelSerializer):
                     "last_name": tutor.last_name,
                 })
             return data
-        return None
+        return []
 
     def get_keywords(self, obj) -> dict:
         if obj.keywords:
@@ -159,7 +165,10 @@ class ThesisDefenseSerializer(ModelSerializer):
                 "president": obj.thesis_committee.president.name + ' ' + obj.thesis_committee.president.last_name,
                 "opponent": obj.thesis_committee.opponent.name + ' ' + obj.thesis_committee.opponent.last_name,
                 "tutor": obj.thesis_committee.thesis.tutor.name + ' ' + obj.thesis_committee.thesis.tutor.last_name,
-                "thesis_title": obj.thesis_committee.thesis.title,
+                "thesis": {
+                    "title": obj.thesis_committee.thesis.title,
+                    "id": obj.thesis_committee.thesis.id,
+                },
                 "student": obj.thesis_committee.thesis.student,
                 "cotutors": cotutors,
                 "keywords": keywords
