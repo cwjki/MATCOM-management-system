@@ -3,31 +3,15 @@ from django.http import HttpResponse, HttpResponseNotFound
 from rest_framework import permissions, viewsets, authentication, generics, mixins
 from rest_framework import filters, status
 from rest_framework.decorators import action
-from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
-from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import Career, CarmenTable, Faculty, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester, TeachingPlanning
-from .serializers import CarmenTableSerializer, FacultySerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, UserSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer, MyTokenObtainPairSerializer
+from .serializers import CarmenTableSerializer, FacultySerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer
 from .serializers_csv import CareerSerializerCSV
 from .permissions import IsOwnerOrReadOnly
 from .optimization.optimization import OptimizationModel
 from .excels.get_csv import TA_CSV_GENERATOR
-
-# JSON Web Token Authentication
-
-
-class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
-
-
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list` and `retrieve` actions for users.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 
 class CSVDownloadView(mixins.ListModelMixin, generics.GenericAPIView):

@@ -1,14 +1,10 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from rest_framework.authtoken.views import obtain_auth_token
 from teachingAssignment import views
 
 
 # Create a router and register our viewsets with it
 router = DefaultRouter()
-
-router.register(r'users', views.UserViewSet,
-                basename="users")
 
 router.register(r'careers', views.CareerViewSet,
                 basename="careers")
@@ -63,7 +59,6 @@ router.register(r'semesters', views.SemesterViewSet,
 
 # The API URLs are now determined automatically by the router
 urlpatterns = [
-    path('auth/', obtain_auth_token),
     path('csv-download/', views.CSVDownloadView.as_view()),
     path('generate-solution-ta/', views.GenerateSolutionTAView.as_view()),
     path('', include(router.urls)),

@@ -1,7 +1,7 @@
 import os
 from django.http import HttpResponse, HttpResponseNotFound
-from rest_framework import viewsets, authentication, generics, mixins
-from rest_framework import filters, status
+from rest_framework import viewsets, generics, mixins
+from rest_framework import filters
 
 
 from .models import Keyword, Place, Thesis, ThesisCommittee, ThesisDefense
