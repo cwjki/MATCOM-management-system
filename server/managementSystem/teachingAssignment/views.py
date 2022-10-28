@@ -15,12 +15,6 @@ from .permissions import IsOwnerOrReadOnly
 from .optimization.optimization import OptimizationModel
 from .excels.get_csv import TA_CSV_GENERATOR
 
-# JSON Web Token Authentication
-
-
-class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
-
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
