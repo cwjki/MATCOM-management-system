@@ -1,19 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from django.contrib.auth.models import User
 
 from .models import CarmenTable, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, TeachingPlanning, TimePeriod
-
-
-class UserSerializer(ModelSerializer):
-    # snippets = serializers.PrimaryKeyRelatedField(
-    #     many=True, queryset=Snippet.objects.all())
-
-    # careers = serializers.PrimaryKeyRelatedField(
-    #     many=True, queryset=Career.objects.all())
-    class Meta:
-        model = User
-        fields = '__all__'
 
 
 class CareerSerializer(ModelSerializer):

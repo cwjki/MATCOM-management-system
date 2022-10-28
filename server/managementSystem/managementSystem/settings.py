@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'corsheaders',
 
-    'auth',
     'teachingAssignment',
     'thesisAssignment',
 
