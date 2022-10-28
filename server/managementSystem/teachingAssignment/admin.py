@@ -18,5 +18,3 @@ admin.site.register(CarmenTable)
 admin.site.register(SubjectDescription)
 admin.site.register(TeachingAssignment)
 admin.site.register(TeachingPlanning)
-
-

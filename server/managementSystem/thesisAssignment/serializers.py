@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
-from teachingAssignment.serializers import ProfessorSerializer
 from .models import Keyword, Place, Thesis, ThesisCommittee, ThesisDefense
 
 
