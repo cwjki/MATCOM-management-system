@@ -81,8 +81,7 @@ class CareerViewSet(viewsets.ModelViewSet):
     serializer_class = CareerSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']
-    # def perform_create(self, serializer):
-    #     serializer.save(owner=self.request.user)
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class CareerCSVViewSet(viewsets.ModelViewSet):
