@@ -50,6 +50,34 @@
 
                 <slot name="g-table-right-actions" />
 
+                <q-select
+                    v-model="filterObj[f.name]"
+                    @update:model-value="onChangeFilter"
+                    v-for="(f, i) in fieldToFilter"
+                    :label="f.label"
+                    dense
+                    :options="filterOptions[f.name] || []"
+                    :option-value="f.field.selectOptions.value"
+                    :option-label="
+                        f.field.selectOptions.refactorValue ||
+                        f.field.selectOptions.label
+                    "
+                    emit-value
+                    :readonly="!filterOptions[f.name]"
+                    :key="`f-${i}`"
+                    class="q-mx-md"
+                    map-options
+                    use-chips
+                    debounce="300"
+                    outlined
+                    borderless
+                    style="width: 200px !important"
+                >
+                    <template v-slot:append>
+                        <q-icon name="search" />
+                    </template>
+                </q-select>
+
                 <q-input
                     v-model="filter"
                     :placeholder="config.filterLabel"
@@ -187,7 +215,12 @@ export default defineComponent({
             actions,
             isActionOnTable,
             pagination,
+
             filter,
+            fieldToFilter,
+            filterObj,
+            filterOptions,
+            onChangeFilter,
 
             load,
             onRequest,
@@ -263,7 +296,12 @@ export default defineComponent({
             actions,
             isActionOnTable,
             pagination,
+
             filter,
+            fieldToFilter,
+            filterObj,
+            filterOptions,
+            onChangeFilter,
 
             load,
             onRequest,

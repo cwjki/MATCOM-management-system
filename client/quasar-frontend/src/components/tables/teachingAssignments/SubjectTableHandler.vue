@@ -53,6 +53,7 @@ export default defineComponent({
                             return `${row.career.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: careerService.list,
@@ -69,6 +70,7 @@ export default defineComponent({
                         },
                     },
                     type: 'select',
+                    filter: true,
                     selectOptions: {
                         list: departmentService.list,
                         value: 'id',
@@ -78,6 +80,7 @@ export default defineComponent({
                 {
                     name: 'semester',
                     label: 'Semestre',
+                    filter: true,
                     column: {
                         transform(row) {
                             return `${row.semester.name}`;

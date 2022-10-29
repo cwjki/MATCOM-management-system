@@ -34,6 +34,8 @@ export interface FieldBasic {
 
     rules?: string[];
 
+    filter?: boolean;
+
     form?: {
         responsiveOptions: {
             xs?: number;
