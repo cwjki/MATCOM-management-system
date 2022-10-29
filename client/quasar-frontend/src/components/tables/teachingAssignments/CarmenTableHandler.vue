@@ -8,7 +8,7 @@ import {
     timePeriodService,
     semesterService,
     teachingGroupService,
-studyPlanService,
+    studyPlanService,
 } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
@@ -33,6 +33,7 @@ export default defineComponent({
                             return `${row.teaching_group.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: teachingGroupService.list,
@@ -49,6 +50,7 @@ export default defineComponent({
                             return `${row.study_plan.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: studyPlanService.list,
@@ -65,6 +67,7 @@ export default defineComponent({
                             return `${row.semester.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: semesterService.list,

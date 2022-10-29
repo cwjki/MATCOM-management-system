@@ -71,7 +71,7 @@
                     debounce="300"
                     outlined
                     borderless
-                    style="width: 200px !important"
+                    style="width: 170px !important"
                 >
                     <template v-slot:append>
                         <q-icon name="search" />

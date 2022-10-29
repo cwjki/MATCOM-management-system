@@ -60,6 +60,7 @@ export default defineComponent({
                             return `${row.teaching_group.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: teachingGroupService.list,
@@ -76,6 +77,7 @@ export default defineComponent({
                             return `${row.class_type.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: classTypeService.list,
@@ -105,6 +107,7 @@ export default defineComponent({
                             return `${row.time_period.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: timePeriodService.list,

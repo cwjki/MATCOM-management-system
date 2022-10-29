@@ -185,6 +185,7 @@ class ProfessorViewSet(viewsets.ModelViewSet):
     serializer_class = ProfessorSerializer
     search_fields = ['name', 'last_name', 'department__name',
                      'scientific_degree__name', 'teaching_category__name']
+    filterset_fields = ['department', 'scientific_degree', 'teaching_category']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -195,8 +196,8 @@ class SubjectViewSet(viewsets.ModelViewSet):
     """
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    filterset_fields = ['department', 'career', 'study_plan', 'semester']
     search_fields = ['name', 'department__name']
+    filterset_fields = ['department', 'career', 'study_plan', 'semester']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -209,6 +210,7 @@ class SubjectDescriptionViewSet(viewsets.ModelViewSet):
     serializer_class = SubjectDescriptionSerializer
     search_fields = ['subject__name',
                      'class_type__name', 'teaching_group__name', 'time_period__name']
+    filterset_fields = ['teaching_group', 'class_type', 'time_period']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     @action(detail=True)
@@ -237,6 +239,8 @@ class TeachingAssignmentViewSet(viewsets.ModelViewSet):
                      'professor__name', 'professor__last_name',
                      'subject_description__class_type__name',
                      'subject_description__teaching_group__name']
+    filterset_fields = ['professor']
+
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -259,4 +263,6 @@ class CarmenTableViewSet(viewsets.ModelViewSet):
     queryset = CarmenTable.objects.all()
     serializer_class = CarmenTableSerializer
     search_fields = ['teaching_group__name', 'study_plan__name']
+    filterset_fields = ['teaching_group', 'study_plan', 'semester']
+
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]

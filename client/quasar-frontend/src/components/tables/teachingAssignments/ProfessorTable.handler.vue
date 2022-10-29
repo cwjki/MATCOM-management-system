@@ -46,15 +46,15 @@ export default defineComponent({
                     },
                     rules: ['required'],
                 },
-                {
-                    name: 'faculty',
-                    label: 'Facultad',
-                    column: {
-                        transform(row) {
-                            return `${row.faculty.name}`;
-                        },
-                    },
-                },
+                // {
+                //     name: 'faculty',
+                //     label: 'Facultad',
+                //     column: {
+                //         transform(row) {
+                //             return `${row.faculty.name}`;
+                //         },
+                //     },
+                // },
                 {
                     name: 'department',
                     label: 'Departamento',
@@ -63,6 +63,7 @@ export default defineComponent({
                             return `${row.department.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: departmentService.list,
@@ -79,6 +80,7 @@ export default defineComponent({
                             return `${row.scientific_degree.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: scientificDegreeService.list,
@@ -95,6 +97,7 @@ export default defineComponent({
                             return `${row.teaching_category.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: teachingCategoryService.list,

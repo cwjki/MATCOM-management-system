@@ -21,7 +21,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Asignaciones de docencia',
             singularLabel: 'Asignación de docencia',
-            filterLabel: 'Filtrar por Departamento',
+            filterLabel: 'Asignatura, Act de clase',
             service: teachingAssignmentService,
             fields: [
                 {
@@ -123,6 +123,7 @@ export default defineComponent({
                             }`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: professorService.list,
