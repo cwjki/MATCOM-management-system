@@ -208,9 +208,9 @@ class SubjectViewSet(viewsets.ModelViewSet):
     """
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['department']
-    # search_fields = ['name', 'department__name']
+    # filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['department', 'career', 'study_plan', 'semester']
+    search_fields = ['name', 'department__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
