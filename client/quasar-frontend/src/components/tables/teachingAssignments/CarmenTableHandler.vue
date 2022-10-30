@@ -23,6 +23,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Tabla de Carmen',
             singularLabel: 'Tabla',
+            searchLabel: 'Curso o Plan de estudio',
             service: carmenTableService,
             fields: [
                 {

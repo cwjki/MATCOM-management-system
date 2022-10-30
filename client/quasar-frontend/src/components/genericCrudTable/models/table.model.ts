@@ -6,7 +6,7 @@ export interface GenericCrudTableConfig {
 
     singularLabel: string;
 
-    filterLabel?: string
+    searchLabel?: string;
 
     actions?: {
         create?: boolean;

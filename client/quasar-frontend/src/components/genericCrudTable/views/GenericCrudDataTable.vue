@@ -80,7 +80,7 @@
 
                 <q-input
                     v-model="filter"
-                    :placeholder="config.filterLabel"
+                    :placeholder="config.searchLabel"
                     dense
                     class="q-ml-md"
                     debounce="300"

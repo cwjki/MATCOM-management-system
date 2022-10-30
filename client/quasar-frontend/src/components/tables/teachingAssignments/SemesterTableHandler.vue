@@ -17,6 +17,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Semestres',
             singularLabel: 'Semestre',
+            searchLabel: 'Semestre',
             service: semesterService,
             fields: [
                 {

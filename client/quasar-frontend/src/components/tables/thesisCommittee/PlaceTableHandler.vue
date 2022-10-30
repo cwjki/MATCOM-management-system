@@ -17,11 +17,12 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Locales',
             singularLabel: 'Local',
+            searchLabel: 'Local',
             service: placeService,
             fields: [
                 {
                     name: 'name',
-                    label: 'Nombre',
+                    label: 'Local',
                     type: 'text',
                     form: {
                         responsiveOptions: {

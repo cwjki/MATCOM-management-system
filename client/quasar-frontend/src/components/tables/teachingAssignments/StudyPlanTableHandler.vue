@@ -17,11 +17,12 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Planes de estudio',
             singularLabel: 'Plan de estudio',
+            searchLabel: 'Plan de estudio',
             service: studyPlanService,
             fields: [
                 {
                     name: 'name',
-                    label: 'Nombre',
+                    label: 'Plan de estudio',
                     type: 'text',
                 },
                 {

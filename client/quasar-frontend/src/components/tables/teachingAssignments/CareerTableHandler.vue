@@ -17,11 +17,12 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Carreras',
             singularLabel: 'Carrera',
+            searchLabel: 'Carrera o Facultad',
             service: careerService,
             fields: [
                 {
                     name: 'name',
-                    label: 'Nombre',
+                    label: 'Carrera',
                     type: 'text',
                 },
                 {

@@ -15,13 +15,14 @@ export default defineComponent({
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Palabras Claves',
-            singularLabel: 'Palabra Clave',
+            name: 'Palabras Clave',
+            singularLabel: 'Palabras Clave',
+            searchLabel: 'Palabras clave',
             service: keywordService,
             fields: [
                 {
                     name: 'name',
-                    label: 'Nombre',
+                    label: 'Palabras clave',
                     type: 'text',
                     form: {
                         responsiveOptions: {

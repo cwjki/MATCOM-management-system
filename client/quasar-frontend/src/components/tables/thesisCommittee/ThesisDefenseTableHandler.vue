@@ -21,6 +21,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Defensas de Tesis',
             singularLabel: 'Defensa de Tesis',
+            searchLabel: 'Fecha o Título de la tesis',
             service: thesisDefenseService,
             fields: [
                 {
@@ -43,6 +44,7 @@ export default defineComponent({
                             return `${row.place.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: placeService.list,
@@ -53,7 +55,7 @@ export default defineComponent({
                 },
                 {
                     name: 'thesis_committee',
-                    label: 'Tesis',
+                    label: 'Título de la tesis',
                     column: {
                         transform(row) {
                             return `${row.thesis_committee.thesis.title}`;

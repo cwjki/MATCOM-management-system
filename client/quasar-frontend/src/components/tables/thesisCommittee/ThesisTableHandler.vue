@@ -17,6 +17,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Tesis',
             singularLabel: 'Tesis',
+            searchLabel: 'Título',
             service: thesisService,
             fields: [
                 {
@@ -51,6 +52,7 @@ export default defineComponent({
                             }`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: professorService.list,
@@ -72,6 +74,7 @@ export default defineComponent({
                             return `${result.slice(0, -2)}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: professorService.list,
@@ -93,6 +96,7 @@ export default defineComponent({
                             return `${result.slice(0, -2)}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: keywordService.list,

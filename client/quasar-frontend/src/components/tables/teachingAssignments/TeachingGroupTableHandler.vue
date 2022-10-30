@@ -17,6 +17,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Grupos',
             singularLabel: 'Grupo',
+            searchLabel: 'Nombre',
             service: teachingGroupService,
             fields: [
                 {

@@ -16,7 +16,6 @@ class PlaceViewSet(viewsets.ModelViewSet):
     """
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
-    filter_backends = [filters.SearchFilter]
     search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -28,7 +27,6 @@ class KeywordViewSet(viewsets.ModelViewSet):
     """
     queryset = Keyword.objects.all()
     serializer_class = KeywordSerializer
-    filter_backends = [filters.SearchFilter]
     search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -40,8 +38,9 @@ class ThesisViewSet(viewsets.ModelViewSet):
     """
     queryset = Thesis.objects.all()
     serializer_class = ThesisSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['tutor__name']
+    search_fields = ['title']
+    filterset_fields = ['tutor', 'cotutors', 'keywords']
+
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -52,7 +51,10 @@ class ThesisCommitteeViewSet(viewsets.ModelViewSet):
     """
     queryset = ThesisCommittee.objects.all()
     serializer_class = ThesisCommitteeSerializer
-    filter_backends = [filters.SearchFilter]
+    search_fields = ['thesis__title',
+                     'thesis__tutor__name', 'thesis__tutor__last_name',
+                     'thesis__cotutors__name', 'thesis__cotutors__last_name']
+    filterset_fields = ['president', 'secretary', 'opponent']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -63,7 +65,8 @@ class ThesisDefenseViewSet(viewsets.ModelViewSet):
     """
     queryset = ThesisDefense.objects.all()
     serializer_class = ThesisDefenseSerializer
-    filter_backends = [filters.SearchFilter]
+    search_fields = ['date', 'thesis_committee__thesis__title']
+    filterset_fields = ['place']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 

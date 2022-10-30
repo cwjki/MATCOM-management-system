@@ -63,7 +63,7 @@ class CareerViewSet(viewsets.ModelViewSet):
     """
     queryset = Career.objects.all()
     serializer_class = CareerSerializer
-    search_fields = ['name']
+    search_fields = ['name', 'faculty__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -196,7 +196,7 @@ class SubjectViewSet(viewsets.ModelViewSet):
     """
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    search_fields = ['name', 'department__name']
+    search_fields = ['name']
     filterset_fields = ['department', 'career', 'study_plan', 'semester']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

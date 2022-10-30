@@ -22,6 +22,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Tribunales de Tesis',
             singularLabel: 'Tribunal',
+            searchLabel: 'Título o Tutores',
             service: thesisCommitteeService,
             fields: [
                 {
@@ -81,6 +82,7 @@ export default defineComponent({
                             }`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: professorService.list,
@@ -105,6 +107,7 @@ export default defineComponent({
                             }`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: professorService.list,
@@ -127,6 +130,7 @@ export default defineComponent({
                             }`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: professorService.list,

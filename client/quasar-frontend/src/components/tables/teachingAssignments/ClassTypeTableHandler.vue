@@ -17,6 +17,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Actividades de clases',
             singularLabel: 'Actividad de clase',
+            searchLabel: 'Actividad',
             service: classTypeService,
             fields: [
                 {

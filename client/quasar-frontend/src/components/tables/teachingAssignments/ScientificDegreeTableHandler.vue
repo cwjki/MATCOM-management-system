@@ -17,6 +17,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Grados Científicos',
             singularLabel: 'Grado Científico',
+            searchLabel: 'Grado Científico',
             service: scientificDegreeService,
             fields: [
                 {

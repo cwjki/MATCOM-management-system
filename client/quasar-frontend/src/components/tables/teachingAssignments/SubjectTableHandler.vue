@@ -23,11 +23,12 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Asignaturas',
             singularLabel: 'Asignatura',
+            searchLabel: 'Asignatura',
             service: subjectService,
             fields: [
                 {
                     name: 'name',
-                    label: 'Nombre',
+                    label: 'Asignatura',
                     type: 'text',
                 },
                 {
@@ -38,6 +39,7 @@ export default defineComponent({
                             return `${row.study_plan.name}`;
                         },
                     },
+                    filter: true,
                     type: 'select',
                     selectOptions: {
                         list: studyPlanService.list,

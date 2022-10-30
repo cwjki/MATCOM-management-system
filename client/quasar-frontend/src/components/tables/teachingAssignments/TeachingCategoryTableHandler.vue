@@ -17,6 +17,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Categorías Escolares',
             singularLabel: 'Categoría Escolar',
+            searchLabel: 'Categoría Escolar',
             service: teachingCategoryService,
             fields: [
                 {

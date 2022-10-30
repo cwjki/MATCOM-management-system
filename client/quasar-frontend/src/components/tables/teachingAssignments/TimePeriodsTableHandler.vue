@@ -17,6 +17,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Períodos de tiempo',
             singularLabel: 'Período de tiempo',
+            searchLabel: 'Período de tiempo',
             service: timePeriodService,
             fields: [
                 {
