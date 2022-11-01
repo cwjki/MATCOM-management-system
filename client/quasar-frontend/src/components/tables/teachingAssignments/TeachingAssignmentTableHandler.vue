@@ -21,7 +21,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Asignaciones de docencia',
             singularLabel: 'Asignación de docencia',
-            searchLabel: 'Asignatura, Act de clase',
+            searchLabel: 'Asignatura o Actividad',
             service: teachingAssignmentService,
             fields: [
                 {
