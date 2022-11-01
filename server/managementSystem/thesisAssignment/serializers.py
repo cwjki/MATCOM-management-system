@@ -1,5 +1,7 @@
+from asyncore import read
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
+from teachingAssignment.serializers import ProfessorSerializer
 
 from teachingAssignment.models import Professor
 
@@ -20,46 +22,15 @@ class KeywordSerializer(ModelSerializer):
 
 class ThesisSerializer(ModelSerializer):
     tutor_id = serializers.IntegerField(required=True, write_only=True)
-    tutor = serializers.SerializerMethodField()
+    tutor = ProfessorSerializer(read_only=True)
 
-    cotutors = serializers.SerializerMethodField()
     cotutors_id = serializers.PrimaryKeyRelatedField(
         required=False, many=True, read_only=False, queryset=Professor.objects.all(), source='cotutors')
+    cotutors = ProfessorSerializer(many=True, read_only=True)
+
     keywords_id = serializers.PrimaryKeyRelatedField(
         required=False, many=True, read_only=False, queryset=Keyword.objects.all(), source='keywords')
-    keywords = serializers.SerializerMethodField()
-
-    def get_tutor(self, obj) -> dict:
-        if obj.tutor:
-            return {
-                "id": obj.tutor.id,
-                "name": obj.tutor.name,
-                "last_name": obj.tutor.last_name,
-            }
-        return None
-
-    def get_cotutors(self, obj) -> dict:
-        if obj.cotutors:
-            data = []
-            for tutor in obj.cotutors.all():
-                data.append({
-                    "id": tutor.id,
-                    "name": tutor.name,
-                    "last_name": tutor.last_name,
-                })
-            return data
-        return []
-
-    def get_keywords(self, obj) -> dict:
-        if obj.keywords:
-            data = []
-            for keyword in obj.keywords.all():
-                data.append({
-                    "id": keyword.id,
-                    "name": keyword.name,
-                })
-            return data
-        return None
+    keywords = KeywordSerializer(many=True, read_only=True)
 
     class Meta:
         model = Thesis
@@ -67,70 +38,17 @@ class ThesisSerializer(ModelSerializer):
 
 
 class ThesisCommitteeSerializer(ModelSerializer):
-    # thesis_id = serializers.IntegerField(required=True, write_only=True)
-    # thesis = serializers.SerializerMethodField()
-
     opponent_id = serializers.IntegerField(required=True, write_only=True)
-    opponent = serializers.SerializerMethodField()
+    opponent = ProfessorSerializer(read_only=True)
 
     secretary_id = serializers.IntegerField(required=True, write_only=True)
-    secretary = serializers.SerializerMethodField()
+    secretary = ProfessorSerializer(read_only=True)
 
     president_id = serializers.IntegerField(required=True, write_only=True)
-    president = serializers.SerializerMethodField()
+    president = ProfessorSerializer(read_only=True)
 
     thesis_id = serializers.IntegerField(required=True, write_only=True)
-    thesis = serializers.SerializerMethodField()
-
-    def get_thesis(self, obj) -> dict:
-        if obj.thesis:
-
-            cotutors = ''
-            for cotutor in obj.thesis.cotutors.all():
-                cotutors += cotutor.name + ' ' + cotutor.last_name + ', '
-            cotutors = cotutors[0: -2]
-
-            keywords = ''
-            for keyword in obj.thesis.keywords.all():
-                keywords += keyword.name + ', '
-            keywords = keywords[0: -2]
-
-            return {
-                "id": obj.thesis.id,
-                "title": obj.thesis.title,
-                "student": obj.thesis.student,
-                "tutor": obj.thesis.tutor.name + ' ' + obj.thesis.tutor.last_name,
-                "cotutors": cotutors,
-                "keywords": keywords
-            }
-        return None
-
-    def get_opponent(self, obj) -> dict:
-        if obj.opponent:
-            return {
-                "id": obj.opponent.id,
-                "name": obj.opponent.name,
-                "last_name": obj.opponent.last_name
-            }
-        return None
-
-    def get_secretary(self, obj) -> dict:
-        if obj.secretary:
-            return {
-                "id": obj.secretary.id,
-                "name": obj.secretary.name,
-                "last_name": obj.secretary.last_name
-            }
-        return None
-
-    def get_president(self, obj) -> dict:
-        if obj.president:
-            return {
-                "id": obj.president.id,
-                "name": obj.president.name,
-                "last_name": obj.president.last_name
-            }
-        return None
+    thesis = ThesisSerializer(read_only=True)
 
     class Meta:
         model = ThesisCommittee
@@ -141,48 +59,10 @@ class ThesisDefenseSerializer(ModelSerializer):
 
     thesis_committee_id = serializers.IntegerField(
         required=True, write_only=True)
-    thesis_committee = serializers.SerializerMethodField()
+    thesis_committee = ThesisCommitteeSerializer(read_only=True)
 
     place_id = serializers.IntegerField(required=True, write_only=True)
-    place = serializers.SerializerMethodField()
-
-    def get_thesis_committee(self, obj) -> dict:
-        if obj.thesis_committee:
-
-            keywords = ''
-            for keyword in obj.thesis_committee.thesis.keywords.all():
-                keywords += keyword.name + ', '
-            keywords = keywords[0: -2]
-
-            cotutors = ''
-            for cotutor in obj.thesis_committee.thesis.cotutors.all():
-                cotutors += cotutor.name + ' ' + cotutor.last_name + ', '
-            cotutors = cotutors[0: -2]
-
-            return {
-                "id": obj.thesis_committee.id,
-                "secretary": obj.thesis_committee.secretary.name + ' ' + obj.thesis_committee.secretary.last_name,
-                "president": obj.thesis_committee.president.name + ' ' + obj.thesis_committee.president.last_name,
-                "opponent": obj.thesis_committee.opponent.name + ' ' + obj.thesis_committee.opponent.last_name,
-                "tutor": obj.thesis_committee.thesis.tutor.name + ' ' + obj.thesis_committee.thesis.tutor.last_name,
-                "thesis": {
-                    "title": obj.thesis_committee.thesis.title,
-                    "id": obj.thesis_committee.thesis.id,
-                },
-                "student": obj.thesis_committee.thesis.student,
-                "cotutors": cotutors,
-                "keywords": keywords
-            }
-
-        return None
-
-    def get_place(self, obj) -> dict:
-        if obj.place:
-            return {
-                "id": obj.place.id,
-                "name": obj.place.name
-            }
-        return None
+    place = PlaceSerializer(read_only=True)
 
     class Meta:
         model = ThesisDefense
