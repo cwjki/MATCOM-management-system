@@ -29,7 +29,7 @@ export default defineComponent({
                     label: 'Asignatura',
                     column: {
                         transform(row) {
-                            return `${row.subject_description.name}`;
+                            return `${row.subject_description.subject.name}`;
                         },
                     },
                     type: 'select',
@@ -38,9 +38,9 @@ export default defineComponent({
                         value: 'id',
                         label: 'subject_description',
                         refactorValue: (value) =>
-                            value
+                            value.subject
                                 ? `${
-                                      value.subject +
+                                      value.subject.name +
                                       ' --- ' +
                                       value.class_type.name +
                                       ' --- ' +
@@ -60,7 +60,7 @@ export default defineComponent({
                     label: 'Año',
                     column: {
                         transform(row) {
-                            return `${row.subject_description.teaching_group}`;
+                            return `${row.subject_description.teaching_group.name}`;
                         },
                     },
                 },
@@ -69,7 +69,7 @@ export default defineComponent({
                     label: 'Actividad de clase',
                     column: {
                         transform(row) {
-                            return `${row.subject_description.class_type}`;
+                            return `${row.subject_description.class_type.name}`;
                         },
                     },
                 },
