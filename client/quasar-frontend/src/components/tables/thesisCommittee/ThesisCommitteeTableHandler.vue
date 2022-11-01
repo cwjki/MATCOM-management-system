@@ -55,17 +55,20 @@ export default defineComponent({
                     label: 'Tutor(es)',
                     column: {
                         transform(row) {
-                            var result = row.thesis.tutor;
+                            var result =
+                                row.thesis.tutor.name +
+                                ' ' +
+                                row.thesis.tutor.last_name;
 
                             if (row.thesis.cotutors.length > 0) {
                                 result += ', ';
                             }
-                            result += row.thesis.cotutors;
 
-                            // row.thesis.cotutors.forEach((tutor: any) => {
-                            //     result +=
-                            //         tutor.name + ' ' + tutor.last_name + ', ';
-                            // });
+                            row.thesis.cotutors.forEach((tutor: any) => {
+                                result +=
+                                    tutor.name + ' ' + tutor.last_name + ', ';
+                            });
+                            result = result.slice(0, -2);
                             return `${result}`;
                         },
                     },
