@@ -137,7 +137,8 @@ class SubjectDescription(models.Model):
     number_of_groups = models.PositiveIntegerField()
 
     # Relationships
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    subject = models.ForeignKey(
+        Subject, related_name='subject', on_delete=models.CASCADE)
     class_type = models.ForeignKey(ClassType, on_delete=models.CASCADE)
     time_period = models.ForeignKey(TimePeriod, on_delete=models.CASCADE)
     teaching_group = models.ForeignKey(TeachingGroup, on_delete=models.CASCADE)
@@ -164,4 +165,4 @@ class TeachingPlanning(models.Model):
     teaching_assignments = models.ManyToManyField(TeachingAssignment)
 
 
-## Cmenrtario a ver si git se arregla
+# Cmenrtario a ver si git se arregla
