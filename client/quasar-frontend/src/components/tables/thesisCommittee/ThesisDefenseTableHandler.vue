@@ -76,7 +76,7 @@ export default defineComponent({
                     label: 'Estudiante',
                     column: {
                         transform(row) {
-                            return `${row.thesis_committee.student}`;
+                            return `${row.thesis_committee.thesis.student}`;
                         },
                     },
                 },
@@ -85,51 +85,67 @@ export default defineComponent({
                     label: 'Tutor(es)',
                     column: {
                         transform(row) {
-                            var result = row.thesis_committee.tutor;
-                            if (row.thesis_committee.cotutors.length > 0) {
+                            var result =
+                                row.thesis_committee.thesis.tutor.name +
+                                ' ' +
+                                row.thesis_committee.thesis.tutor.last_name;
+
+                            if (
+                                row.thesis_committee.thesis.cotutors.length > 0
+                            ) {
                                 result += ', ';
+                                row.thesis_committee.thesis.cotutors.forEach(
+                                    (tutor: any) => {
+                                        result +=
+                                            tutor.name +
+                                            ' ' +
+                                            tutor.last_name +
+                                            ', ';
+                                    }
+                                );
+                                result = result.slice(0, -2);
                             }
-                            result += row.thesis_committee.cotutors;
+
                             return `${result}`;
                         },
                     },
                 },
-                {
-                    name: 'president',
-                    label: 'Presidente',
-                    column: {
-                        transform(row) {
-                            return `${row.thesis_committee.president}`;
-                        },
-                    },
-                },
-                {
-                    name: 'secretary',
-                    label: 'Secretario',
-                    column: {
-                        transform(row) {
-                            return `${row.thesis_committee.secretary}`;
-                        },
-                    },
-                },
-                {
-                    name: 'opponent',
-                    label: 'Oponente',
-                    column: {
-                        transform(row) {
-                            return `${row.thesis_committee.opponent}`;
-                        },
-                    },
-                },
-                {
-                    name: 'keywords',
-                    label: 'Palabras Claves',
-                    column: {
-                        transform(row) {
-                            return `${row.thesis_committee.keywords}`;
-                        },
-                    },
-                },
+                // {
+                //     name: 'president',
+                //     label: 'Presidente',
+                //     column: {
+                //         transform(row) {
+                //             return `${row.thesis_committee.president}`;
+                //         },
+                //     },
+                // },
+                // {
+                //     name: 'secretary',
+                //     label: 'Secretario',
+                //     column: {
+                //         transform(row) {
+                //             return `${row.thesis_committee.secretary}`;
+                //         },
+                //     },
+                // },
+                // {
+                //     name: 'opponent',
+                //     label: 'Oponente',
+                //     column: {
+                //         transform(row) {
+                //             return `${row.thesis_committee.opponent}`;
+                //         },
+                //     },
+                // },
+                // {
+                //     name: 'keywords',
+                //     label: 'Palabras Claves',
+                //     column: {
+                //         transform(row) {
+                //             return `${row.thesis_committee.keywords}`;
+                //         },
+                //     },
+                // },
             ],
             actions: {
                 create: true,
