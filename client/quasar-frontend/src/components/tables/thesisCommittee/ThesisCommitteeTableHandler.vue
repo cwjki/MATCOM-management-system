@@ -62,13 +62,16 @@ export default defineComponent({
 
                             if (row.thesis.cotutors.length > 0) {
                                 result += ', ';
+                                row.thesis.cotutors.forEach((tutor: any) => {
+                                    result +=
+                                        tutor.name +
+                                        ' ' +
+                                        tutor.last_name +
+                                        ', ';
+                                });
+                                result = result.slice(0, -2);
                             }
 
-                            row.thesis.cotutors.forEach((tutor: any) => {
-                                result +=
-                                    tutor.name + ' ' + tutor.last_name + ', ';
-                            });
-                            result = result.slice(0, -2);
                             return `${result}`;
                         },
                     },

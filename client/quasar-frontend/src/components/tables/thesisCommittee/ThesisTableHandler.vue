@@ -58,6 +58,10 @@ export default defineComponent({
                         list: professorService.list,
                         value: 'id',
                         label: 'name',
+                        refactorValue: (value) =>
+                            value
+                                ? `${value.name + ' ' + value.last_name}`
+                                : '',
                     },
                     rules: ['required'],
                 },
@@ -81,7 +85,12 @@ export default defineComponent({
                         value: 'id',
                         label: 'name',
                         multiple: true,
+                        refactorValue: (value) =>
+                            value
+                                ? `${value.name + ' ' + value.last_name}`
+                                : '',
                     },
+
                     rules: ['required'],
                 },
                 {
