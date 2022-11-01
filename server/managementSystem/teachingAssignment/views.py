@@ -213,6 +213,7 @@ class SubjectDescriptionViewSet(viewsets.ModelViewSet):
     filterset_fields = ['teaching_group', 'class_type', 'time_period']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+
     @action(detail=True)
     def get_groups(self, request, pk=None):
         """
