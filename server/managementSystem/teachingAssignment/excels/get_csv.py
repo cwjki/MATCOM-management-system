@@ -1,7 +1,9 @@
 import csv
 from typing import List
+
 from ..models import TeachingAssignment
 from ..serializers import TeachingAssignmentSerializer
+from ..serializers_csv import TeachingAssignmentSerializerCSV
 
 
 class TeachingAssignmentInfo:
@@ -48,11 +50,11 @@ class TeachingAssignmentInfoCollection:
     def analize_row(self, teaching_assignment: dict):
         '''Compute and save all the important data of a teaching assignment'''
         # get data
-        subject_name = teaching_assignment['subject_description']['name']
-        teaching_group = teaching_assignment['subject_description']['teaching_group']
-        class_type = teaching_assignment['subject_description']['class_type']
+        subject_name = teaching_assignment['subject_description']['subject']['name']
+        teaching_group = teaching_assignment['subject_description']['teaching_group']['name']
+        class_type = teaching_assignment['subject_description']['class_type']['name']
         number_of_hours = teaching_assignment['subject_description']['number_of_hours']
-        total_hours = teaching_assignment['subject_description']['total_hours']
+        total_hours = teaching_assignment['subject_description']['subject']['number_of_hours']
         percent = teaching_assignment['percent']
         group = teaching_assignment['group']
         number_of_groups = teaching_assignment['subject_description']['number_of_groups']
@@ -88,7 +90,7 @@ class TeachingAssignmentInfoCollection:
         Returns a tuple <True or False>, <Instance or None>
         '''
         for ta in self.teaching_assignments:
-            if ta.subject_name == teaching_assignment['subject_description']['name'] and ta.teaching_group == teaching_assignment['subject_description']['teaching_group']:
+            if ta.subject_name == teaching_assignment['subject_description']['subject']['name'] and ta.teaching_group == teaching_assignment['subject_description']['teaching_group']['name']:
                 return True, ta
         return False, None
 
@@ -113,7 +115,6 @@ class TA_CSV_GENERATOR():
         ta_info.proccess_info(data)
 
         rows = self.construct_fields(ta_info)
-        print(data)
         fieldnames = ['Facultad', 'Tipo curso', 'Año',
                       'Asignatura', 'Horas', 'G', 'Profesor']
 
@@ -137,13 +138,11 @@ class TA_CSV_GENERATOR():
         return result
 
     def filter_by_department(self, department_name):
-        queryset = TeachingAssignment.objects.all()
+        queryset = TeachingAssignment.objects.filter(
+            subject_description__subject__department__name=department_name)
         data = [
             TeachingAssignmentSerializer(teachingAssignment).data
             for teachingAssignment in queryset]
-        data = [
-            teaching_assignment for teaching_assignment in data
-            if teaching_assignment['subject_description']['department'] == department_name]
 
         excel_data = TeachingAssignmentInfoCollection()
         for teaching_assigment in data:
