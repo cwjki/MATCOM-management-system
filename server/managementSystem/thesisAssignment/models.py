@@ -32,16 +32,14 @@ class Thesis(models.Model):
 
 
 class ThesisCommittee(models.Model):
-    #     date = models.DateField(null=True, blank=True)
-    #     time = models.TimeField(null=True, blank=True)
     # Relationships
     thesis = models.ForeignKey(Thesis, on_delete=models.CASCADE)
     opponent = models.ForeignKey(
-        Professor, related_name='opponent', on_delete=models.CASCADE)
+        Professor, null=True, blank=True, related_name='opponent', on_delete=models.CASCADE)
     secretary = models.ForeignKey(
-        Professor, related_name='secretary', on_delete=models.CASCADE)
+        Professor, null=True, blank=True, related_name='secretary', on_delete=models.CASCADE)
     president = models.ForeignKey(
-        Professor, related_name='president', on_delete=models.CASCADE)
+        Professor, null=True, blank=True, related_name='president', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return str(self.thesis) + ' ' + str(self.opponent) + ' ' + str(self.secretary)
@@ -53,6 +51,7 @@ class ThesisDefense(models.Model):
 
     thesis_committee = models.ForeignKey(
         ThesisCommittee, on_delete=models.CASCADE)
-    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    place = models.ForeignKey(
+        Place, null=True, blank=True, on_delete=models.CASCADE)
 
     # Relationships

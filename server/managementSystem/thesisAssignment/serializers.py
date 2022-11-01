@@ -32,6 +32,24 @@ class ThesisSerializer(ModelSerializer):
         required=False, many=True, read_only=False, queryset=Keyword.objects.all(), source='keywords')
     keywords = KeywordSerializer(many=True, read_only=True)
 
+    def create(self, validated_data):
+        cotutors = validated_data.pop(
+            'cotutors') if 'cotutors' in validated_data else []
+        keywords = validated_data.pop('keywords')
+
+        thesis = Thesis.objects.create(
+            **validated_data)
+
+        for cotutor in cotutors:
+            thesis.cotutors.add(cotutor)
+
+        for keyword in keywords:
+            thesis.keywords.add(keyword)
+
+        thesis_committee = ThesisCommittee.objects.create(thesis_id=thesis.id)
+        ThesisDefense.objects.create(thesis_committee_id=thesis_committee.id)
+        return thesis
+
     class Meta:
         model = Thesis
         fields = '__all__'
