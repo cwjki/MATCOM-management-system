@@ -104,9 +104,7 @@ export default defineComponent({
                     name: 'group',
                     label: 'Grupo',
                     column: {
-                        transform(row) {
-                            return `${row.group}`;
-                        },
+                        transform: (row) => (row.group ? `${row.group}` : ''),
                     },
                     type: 'text',
                     rules: ['required'],
@@ -115,13 +113,14 @@ export default defineComponent({
                     name: 'professor',
                     label: 'Profesor',
                     column: {
-                        transform(row) {
-                            return `${
-                                row.professor.name +
-                                ' ' +
-                                row.professor.last_name
-                            }`;
-                        },
+                        transform: (row) =>
+                            row.professor
+                                ? `${
+                                      row.professor.name +
+                                      ' ' +
+                                      row.professor.last_name
+                                  }`
+                                : '',
                     },
                     filter: true,
                     type: 'select',
@@ -140,9 +139,8 @@ export default defineComponent({
                     name: 'percent',
                     label: 'Porciento',
                     column: {
-                        transform(row) {
-                            return `${row.percent}%`;
-                        },
+                        transform: (row) =>
+                            row.percent ? `${row.percent}%` : '',
                     },
                     type: 'text',
                     rules: ['required'],

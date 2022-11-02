@@ -21,7 +21,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Defensas de Tesis',
             singularLabel: 'Defensa de Tesis',
-            searchLabel: 'Fecha o Título de la tesis',
+            searchLabel: 'Fecha o Tesis',
             service: thesisDefenseService,
             fields: [
                 {
@@ -40,9 +40,8 @@ export default defineComponent({
                     name: 'place',
                     label: 'Lugar',
                     column: {
-                        transform(row) {
-                            return `${row.place.name}`;
-                        },
+                        transform: (row) =>
+                            row.place ? `${row.place.name}` : '',
                     },
                     filter: true,
                     type: 'select',
@@ -55,7 +54,7 @@ export default defineComponent({
                 },
                 {
                     name: 'thesis_committee',
-                    label: 'Título de la tesis',
+                    label: 'Tesis',
                     column: {
                         transform(row) {
                             return `${row.thesis_committee.thesis.title}`;
@@ -110,15 +109,64 @@ export default defineComponent({
                         },
                     },
                 },
-                // {
-                //     name: 'president',
-                //     label: 'Presidente',
-                //     column: {
-                //         transform(row) {
-                //             return `${row.thesis_committee.president}`;
-                //         },
-                //     },
-                // },
+                {
+                    name: 'opponent',
+                    label: 'Oponente',
+                    column: {
+                        transform: (row) =>
+                            row.thesis_committee.opponent
+                                ? `${
+                                      row.thesis_committee.opponent.name +
+                                      ' ' +
+                                      row.thesis_committee.opponent.last_name
+                                  }`
+                                : ' ',
+                    },
+                },
+                {
+                    name: 'president',
+                    label: 'Presidente',
+                    column: {
+                        transform: (row) =>
+                            row.thesis_committee.president
+                                ? `${
+                                      row.thesis_committee.president.name +
+                                      ' ' +
+                                      row.thesis_committee.president.last_name
+                                  }`
+                                : ' ',
+                    },
+                },
+                {
+                    name: 'secretary',
+                    label: 'Secretario',
+                    column: {
+                        transform: (row) =>
+                            row.thesis_committee.secretary
+                                ? `${
+                                      row.thesis_committee.secretary.name +
+                                      ' ' +
+                                      row.thesis_committee.secretary.last_name
+                                  }`
+                                : ' ',
+                    },
+                },
+                {
+                    name: 'keywords',
+                    label: 'Palabras clave',
+                    column: {
+                        transform(row) {
+                            var result = '';
+                            row.thesis_committee.thesis.keywords.forEach(
+                                (keyword: any) => {
+                                    result += keyword.name + ', ';
+                                }
+                            );
+                            return `${result.slice(0, -2)}`;
+                        },
+                    },
+                },
+
                 // {
                 //     name: 'secretary',
                 //     label: 'Secretario',

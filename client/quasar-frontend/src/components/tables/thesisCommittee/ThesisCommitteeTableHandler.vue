@@ -80,13 +80,14 @@ export default defineComponent({
                     name: 'president',
                     label: 'Presidente',
                     column: {
-                        transform(row) {
-                            return `${
-                                row.president.name +
-                                ' ' +
-                                row.president.last_name
-                            }`;
-                        },
+                        transform: (row) =>
+                            row.president
+                                ? `${
+                                      row.president.name +
+                                      ' ' +
+                                      row.president.last_name
+                                  }`
+                                : '',
                     },
                     filter: true,
                     type: 'select',
@@ -105,13 +106,14 @@ export default defineComponent({
                     name: 'secretary',
                     label: 'Secretario',
                     column: {
-                        transform(row) {
-                            return `${
-                                row.secretary.name +
-                                ' ' +
-                                row.secretary.last_name
-                            }`;
-                        },
+                        transform: (row) =>
+                            row.secretary
+                                ? `${
+                                      row.secretary.name +
+                                      ' ' +
+                                      row.secretary.last_name
+                                  }`
+                                : '',
                     },
                     filter: true,
                     type: 'select',
@@ -130,11 +132,14 @@ export default defineComponent({
                     name: 'opponent',
                     label: 'Oponente',
                     column: {
-                        transform(row) {
-                            return `${
-                                row.opponent.name + ' ' + row.opponent.last_name
-                            }`;
-                        },
+                        transform: (row) =>
+                            row.opponent
+                                ? `${
+                                      row.opponent.name +
+                                      ' ' +
+                                      row.opponent.last_name
+                                  }`
+                                : '',
                     },
                     filter: true,
                     type: 'select',
@@ -148,6 +153,19 @@ export default defineComponent({
                                 : '',
                     },
                     rules: ['required'],
+                },
+                {
+                    name: 'keywords',
+                    label: 'Palabras clave',
+                    column: {
+                        transform(row) {
+                            var result = '';
+                            row.thesis.keywords.forEach((keyword: any) => {
+                                result += keyword.name + ', ';
+                            });
+                            return `${result.slice(0, -2)}`;
+                        },
+                    },
                 },
             ],
             actions: {

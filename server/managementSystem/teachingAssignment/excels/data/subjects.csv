@@ -24,8 +24,8 @@ Programación Declarativa,Inteligencia Artificial y Sistemas Computacionales,Cie
 Filosofía y Sociedad,Matemática,Ciencias de la Computación,E,1,32
 Economía,Matemática,Ciencias de la Computación,E,1,54
 Historia de Cuba,Matemática,Ciencias de la Computación,E,2,50
-Educación Física I,Otro,Ciencias de la Computación,E,1,28
-Educación Física II,Otro,Ciencias de la Computación,E,2,28
+Educación Física I,DepARTAETI,Ciencias de la Computación,E,1,28
+Educación Física II,DepARTAETI,Ciencias de la Computación,E,2,28
 Análisis Matemático I,Matemática,Ciencias de la Computación,E,1,96
 Análisis Matemático II,Matemática,Ciencias de la Computación,E,2,80
 Álgebra I,Matemática,Ciencias de la Computación,E,1,80
@@ -34,13 +34,13 @@ Lógica,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Comput
 Programación,Programación y Sistemas de Información,Ciencias de la Computación,E,1,192
 Economía Política,Matemática,Ciencias de la Computación,E (COVID),3,56
 Historia de Cuba,Matemática,Ciencias de la Computación,E (COVID),3,56
-Educación Física II,Otro,Ciencias de la Computación,E (COVID),3,28
+Educación Física II,DepARTAETI,Ciencias de la Computación,E (COVID),3,28
 Análisis Matemático II,Matemática,Ciencias de la Computación,E (COVID),3,96
 Álgebra II,Matemática,Ciencias de la Computación,E (COVID),3,80
 Programación II,Programación y Sistemas de Información,Ciencias de la Computación,E (COVID),3,96
 Matemática Discreta I,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E (COVID),3,64
 Teoría Política,Matemática,Ciencias de la Computación,E (COVID),4,48
-Educación Física 3,Otro,Ciencias de la Computación,E (COVID),4,28
+Educación Física 3,DepARTAETI,Ciencias de la Computación,E (COVID),4,28
 Ecuaciones Diferenciales Ordinarias,Matemática,Ciencias de la Computación,E (COVID),4,64
 Matemática Numérica,Matemática Aplicada,Ciencias de la Computación,E (COVID),4,64
 Matemática Discreta II,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E (COVID),4,64

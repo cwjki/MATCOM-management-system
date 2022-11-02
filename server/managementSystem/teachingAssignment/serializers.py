@@ -122,6 +122,17 @@ class SubjectDescriptionSerializer(ModelSerializer):
         required=True, write_only=True)
     teaching_group = TeachingGroupSerializer(read_only=True)
 
+    def create(self, validated_data):
+        subject_description = SubjectDescription.objects.create(
+            **validated_data)
+
+        number_of_groups = validated_data['number_of_groups']
+        for _ in range(0, number_of_groups):
+            TeachingAssignment.objects.create(
+                subject_description_id=subject_description.id)
+
+        return subject_description
+
     class Meta:
         model = SubjectDescription
         fields = '__all__'

@@ -148,11 +148,12 @@ class SubjectDescription(models.Model):
 
 
 class TeachingAssignment(models.Model):
-    percent = models.IntegerField(default=1)
-    group = models.IntegerField()
+    percent = models.IntegerField(null=True, blank=True)
+    group = models.IntegerField(null=True, blank=True)
 
     # Relationships
-    professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
+    professor = models.ForeignKey(
+        Professor, null=True, blank=True, on_delete=models.CASCADE)
     subject_description = models.ForeignKey(
         SubjectDescription, on_delete=models.CASCADE)
 
