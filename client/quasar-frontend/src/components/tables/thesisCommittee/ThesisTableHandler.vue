@@ -90,8 +90,6 @@ export default defineComponent({
                                 ? `${value.name + ' ' + value.last_name}`
                                 : '',
                     },
-
-                    rules: ['required'],
                 },
                 {
                     name: 'keywords',
