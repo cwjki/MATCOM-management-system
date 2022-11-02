@@ -1,5 +1,5 @@
 import os
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import Http404, HttpResponse, HttpResponseNotFound
 from rest_framework import permissions, viewsets, authentication, generics, mixins
 from rest_framework import filters, status
 from rest_framework.decorators import action
@@ -213,19 +213,42 @@ class SubjectDescriptionViewSet(viewsets.ModelViewSet):
     filterset_fields = ['teaching_group', 'class_type', 'time_period']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    @action(detail=True)
-    def get_groups(self, request, pk=None):
-        """
-        Return a list with the groups of the subject description.
-        """
+    # @action(detail=True)
+    # def get_groups(self, request, pk=None):
+    #     """
+    #     Return a list with the groups of the subject description.
+    #     """
+    #     try:
+    #         subject_description = SubjectDescription.objects.get(pk=pk)
+    #         groups = subject_description.number_of_groups
+    #         data = [i for i in range(1, groups + 1)]
+    #         return Response(data=data, status=status.HTTP_202_ACCEPTED)
+    #     except:
+    #         return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def destroy(self, request, *args, **kwargs):
         try:
-            subject_description = SubjectDescription.objects.get(pk=pk)
-            groups = subject_description.number_of_groups
-            data = [i for i in range(1, groups + 1)]
-            return Response(data=data, status=status.HTTP_202_ACCEPTED)
+            instance = self.get_object()
+
+            # need to find all teaching assignment associate with this subject_description instance
+            teaching_assignments = TeachingAssignment.objects.filter(
+                subject_description_id=instance.id)
+
+            # remove the number of hours of teaching load of the professor
+            for teaching_assignment in teaching_assignments:
+                number_of_hours = float(
+                    teaching_assignment.percent / 100) * instance.number_of_hours
+                professor = Professor.objects.get(
+                    pk=teaching_assignment.professor_id)
+                professor.teaching_load -= number_of_hours if professor.teaching_load > 0 else 0
+                professor.save()
+
+            self.perform_destroy(instance)
+
         except:
-            print('C')
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            pass
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class TeachingAssignmentViewSet(viewsets.ModelViewSet):
@@ -240,6 +263,24 @@ class TeachingAssignmentViewSet(viewsets.ModelViewSet):
                      'subject_description__class_type__name',
                      'subject_description__teaching_group__name']
     filterset_fields = ['professor']
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+
+            # remove the number of hours of teaching load of the professor
+            subject_description = SubjectDescription.objects.get(
+                pk=instance.subject_description_id)
+            number_of_hours = float(
+                instance.percent / 100) * subject_description.number_of_hours
+            professor = Professor.objects.get(pk=instance.professor_id)
+            professor.teaching_load -= number_of_hours if professor.teaching_load > 0 else 0
+            professor.save()
+            self.perform_destroy(instance)
+        except:
+            pass
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

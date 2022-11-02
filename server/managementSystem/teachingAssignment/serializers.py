@@ -1,4 +1,5 @@
 from asyncore import read, write
+from xml.dom import ValidationErr
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
@@ -133,6 +134,13 @@ class SubjectDescriptionSerializer(ModelSerializer):
 
         return subject_description
 
+    def update(self, instance, validated_data):
+        print(validated_data)
+        subject_id = validated_data.get('subject_id')
+        class_type_id = validated_data.get('class_type_id')
+
+        return instance
+
     class Meta:
         model = SubjectDescription
         fields = '__all__'
@@ -145,6 +153,56 @@ class TeachingAssignmentSerializer(ModelSerializer):
     subject_description_id = serializers.IntegerField(
         required=True, write_only=True)
     subject_description = SubjectDescriptionSerializer(read_only=True)
+
+    def create(self, validated_data):
+        # add the number of hours of teaching load to the professor
+        subject_description = SubjectDescription.objects.get(
+            pk=validated_data.get('subject_description_id'))
+        number_of_hours = float(
+            validated_data.get('percent') / 100) * subject_description.number_of_hours
+        professor = Professor.objects.get(
+            pk=validated_data.get('professor_id'))
+        professor.teaching_load += number_of_hours
+        professor.save()
+
+        teaching_assignment = TeachingAssignment.objects.create(
+            **validated_data)
+        return teaching_assignment
+
+    def update(self, instance, validated_data):
+        new_professor_id = validated_data.get('professor_id')
+        new_subject_description_id = validated_data.get(
+            'subject_description_id')
+        new_group = validated_data.get('group')
+        new_percent = validated_data.get('percent')
+
+        # remove the number of hours of teaching load of the old professor
+        try:
+            professor = Professor.objects.get(pk=instance.professor_id)
+            old_subject_description = SubjectDescription.objects.get(
+                pk=instance.subject_description_id)
+            old_number_of_hours = float(
+                instance.percent / 100) * old_subject_description.number_of_hours
+            professor.teaching_load -= old_number_of_hours if professor.teaching_load > 0 else 0
+            professor.save()
+        except:
+            pass
+
+        # add the number of hours of teaching load of the new professor
+        new_subject_description = SubjectDescription.objects.get(
+            pk=new_subject_description_id)
+        new_number_of_hours = float(
+            new_percent / 100) * new_subject_description.number_of_hours
+        professor = Professor.objects.get(pk=new_professor_id)
+        professor.teaching_load += new_number_of_hours
+        professor.save()
+
+        instance.professor_id = new_professor_id
+        instance.subject_description_id = new_subject_description_id
+        instance.group = new_group
+        instance.percent = new_percent
+        instance.save()
+        return instance
 
     class Meta:
         model = TeachingAssignment

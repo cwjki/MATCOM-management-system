@@ -1,4 +1,5 @@
 from pyexpat import model
+from tokenize import blank_re
 from django.db import models
 
 
@@ -88,8 +89,11 @@ class TimePeriod(models.Model):
 class Professor(models.Model):
     name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
-    # created = models.DateTimeField(auto_now_add=True)
-    # updated = models.DateTimeField(auto_now=True)
+
+    teaching_load = models.PositiveIntegerField(default=0, blank=True)
+    opponent_count = models.PositiveIntegerField(default=0, blank=True)
+    president_count = models.PositiveIntegerField(default=0, blank=True)
+    secretary_count = models.PositiveIntegerField(default=0, blank=True)
 
     # Relationships
     scientific_degree = models.ForeignKey(
