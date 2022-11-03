@@ -90,10 +90,10 @@ class Professor(models.Model):
     name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
 
-    teaching_load = models.PositiveIntegerField(default=0, blank=True)
-    opponent_count = models.PositiveIntegerField(default=0, blank=True)
-    president_count = models.PositiveIntegerField(default=0, blank=True)
-    secretary_count = models.PositiveIntegerField(default=0, blank=True)
+    # teaching_load = models.PositiveIntegerField(default=0, blank=True)
+    # opponent_count = models.PositiveIntegerField(default=0, blank=True)
+    # president_count = models.PositiveIntegerField(default=0, blank=True)
+    # secretary_count = models.PositiveIntegerField(default=0, blank=True)
 
     # Relationships
     scientific_degree = models.ForeignKey(
