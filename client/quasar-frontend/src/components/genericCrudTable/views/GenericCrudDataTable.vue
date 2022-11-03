@@ -250,18 +250,20 @@ export default defineComponent({
                 .then((r) => {
                     load();
                     setTimeout(() => {
+                        const success_action = edit ? 'editó' : 'creó';
                         Notify.create({
                             type: 'positive',
-                            message: `Se creo un ${props.config.singularLabel} correctamente`,
+                            message: `Se ${success_action} una instancia de '${props.config.singularLabel}' correctamente`,
                         });
                         crudLoading.value = false;
                         crudDialog.value = false;
                     }, 200);
                 })
                 .catch((e) => {
+                    const fail_action = edit ? 'editar' : 'crear';
                     Notify.create({
                         type: 'negative',
-                        message: `Error al crear un ${props.config.singularLabel}`,
+                        message: `Error al ${fail_action} una instancia de  '${props.config.singularLabel}''`,
                     });
                     crudDialog.value = false;
                     crudLoading.value = false;
@@ -283,6 +285,14 @@ export default defineComponent({
                 .delete(row.id)
                 .then((response) => {
                     // todo put this event on event hooks
+                    setTimeout(() => {
+                        Notify.create({
+                            type: 'positive',
+                            message: `Se eliminó una instancia de '${props.config.singularLabel}' correctamente`,
+                        });
+                        crudLoading.value = false;
+                        crudDialog.value = false;
+                    }, 200);
                     load();
                 })
                 .catch((error) => {
