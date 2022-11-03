@@ -93,7 +93,7 @@ export default defineComponent({
                 },
                 {
                     name: 'number_of_groups',
-                    label: 'Cantidad de grupos',
+                    label: 'Total de grupos',
                     column: {
                         transform(row) {
                             return `${row.subject_description.number_of_groups}`;

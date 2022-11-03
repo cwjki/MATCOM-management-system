@@ -1,3 +1,2 @@
 title,student,tutor,cotutors,keywords
-Tesis 1,Juan,"{'name': 'Alina', 'last_name': 'Ruiz Johnes'}","[{'name': 'Gemayqzel', 'last_name': 'Bouza Allende'}, {'name': 'Alina', 'last_name': 'Ruiz Johnes'}]","[{'name': 'autoML'}, {'name': 'argumentación computacional'}, {'name': 'computabilidad'}]"
-juan,asfasf,"{'name': 'Gemayqzel', 'last_name': 'Bouza Allende'}","[{'name': 'José', 'last_name': 'Valdes Castro'}]",[{'name': 'argumentación computacional'}]
+Sistema de gestión para el funcionamiento de un departamento docente en la facultad de Matemática y Computación de la UH,Juan Carlos Casteleiro Wong,"{'name': 'Fernando Raul', 'last_name': 'Rodriguez Flores'}","[{'name': 'Daniela', 'last_name': 'González Beltrán'}]",[{'name': 'desarrollo web'}]
