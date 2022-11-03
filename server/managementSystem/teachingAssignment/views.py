@@ -226,29 +226,29 @@ class SubjectDescriptionViewSet(viewsets.ModelViewSet):
     #     except:
     #         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    def destroy(self, request, *args, **kwargs):
-        try:
-            instance = self.get_object()
+    # def destroy(self, request, *args, **kwargs):
+    #     try:
+    #         instance = self.get_object()
 
-            # need to find all teaching assignment associate with this subject_description instance
-            teaching_assignments = TeachingAssignment.objects.filter(
-                subject_description_id=instance.id)
+    #         # need to find all teaching assignment associate with this subject_description instance
+    #         teaching_assignments = TeachingAssignment.objects.filter(
+    #             subject_description_id=instance.id)
 
-            # remove the number of hours of teaching load of the professor
-            for teaching_assignment in teaching_assignments:
-                number_of_hours = float(
-                    teaching_assignment.percent / 100) * instance.number_of_hours
-                professor = Professor.objects.get(
-                    pk=teaching_assignment.professor_id)
-                professor.teaching_load -= number_of_hours if professor.teaching_load > 0 else 0
-                professor.save()
+    #         # remove the number of hours of teaching load of the professor
+    #         for teaching_assignment in teaching_assignments:
+    #             number_of_hours = float(
+    #                 teaching_assignment.percent / 100) * instance.number_of_hours
+    #             professor = Professor.objects.get(
+    #                 pk=teaching_assignment.professor_id)
+    #             professor.teaching_load -= number_of_hours if professor.teaching_load > 0 else 0
+    #             professor.save()
 
-            self.perform_destroy(instance)
+    #         self.perform_destroy(instance)
 
-        except:
-            pass
+    #     except:
+    #         pass
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class TeachingAssignmentViewSet(viewsets.ModelViewSet):
@@ -264,23 +264,23 @@ class TeachingAssignmentViewSet(viewsets.ModelViewSet):
                      'subject_description__teaching_group__name']
     filterset_fields = ['professor']
 
-    def destroy(self, request, *args, **kwargs):
-        try:
-            instance = self.get_object()
+    # def destroy(self, request, *args, **kwargs):
+    #     try:
+    #         instance = self.get_object()
 
-            # remove the number of hours of teaching load of the professor
-            subject_description = SubjectDescription.objects.get(
-                pk=instance.subject_description_id)
-            number_of_hours = float(
-                instance.percent / 100) * subject_description.number_of_hours
-            professor = Professor.objects.get(pk=instance.professor_id)
-            professor.teaching_load -= number_of_hours if professor.teaching_load > 0 else 0
-            professor.save()
-            self.perform_destroy(instance)
-        except:
-            pass
+    #         # remove the number of hours of teaching load of the professor
+    #         subject_description = SubjectDescription.objects.get(
+    #             pk=instance.subject_description_id)
+    #         number_of_hours = float(
+    #             instance.percent / 100) * subject_description.number_of_hours
+    #         professor = Professor.objects.get(pk=instance.professor_id)
+    #         professor.teaching_load -= number_of_hours if professor.teaching_load > 0 else 0
+    #         professor.save()
+    #         self.perform_destroy(instance)
+    #     except:
+    #         pass
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
 
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
