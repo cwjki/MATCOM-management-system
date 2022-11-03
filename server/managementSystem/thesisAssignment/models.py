@@ -36,10 +36,10 @@ class ThesisCommittee(models.Model):
     thesis = models.ForeignKey(Thesis, on_delete=models.CASCADE)
     opponent = models.ForeignKey(
         Professor, null=True, blank=True, related_name='opponent', on_delete=models.CASCADE)
-    secretary = models.ForeignKey(
-        Professor, null=True, blank=True, related_name='secretary', on_delete=models.CASCADE)
     president = models.ForeignKey(
         Professor, null=True, blank=True, related_name='president', on_delete=models.CASCADE)
+    secretary = models.ForeignKey(
+        Professor, null=True, blank=True, related_name='secretary', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return str(self.thesis) + ' ' + str(self.opponent) + ' ' + str(self.secretary)

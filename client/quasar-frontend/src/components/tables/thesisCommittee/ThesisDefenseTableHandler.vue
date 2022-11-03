@@ -137,20 +137,20 @@ export default defineComponent({
                                 : ' ',
                     },
                 },
-                {
-                    name: 'secretary',
-                    label: 'Secretario',
-                    column: {
-                        transform: (row) =>
-                            row.thesis_committee.secretary
-                                ? `${
-                                      row.thesis_committee.secretary.name +
-                                      ' ' +
-                                      row.thesis_committee.secretary.last_name
-                                  }`
-                                : ' ',
-                    },
-                },
+                // {
+                //     name: 'secretary',
+                //     label: 'Secretario',
+                //     column: {
+                //         transform: (row) =>
+                //             row.thesis_committee.secretary
+                //                 ? `${
+                //                       row.thesis_committee.secretary.name +
+                //                       ' ' +
+                //                       row.thesis_committee.secretary.last_name
+                //                   }`
+                //                 : ' ',
+                //     },
+                // },
                 {
                     name: 'keywords',
                     label: 'Palabras clave',

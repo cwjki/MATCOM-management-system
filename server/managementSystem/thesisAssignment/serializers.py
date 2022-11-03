@@ -59,14 +59,15 @@ class ThesisCommitteeSerializer(ModelSerializer):
     opponent_id = serializers.IntegerField(required=True, write_only=True)
     opponent = ProfessorSerializer(read_only=True)
 
-    secretary_id = serializers.IntegerField(required=True, write_only=True)
-    secretary = ProfessorSerializer(read_only=True)
-
     president_id = serializers.IntegerField(required=True, write_only=True)
     president = ProfessorSerializer(read_only=True)
 
     thesis_id = serializers.IntegerField(required=True, write_only=True)
     thesis = ThesisSerializer(read_only=True)
+    
+    # secretary_id = serializers.IntegerField(write_only=True)
+    # secretary = ProfessorSerializer(read_only=True)
+
 
     class Meta:
         model = ThesisCommittee

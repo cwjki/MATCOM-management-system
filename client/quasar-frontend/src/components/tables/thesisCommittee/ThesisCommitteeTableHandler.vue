@@ -77,58 +77,6 @@ export default defineComponent({
                     },
                 },
                 {
-                    name: 'president',
-                    label: 'Presidente',
-                    column: {
-                        transform: (row) =>
-                            row.president
-                                ? `${
-                                      row.president.name +
-                                      ' ' +
-                                      row.president.last_name
-                                  }`
-                                : '',
-                    },
-                    filter: true,
-                    type: 'select',
-                    selectOptions: {
-                        list: professorService.list,
-                        value: 'id',
-                        label: 'name',
-                        refactorValue: (value) =>
-                            value
-                                ? `${value.name + ' ' + value.last_name}`
-                                : '',
-                    },
-                    rules: ['required'],
-                },
-                {
-                    name: 'secretary',
-                    label: 'Secretario',
-                    column: {
-                        transform: (row) =>
-                            row.secretary
-                                ? `${
-                                      row.secretary.name +
-                                      ' ' +
-                                      row.secretary.last_name
-                                  }`
-                                : '',
-                    },
-                    filter: true,
-                    type: 'select',
-                    selectOptions: {
-                        list: professorService.list,
-                        value: 'id',
-                        label: 'name',
-                        refactorValue: (value) =>
-                            value
-                                ? `${value.name + ' ' + value.last_name}`
-                                : '',
-                    },
-                    rules: ['required'],
-                },
-                {
                     name: 'opponent',
                     label: 'Oponente',
                     column: {
@@ -154,6 +102,59 @@ export default defineComponent({
                     },
                     rules: ['required'],
                 },
+                {
+                    name: 'president',
+                    label: 'Presidente',
+                    column: {
+                        transform: (row) =>
+                            row.president
+                                ? `${
+                                      row.president.name +
+                                      ' ' +
+                                      row.president.last_name
+                                  }`
+                                : '',
+                    },
+                    filter: true,
+                    type: 'select',
+                    selectOptions: {
+                        list: professorService.list,
+                        value: 'id',
+                        label: 'name',
+                        refactorValue: (value) =>
+                            value
+                                ? `${value.name + ' ' + value.last_name}`
+                                : '',
+                    },
+                    rules: ['required'],
+                },
+                // {
+                //     name: 'secretary',
+                //     label: 'Secretario',
+                //     column: {
+                //         transform: (row) =>
+                //             row.secretary
+                //                 ? `${
+                //                       row.secretary.name +
+                //                       ' ' +
+                //                       row.secretary.last_name
+                //                   }`
+                //                 : '',
+                //     },
+                //     filter: true,
+                //     type: 'select',
+                //     selectOptions: {
+                //         list: professorService.list,
+                //         value: 'id',
+                //         label: 'name',
+                //         refactorValue: (value) =>
+                //             value
+                //                 ? `${value.name + ' ' + value.last_name}`
+                //                 : '',
+                //     },
+                //     rules: ['required'],
+                // },
+
                 {
                     name: 'keywords',
                     label: 'Palabras clave',
