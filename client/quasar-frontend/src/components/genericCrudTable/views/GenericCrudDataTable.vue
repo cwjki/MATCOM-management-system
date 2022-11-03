@@ -17,7 +17,7 @@
             :no-data-label="'No hay datos'"
             :no-results-label="'No hay resultados'"
             :pagination-label="(a, b, c) => `${a}-${b} ${'de'} ${c}`"
-            :rows-per-page-options="[]"
+            :rows-per-page-options="[10, 15, 25, 50, 100]"
         >
             <!-- add new row btn  and search bar-->
             <template v-slot:top>
@@ -29,6 +29,16 @@
                     class="q-mr-sm"
                     no-caps
                     @click="prepareCreate"
+                />
+                <q-btn
+                    v-for="(item, i) in external"
+                    :key="`btn-${i}`"
+                    :color="item.color"
+                    :icon="item.icon"
+                    round
+                    class="q-mr-sm"
+                    no-caps
+                    @click="item.func()"
                 />
                 <q-separator
                     vertical
@@ -201,13 +211,14 @@ import { Dictionary } from 'src/models/base';
 import { Notify } from 'quasar';
 export default defineComponent({
     components: { GenericFormHandler },
+    emits: ['onRequest'],
     props: {
         config: {
             type: Object as PropType<GenericCrudTableConfig>,
             required: true,
         },
     },
-    setup(props) {
+    setup(props, { emit }) {
         const {
             loading,
             rows,
@@ -215,6 +226,7 @@ export default defineComponent({
             actions,
             isActionOnTable,
             pagination,
+            external,
 
             filter,
             fieldToFilter,
@@ -224,7 +236,9 @@ export default defineComponent({
 
             load,
             onRequest,
-        } = useGenericDataTable(props.config);
+        } = useGenericDataTable(props.config, emit);
+
+        // emit('onRequest');
 
         const {
             crudLoading,
@@ -306,6 +320,7 @@ export default defineComponent({
             actions,
             isActionOnTable,
             pagination,
+            external,
 
             filter,
             fieldToFilter,

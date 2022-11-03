@@ -10,6 +10,8 @@ export interface FieldColumn {
     // or as Function --> style: row => ... (return String/Array/Object)
     classes?: string;
 
+    ordering?: boolean;
+
     // header th:
     headerStyle?: string;
     headerClasses?: string;

@@ -13,7 +13,7 @@ export const transformQuasarColumn = (
                 name: field.name,
                 label: field.label || field.name,
                 align: (column && column.align) || 'center',
-                sortable: false,
+                sortable: (column && column.ordering) || false,
                 // TODO: finish map fieldModel to quasarColumn
             } as quasarColumn;
         }),

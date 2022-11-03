@@ -1,15 +1,19 @@
 import { Notify } from 'quasar';
 import { Dictionary } from 'src/models/base';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { FieldSelect } from '../models/field.model';
 import { GenericCrudTableConfig, RequestModel } from '../models/table.model';
 import { useSerializer } from './serializer.hooks';
 import { transformQuasarColumn } from './utils.hooks';
 
-export const useGenericDataTable = (config: GenericCrudTableConfig) => {
+export const useGenericDataTable = (
+    config: GenericCrudTableConfig,
+    emit: (x: any) => any
+) => {
     const loading = ref(false);
     const rows = ref<any[]>([]);
     const actions = ref(config.actions || {});
+    const external = computed(() => config.actions?.external || []);
     const isActionOnTable = !!(actions.value.delete || actions.value.update);
     const columns = ref(transformQuasarColumn(config.fields, isActionOnTable));
     const error = ref('');
@@ -70,6 +74,7 @@ export const useGenericDataTable = (config: GenericCrudTableConfig) => {
     };
 
     const onRequest = (request: RequestModel) => {
+        emit('onRequest');
         loading.value = true;
         pagination.value = request.pagination;
 
@@ -77,6 +82,13 @@ export const useGenericDataTable = (config: GenericCrudTableConfig) => {
             size: request.pagination.rowsPerPage,
             page: request.pagination.page,
             search: request.filter,
+            ...(pagination.value.sortBy
+                ? {
+                      ordering: `${pagination.value.descending ? '-' : ''}${
+                          pagination.value.sortBy
+                      }`,
+                  }
+                : {}),
             ...filterObj.value,
         };
 
@@ -104,6 +116,7 @@ export const useGenericDataTable = (config: GenericCrudTableConfig) => {
         isActionOnTable,
         pagination,
         filter,
+        external,
 
         fieldToFilter,
         filterObj,
