@@ -44,7 +44,6 @@
 </template>
 
 <script lang="ts">
-import { response } from 'express';
 import {
     professorService,
     subjectDescriptionService,
@@ -223,7 +222,7 @@ export default defineComponent({
                                 docUrl.href = File;
                                 docUrl.setAttribute(
                                     'download',
-                                    'teaching-assignment' + '.csv'
+                                    'Asignación de docencia' + '.csv'
                                 );
                                 document.body.appendChild(docUrl);
                                 docUrl.click();

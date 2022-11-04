@@ -12,6 +12,21 @@ import {
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
+import { axios } from 'src/boot/axios';
+
+type ProfessorCharge = {
+    name: string;
+    opponent_amount: number;
+    president_amount: number;
+    opponent_thesis: {
+        name: string;
+        keywords: string[];
+    };
+    president_thesis: {
+        name: string;
+        keywords: string[];
+    };
+};
 
 export default defineComponent({
     components: { GenericCrudDataTable },
@@ -173,6 +188,31 @@ export default defineComponent({
                 create: true,
                 update: true,
                 delete: true,
+                external: [
+                    {
+                        icon: 'download',
+                        color: 'green',
+                        func: () => {
+                            return axios({
+                                url: 'http://127.0.0.1:8000/thesis-assignment/thesis-committee-csv-download/',
+                                method: 'GET',
+                                responseType: 'blob',
+                            }).then((response) => {
+                                const File = window.URL.createObjectURL(
+                                    new Blob([response.data])
+                                );
+                                const docUrl = document.createElement('a');
+                                docUrl.href = File;
+                                docUrl.setAttribute(
+                                    'download',
+                                    'Tribunales de tesis' + '.csv'
+                                );
+                                document.body.appendChild(docUrl);
+                                docUrl.click();
+                            });
+                        },
+                    },
+                ],
             },
         });
         return { config };
