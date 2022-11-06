@@ -182,7 +182,7 @@ const teachingAssignmentLinks1 = [
         link: 'semesters',
     },
     {
-        title: 'Categorías Escolares',
+        title: 'Categorías Docentes',
         caption: 'quasar.dev',
         icon: 'star_rate',
         link: 'teaching-category',

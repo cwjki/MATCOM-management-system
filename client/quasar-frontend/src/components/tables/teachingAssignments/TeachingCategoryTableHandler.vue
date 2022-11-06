@@ -15,14 +15,14 @@ export default defineComponent({
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({
-            name: 'Categorías Escolares',
-            singularLabel: 'Categoría Escolar',
-            searchLabel: 'Categoría Escolar',
+            name: 'Categorías Docentes',
+            singularLabel: 'Categoría Docente',
+            searchLabel: 'Categoría Docente',
             service: teachingCategoryService,
             fields: [
                 {
                     name: 'name',
-                    label: 'Categoría Escolar ',
+                    label: 'Categoría Docente',
                     type: 'text',
                 },
             ],
