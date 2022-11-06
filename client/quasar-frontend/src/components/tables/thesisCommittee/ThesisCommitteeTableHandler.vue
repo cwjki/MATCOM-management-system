@@ -12,6 +12,21 @@ import {
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
+import { axios } from 'src/boot/axios';
+
+type ProfessorCharge = {
+    name: string;
+    opponent_amount: number;
+    president_amount: number;
+    opponent_thesis: {
+        name: string;
+        keywords: string[];
+    };
+    president_thesis: {
+        name: string;
+        keywords: string[];
+    };
+};
 
 export default defineComponent({
     components: { GenericCrudDataTable },
@@ -25,6 +40,15 @@ export default defineComponent({
             searchLabel: 'Título o Tutores',
             service: thesisCommitteeService,
             fields: [
+                {
+                    name: 'student',
+                    label: 'Estudiante',
+                    column: {
+                        transform(row) {
+                            return `${row.thesis.student}`;
+                        },
+                    },
+                },
                 {
                     name: 'thesis',
                     label: 'Título',
@@ -40,15 +64,6 @@ export default defineComponent({
                         label: 'title',
                     },
                     rules: ['required'],
-                },
-                {
-                    name: 'student',
-                    label: 'Estudiante',
-                    column: {
-                        transform(row) {
-                            return `${row.thesis.student}`;
-                        },
-                    },
                 },
                 {
                     name: 'tutor',
@@ -77,58 +92,6 @@ export default defineComponent({
                     },
                 },
                 {
-                    name: 'president',
-                    label: 'Presidente',
-                    column: {
-                        transform: (row) =>
-                            row.president
-                                ? `${
-                                      row.president.name +
-                                      ' ' +
-                                      row.president.last_name
-                                  }`
-                                : '',
-                    },
-                    filter: true,
-                    type: 'select',
-                    selectOptions: {
-                        list: professorService.list,
-                        value: 'id',
-                        label: 'name',
-                        refactorValue: (value) =>
-                            value
-                                ? `${value.name + ' ' + value.last_name}`
-                                : '',
-                    },
-                    rules: ['required'],
-                },
-                {
-                    name: 'secretary',
-                    label: 'Secretario',
-                    column: {
-                        transform: (row) =>
-                            row.secretary
-                                ? `${
-                                      row.secretary.name +
-                                      ' ' +
-                                      row.secretary.last_name
-                                  }`
-                                : '',
-                    },
-                    filter: true,
-                    type: 'select',
-                    selectOptions: {
-                        list: professorService.list,
-                        value: 'id',
-                        label: 'name',
-                        refactorValue: (value) =>
-                            value
-                                ? `${value.name + ' ' + value.last_name}`
-                                : '',
-                    },
-                    rules: ['required'],
-                },
-                {
                     name: 'opponent',
                     label: 'Oponente',
                     column: {
@@ -155,6 +118,59 @@ export default defineComponent({
                     rules: ['required'],
                 },
                 {
+                    name: 'president',
+                    label: 'Presidente',
+                    column: {
+                        transform: (row) =>
+                            row.president
+                                ? `${
+                                      row.president.name +
+                                      ' ' +
+                                      row.president.last_name
+                                  }`
+                                : '',
+                    },
+                    filter: true,
+                    type: 'select',
+                    selectOptions: {
+                        list: professorService.list,
+                        value: 'id',
+                        label: 'name',
+                        refactorValue: (value) =>
+                            value
+                                ? `${value.name + ' ' + value.last_name}`
+                                : '',
+                    },
+                    rules: ['required'],
+                },
+                // {
+                //     name: 'secretary',
+                //     label: 'Secretario',
+                //     column: {
+                //         transform: (row) =>
+                //             row.secretary
+                //                 ? `${
+                //                       row.secretary.name +
+                //                       ' ' +
+                //                       row.secretary.last_name
+                //                   }`
+                //                 : '',
+                //     },
+                //     filter: true,
+                //     type: 'select',
+                //     selectOptions: {
+                //         list: professorService.list,
+                //         value: 'id',
+                //         label: 'name',
+                //         refactorValue: (value) =>
+                //             value
+                //                 ? `${value.name + ' ' + value.last_name}`
+                //                 : '',
+                //     },
+                //     rules: ['required'],
+                // },
+
+                {
                     name: 'keywords',
                     label: 'Palabras clave',
                     column: {
@@ -172,6 +188,31 @@ export default defineComponent({
                 create: true,
                 update: true,
                 delete: true,
+                external: [
+                    {
+                        icon: 'download',
+                        color: 'green',
+                        func: () => {
+                            return axios({
+                                url: 'http://127.0.0.1:8000/thesis-assignment/thesis-committee-csv-download/',
+                                method: 'GET',
+                                responseType: 'blob',
+                            }).then((response) => {
+                                const File = window.URL.createObjectURL(
+                                    new Blob([response.data])
+                                );
+                                const docUrl = document.createElement('a');
+                                docUrl.href = File;
+                                docUrl.setAttribute(
+                                    'download',
+                                    'Tribunales de tesis' + '.csv'
+                                );
+                                document.body.appendChild(docUrl);
+                                docUrl.click();
+                            });
+                        },
+                    },
+                ],
             },
         });
         return { config };

@@ -186,6 +186,8 @@ class ProfessorViewSet(viewsets.ModelViewSet):
     search_fields = ['name', 'last_name', 'department__name',
                      'scientific_degree__name', 'teaching_category__name']
     filterset_fields = ['department', 'scientific_degree', 'teaching_category']
+    ordering_fields = ['name']
+    ordering = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -198,6 +200,8 @@ class SubjectViewSet(viewsets.ModelViewSet):
     serializer_class = SubjectSerializer
     search_fields = ['name']
     filterset_fields = ['department', 'career', 'study_plan', 'semester']
+    ordering_fields = ['name']
+    ordering = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -211,6 +215,8 @@ class SubjectDescriptionViewSet(viewsets.ModelViewSet):
     search_fields = ['subject__name',
                      'class_type__name', 'teaching_group__name', 'time_period__name']
     filterset_fields = ['teaching_group', 'class_type', 'time_period']
+    ordering_fields = ['subject__name']
+    ordering = ['subject__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     @action(detail=True)
@@ -240,6 +246,8 @@ class TeachingAssignmentViewSet(viewsets.ModelViewSet):
                      'subject_description__class_type__name',
                      'subject_description__teaching_group__name']
     filterset_fields = ['professor']
+    # ordering_fields = ['subject_description__subject__name']
+    # ordering = ['subject_description__subject__name']
 
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

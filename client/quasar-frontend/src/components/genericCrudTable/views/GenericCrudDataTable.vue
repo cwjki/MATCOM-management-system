@@ -17,7 +17,7 @@
             :no-data-label="'No hay datos'"
             :no-results-label="'No hay resultados'"
             :pagination-label="(a, b, c) => `${a}-${b} ${'de'} ${c}`"
-            :rows-per-page-options="[]"
+            :rows-per-page-options="[10, 15, 25, 50, 100]"
         >
             <!-- add new row btn  and search bar-->
             <template v-slot:top>
@@ -29,6 +29,16 @@
                     class="q-mr-sm"
                     no-caps
                     @click="prepareCreate"
+                />
+                <q-btn
+                    v-for="(item, i) in external"
+                    :key="`btn-${i}`"
+                    :color="item.color"
+                    :icon="item.icon"
+                    round
+                    class="q-mr-sm"
+                    no-caps
+                    @click="item.func()"
                 />
                 <q-separator
                     vertical
@@ -201,13 +211,14 @@ import { Dictionary } from 'src/models/base';
 import { Notify } from 'quasar';
 export default defineComponent({
     components: { GenericFormHandler },
+    emits: ['onRequest'],
     props: {
         config: {
             type: Object as PropType<GenericCrudTableConfig>,
             required: true,
         },
     },
-    setup(props) {
+    setup(props, { emit }) {
         const {
             loading,
             rows,
@@ -215,6 +226,7 @@ export default defineComponent({
             actions,
             isActionOnTable,
             pagination,
+            external,
 
             filter,
             fieldToFilter,
@@ -224,7 +236,9 @@ export default defineComponent({
 
             load,
             onRequest,
-        } = useGenericDataTable(props.config);
+        } = useGenericDataTable(props.config, emit);
+
+        // emit('onRequest');
 
         const {
             crudLoading,
@@ -250,18 +264,20 @@ export default defineComponent({
                 .then((r) => {
                     load();
                     setTimeout(() => {
+                        const success_action = edit ? 'editó' : 'creó';
                         Notify.create({
                             type: 'positive',
-                            message: `Se creo un ${props.config.singularLabel} correctamente`,
+                            message: `Se ${success_action} una instancia de '${props.config.singularLabel}' correctamente`,
                         });
                         crudLoading.value = false;
                         crudDialog.value = false;
                     }, 200);
                 })
                 .catch((e) => {
+                    const fail_action = edit ? 'editar' : 'crear';
                     Notify.create({
                         type: 'negative',
-                        message: `Error al crear un ${props.config.singularLabel}`,
+                        message: `Error al ${fail_action} una instancia de  '${props.config.singularLabel}''`,
                     });
                     crudDialog.value = false;
                     crudLoading.value = false;
@@ -283,6 +299,14 @@ export default defineComponent({
                 .delete(row.id)
                 .then((response) => {
                     // todo put this event on event hooks
+                    setTimeout(() => {
+                        Notify.create({
+                            type: 'positive',
+                            message: `Se eliminó una instancia de '${props.config.singularLabel}' correctamente`,
+                        });
+                        crudLoading.value = false;
+                        crudDialog.value = false;
+                    }, 200);
                     load();
                 })
                 .catch((error) => {
@@ -296,6 +320,7 @@ export default defineComponent({
             actions,
             isActionOnTable,
             pagination,
+            external,
 
             filter,
             fieldToFilter,

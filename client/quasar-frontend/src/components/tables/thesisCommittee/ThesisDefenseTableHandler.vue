@@ -11,6 +11,7 @@ import {
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
+import { axios } from 'src/boot/axios';
 
 export default defineComponent({
     components: { GenericCrudDataTable },
@@ -137,20 +138,20 @@ export default defineComponent({
                                 : ' ',
                     },
                 },
-                {
-                    name: 'secretary',
-                    label: 'Secretario',
-                    column: {
-                        transform: (row) =>
-                            row.thesis_committee.secretary
-                                ? `${
-                                      row.thesis_committee.secretary.name +
-                                      ' ' +
-                                      row.thesis_committee.secretary.last_name
-                                  }`
-                                : ' ',
-                    },
-                },
+                // {
+                //     name: 'secretary',
+                //     label: 'Secretario',
+                //     column: {
+                //         transform: (row) =>
+                //             row.thesis_committee.secretary
+                //                 ? `${
+                //                       row.thesis_committee.secretary.name +
+                //                       ' ' +
+                //                       row.thesis_committee.secretary.last_name
+                //                   }`
+                //                 : ' ',
+                //     },
+                // },
                 {
                     name: 'keywords',
                     label: 'Palabras clave',
@@ -199,6 +200,31 @@ export default defineComponent({
                 create: true,
                 update: true,
                 delete: true,
+                external: [
+                    {
+                        icon: 'download',
+                        color: 'green',
+                        func: () => {
+                            return axios({
+                                url: 'http://127.0.0.1:8000/thesis-assignment/thesis-defense-csv-download/',
+                                method: 'GET',
+                                responseType: 'blob',
+                            }).then((response) => {
+                                const File = window.URL.createObjectURL(
+                                    new Blob([response.data])
+                                );
+                                const docUrl = document.createElement('a');
+                                docUrl.href = File;
+                                docUrl.setAttribute(
+                                    'download',
+                                    'Defensas de tesis' + '.csv'
+                                );
+                                document.body.appendChild(docUrl);
+                                docUrl.click();
+                            });
+                        },
+                    },
+                ],
             },
         });
         return { config };

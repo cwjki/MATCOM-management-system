@@ -127,9 +127,9 @@ class SubjectDescriptionSerializer(ModelSerializer):
             **validated_data)
 
         number_of_groups = validated_data['number_of_groups']
-        for _ in range(0, number_of_groups):
+        for i in range(0, number_of_groups):
             TeachingAssignment.objects.create(
-                subject_description_id=subject_description.id)
+                subject_description_id=subject_description.id, group=i+1)
 
         return subject_description
 

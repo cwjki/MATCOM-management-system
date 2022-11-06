@@ -89,7 +89,7 @@ export default defineComponent({
                 },
                 {
                     name: 'number_of_groups',
-                    label: 'Grupos',
+                    label: 'Total de grupos',
                     type: 'text',
 
                     rules: ['required'],

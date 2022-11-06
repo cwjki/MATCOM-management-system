@@ -12,6 +12,11 @@ export interface GenericCrudTableConfig {
         create?: boolean;
         update?: boolean;
         delete?: boolean;
+        external?: {
+            color: string;
+            icon: string;
+            func: () => void;
+        }[];
     };
 
     service: CRUDService;

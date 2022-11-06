@@ -38,14 +38,15 @@ class TeachingAssignmentInfoCollection:
         '''Main function to analize all teaching assignments'''
         for teaching_assignment in teaching_assignments:
             self.analize_row(teaching_assignment)
-        self.compute_total_hours()
+        # self.compute_total_hours()
 
-    def compute_total_hours(self):
-        '''Compute the total hours of a subject'''
-        for ta in self.teaching_assignments:
-            conf_hours = ta.conf_hours / ta.conf_groups if ta.conf_groups != 0 else 0
-            cp_hours = ta.cp_hours / ta.cp_groups if ta.cp_groups != 0 else 0
-            ta.number_of_hours = conf_hours + cp_hours
+    # def compute_total_hours(self):
+    #     '''Compute the total hours of a subject'''
+    #     for ta in self.teaching_assignments:
+    #         print(ta)
+    #         conf_hours = ta.conf_hours / ta.conf_groups if ta.conf_groups != 0 else 0
+    #         cp_hours = ta.cp_hours / ta.cp_groups if ta.cp_groups != 0 else 0
+    #         ta.number_of_hours = conf_hours + cp_hours
 
     def analize_row(self, teaching_assignment: dict):
         '''Compute and save all the important data of a teaching assignment'''

@@ -21,8 +21,8 @@ export default defineComponent({
             service: thesisService,
             fields: [
                 {
-                    name: 'title',
-                    label: 'Título',
+                    name: 'student',
+                    label: 'Estudiante',
                     type: 'text',
                     form: {
                         responsiveOptions: {
@@ -32,8 +32,8 @@ export default defineComponent({
                     rules: ['required'],
                 },
                 {
-                    name: 'student',
-                    label: 'Estudiante',
+                    name: 'title',
+                    label: 'Título',
                     type: 'text',
                     form: {
                         responsiveOptions: {
