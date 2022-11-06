@@ -41,6 +41,15 @@ export default defineComponent({
             service: thesisCommitteeService,
             fields: [
                 {
+                    name: 'student',
+                    label: 'Estudiante',
+                    column: {
+                        transform(row) {
+                            return `${row.thesis.student}`;
+                        },
+                    },
+                },
+                {
                     name: 'thesis',
                     label: 'Título',
                     column: {
@@ -55,15 +64,6 @@ export default defineComponent({
                         label: 'title',
                     },
                     rules: ['required'],
-                },
-                {
-                    name: 'student',
-                    label: 'Estudiante',
-                    column: {
-                        transform(row) {
-                            return `${row.thesis.student}`;
-                        },
-                    },
                 },
                 {
                     name: 'tutor',
