@@ -34,7 +34,7 @@
         <q-card-actions align="between" class="bg-white text-teal full-width">
             <q-btn
                 outline
-                label="Cancel"
+                label="Cancelar"
                 no-caps
                 @click="$emit('cancel')"
                 class="col-md-4 col-lg-3 col-5"
