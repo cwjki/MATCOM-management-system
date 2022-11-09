@@ -5,6 +5,7 @@
 <script lang="ts">
 import {
     classTypeService,
+    scholarYearsService,
     subjectDescriptionService,
     subjectService,
     teachingGroupService,
@@ -98,6 +99,23 @@ export default defineComponent({
                     name: 'number_of_hours',
                     label: 'Horas',
                     type: 'text',
+                    rules: ['required'],
+                },
+                {
+                    name: 'scholar_year',
+                    label: 'Curso Escolar',
+                    column: {
+                        transform(row) {
+                            return `${row.scholar_year.name}`;
+                        },
+                    },
+                    filter: true,
+                    type: 'select',
+                    selectOptions: {
+                        list: scholarYearsService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
                     rules: ['required'],
                 },
                 {

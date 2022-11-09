@@ -6,6 +6,7 @@ import { ScientificDegreeModel } from 'src/models/teachingAssignments/scientific
 import { SemesterModel } from 'src/models/teachingAssignments/semester.model';
 import { ClassTypeModel } from 'src/models/teachingAssignments/classType.model';
 import { TimePeriodModel } from 'src/models/teachingAssignments/timePeriod.model';
+import { ScholarYearModel } from 'src/models/teachingAssignments/scholarYear.model';
 import { StudyPlanModel } from 'src/models/teachingAssignments/studyPlan.model';
 import { SubjectModel } from 'src/models/teachingAssignments/subject.model';
 import { SubjectDescriptionModel } from 'src/models/teachingAssignments/subjectDescription.model';
@@ -36,6 +37,7 @@ export const RESOURCES = {
     studyPlans: '/teaching-assignment/study-plans/',
     classTypes: '/teaching-assignment/class-types/',
     timePeriods: '/teaching-assignment/time-periods/',
+    scholarYears: '/teaching-assignment/scholar-years/',
     teachingGroups: '/teaching-assignment/teaching-groups/',
     teachingPlanning: '/teaching-assignment/teaching-planning',
 
@@ -97,6 +99,10 @@ export const classTypeService = CrudServiceFactory<ClassTypeModel>(
 
 export const timePeriodService = CrudServiceFactory<TimePeriodModel>(
     RESOURCES.timePeriods
+);
+
+export const scholarYearsService = CrudServiceFactory<ScholarYearModel>(
+    RESOURCES.scholarYears
 );
 
 export const teachingGroupService = CrudServiceFactory<TeachingGroupModel>(

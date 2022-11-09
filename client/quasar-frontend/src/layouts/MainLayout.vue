@@ -169,12 +169,17 @@ const teachingAssignmentLinks1 = [
         link: 'teaching-groups',
     },
     {
+        title: 'Cursos Escolares',
+        caption: 'quasar.dev',
+        icon: 'date_range',
+        link: 'scholar-years',
+    },
+    {
         title: 'Períodos de tiempo',
         caption: 'quasar.dev',
         icon: 'date_range',
         link: 'time-periods',
     },
-
     {
         title: 'Semestres',
         caption: 'quasar.dev',
