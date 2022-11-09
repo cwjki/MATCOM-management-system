@@ -78,6 +78,13 @@ class Semester(models.Model):
         return str(self.name)
 
 
+class ScholarYear(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+        return str(self.name)
+
+
 class TimePeriod(models.Model):
     name = models.CharField(max_length=200)
 
@@ -142,6 +149,7 @@ class SubjectDescription(models.Model):
     class_type = models.ForeignKey(ClassType, on_delete=models.CASCADE)
     time_period = models.ForeignKey(TimePeriod, on_delete=models.CASCADE)
     teaching_group = models.ForeignKey(TeachingGroup, on_delete=models.CASCADE)
+    scholar_year = models.ForeignKey(ScholarYear, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return '[' + str(self.subject) + '] ' + '[' + str(self.class_type) + '] ' + '[' + str(self.time_period) + ']'

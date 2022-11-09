@@ -2,7 +2,7 @@ from asyncore import read, write
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
-from .models import CarmenTable, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, TeachingPlanning, TimePeriod
+from .models import CarmenTable, Faculty, Career, ScholarYear, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, TeachingPlanning, TimePeriod
 
 
 class FacultySerializer(ModelSerializer):
@@ -46,6 +46,12 @@ class DepartmentSerializer(ModelSerializer):
 class ClassTypeSerializer(ModelSerializer):
     class Meta:
         model = ClassType
+        fields = '__all__'
+
+
+class ScholarYearSerializer(ModelSerializer):
+    class Meta:
+        model = ScholarYear
         fields = '__all__'
 
 
@@ -117,6 +123,9 @@ class SubjectDescriptionSerializer(ModelSerializer):
 
     time_period_id = serializers.IntegerField(required=True, write_only=True)
     time_period = TimePeriodSerializer(read_only=True)
+
+    scholar_year_id = serializers.IntegerField(required=True, write_only=True)
+    scholar_year = ScholarYearSerializer(read_only=True)
 
     teaching_group_id = serializers.IntegerField(
         required=True, write_only=True)

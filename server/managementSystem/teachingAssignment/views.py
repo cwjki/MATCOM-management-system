@@ -6,8 +6,8 @@ from rest_framework.decorators import action
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 
-from .models import Career, CarmenTable, Faculty, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester, TeachingPlanning
-from .serializers import CarmenTableSerializer, FacultySerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer
+from .models import Career, CarmenTable, Faculty, ScholarYear, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, TimePeriod, TeachingCategory, ScientificDegree, Professor, Subject, Semester, TeachingPlanning
+from .serializers import CarmenTableSerializer, FacultySerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer, ScholarYearSerializer
 from .serializers_csv import CareerSerializerCSV
 from .permissions import IsOwnerOrReadOnly
 from .optimization.optimization import OptimizationModel
@@ -141,6 +141,16 @@ class ClassTypeViewSet(viewsets.ModelViewSet):
     serializer_class = ClassTypeSerializer
     search_fields = ['name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class ScholarYearViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for scholar years.
+    """
+    queryset = ScholarYear.objects.all()
+    serializer_class = ScholarYearSerializer
+    search_fields = ['name']
 
 
 class TimePeriodViewSet(viewsets.ModelViewSet):

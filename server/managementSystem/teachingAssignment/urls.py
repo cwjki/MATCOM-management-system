@@ -21,6 +21,9 @@ router.register(r'departments', views.DepartmentViewSet,
 router.register(r'class-types', views.ClassTypeViewSet,
                 basename="class-types")
 
+router.register(r'scholar-year', views.ScholarYearViewSet,
+                basename="scholar-years")
+
 router.register(r'time-periods', views.TimePeriodViewSet,
                 basename="time-periods")
 
