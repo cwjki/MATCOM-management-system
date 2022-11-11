@@ -101,7 +101,7 @@ export const timePeriodService = CrudServiceFactory<TimePeriodModel>(
     RESOURCES.timePeriods
 );
 
-export const scholarYearsService = CrudServiceFactory<ScholarYearModel>(
+export const scholarYearService = CrudServiceFactory<ScholarYearModel>(
     RESOURCES.scholarYears
 );
 

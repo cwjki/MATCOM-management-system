@@ -6,7 +6,7 @@
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
-import { scholarYearsService } from 'src/services';
+import { scholarYearService } from 'src/services';
 
 export default defineComponent({
     name: 'timePeriodHandler',
@@ -18,7 +18,7 @@ export default defineComponent({
             name: 'Cursos Escolares',
             singularLabel: 'Curso Escolar',
             searchLabel: 'Curso Escolar',
-            service: scholarYearsService,
+            service: scholarYearService,
             fields: [
                 {
                     name: 'name',

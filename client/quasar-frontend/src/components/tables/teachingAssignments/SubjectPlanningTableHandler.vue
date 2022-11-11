@@ -5,7 +5,7 @@
 <script lang="ts">
 import {
     classTypeService,
-    scholarYearsService,
+    scholarYearService,
     subjectDescriptionService,
     subjectService,
     teachingGroupService,
@@ -112,7 +112,7 @@ export default defineComponent({
                     filter: true,
                     type: 'select',
                     selectOptions: {
-                        list: scholarYearsService.list,
+                        list: scholarYearService.list,
                         value: 'id',
                         label: 'name',
                     },
