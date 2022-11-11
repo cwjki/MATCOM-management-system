@@ -24,7 +24,7 @@ export default defineComponent({
         const config = ref<GenericCrudTableConfig>({
             name: 'Planificación de las Asignaturas',
             singularLabel: 'Planificación',
-            searchLabel: 'Buscar por texto',
+            searchLabel: 'Asignatura',
             service: subjectDescriptionService,
             fields: [
                 {

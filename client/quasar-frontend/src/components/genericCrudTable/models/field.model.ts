@@ -12,6 +12,8 @@ export interface FieldColumn {
 
     ordering?: boolean;
 
+    maxLength?: number;
+
     // header th:
     headerStyle?: string;
     headerClasses?: string;
