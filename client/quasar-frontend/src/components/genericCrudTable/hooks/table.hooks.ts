@@ -53,9 +53,14 @@ export const useGenericDataTable = (
         };
         fieldToFilter.map((x) => {
             if (x.field) {
-                x.field.selectOptions.list(query).then((r) => {
-                    filterOptions.value[x.name] = r.data.results;
-                });
+                x.field.selectOptions
+                    .list({
+                        ...query,
+                        ...(x.field.selectOptions.query || {}),
+                    })
+                    .then((r) => {
+                        filterOptions.value[x.name] = r.data.results;
+                    });
             }
         });
     };
@@ -79,6 +84,7 @@ export const useGenericDataTable = (
         pagination.value = request.pagination;
 
         const query = {
+            ...(config.query || {}),
             size: request.pagination.rowsPerPage,
             page: request.pagination.page,
             search: request.filter,

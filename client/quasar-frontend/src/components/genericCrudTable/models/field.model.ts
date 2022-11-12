@@ -1,4 +1,5 @@
 import { AxiosPromise } from 'axios';
+import { Dictionary } from 'src/models/base';
 import { ListResult } from 'src/services';
 
 export interface FieldColumn {
@@ -56,6 +57,7 @@ export interface FieldSelect extends FieldBasic {
     type: 'select';
     selectOptions: {
         list: (query?: any) => AxiosPromise<ListResult<any>>;
+        query?: Dictionary;
         label: string;
         value: string;
         refactorValue?: (value: any) => string;

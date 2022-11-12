@@ -1,5 +1,5 @@
 from django.db import models
-from teachingAssignment.models import Professor
+from teachingAssignment.models import Professor, ScholarYear
 
 
 class Place(models.Model):
@@ -26,6 +26,7 @@ class Thesis(models.Model):
     cotutors = models.ManyToManyField(
         Professor, blank=True, related_name='tutors')
     keywords = models.ManyToManyField(Keyword, related_name='keywords')
+    scholar_year = models.ForeignKey(ScholarYear, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return str(self.title + ' ' + str(self.student))

@@ -1,7 +1,7 @@
 from asyncore import read
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from teachingAssignment.serializers import ProfessorSerializer
+from teachingAssignment.serializers import ProfessorSerializer, ScholarYearSerializer
 
 from teachingAssignment.models import Professor
 
@@ -31,6 +31,9 @@ class ThesisSerializer(ModelSerializer):
     keywords_id = serializers.PrimaryKeyRelatedField(
         required=False, many=True, read_only=False, queryset=Keyword.objects.all(), source='keywords')
     keywords = KeywordSerializer(many=True, read_only=True)
+
+    scholar_year_id = serializers.IntegerField(required=True, write_only=True)
+    scholar_year = ScholarYearSerializer(read_only=True)
 
     def create(self, validated_data):
         cotutors = validated_data.pop(
@@ -64,10 +67,9 @@ class ThesisCommitteeSerializer(ModelSerializer):
 
     thesis_id = serializers.IntegerField(required=True, write_only=True)
     thesis = ThesisSerializer(read_only=True)
-    
+
     # secretary_id = serializers.IntegerField(write_only=True)
     # secretary = ProfessorSerializer(read_only=True)
-
 
     class Meta:
         model = ThesisCommittee

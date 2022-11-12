@@ -222,9 +222,9 @@ class SubjectDescriptionViewSet(viewsets.ModelViewSet):
     """
     queryset = SubjectDescription.objects.all()
     serializer_class = SubjectDescriptionSerializer
-    search_fields = ['subject__name',
-                     'class_type__name', 'teaching_group__name', 'time_period__name']
-    filterset_fields = ['teaching_group', 'class_type', 'time_period']
+    search_fields = ['subject__name']
+    filterset_fields = ['teaching_group', 'class_type',
+                        'time_period', 'subject__department']
     ordering_fields = ['subject__name']
     ordering = ['subject__name']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -252,10 +252,12 @@ class TeachingAssignmentViewSet(viewsets.ModelViewSet):
     queryset = TeachingAssignment.objects.all()
     serializer_class = TeachingAssignmentSerializer
     search_fields = ['subject_description__subject__name',
+                     'subject_description__subject__department__name'
                      'professor__name', 'professor__last_name',
                      'subject_description__class_type__name',
                      'subject_description__teaching_group__name']
-    filterset_fields = ['professor']
+    filterset_fields = ['professor',
+                        'subject_description__subject__department']
     # ordering_fields = ['subject_description__subject__name']
     # ordering = ['subject_description__subject__name']
 
