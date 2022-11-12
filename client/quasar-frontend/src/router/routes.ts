@@ -35,6 +35,12 @@ const routes: RouteRecordRaw[] = [
                     import('src/pages/teachingAssignments/ClassTypes.vue'),
             },
             {
+                path: 'scholar-years',
+                name: 'scholar-years',
+                component: () =>
+                    import('src/pages/teachingAssignments/ScholarYears.vue'),
+            },
+            {
                 path: 'time-periods',
                 name: 'time-periods',
                 component: () =>

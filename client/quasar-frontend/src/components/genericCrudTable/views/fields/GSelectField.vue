@@ -48,12 +48,16 @@ export default defineComponent({
         const options = ref([] as any[]);
         const loading = ref(true);
 
-        props.field.selectOptions.list().then((r) => {
-            options.value = r.data.results;
-            setTimeout(() => {
-                loading.value = false;
-            }, 1000);
-        });
+        props.field.selectOptions
+            .list({
+                ...(props.field.selectOptions.query || {}),
+            })
+            .then((r) => {
+                options.value = r.data.results;
+                setTimeout(() => {
+                    loading.value = false;
+                }, 1000);
+            });
         return {
             options,
             loading,

@@ -7,6 +7,12 @@
             z-index: 1000 !important;
         "
     >
+        <p
+            class="text-h6 text-primary full-width text-center q-mb-none"
+            v-if="departament.id"
+        >
+            Departamento: {{ departament.name }}
+        </p>
         <q-card-section
             class="full-width row justify-center items-center q-pa-none q-pt-md"
         >
@@ -54,6 +60,7 @@ import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.mode
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
 import { Dictionary } from 'src/models/base';
 import { axios } from 'src/boot/axios';
+import { useDepartamentSesion } from 'src/hooks/departamentSesion';
 
 type UserCharge = {
     name: string;
@@ -71,11 +78,21 @@ export default defineComponent({
     props: {},
     emits: [],
     setup(props, { emit }) {
+        const { departament } = useDepartamentSesion();
+
         const config = ref<GenericCrudTableConfig>({
             name: 'Asignaciones de docencia',
             singularLabel: 'Asignación de docencia',
             searchLabel: 'Asignatura o Actividad',
             service: teachingAssignmentService,
+            query: {
+                ...(departament.value.id
+                    ? {
+                          subject_description__subject__department:
+                              departament.value.id,
+                      }
+                    : {}),
+            },
             fields: [
                 {
                     name: 'subject_description',
@@ -87,6 +104,11 @@ export default defineComponent({
                     },
                     type: 'select',
                     selectOptions: {
+                        query: {
+                            ...(departament.value.id
+                                ? { subject__department: departament.value.id }
+                                : {}),
+                        },
                         list: subjectDescriptionService.list,
                         value: 'id',
                         label: 'subject_description',
@@ -182,6 +204,11 @@ export default defineComponent({
                         list: professorService.list,
                         value: 'id',
                         label: 'name',
+                        query: {
+                            ...(departament.value.id
+                                ? { department: departament.value.id }
+                                : {}),
+                        },
                         refactorValue: (value) =>
                             value
                                 ? `${value.name + ' ' + value.last_name}`
@@ -248,7 +275,15 @@ export default defineComponent({
                     userCharges.value[key].subjects = [];
                 });
                 teachingAssignmentService
-                    .list({ size: 100000 })
+                    .list({
+                        size: 100000,
+                        ...(departament.value.id
+                            ? {
+                                  subject_description__subject__department:
+                                      departament.value.id,
+                              }
+                            : {}),
+                    })
                     .then((response: any) => {
                         response.data.results.map((x: any) => {
                             if (!x.professor) return;
@@ -281,6 +316,7 @@ export default defineComponent({
                     });
             },
             loading,
+            departament,
             refactorName(
                 data: {
                     hour: number;

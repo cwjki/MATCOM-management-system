@@ -3,7 +3,12 @@
 </template>
 
 <script lang="ts">
-import { thesisService, professorService, keywordService } from 'src/services';
+import {
+    thesisService,
+    professorService,
+    keywordService,
+    scholarYearService,
+} from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
@@ -20,6 +25,23 @@ export default defineComponent({
             searchLabel: 'Título',
             service: thesisService,
             fields: [
+                {
+                    name: 'scholar_year',
+                    label: 'Curso Escolar',
+                    column: {
+                        transform(row) {
+                            return `${row.scholar_year.name}`;
+                        },
+                    },
+                    filter: true,
+                    type: 'select',
+                    selectOptions: {
+                        list: scholarYearService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
+                    rules: ['required'],
+                },
                 {
                     name: 'student',
                     label: 'Estudiante',

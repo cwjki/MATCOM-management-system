@@ -1,7 +1,7 @@
 import { Notify } from 'quasar';
 import { Dictionary } from 'src/models/base';
 import { computed, ref } from 'vue';
-import { FieldSelect } from '../models/field.model';
+import { FieldColumn, FieldModel, FieldSelect } from '../models/field.model';
 import { GenericCrudTableConfig, RequestModel } from '../models/table.model';
 import { useSerializer } from './serializer.hooks';
 import { transformQuasarColumn } from './utils.hooks';
@@ -53,9 +53,14 @@ export const useGenericDataTable = (
         };
         fieldToFilter.map((x) => {
             if (x.field) {
-                x.field.selectOptions.list(query).then((r) => {
-                    filterOptions.value[x.name] = r.data.results;
-                });
+                x.field.selectOptions
+                    .list({
+                        ...query,
+                        ...(x.field.selectOptions.query || {}),
+                    })
+                    .then((r) => {
+                        filterOptions.value[x.name] = r.data.results;
+                    });
             }
         });
     };
@@ -79,6 +84,7 @@ export const useGenericDataTable = (
         pagination.value = request.pagination;
 
         const query = {
+            ...(config.query || {}),
             size: request.pagination.rowsPerPage,
             page: request.pagination.page,
             search: request.filter,
@@ -107,6 +113,12 @@ export const useGenericDataTable = (
             });
     };
 
+    const mappedField = ref<Dictionary<FieldColumn>>({});
+
+    config.fields.map((f) => {
+        mappedField.value[f.name] = f.column as FieldColumn;
+    });
+
     return {
         loading,
         rows,
@@ -125,5 +137,6 @@ export const useGenericDataTable = (
 
         load,
         onRequest,
+        mappedField,
     };
 };

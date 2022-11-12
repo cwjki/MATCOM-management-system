@@ -1,3 +1,4 @@
+import { Dictionary } from 'src/models/base';
 import { CRUDService } from 'src/services';
 import { FieldModel } from './field.model';
 
@@ -20,6 +21,8 @@ export interface GenericCrudTableConfig {
     };
 
     service: CRUDService;
+
+    query?: Dictionary,
 
     fields: FieldModel[];
 }

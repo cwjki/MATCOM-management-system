@@ -1,5 +1,12 @@
 <template>
-    <generic-crud-data-table :config="config" />
+    <generic-crud-data-table :config="config">
+        <!-- <template v-slot:column-student="props">
+            <q-badge> {{ props.value.thesis.student }} </q-badge>
+        </template> -->
+        <!-- <template v-slot:table-column-student="props">
+            <q-btn> {{ props.value.thesis.student }} </q-btn>
+        </template> -->
+    </generic-crud-data-table>
 </template>
 
 <script lang="ts">
@@ -56,6 +63,7 @@ export default defineComponent({
                         transform(row) {
                             return `${row.thesis.title}`;
                         },
+                        maxLength: 20,
                     },
                     type: 'select',
                     selectOptions: {
@@ -76,7 +84,7 @@ export default defineComponent({
                                 row.thesis.tutor.last_name;
 
                             if (row.thesis.cotutors.length > 0) {
-                                result += ', ';
+                                result += '<br>';
                                 row.thesis.cotutors.forEach((tutor: any) => {
                                     result +=
                                         tutor.name +
@@ -177,7 +185,7 @@ export default defineComponent({
                         transform(row) {
                             var result = '';
                             row.thesis.keywords.forEach((keyword: any) => {
-                                result += keyword.name + ', ';
+                                result += keyword.name + '<br>';
                             });
                             return `${result.slice(0, -2)}`;
                         },

@@ -102,6 +102,36 @@
                     </template>
                 </q-input>
             </template>
+
+            <!-- redefine how show the columns -->
+            <template v-slot:body-cell="props">
+                <q-td :props="props">
+                    <slot :name="'column-' + props.col.name" :value="props.row">
+                        <p
+                            class="q-mb-none"
+                            v-if="
+                                mappedField[props.col.name] &&
+                                mappedField[props.col.name].maxLength
+                            "
+                        >
+                            {{
+                                `${props.value.substr(
+                                    0,
+                                    mappedField[props.col.name].maxLength
+                                )}${
+                                    (mappedField[props.col.name].maxLength ||
+                                        0) < props.value.length
+                                        ? '...'
+                                        : ''
+                                }`
+                            }}
+                            <q-tooltip> {{ props.value }} </q-tooltip>
+                        </p>
+                        <p class="q-mb-none" v-else v-html="props.value"></p>
+                    </slot>
+                </q-td>
+            </template>
+
             <!-- edit and delete btns -->
             <template v-slot:body-cell-csactions="props" v-if="isActionOnTable">
                 <q-td :props="props">
@@ -155,21 +185,54 @@
                             />
                         </q-card-section>
                         <q-separator />
-                        <q-list dense>
+                        <q-list dense class="q-py-sm">
                             <q-item
                                 v-for="col in props.cols.filter(
                                     (col) => col.name !== 'csactions'
                                 )"
                                 :key="col.name"
                             >
-                                <q-item-section>
-                                    <q-item-label>{{ col.label }}</q-item-label>
-                                </q-item-section>
-                                <q-item-section side>
-                                    <q-item-label caption>{{
-                                        col.value
-                                    }}</q-item-label>
-                                </q-item-section>
+                                <slot
+                                    :name="'table-column-' + col.name"
+                                    :value="props.row"
+                                >
+                                    <q-item-section>
+                                        <q-item-label>{{
+                                            col.label
+                                        }}</q-item-label>
+                                    </q-item-section>
+                                    <q-item-section>
+                                        <q-item-label
+                                            class="q-mb-none"
+                                            v-if="
+                                                mappedField[col.name] &&
+                                                mappedField[col.name].maxLength
+                                            "
+                                        >
+                                            {{
+                                                `${col.value.substr(
+                                                    0,
+                                                    mappedField[col.name]
+                                                        .maxLength
+                                                )}${
+                                                    (mappedField[col.name]
+                                                        .maxLength || 0) <
+                                                    col.value.length
+                                                        ? '...'
+                                                        : ''
+                                                }`
+                                            }}
+                                            <q-tooltip>
+                                                {{ col.value }}
+                                            </q-tooltip>
+                                        </q-item-label>
+                                        <q-item-label
+                                            class="q-mb-none"
+                                            v-else
+                                            v-html="col.value"
+                                        ></q-item-label>
+                                    </q-item-section>
+                                </slot>
                             </q-item>
                         </q-list>
                     </q-card>
@@ -236,6 +299,7 @@ export default defineComponent({
 
             load,
             onRequest,
+            mappedField,
         } = useGenericDataTable(props.config, emit);
 
         // emit('onRequest');
@@ -340,6 +404,7 @@ export default defineComponent({
             prepareEdit,
             prepareCreate,
             changeKey,
+            mappedField,
         };
     },
 });

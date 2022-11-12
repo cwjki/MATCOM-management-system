@@ -1,10 +1,18 @@
 <template>
+    <p
+        class="text-h6 text-primary full-width text-center"
+        v-if="departament.id"
+    >
+        Departamento: {{ departament.name }}
+    </p>
     <generic-crud-data-table :config="config" />
 </template>
 
 <script lang="ts">
+import { useDepartamentSesion } from 'src/hooks/departamentSesion';
 import {
     classTypeService,
+    scholarYearService,
     subjectDescriptionService,
     subjectService,
     teachingGroupService,
@@ -20,11 +28,17 @@ export default defineComponent({
     props: {},
     emits: [],
     setup(props, { emit }) {
+        const { departament } = useDepartamentSesion();
         const config = ref<GenericCrudTableConfig>({
             name: 'Planificación de las Asignaturas',
             singularLabel: 'Planificación',
-            searchLabel: 'Buscar por texto',
+            searchLabel: 'Asignatura',
             service: subjectDescriptionService,
+            query: {
+                ...(departament.value.id
+                    ? { subject__department: departament.value.id }
+                    : {}),
+            },
             fields: [
                 {
                     name: 'subject',
@@ -39,6 +53,11 @@ export default defineComponent({
                         list: subjectService.list,
                         value: 'id',
                         label: 'name',
+                        query: {
+                            ...(departament.value.id
+                                ? { department: departament.value.id }
+                                : {}),
+                        },
                         refactorValue: (value) =>
                             value
                                 ? `${
@@ -101,6 +120,23 @@ export default defineComponent({
                     rules: ['required'],
                 },
                 {
+                    name: 'scholar_year',
+                    label: 'Curso Escolar',
+                    column: {
+                        transform(row) {
+                            return `${row.scholar_year.name}`;
+                        },
+                    },
+                    filter: true,
+                    type: 'select',
+                    selectOptions: {
+                        list: scholarYearService.list,
+                        value: 'id',
+                        label: 'name',
+                    },
+                    rules: ['required'],
+                },
+                {
                     name: 'time_period',
                     label: 'Período de Tiempo',
                     column: {
@@ -125,7 +161,7 @@ export default defineComponent({
             },
         });
 
-        return { config };
+        return { config, departament };
     },
 });
 </script>
