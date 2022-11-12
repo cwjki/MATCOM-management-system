@@ -60,6 +60,7 @@ export default defineComponent({
                         transform(row) {
                             return `${row.thesis_committee.thesis.title}`;
                         },
+                        maxLength: 20,
                     },
                     type: 'select',
                     selectOptions: {
@@ -93,7 +94,7 @@ export default defineComponent({
                             if (
                                 row.thesis_committee.thesis.cotutors.length > 0
                             ) {
-                                result += ', ';
+                                result += '<br>';
                                 row.thesis_committee.thesis.cotutors.forEach(
                                     (tutor: any) => {
                                         result +=
@@ -160,7 +161,7 @@ export default defineComponent({
                             var result = '';
                             row.thesis_committee.thesis.keywords.forEach(
                                 (keyword: any) => {
-                                    result += keyword.name + ', ';
+                                    result += keyword.name + '<br>';
                                 }
                             );
                             return `${result.slice(0, -2)}`;

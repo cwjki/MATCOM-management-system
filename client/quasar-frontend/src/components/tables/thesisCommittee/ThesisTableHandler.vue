@@ -56,6 +56,12 @@ export default defineComponent({
                 {
                     name: 'title',
                     label: 'Título',
+                    column: {
+                        transform(row) {
+                            return `${row.title}`;
+                        },
+                        maxLength: 20,
+                    },
                     type: 'text',
                     form: {
                         responsiveOptions: {
@@ -120,7 +126,7 @@ export default defineComponent({
                         transform(row) {
                             var result = '';
                             row.keywords.forEach((keyword: any) => {
-                                result += keyword.name + ', ';
+                                result += keyword.name + '<br>';
                             });
                             return `${result.slice(0, -2)}`;
                         },
