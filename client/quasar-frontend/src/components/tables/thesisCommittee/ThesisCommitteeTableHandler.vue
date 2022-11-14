@@ -1,5 +1,51 @@
 <template>
-    <generic-crud-data-table :config="config">
+    <q-card>
+        <q-card-section
+            class="full-width row justify-center items-center q-pa-none q-pt-md"
+        >
+            <div
+                class="q-px-sm q-mb-md"
+                v-for="(obj, key) in professorCharges"
+                :key="key"
+            >
+                <q-btn
+                    :loading="loading"
+                    no-caps
+                    color="secondary"
+                    outline
+                    ripple
+                    class="q-px-md"
+                >
+                    {{ obj.name }}
+                    <q-badge
+                        color="primary"
+                        class="q-pa-xs"
+                        floating
+                        align="top"
+                        style="top: -10px !important"
+                    >
+                        {{ obj.opponent_amount }}
+                    </q-badge>
+
+                    <q-badge
+                        color="primary"
+                        class="q-pa-xs"
+                        floating
+                        align="top"
+                        style="top: -30px !important"
+                    >
+                        {{ obj.president_amount }}
+                    </q-badge>
+                    <q-tooltip>
+                        Oponente: {{ obj.opponent_amount }} | Presidente:
+                        {{ obj.president_amount }}
+                    </q-tooltip>
+                </q-btn>
+            </div>
+        </q-card-section>
+    </q-card>
+
+    <generic-crud-data-table @on-request="onReload" :config="config">
         <!-- <template v-slot:column-student="props">
             <q-badge> {{ props.value.thesis.student }} </q-badge>
         </template> -->
@@ -20,19 +66,17 @@ import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
 import { axios } from 'src/boot/axios';
+import { Dictionary } from 'src/models/base';
 
 type ProfessorCharge = {
     name: string;
     opponent_amount: number;
     president_amount: number;
-    opponent_thesis: {
+    thesis: {
         name: string;
         keywords: string[];
-    };
-    president_thesis: {
-        name: string;
-        keywords: string[];
-    };
+        role: string;
+    }[];
 };
 
 export default defineComponent({
@@ -223,7 +267,82 @@ export default defineComponent({
                 ],
             },
         });
-        return { config };
+
+        const loading = ref<boolean>(false);
+
+        const professorCharges = ref<Dictionary<ProfessorCharge>>({});
+
+        return {
+            config,
+            professorCharges,
+            onReload() {
+                loading.value = true;
+                Object.keys(professorCharges.value).map((key) => {
+                    professorCharges.value[key].opponent_amount = 0;
+                    professorCharges.value[key].president_amount = 0;
+                    professorCharges.value[key].thesis = [];
+                });
+                thesisCommitteeService
+                    .list({
+                        size: 100000,
+                    })
+                    .then((response: any) => {
+                        response.data.results.map((x: any) => {
+                            if (x.opponent) {
+                                const idp = x.opponent.id;
+                                if (!professorCharges.value[idp]) {
+                                    professorCharges.value[idp] = {
+                                        name:
+                                            x.opponent.name +
+                                            ' ' +
+                                            x.opponent.last_name,
+                                        opponent_amount: 0,
+                                        president_amount: 0,
+                                        thesis: [],
+                                    };
+                                }
+
+                                professorCharges.value[
+                                    idp
+                                ].opponent_amount += 1;
+                                professorCharges.value[idp].thesis.push({
+                                    name: x.thesis.title,
+                                    keywords: x.keywords,
+                                    role: 'oponente',
+                                });
+                            }
+
+                            if (x.president) {
+                                const idp = x.president.id;
+                                if (!professorCharges.value[idp]) {
+                                    professorCharges.value[idp] = {
+                                        name:
+                                            x.president.name +
+                                            ' ' +
+                                            x.president.last_name,
+                                        opponent_amount: 0,
+                                        president_amount: 0,
+                                        thesis: [],
+                                    };
+                                }
+
+                                professorCharges.value[
+                                    idp
+                                ].president_amount += 1;
+                                professorCharges.value[idp].thesis.push({
+                                    name: x.thesis.title,
+                                    keywords: x.keywords,
+                                    role: 'presidente',
+                                });
+                            }
+                        });
+                    })
+                    .finally(() => {
+                        loading.value = false;
+                    });
+            },
+            loading,
+        };
     },
 });
 </script>

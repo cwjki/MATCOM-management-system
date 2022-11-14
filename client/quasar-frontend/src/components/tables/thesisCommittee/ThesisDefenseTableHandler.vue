@@ -101,7 +101,7 @@ export default defineComponent({
                                             tutor.name +
                                             ' ' +
                                             tutor.last_name +
-                                            ', ';
+                                            '<br>';
                                     }
                                 );
                                 result = result.slice(0, -2);

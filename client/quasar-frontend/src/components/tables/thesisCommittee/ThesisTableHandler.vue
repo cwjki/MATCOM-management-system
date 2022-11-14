@@ -101,7 +101,7 @@ export default defineComponent({
                             var result = '';
                             row.cotutors.forEach((tutor: any) => {
                                 result +=
-                                    tutor.name + ' ' + tutor.last_name + ', ';
+                                    tutor.name + ' ' + tutor.last_name + '<br>';
                             });
                             return `${result.slice(0, -2)}`;
                         },
