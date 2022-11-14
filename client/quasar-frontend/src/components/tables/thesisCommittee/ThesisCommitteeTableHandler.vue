@@ -24,16 +24,7 @@
                         align="top"
                         style="top: -10px !important"
                     >
-                        {{ obj.opponent_amount }}
-                    </q-badge>
-
-                    <q-badge
-                        color="primary"
-                        class="q-pa-xs"
-                        floating
-                        align="top"
-                        style="top: -30px !important"
-                    >
+                        {{ obj.opponent_amount }} |
                         {{ obj.president_amount }}
                     </q-badge>
                     <q-tooltip>
