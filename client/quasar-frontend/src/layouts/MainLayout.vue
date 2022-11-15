@@ -135,7 +135,6 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import EssentialLink from 'components/EssentialLink.vue';
 
 const teachingAssignmentLinks1 = [
     {
@@ -280,11 +279,7 @@ const thesisCommitteeLinks = [
 
 export default defineComponent({
     name: 'MainLayout',
-
-    components: {
-        EssentialLink,
-    },
-
+ 
     setup() {
         const leftDrawerOpen = ref(false);
         const imageLogo = require('src/assets/logo.jpg');
