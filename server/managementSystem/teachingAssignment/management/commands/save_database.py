@@ -31,7 +31,6 @@ class Command(BaseCommand):
                         'Places', 'Keywords', 'Thesis', 'ThesisCommittees', 'ThesisDefenses']
 
         for model_name in models_names:
-            print(model_name)
             self.save_model(model_name)
 
     def save_model(self, model_name: str):
