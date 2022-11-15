@@ -1,8 +1,12 @@
 professor_name,professor_last_name,career,study_plan,subject,class_type,time_period,teaching_group,percent,group
-Alejandro,Mesejo Chiong,Matemática,E,Programación y Algoritmos,Conferencia,enero - julio,M1,100,1
-Rocío,Ortiz,Matemática,E,Programación y Algoritmos,Clase Práctica,enero - julio,M1,100,1
-Daniela,González Beltrán,Matemática,E,Programación y Algoritmos,Clase Práctica,enero - julio,M1,100,2
-Camila,Pérez Mosquera,Matemática,E,Programación y Algoritmos,Clase Práctica,enero - julio,M1,100,3
-Carlos,Bouza Herrera,Matemática,E,Seminario de Problemas I,Conferencia,enero - julio,M1,100,1
-Alejandro,Mesejo Chiong,Matemática,E,Programación y Algoritmos,Conferencia,enero - julio,M2,100,1
-Sheyla,Artiles,Matemática,E,Programación y Algoritmos,Clase Práctica,enero - julio,M2,100,1
+Alain,Cartaya Salabarría,Ciencia de la Computación,E,Base de Datos II,Conferencia,enero - julio,C2,100,1
+,,Ciencia de la Computación,E,Base de Datos II,Conferencia,enero - julio,C2,,2
+Aymée,Marrero Severo,Matemática,E,Optimización Matemática I,Conferencia,enero - julio,M3,100,1
+Gemayqzel,Bouza Allende,Matemática,E,Optimización Matemática I,Clase Práctica,enero - julio,M3,100,1
+Fernando Raul,Rodriguez Flores,Ciencia de la Computación,E,Modelos de Optimización,Conferencia,enero - julio,C3,50,1
+Daniela,González Beltrán,Ciencia de la Computación,E,Modelos de Optimización,Clase Práctica,enero - julio,C3,100,1
+Camila,Pérez Mosquera,Ciencia de la Computación,E,Modelos de Optimización,Clase Práctica,enero - julio,C3,100,2
+Elyanis,García Pola,Geografía,Geografía,Estadística,Conferencia,enero - julio,G2,100,1
+Ernesto,Borrego Rodríguez,Geografía,Geografía,Estadística,Clase Práctica,enero - julio,G2,100,1
+Elyanis,García Pola,Geografía,Geografía,Estadística,Clase Práctica,enero - julio,G2,100,2
+Aymée,Marrero Severo,Ciencia de la Computación,E,Modelos de Optimización,Conferencia,enero - julio,C3,50,1

@@ -63,6 +63,5 @@ router.register(r'semesters', views.SemesterViewSet,
 # The API URLs are now determined automatically by the router
 urlpatterns = [
     path('csv-download/', views.CSVDownloadView.as_view()),
-    path('generate-solution-ta/', views.GenerateSolutionTAView.as_view()),
     path('', include(router.urls)),
 ]

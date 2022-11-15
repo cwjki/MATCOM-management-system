@@ -3,7 +3,7 @@ import os
 
 from django.core.management.base import BaseCommand, CommandParser
 
-from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
+from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable, ScholarYear
 from thesisAssignment.models import Place, Keyword, Thesis, ThesisCommittee, ThesisDefense
 
 
@@ -24,7 +24,7 @@ class Command(BaseCommand):
     def fill_all(self):
         models_names = ['ClassTypes', 'Faculties',
                         'ScientificDegrees', 'TeachingCategories',
-                        'Semesters', 'TeachingGroups', 'TimePeriods',
+                        'Semesters', 'TeachingGroups', 'TimePeriods', 'ScholarYears',
                         'Careers', 'StudyPlans', 'CarmenTable', 'Departments',
                         'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments',
                         'Places', 'Keywords', 'Thesis', 'ThesisCommittees', 'ThesisDefenses']
