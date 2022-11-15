@@ -17,7 +17,7 @@ class TC_CSV_GENERATOR():
                 for thesis_committee in queryset]
 
             fieldnames = ['Estudiantes', 'Tesis', 'Tutor(es)',
-                          'Presidente', 'Secretario', 'Oponente', 'Palabras Claves']
+                          'Presidente', 'Oponente', 'Palabras Claves']
 
             rows: List[dict] = []
             for thesis_committee in data:
@@ -32,8 +32,9 @@ class TC_CSV_GENERATOR():
                     ' ' + thesis_committee['president']['last_name']
                 row['Oponente'] = thesis_committee['opponent']['name'] + \
                     ' ' + thesis_committee['opponent']['last_name']
-                row['Secretario'] = thesis_committee['secretary']['name'] + \
-                    ' ' + thesis_committee['secretary']['last_name']
+                # row['Secretario'] = thesis_committee['secretary']['name'] + \
+                #     ' ' + thesis_committee['secretary']['last_name']
+
                 rows.append(row)
 
         elif self.model_name == 'ThesisDefenses':
@@ -43,14 +44,14 @@ class TC_CSV_GENERATOR():
                 for thesis_defense in queryset]
 
             fieldnames = ['Fecha', 'Hora', 'Lugar',  'Estudiantes', 'Tesis', 'Tutor(es)',
-                          'Presidente', 'Secretario', 'Oponente', 'Palabras Claves']
+                          'Presidente', 'Oponente', 'Palabras Claves']
 
             rows: List[dict] = []
             for thesis_defense in data:
                 row: dict = {}
-                row['Fecha'] = thesis_defense['date']
-                row['Hora'] = thesis_defense['time']
-                row['Lugar'] = thesis_defense['place']['name']
+                row['Fecha'] = thesis_defense['date'] if thesis_defense['date'] else None
+                row['Hora'] = thesis_defense['time'] if thesis_defense['time'] else None
+                row['Lugar'] = thesis_defense['place']['name'] if thesis_defense['place'] else None
                 row['Estudiantes'] = thesis_defense['thesis_committee']['student']
                 row['Tutor(es)'] = ", ".join(
                     thesis_defense['thesis_committee']['tutors'])
@@ -59,7 +60,7 @@ class TC_CSV_GENERATOR():
                     thesis_defense['thesis_committee']['keywords'])
                 row['Presidente'] = thesis_defense['thesis_committee']['president']
                 row['Oponente'] = thesis_defense['thesis_committee']['opponent']
-                row['Secretario'] = thesis_defense['thesis_committee']['secretary']
+                # row['Secretario'] = thesis_defense['thesis_committee']['secretary']
                 rows.append(row)
 
         with open(self.csv_dir, 'w', encoding='UTF8') as f:

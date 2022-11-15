@@ -1,11 +1,13 @@
 Facultad,Tipo curso,Año,Asignatura,Horas,G,Profesor
-MATCOM,CRD,C2,Matemática Numérica,64,1/2,"C: Fernando Raul Rodriguez Flores (32.0) (1) 
-CP: Fernando Raul Rodriguez Flores (32.0) (1) 
-CP: Ernesto Borrego Rodríguez (32.0) (2) 
+MATCOM,CRD,M3,Optimización Matemática I,64,1/1,"C: Aymée Marrero Severo (32.0) (1) 
+CP: Gemayqzel Bouza Allende (32.0) (1) 
+"
+MATCOM,CRD,C3,Modelos de Optimización,64,1/2,"C: Fernando Raul Rodriguez Flores (16.0) (1) 
+C: Aymée Marrero Severo (16.0) (1) 
+CP: Daniela González Beltrán (32.0) (1) 
 CP: Camila Pérez Mosquera (32.0) (2) 
 "
-MATCOM,CRD,M1,Programación y Algoritmos,64,1/3,"C: Alejandro Mesejo Chiong (32.0) (1) 
-CP: Rocío Ortiz (32.0) (1) 
-CP: Daniela González Beltrán (32.0) (2) 
-CP: Camila Pérez Mosquera (32.0) (3) 
+MATCOM,CRD,G2,Estadística,80,1/2,"C: Elyanis García Pola (48.0) (1) 
+CP: Ernesto Borrego Rodríguez (32.0) (1) 
+CP: Elyanis García Pola (32.0) (2) 
 "

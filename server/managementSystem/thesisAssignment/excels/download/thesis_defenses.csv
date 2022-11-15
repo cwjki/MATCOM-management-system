@@ -1,2 +1,8 @@
-Fecha,Hora,Lugar,Estudiantes,Tesis,Tutor(es),Presidente,Secretario,Oponente,Palabras Claves
-2022-11-02,22:40:00,Salón del decanato,Juan Carlos Casteleiro Wong,Sistema de gestión para el funcionamiento de un departamento docente en la facultad de Matemática y Computación de la UH,"Fernando Raul Rodriguez Flores, Daniela González Beltrán",Marta Lourdes Baguer Díaz-Romañach,Angela León Mecías,Alejandro Mesejo Chiong,desarrollo web
+Fecha,Hora,Lugar,Estudiantes,Tesis,Tutor(es),Presidente,Oponente,Palabras Claves
+,,,Gustavo Despaigne Dita,Simulación y optimización de movimientos de malabares,Fernando Raul Rodriguez Flores,Aymée Marrero Severo,Gemayqzel Bouza Allende,"simulación
+malabares
+modelos de optimización"
+2022-11-15,01:06:00,Aula de Matemática,Abel Antonio Cruz Suárez,Propagación de epidemias mediante modelos basados en metapoblaciones,"Angela León Mecías, Alejandro Mesejo Chiong, Camila Pérez Mosquera",Vivian Sistaschs,Gemayqzel Bouza Allende,"metapoblaciones
+movimiento langrangiano
+movimiento euleriano
+modelos compartimentales"
