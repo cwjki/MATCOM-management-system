@@ -2,8 +2,8 @@ import csv
 import os
 from django.core.management.base import BaseCommand, CommandParser
 
-from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
-from ...serializers_csv import CareerSerializerCSV, CarmenTableSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, SubjectDescriptionSerializerCSV, SubjectSerializerCSV, TeachingAssignmentSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV
+from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable, ScholarYear
+from ...serializers_csv import CareerSerializerCSV, CarmenTableSerializerCSV, ClassTypeSerializerCSV, DepartmentSerializerCSV, FacultySerializerCSV, ProfessorSerializerCSV, ScientificDegreeSerializerCSV, SemesterSerializerCSV, StudyPlanSerializerCSV, SubjectDescriptionSerializerCSV, SubjectSerializerCSV, TeachingAssignmentSerializerCSV, TeachingCategorySerializerCSV, TeachingGroupSerializerCSV, TimePeriodSerializerCSV, ScholarYearSerializerCSV
 from thesisAssignment.models import Place, Keyword, Thesis, ThesisCommittee, ThesisDefense
 from thesisAssignment.serializers_csv import PlaceSerializerCSV, KeywordSerializerCSV, ThesisCommitteeSerializerCSV, ThesisSerializerCSV, ThesisDefenseSerializerCSV
 
@@ -25,7 +25,7 @@ class Command(BaseCommand):
     def save_all(self):
         models_names = ['ClassTypes', 'Faculties',
                         'ScientificDegrees', 'TeachingCategories',
-                        'Semesters', 'TeachingGroups', 'TimePeriods',
+                        'Semesters', 'TeachingGroups', 'TimePeriods', 'ScholarYears',
                         'Careers', 'StudyPlans', 'CarmenTable', 'Departments',
                         'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments',
                         'Places', 'Keywords', 'Thesis', 'ThesisCommittees', 'ThesisDefenses']
@@ -120,6 +120,12 @@ class Command(BaseCommand):
             data = [TimePeriodSerializerCSV(
                 time_period).data for time_period in queryset]
 
+        elif model_name == 'ScholarYears':
+            queryset = ScholarYear.objects.all()
+            fieldnames = ['name']
+            data = [ScholarYearSerializerCSV(
+                scholar_year).data for scholar_year in queryset]
+
         elif model_name == 'CarmenTable':
             queryset = CarmenTable.objects.all()
             fieldnames = ['teaching_group',
@@ -129,7 +135,7 @@ class Command(BaseCommand):
 
         elif model_name == 'SubjectDescriptions':
             queryset = SubjectDescription.objects.all()
-            fieldnames = ['subject', 'career', 'study_plan', 'class_type', 'time_period',
+            fieldnames = ['subject', 'career', 'study_plan', 'class_type', 'time_period', 'scholar_year',
                           'number_of_groups', 'teaching_group', 'number_of_hours']
             data = [SubjectDescriptionSerializerCSV(
                 subject_description).data for subject_description in queryset]
@@ -156,7 +162,7 @@ class Command(BaseCommand):
         elif model_name == 'Thesis':
             queryset = Thesis.objects.all()
             fieldnames = ['title', 'student',
-                          'tutor', 'cotutors', 'keywords']
+                          'tutor', 'cotutors', 'keywords', 'scholar_year']
             data = [ThesisSerializerCSV(
                 thesis).data for thesis in queryset]
 
@@ -195,6 +201,8 @@ class Command(BaseCommand):
             CURRENT_PATH, '../../excels/data/class_types.csv')
         TIME_PERIOD_DIR = os.path.join(
             CURRENT_PATH, '../../excels/data/time_periods.csv')
+        SCHOLAR_YEAR_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/scholar_years.csv')
         CARMEN_TABLE_DIR = os.path.join(
             CURRENT_PATH, '../../excels/data/carmen_table.csv')
         TEACHING_GROUP_DIR = os.path.join(
@@ -244,6 +252,8 @@ class Command(BaseCommand):
             file_dir = TEACHING_GROUP_DIR
         elif model_name == 'TimePeriods':
             file_dir = TIME_PERIOD_DIR
+        elif model_name == 'ScholarYears':
+            file_dir = SCHOLAR_YEAR_DIR
         elif model_name == 'SubjectDescriptions':
             file_dir = SUBJECT_DESCRIPTION_DIR
         elif model_name == 'TeachingAssignments':

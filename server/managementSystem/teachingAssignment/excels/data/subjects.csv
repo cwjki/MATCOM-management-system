@@ -1,51 +1,47 @@
 name,department,career,study_plan,semester,number_of_hours
-Inteligencia Artificial,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,D,9,64
-Sistemas de Información,Programación y Sistemas de Información,Ciencias de la Computación,D,9,64
-Didáctica de la Educación Superior,Programación y Sistemas de Información,Ciencias de la Computación,D,9,16
-Historia de la Computación,Programación y Sistemas de Información,Ciencias de la Computación,D,9,16
-Problemas Sociales de la Ciencia y la Tecnología,Matemática,Ciencias de la Computación,E,7,32
-Sistemas Distribuidos,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,7,64
-Diseño y Análisis de Algoritmos,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,7,64
-Aprendizaje de Máquinas,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,7,64
-Metodología de la Investigación,Programación y Sistemas de Información,Ciencias de la Computación,E,7,32
-Historia de la Computación,Programación y Sistemas de Información,Ciencias de la Computación,E,7,16
-Estadística,Matemática Aplicada,Ciencias de la Computación,E,5,64
-Modelos de Optimización,Matemática Aplicada,Ciencias de la Computación,E,5,64
-Compilación,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,5,64
-Ingeniería de Software,Programación y Sistemas de Información,Ciencias de la Computación,E,6,64
-Lenguajes de Programación,Programación y Sistemas de Información,Ciencias de la Computación,E,6,64
-Sistemas de Recuperación de la Información,Programación y Sistemas de Información,Ciencias de la Computación,E,6,64
-Redes de Computadoras,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,6,64
-Simulación,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,6,64
-Inteligencia Artificial,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,6,64
-Modelos Matemáticos Aplicados,Matemática Aplicada,Ciencias de la Computación,E,5,32
-Base de Datos II,Programación y Sistemas de Información,Ciencias de la Computación,E,6,64
-Programación Declarativa,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,5,64
-Filosofía y Sociedad,Matemática,Ciencias de la Computación,E,1,32
-Economía,Matemática,Ciencias de la Computación,E,1,54
-Historia de Cuba,Matemática,Ciencias de la Computación,E,2,50
-Educación Física I,DepARTAETI,Ciencias de la Computación,E,1,28
-Educación Física II,DepARTAETI,Ciencias de la Computación,E,2,28
-Análisis Matemático I,Matemática,Ciencias de la Computación,E,1,96
-Análisis Matemático II,Matemática,Ciencias de la Computación,E,2,80
-Álgebra I,Matemática,Ciencias de la Computación,E,1,80
-Álgebra II,Matemática,Ciencias de la Computación,E,2,96
-Lógica,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E,1,64
-Programación,Programación y Sistemas de Información,Ciencias de la Computación,E,1,192
-Economía Política,Matemática,Ciencias de la Computación,E (COVID),3,56
-Historia de Cuba,Matemática,Ciencias de la Computación,E (COVID),3,56
-Educación Física II,DepARTAETI,Ciencias de la Computación,E (COVID),3,28
-Análisis Matemático II,Matemática,Ciencias de la Computación,E (COVID),3,96
-Álgebra II,Matemática,Ciencias de la Computación,E (COVID),3,80
-Programación II,Programación y Sistemas de Información,Ciencias de la Computación,E (COVID),3,96
-Matemática Discreta I,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E (COVID),3,64
-Teoría Política,Matemática,Ciencias de la Computación,E (COVID),4,48
-Educación Física 3,DepARTAETI,Ciencias de la Computación,E (COVID),4,28
-Ecuaciones Diferenciales Ordinarias,Matemática,Ciencias de la Computación,E (COVID),4,64
-Matemática Numérica,Matemática Aplicada,Ciencias de la Computación,E (COVID),4,64
-Matemática Discreta II,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E (COVID),4,64
-Estructura de Datos y Algoritmos I,Programación y Sistemas de Información,Ciencias de la Computación,E (COVID),4,64
-Arquitectura de Computadoras,Inteligencia Artificial y Sistemas Computacionales,Ciencias de la Computación,E (COVID),4,64
+Inteligencia Artificial,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,D,9,64
+Sistemas de Información,Programación y Sistemas de Información,Ciencia de la Computación,D,9,64
+Didáctica de la Educación Superior,Programación y Sistemas de Información,Ciencia de la Computación,D,9,16
+Historia de la Computación,Programación y Sistemas de Información,Ciencia de la Computación,D,9,16
+Problemas Sociales de la Ciencia y la Tecnología,Matemática,Ciencia de la Computación,E,7,32
+Sistemas Distribuidos,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E,7,64
+Diseño y Análisis de Algoritmos,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E,7,64
+Aprendizaje de Máquinas,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E,7,64
+Metodología de la Investigación,Programación y Sistemas de Información,Ciencia de la Computación,E,7,32
+Historia de la Computación,Programación y Sistemas de Información,Ciencia de la Computación,E,7,16
+Estadística,Matemática Aplicada,Ciencia de la Computación,E,5,64
+Modelos de Optimización,Matemática Aplicada,Ciencia de la Computación,E,5,64
+Compilación,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E,5,64
+Ingeniería de Software,Programación y Sistemas de Información,Ciencia de la Computación,E,6,64
+Lenguajes de Programación,Programación y Sistemas de Información,Ciencia de la Computación,E,6,64
+Sistemas de Recuperación de la Información,Programación y Sistemas de Información,Ciencia de la Computación,E,6,64
+Redes de Computadoras,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E,6,64
+Simulación,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E,6,64
+Inteligencia Artificial,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E,6,64
+Modelos Matemáticos Aplicados,Matemática Aplicada,Ciencia de la Computación,E,5,32
+Base de Datos II,Programación y Sistemas de Información,Ciencia de la Computación,E,6,64
+Programación Declarativa,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E,5,64
+Filosofía y Sociedad,Matemática,Ciencia de la Computación,E,1,32
+Economía,Matemática,Ciencia de la Computación,E,1,54
+Historia de Cuba,Matemática,Ciencia de la Computación,E,2,50
+Análisis Matemático I,Matemática,Ciencia de la Computación,E,1,96
+Análisis Matemático II,Matemática,Ciencia de la Computación,E,2,80
+Álgebra I,Matemática,Ciencia de la Computación,E,1,80
+Álgebra II,Matemática,Ciencia de la Computación,E,2,96
+Lógica,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E,1,64
+Programación,Programación y Sistemas de Información,Ciencia de la Computación,E,1,192
+Economía Política,Matemática,Ciencia de la Computación,E (COVID),3,56
+Historia de Cuba,Matemática,Ciencia de la Computación,E (COVID),3,56
+Análisis Matemático II,Matemática,Ciencia de la Computación,E (COVID),3,96
+Álgebra II,Matemática,Ciencia de la Computación,E (COVID),3,80
+Programación II,Programación y Sistemas de Información,Ciencia de la Computación,E (COVID),3,96
+Matemática Discreta I,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E (COVID),3,64
+Teoría Política,Matemática,Ciencia de la Computación,E (COVID),4,48
+Ecuaciones Diferenciales Ordinarias,Matemática,Ciencia de la Computación,E (COVID),4,64
+Matemática Numérica,Matemática Aplicada,Ciencia de la Computación,E (COVID),4,64
+Matemática Discreta II,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E (COVID),4,64
+Estructura de Datos y Algoritmos I,Programación y Sistemas de Información,Ciencia de la Computación,E (COVID),4,64
+Arquitectura de Computadoras,Inteligencia Artificial y Sistemas Computacionales,Ciencia de la Computación,E (COVID),4,64
 Programación y Algoritmos,Matemática Aplicada,Matemática,E,1,64
 Introducción al Análisis Matemático,Matemática,Matemática,E,1,96
 Introducción al Álgebra,Matemática,Matemática,E,1,96
@@ -73,3 +69,4 @@ Medida e Integración,Matemática,Matemática,E,7,64
 Historia de la Matemática,Matemática,Matemática,E,7,64
 Análisis Funcional,Matemática,Matemática,E,8,84
 Seminario de Problemas I,Matemática Aplicada,Matemática,E,2,42
+Estadística,Matemática Aplicada,Geografía,Geografía,3,80

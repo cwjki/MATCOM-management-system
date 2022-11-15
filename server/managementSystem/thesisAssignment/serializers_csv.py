@@ -20,6 +20,14 @@ class ThesisSerializerCSV(ModelSerializer):
     tutor = serializers.SerializerMethodField()
     cotutors = serializers.SerializerMethodField()
     keywords = serializers.SerializerMethodField()
+    scholar_year = serializers.SerializerMethodField()
+
+    def get_scholar_year(self, obj) -> dict:
+        if obj.scholar_year:
+            return {
+                "name": obj.scholar_year.name
+            }
+        return None
 
     def get_tutor(self, obj) -> dict:
         if obj.tutor:
@@ -115,12 +123,13 @@ class ThesisDefenseSerializerCSV(ModelSerializer):
             for cotutor in obj.thesis_committee.thesis.cotutors.all():
                 tutors.append(cotutor.name + ' ' + cotutor.last_name)
 
-            keywords = [keyword.name for keyword in obj.thesis_committee.thesis.keywords.all()]
+            keywords = [
+                keyword.name for keyword in obj.thesis_committee.thesis.keywords.all()]
 
             return {
-                "secretary": obj.thesis_committee.secretary.name + ' ' + obj.thesis_committee.secretary.last_name,
-                "president": obj.thesis_committee.president.name + ' ' + obj.thesis_committee.president.last_name,
-                "opponent": obj.thesis_committee.opponent.name + ' ' + obj.thesis_committee.opponent.last_name,
+                "secretary": obj.thesis_committee.secretary.name + ' ' + obj.thesis_committee.secretary.last_name if obj.thesis_committee.secretary else ' ',
+                "president": obj.thesis_committee.president.name + ' ' + obj.thesis_committee.president.last_name if obj.thesis_committee.president else ' ',
+                "opponent": obj.thesis_committee.opponent.name + ' ' + obj.thesis_committee.opponent.last_name if obj.thesis_committee.opponent else ' ',
                 "tutors": tutors,
                 "thesis_title": obj.thesis_committee.thesis.title,
                 "student": obj.thesis_committee.thesis.student,

@@ -10,7 +10,6 @@ from .models import Career, CarmenTable, Faculty, ScholarYear, StudyPlan, Subjec
 from .serializers import CarmenTableSerializer, FacultySerializer, SubjectDescriptionSerializer, TeachingAssignmentSerializer, CareerSerializer, StudyPlanSerializer, TeachingGroupSerializer, DepartmentSerializer, ClassTypeSerializer, TimePeriodSerializer, TeachingCategorySerializer, ScientificDegreeSerializer, ProfessorSerializer, SubjectSerializer, SemesterSerializer, TeachingPlanningSerializer, ScholarYearSerializer
 from .serializers_csv import CareerSerializerCSV
 from .permissions import IsOwnerOrReadOnly
-from .optimization.optimization import OptimizationModel
 from .excels.get_csv import TA_CSV_GENERATOR
 
 
@@ -39,20 +38,6 @@ class CSVDownloadView(mixins.ListModelMixin, generics.GenericAPIView):
         except IOError:
             response = HttpResponseNotFound('<h1>File not found</h1>')
 
-        return response
-
-
-class GenerateSolutionTAView(mixins.ListModelMixin, generics.GenericAPIView):
-    queryset = []
-
-    def get(self, request):
-        subject_qs = SubjectDescription.objects.all()
-        professor_qs = Professor.objects.all()
-
-        model = OptimizationModel(subject_qs, professor_qs)
-        results = model.solve()
-
-        response = Response(data=results)
         return response
 
 

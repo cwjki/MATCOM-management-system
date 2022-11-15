@@ -3,7 +3,7 @@ import os
 
 from django.core.management.base import BaseCommand, CommandParser
 
-from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable
+from ...models import Professor, Subject, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ScientificDegree, TeachingCategory, ClassType, Semester, TimePeriod, CarmenTable, ScholarYear
 from thesisAssignment.models import Place, Keyword, Thesis, ThesisCommittee, ThesisDefense
 
 
@@ -24,7 +24,7 @@ class Command(BaseCommand):
     def fill_all(self):
         models_names = ['ClassTypes', 'Faculties',
                         'ScientificDegrees', 'TeachingCategories',
-                        'Semesters', 'TeachingGroups', 'TimePeriods',
+                        'Semesters', 'TeachingGroups', 'TimePeriods', 'ScholarYears',
                         'Careers', 'StudyPlans', 'CarmenTable', 'Departments',
                         'Subjects', 'Professors', 'SubjectDescriptions', 'TeachingAssignments',
                         'Places', 'Keywords', 'Thesis', 'ThesisCommittees', 'ThesisDefenses']
@@ -161,6 +161,12 @@ class Command(BaseCommand):
                 time_period = TimePeriod(name=name)
                 time_period.save()
 
+        elif model_name == 'ScholarYears':
+            for obj in data:
+                name = obj['name']
+                scholar_year = ScholarYear(name=name)
+                scholar_year.save()
+
         elif model_name == 'SubjectDescriptions':
             for obj in data:
                 subject = obj['subject']
@@ -169,6 +175,8 @@ class Command(BaseCommand):
                 career = Career.objects.get(name=obj['career'])
                 class_type = ClassType.objects.get(name=obj['class_type'])
                 time_period = TimePeriod.objects.get(name=obj['time_period'])
+                scholar_year = ScholarYear.objects.get(
+                    name=obj['scholar_year'])
                 study_plan = StudyPlan.objects.get(name=obj['study_plan'])
                 teaching_group = TeachingGroup.objects.get(
                     name=obj['teaching_group'])
@@ -180,6 +188,7 @@ class Command(BaseCommand):
                     subject=subject,
                     class_type=class_type,
                     time_period=time_period,
+                    scholar_year=scholar_year,
                     teaching_group=teaching_group,
                     number_of_hours=number_of_hours,
                     number_of_groups=number_of_groups
@@ -192,6 +201,7 @@ class Command(BaseCommand):
                 professor_name = obj['professor_name']
                 professor_last_name = obj['professor_last_name']
                 percent = obj['percent']
+                percent = percent if len(percent) else None
                 group = obj['group']
                 career = Career.objects.get(name=obj['career'])
                 class_type = ClassType.objects.get(name=obj['class_type'])
@@ -204,7 +214,8 @@ class Command(BaseCommand):
                 subject_description = SubjectDescription.objects.filter(subject=subject).filter(
                     teaching_group=teaching_group).filter(class_type=class_type)[0]
                 professor = Professor.objects.filter(
-                    last_name=professor_last_name).filter(name=professor_name)[0]
+                    last_name=professor_last_name).filter(name=professor_name)
+                professor = professor[0] if len(professor) else None
 
                 teaching_assignment = TeachingAssignment(
                     professor=professor,
@@ -230,6 +241,7 @@ class Command(BaseCommand):
             for obj in data:
                 title = obj['title']
                 student = obj['student']
+                scholar_year: dict = eval(obj['scholar_year'])
                 tutor: dict = eval(obj['tutor'])
                 cotutors: list = eval(obj['cotutors'])
                 keywords: list = eval(obj['keywords'])
@@ -237,10 +249,14 @@ class Command(BaseCommand):
                 tutor = Professor.objects.filter(
                     last_name=tutor['last_name']).filter(name=tutor['name'])[0]
 
+                scholar_year = ScholarYear.objects.get(
+                    name=scholar_year['name'])
+
                 thesis = Thesis(
                     title=title,
                     student=student,
-                    tutor=tutor
+                    tutor=tutor,
+                    scholar_year=scholar_year
                 )
                 thesis.save()
 
@@ -256,17 +272,23 @@ class Command(BaseCommand):
 
         elif model_name == 'ThesisCommittees':
             for obj in data:
-                opponent: dict = eval(obj['opponent'])
-                secretary: dict = eval(obj['secretary'])
-                president: dict = eval(obj['president'])
+                opponent: dict = eval(
+                    obj['opponent']) if obj['opponent'] else None
+                secretary: dict = eval(
+                    obj['secretary']) if obj['secretary'] else None
+                president: dict = eval(
+                    obj['president']) if obj['president'] else None
                 thesis: dict = eval(obj['thesis'])
 
-                opponent = Professor.objects.filter(
-                    last_name=opponent['last_name']).filter(name=opponent['name'])[0]
-                secretary = Professor.objects.filter(
-                    last_name=secretary['last_name']).filter(name=secretary['name'])[0]
-                president = Professor.objects.filter(
-                    last_name=president['last_name']).filter(name=president['name'])[0]
+                if opponent:
+                    opponent = Professor.objects.filter(
+                        last_name=opponent['last_name']).filter(name=opponent['name'])[0]
+                if secretary:
+                    secretary = Professor.objects.filter(
+                        last_name=secretary['last_name']).filter(name=secretary['name'])[0]
+                if president:
+                    president = Professor.objects.filter(
+                        last_name=president['last_name']).filter(name=president['name'])[0]
                 thesis = Thesis.objects.filter(
                     student=thesis['student']).filter(title=thesis['title'])[0]
 
@@ -280,12 +302,13 @@ class Command(BaseCommand):
 
         elif model_name == 'ThesisDefenses':
             for obj in data:
-                date = obj['date']
-                time = obj['time']
+                date = obj['date'] if obj['date'] else None
+                time = obj['time'] if obj['time'] else None
                 thesis_committee: dict = eval(obj['thesis_committee'])
-                place: dict = eval(obj['place'])
+                place: dict = eval(obj['place']) if obj['place'] else None
 
-                place = Place.objects.filter(name=place['name'])[0]
+                if place:
+                    place = Place.objects.filter(name=place['name'])[0]
 
                 thesis = Thesis.objects.filter(
                     student=thesis_committee['student']).filter(title=thesis_committee['thesis_title'])[0]
@@ -342,6 +365,8 @@ class Command(BaseCommand):
             CURRENT_PATH, '../../excels/data/class_types.csv')
         TIME_PERIOD_DIR = os.path.join(
             CURRENT_PATH, '../../excels/data/time_periods.csv')
+        SCHOLAR_YEAR_DIR = os.path.join(
+            CURRENT_PATH, '../../excels/data/scholar_years.csv')
         CARMEN_TABLE_DIR = os.path.join(
             CURRENT_PATH, '../../excels/data/carmen_table.csv')
         TEACHING_GROUP_DIR = os.path.join(
@@ -391,6 +416,8 @@ class Command(BaseCommand):
             file_dir = TEACHING_GROUP_DIR
         elif model_name == 'TimePeriods':
             file_dir = TIME_PERIOD_DIR
+        elif model_name == 'ScholarYears':
+            file_dir = SCHOLAR_YEAR_DIR
         elif model_name == 'SubjectDescriptions':
             file_dir = SUBJECT_DESCRIPTION_DIR
         elif model_name == 'TeachingAssignments':

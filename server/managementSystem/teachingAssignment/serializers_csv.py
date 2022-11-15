@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
-from .models import CarmenTable, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, TimePeriod
+from .models import CarmenTable, Faculty, Career, StudyPlan, SubjectDescription, TeachingAssignment, TeachingGroup, Department, ClassType, ScientificDegree, TeachingCategory, Professor, Subject, Semester, TimePeriod, ScholarYear
 
 
 class CareerSerializerCSV(ModelSerializer):
@@ -58,6 +58,12 @@ class ClassTypeSerializerCSV(ModelSerializer):
 class TimePeriodSerializerCSV(ModelSerializer):
     class Meta:
         model = TimePeriod
+        exclude = ['id']
+
+
+class ScholarYearSerializerCSV(ModelSerializer):
+    class Meta:
+        model = ScholarYear
         exclude = ['id']
 
 
@@ -178,6 +184,7 @@ class SubjectDescriptionSerializerCSV(ModelSerializer):
     career = serializers.SerializerMethodField()
     class_type = serializers.SerializerMethodField()
     time_period = serializers.SerializerMethodField()
+    scholar_year = serializers.SerializerMethodField()
     teaching_group = serializers.SerializerMethodField()
 
     def get_subject(self, obj) -> dict:
@@ -203,6 +210,11 @@ class SubjectDescriptionSerializerCSV(ModelSerializer):
     def get_time_period(self, obj) -> dict:
         if obj.time_period:
             return obj.time_period.name
+        return None
+    
+    def get_scholar_year(self, obj) -> dict:
+        if obj.scholar_year:
+            return obj.scholar_year.name
         return None
 
     def get_teaching_group(self, obj) -> dict:

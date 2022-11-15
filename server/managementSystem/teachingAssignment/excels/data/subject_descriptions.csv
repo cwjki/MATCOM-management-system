@@ -1,6 +1,8 @@
-subject,career,study_plan,class_type,time_period,number_of_groups,teaching_group,number_of_hours
-Programación y Algoritmos,Matemática,E,Conferencia,enero - julio,1,M1,32
-Programación y Algoritmos,Matemática,E,Clase Práctica,enero - julio,3,M1,32
-Seminario de Problemas I,Matemática,E,Conferencia,enero - julio,1,M1,48
-Programación y Algoritmos,Matemática,E,Conferencia,enero - julio,1,M2,16
-Programación y Algoritmos,Matemática,E,Clase Práctica,enero - julio,1,M2,16
+subject,career,study_plan,class_type,time_period,scholar_year,number_of_groups,teaching_group,number_of_hours
+Base de Datos II,Ciencia de la Computación,E,Conferencia,enero - julio,2021-2022,2,C2,36
+Optimización Matemática I,Matemática,E,Conferencia,enero - julio,2022,1,M3,32
+Optimización Matemática I,Matemática,E,Clase Práctica,enero - julio,2022,1,M3,32
+Modelos de Optimización,Ciencia de la Computación,E,Conferencia,enero - julio,2022,1,C3,32
+Modelos de Optimización,Ciencia de la Computación,E,Clase Práctica,enero - julio,2022,2,C3,32
+Estadística,Geografía,Geografía,Conferencia,enero - julio,2022,1,G2,48
+Estadística,Geografía,Geografía,Clase Práctica,enero - julio,2022,2,G2,32
