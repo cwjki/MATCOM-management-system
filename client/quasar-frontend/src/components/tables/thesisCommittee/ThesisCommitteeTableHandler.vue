@@ -1,5 +1,12 @@
 <template>
-    <q-card>
+    <q-card
+        class="full-width q-mb-md"
+        style="
+            position: sticky !important;
+            top: 60px !important;
+            z-index: 1000 !important;
+        "
+    >
         <q-card-section
             class="full-width row justify-center items-center q-pa-none q-pt-md"
         >
