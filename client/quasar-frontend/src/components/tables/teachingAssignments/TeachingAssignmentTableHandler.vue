@@ -7,12 +7,24 @@
             z-index: 1000 !important;
         "
     >
-        <p
-            class="text-h6 text-primary full-width text-center q-mb-none"
+        <div
+            class="full-width justify-center row items-center q-px-md q-pt-md"
             v-if="departament.id"
         >
-            Departamento: {{ departament.name }}
-        </p>
+            <p class="text-h6 text-primary q-mb-none">
+                Departamento: {{ departament.name }}
+                <q-btn
+                    color="red"
+                    icon="clear"
+                    class="q-ml-sm"
+                    dense
+                    rounded
+                    outline
+                    @click="clear"
+                    fabmini
+                ></q-btn>
+            </p>
+        </div>
         <q-card-section
             class="full-width row justify-center items-center q-pa-none q-pt-md"
         >
@@ -78,7 +90,7 @@ export default defineComponent({
     props: {},
     emits: [],
     setup(props, { emit }) {
-        const { departament } = useDepartamentSesion();
+        const { departament, clear } = useDepartamentSesion();
 
         const config = ref<GenericCrudTableConfig>({
             name: 'Asignaciones de docencia',
@@ -316,6 +328,7 @@ export default defineComponent({
                     });
             },
             loading,
+            clear,
             departament,
             refactorName(
                 data: {

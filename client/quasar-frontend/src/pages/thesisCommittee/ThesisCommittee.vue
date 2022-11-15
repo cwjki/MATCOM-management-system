@@ -1,6 +1,6 @@
 <template>
     <q-page padding>
-        <thesis-committee-table-handler />
+        <thesis-committee-table-handler :idC="idC" :Cname="Cname" />
         <!-- <div class="bg-secondary full-width" style="height: 100px"></div> -->
     </q-page>
 </template>
@@ -10,6 +10,8 @@ import ThesisCommitteeTableHandler from 'src/components/tables/thesisCommittee/T
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+    props: ['idC', 'Cname'],
+
     components: {
         ThesisCommitteeTableHandler,
     },

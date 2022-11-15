@@ -12,14 +12,53 @@
             <div class="col-7 q-pa-sm">
                 <q-card>
                     <q-card-section>
-                        <div class="text-h6">Planificación de las tesis</div>
+                        <div class="text-h6 row items-center">
+                            Planificación de las tesis
+                            <q-select
+                                :options="optionsYears"
+                                :loading="loadingYears"
+                                v-model="currentYear"
+                                clearable
+                                hide-bottom-space
+                                option-label="name"
+                                option-value="id"
+                                class="col-lg-3 col-md-4 col-sm-6 col-12 q-ml-md"
+                                dense
+                            ></q-select>
+                        </div>
+                        <div></div>
                     </q-card-section>
-
-                    <q-separator dark inset />
-
+                    <q-separator inset />
                     <q-card-actions align="left">
-                        <q-btn dark outline no-caps color="primary">
-                            Administrar
+                        <q-btn
+                            dark
+                            outline
+                            no-caps
+                            class="q-px-md"
+                            color="primary"
+                            @click="onSelectYear('thesis')"
+                        >
+                            Tesis
+                        </q-btn>
+                        <q-btn
+                            dark
+                            outline
+                            no-caps
+                            class="q-px-md"
+                            color="primary"
+                            @click="onSelectYear('thesis-committees')"
+                        >
+                            Tribunales
+                        </q-btn>
+                        <q-btn
+                            dark
+                            outline
+                            no-caps
+                            class="q-px-md"
+                            color="primary"
+                            @click="onSelectYear('thesis-defenses')"
+                        >
+                            Defensas
                         </q-btn>
                     </q-card-actions>
                 </q-card>
@@ -45,6 +84,16 @@
 
                         <q-separator inset />
                         <q-card-actions align="right">
+                            <q-btn
+                                dark
+                                outline
+                                no-caps
+                                class="q-px-md"
+                                color="primary"
+                                @click="onSelectDepartament(d, 'subjects')"
+                            >
+                                Asignaturas
+                            </q-btn>
                             <q-btn
                                 dark
                                 outline
@@ -80,12 +129,13 @@
 </template>
 
 <script lang="ts">
-import { departmentService } from 'src/services';
+import { departmentService, scholarYearService } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import CSVDownload from '../components/csvDownload/CSVDownload.vue';
 import { useDepartamentSesion } from 'src/hooks/departamentSesion';
 import { DepartmentModel } from 'src/models/teachingAssignments/department.model';
 import { useRouter } from 'vue-router';
+import { route } from 'quasar/wrappers';
 export default defineComponent({
     components: { CSVDownload },
 
@@ -96,11 +146,46 @@ export default defineComponent({
         });
         const R = useRouter();
         const { setDepartament } = useDepartamentSesion();
+        const currentYear = ref();
+        const optionsYears = ref();
+
+        const loadingYears = ref(true);
+        scholarYearService
+            .list()
+            .then((r) => {
+                optionsYears.value = r.data.results;
+                r.data.results.map((x) => {
+                    if (x.current_year) {
+                        currentYear.value = x;
+                    }
+                });
+            })
+            .finally(() => {
+                loadingYears.value = false;
+            });
         return {
             departamentList,
+            currentYear,
+            loadingYears,
+            optionsYears,
             onSelectDepartament(obj: DepartmentModel, routeName: string) {
                 setDepartament(obj);
                 R.push({ name: routeName });
+            },
+            onSelectYear(routeName: string) {
+                if (currentYear.value?.id)
+                    R.push({
+                        name: routeName + '-id',
+                        params: {
+                            idC: currentYear.value.id,
+                            Cname: currentYear.value.name,
+                        },
+                    });
+                else {
+                    R.push({
+                        name: routeName,
+                    });
+                }
             },
         };
     },

@@ -1,6 +1,6 @@
 <template>
     <q-page padding>
-        <thesis-table-handler />
+        <thesis-table-handler :idC="idC" :Cname="Cname" />
         <!-- <div class="bg-secondary full-width" style="height: 100px"></div> -->
     </q-page>
 </template>
@@ -10,6 +10,7 @@ import ThesisTableHandler from 'src/components/tables/thesisCommittee/ThesisTabl
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+    props: ['idC', 'Cname'],
     components: {
         ThesisTableHandler,
     },

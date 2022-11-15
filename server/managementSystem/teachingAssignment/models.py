@@ -80,6 +80,7 @@ class Semester(models.Model):
 
 class ScholarYear(models.Model):
     name = models.CharField(max_length=200)
+    current_year = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return str(self.name)

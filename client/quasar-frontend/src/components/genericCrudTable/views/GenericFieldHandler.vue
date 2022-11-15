@@ -7,6 +7,13 @@
             :rules="getRulesFromField(field)"
             @onChangekey="$emit('onChangekey', $event)"
         />
+        <g-bool-field
+            :editeItem="editeItem"
+            :field="field"
+            v-else-if="field.type === 'bool'"
+            :rules="getRulesFromField(field)"
+            @onChangekey="$emit('onChangekey', $event)"
+        />
         <g-text-field
             :editeItem="editeItem"
             :field="field"
@@ -26,10 +33,12 @@ import { FieldModel } from '../models/field.model';
 import { defineComponent, PropType } from 'vue';
 import { Dictionary } from 'src/models/base';
 import GTextField from './fields/GTextField.vue';
+import GBoolField from './fields/GBoolField.vue';
+
 import GSelectField from './fields/GSelectField.vue';
 
 export default defineComponent({
-    components: { GTextField, GSelectField },
+    components: { GTextField, GSelectField, GBoolField },
     emits: ['onChangekey'],
     props: {
         field: {

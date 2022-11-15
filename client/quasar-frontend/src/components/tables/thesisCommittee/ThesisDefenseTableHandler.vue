@@ -1,4 +1,5 @@
 <template>
+    {{ idC }} {{ Cname }}
     <generic-crud-data-table :config="config" />
 </template>
 
@@ -16,7 +17,7 @@ import { axios } from 'src/boot/axios';
 export default defineComponent({
     components: { GenericCrudDataTable },
     name: 'thesisDefenseHandler',
-    props: {},
+    props: ['idC', 'Cname'],
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({

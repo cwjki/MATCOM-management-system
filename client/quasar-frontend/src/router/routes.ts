@@ -134,7 +134,7 @@ const routes: RouteRecordRaw[] = [
                     import('src/pages/thesisCommittee/Keyword.vue'),
             },
             {
-                path: 'thesis',
+                path: 'thesis/',
                 name: 'thesis',
                 component: () => import('src/pages/thesisCommittee/Thesis.vue'),
             },
@@ -147,6 +147,26 @@ const routes: RouteRecordRaw[] = [
             {
                 path: 'thesis-defenses',
                 name: 'thesis-defenses',
+                component: () =>
+                    import('src/pages/thesisCommittee/ThesisDefense.vue'),
+            },
+            {
+                path: 'thesis/:idC/:Cname',
+                props: true,
+                name: 'thesis-id',
+                component: () => import('src/pages/thesisCommittee/Thesis.vue'),
+            },
+            {
+                path: 'thesis-committees/:idC/:Cname',
+                props: true,
+                name: 'thesis-committees-id',
+                component: () =>
+                    import('src/pages/thesisCommittee/ThesisCommittee.vue'),
+            },
+            {
+                path: 'thesis-defenses/:idC/:Cname',
+                props: true,
+                name: 'thesis-defenses-id',
                 component: () =>
                     import('src/pages/thesisCommittee/ThesisDefense.vue'),
             },

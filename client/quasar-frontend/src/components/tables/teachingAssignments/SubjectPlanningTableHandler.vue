@@ -1,10 +1,28 @@
 <template>
-    <p
-        class="text-h6 text-primary full-width text-center"
-        v-if="departament.id"
-    >
-        Departamento: {{ departament.name }}
-    </p>
+    <div class="full-width justify-between row items-center q-pb-sm">
+        <p class="text-h6 text-primary q-mb-none" v-if="departament.id">
+            Departamento: {{ departament.name }}
+            <q-btn
+                color="red"
+                icon="clear"
+                class="q-ml-sm"
+                dense
+                rounded
+                outline
+                @click="clear"
+                fabmini
+            ></q-btn>
+        </p>
+        <q-btn
+            class=""
+            no-caps
+            color="secondary"
+            outline
+            label="Asignar docencia"
+            @click="$router.push({ name: 'teaching-assignments' })"
+        >
+        </q-btn>
+    </div>
     <generic-crud-data-table :config="config" />
 </template>
 
@@ -28,7 +46,7 @@ export default defineComponent({
     props: {},
     emits: [],
     setup(props, { emit }) {
-        const { departament } = useDepartamentSesion();
+        const { departament, clear } = useDepartamentSesion();
         const config = ref<GenericCrudTableConfig>({
             name: 'Planificación de las Asignaturas',
             singularLabel: 'Planificación',
@@ -161,7 +179,7 @@ export default defineComponent({
             },
         });
 
-        return { config, departament };
+        return { config, departament, clear };
     },
 });
 </script>

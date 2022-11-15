@@ -119,6 +119,12 @@ export const useGenericDataTable = (
         mappedField.value[f.name] = f.column as FieldColumn;
     });
 
+    const mappedFieldDef = ref<Dictionary<FieldModel>>({});
+
+    config.fields.map((f) => {
+        mappedFieldDef.value[f.name] = f;
+    });
+
     return {
         loading,
         rows,
@@ -138,5 +144,6 @@ export const useGenericDataTable = (
         load,
         onRequest,
         mappedField,
+        mappedFieldDef,
     };
 };

@@ -1,4 +1,28 @@
 <template>
+    <div class="full-width justify-between row items-center q-pb-sm">
+        <p class="text-h6 text-primary q-mb-none" v-if="departament.id">
+            Departamento: {{ departament.name }}
+            <q-btn
+                color="red"
+                icon="clear"
+                class="q-ml-sm"
+                dense
+                rounded
+                outline
+                @click="clear"
+                fabmini
+            ></q-btn>
+        </p>
+        <q-btn
+            class=""
+            no-caps
+            color="secondary"
+            outline
+            label="Planificar asignaturas"
+            @click="$router.push({ name: 'subject-plannings' })"
+        >
+        </q-btn>
+    </div>
     <generic-crud-data-table :config="config" />
 </template>
 
@@ -10,9 +34,11 @@ import {
     studyPlanService,
     subjectService,
 } from 'src/services';
+import { useDepartamentSesion } from 'src/hooks/departamentSesion';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
+import { FieldModel } from 'src/components/genericCrudTable/models/field.model';
 
 export default defineComponent({
     components: { GenericCrudDataTable },
@@ -20,11 +46,22 @@ export default defineComponent({
     props: {},
     emits: [],
     setup(props, { emit }) {
+        const { departament, clear } = useDepartamentSesion();
         const config = ref<GenericCrudTableConfig>({
             name: 'Asignaturas',
             singularLabel: 'Asignatura',
             searchLabel: 'Asignatura',
             service: subjectService,
+            defaultValues: {
+                ...(departament.value.id
+                    ? { department_id: departament.value.id }
+                    : {}),
+            },
+            query: {
+                ...(departament.value.id
+                    ? { department: departament.value.id }
+                    : {}),
+            },
             fields: [
                 {
                     name: 'name',
@@ -63,22 +100,26 @@ export default defineComponent({
                         label: 'name',
                     },
                 },
-                {
-                    name: 'department',
-                    label: 'Departamento',
-                    column: {
-                        transform(row) {
-                            return `${row.department.name}`;
-                        },
-                    },
-                    type: 'select',
-                    filter: true,
-                    selectOptions: {
-                        list: departmentService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
-                },
+                ...(departament.value.id
+                    ? []
+                    : ([
+                          {
+                              name: 'department',
+                              label: 'Departamento',
+                              column: {
+                                  transform(row) {
+                                      return `${row.department.name}`;
+                                  },
+                              },
+                              type: 'select',
+                              filter: true,
+                              selectOptions: {
+                                  list: departmentService.list,
+                                  value: 'id',
+                                  label: 'name',
+                              },
+                          },
+                      ] as FieldModel[])),
                 {
                     name: 'semester',
                     label: 'Semestre',
@@ -108,7 +149,7 @@ export default defineComponent({
             },
         });
 
-        return { config };
+        return { config, departament, clear };
     },
 });
 </script>

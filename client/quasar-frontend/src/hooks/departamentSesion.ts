@@ -27,6 +27,7 @@ export const useDepartamentSesion = () => {
 
     const clear = () => {
         localStorage.removeItem(key);
+        document.location.reload();
     };
 
     const departament = ref(getDepartament());

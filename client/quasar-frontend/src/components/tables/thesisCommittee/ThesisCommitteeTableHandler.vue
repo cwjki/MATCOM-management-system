@@ -80,7 +80,7 @@ type ProfessorCharge = {
 export default defineComponent({
     components: { GenericCrudDataTable },
     name: 'thesisCommitteeHandler',
-    props: {},
+    props: ['idC', 'Cname'],
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({

@@ -1,4 +1,5 @@
 <template>
+    {{ idC }} {{ Cname }}
     <generic-crud-data-table :config="config" />
 </template>
 
@@ -16,7 +17,7 @@ import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTa
 export default defineComponent({
     components: { GenericCrudDataTable },
     name: 'thesisHandler',
-    props: {},
+    props: ['idC', 'Cname'],
     emits: [],
     setup(props, { emit }) {
         const config = ref<GenericCrudTableConfig>({

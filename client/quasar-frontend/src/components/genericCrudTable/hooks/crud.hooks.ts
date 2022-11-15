@@ -14,12 +14,12 @@ export const useCrud = (config: GenericCrudTableConfig) => {
             // alert('someone change me');
         },
         prepareEdit(obj: any) {
-            console.log({ ...obj });
-            editeItem.value = { ...obj };
+            console.log({ ...(config.defaultValues || {}), ...obj });
+            editeItem.value = { ...(config.defaultValues || {}), ...obj };
             crudDialog.value = true;
         },
         prepareCreate() {
-            editeItem.value = {};
+            editeItem.value = { ...(config.defaultValues || {}) };
             config.fields.map((f) => {
                 if (f.form && f.form.defaultValue) {
                     editeItem.value[f.name] = f.form.defaultValue;

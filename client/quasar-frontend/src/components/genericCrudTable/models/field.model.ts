@@ -30,7 +30,7 @@ export interface FieldBasic {
     label?: string;
 
     // text by default
-    type?: 'text' | 'select' | 'date' | 'time';
+    type?: 'text' | 'select' | 'date' | 'time' | 'bool';
 
     // false if dont show in the table
     column?: FieldColumn | false;

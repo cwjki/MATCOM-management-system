@@ -107,9 +107,20 @@
             <template v-slot:body-cell="props">
                 <q-td :props="props">
                     <slot :name="'column-' + props.col.name" :value="props.row">
+                        <q-toggle
+                            dense
+                            checked-icon="check"
+                            disable
+                            v-if="
+                                mappedFieldDef[props.col.name] &&
+                                mappedFieldDef[props.col.name].type == 'bool'
+                            "
+                            :label="''"
+                            v-model="props.value"
+                        />
                         <p
                             class="q-mb-none"
-                            v-if="
+                            v-else-if="
                                 mappedField[props.col.name] &&
                                 mappedField[props.col.name].maxLength
                             "
@@ -202,9 +213,21 @@
                                         }}</q-item-label>
                                     </q-item-section>
                                     <q-item-section>
+                                        <q-toggle
+                                            dense
+                                            checked-icon="check"
+                                            disable
+                                            v-if="
+                                                mappedFieldDef[col.name] &&
+                                                mappedFieldDef[col.name].type ==
+                                                    'bool'
+                                            "
+                                            :label="''"
+                                            v-model="col.value"
+                                        />
                                         <q-item-label
                                             class="q-mb-none"
-                                            v-if="
+                                            v-else-if="
                                                 mappedField[col.name] &&
                                                 mappedField[col.name].maxLength
                                             "
@@ -300,6 +323,7 @@ export default defineComponent({
             load,
             onRequest,
             mappedField,
+            mappedFieldDef,
         } = useGenericDataTable(props.config, emit);
 
         // emit('onRequest');
@@ -319,6 +343,7 @@ export default defineComponent({
             crudLoading.value = true;
             const payload = useSerializer(
                 row,
+                props.config.defaultValues || {},
                 props.config.fields
             ).getPayload();
             const serviceMethods = edit
@@ -405,6 +430,7 @@ export default defineComponent({
             prepareCreate,
             changeKey,
             mappedField,
+            mappedFieldDef,
         };
     },
 });

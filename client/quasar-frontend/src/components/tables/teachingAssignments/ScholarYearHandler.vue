@@ -25,6 +25,11 @@ export default defineComponent({
                     label: 'Curso escolar',
                     type: 'text',
                 },
+                {
+                    name: 'current_year',
+                    label: 'Actual ?',
+                    type: 'bool',
+                },
             ],
             actions: {
                 create: true,

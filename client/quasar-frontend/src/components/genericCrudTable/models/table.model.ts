@@ -22,9 +22,11 @@ export interface GenericCrudTableConfig {
 
     service: CRUDService;
 
-    query?: Dictionary,
+    query?: Dictionary;
 
     fields: FieldModel[];
+
+    defaultValues?: Dictionary;
 }
 
 export interface RequestModel {

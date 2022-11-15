@@ -1,10 +1,14 @@
 import { Dictionary } from 'src/models/base';
 import { FieldModel, FieldSelect } from '../models/field.model';
 
-export const useSerializer = (obj: Dictionary, fields: FieldModel[]) => {
+export const useSerializer = (
+    obj: Dictionary,
+    defaultV: Dictionary,
+    fields: FieldModel[]
+) => {
     return {
         getPayload: () => {
-            let payload: Dictionary = {};
+            let payload: Dictionary = { ...defaultV };
             console.log(obj, fields);
             fields.map((f) => {
                 console.log('reducing', f.name, obj[f.name], payload);
