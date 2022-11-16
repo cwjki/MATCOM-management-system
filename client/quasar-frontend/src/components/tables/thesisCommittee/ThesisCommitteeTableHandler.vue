@@ -7,6 +7,33 @@
             z-index: 1000 !important;
         "
     >
+        <div
+            class="full-width justify-center row items-center q-px-md q-pt-md"
+            v-if="idC"
+        >
+            <p class="text-h6 text-primary q-mb-none">
+                Curso escolar: {{ Cname }}
+                <q-btn
+                    color="red"
+                    icon="clear"
+                    class="q-ml-sm"
+                    dense
+                    rounded
+                    outline
+                    @click="$router.push({ name: 'thesis-committees' })"
+                    fabmini
+                ></q-btn>
+            </p>
+            <q-btn
+                class="q-ml-md"
+                no-caps
+                color="secondary"
+                outline
+                label="Defensas"
+                @click="handleRoute('thesis-defenses', idC, Cname)"
+            >
+            </q-btn>
+        </div>
         <q-card-section
             class="full-width row justify-center items-center q-pa-none q-pt-md"
         >
@@ -58,13 +85,13 @@ import {
     thesisCommitteeService,
     thesisService,
     professorService,
-    placeService,
 } from 'src/services';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
 import { axios } from 'src/boot/axios';
 import { Dictionary } from 'src/models/base';
+import { useRouteHandler } from 'src/hooks/routeHandler';
 
 type ProfessorCharge = {
     name: string;
@@ -83,11 +110,18 @@ export default defineComponent({
     props: ['idC', 'Cname'],
     emits: [],
     setup(props, { emit }) {
+        const { handleRoute } = useRouteHandler();
         const config = ref<GenericCrudTableConfig>({
             name: 'Tribunales de Tesis',
             singularLabel: 'Tribunal',
             searchLabel: 'Título o Tutores',
             service: thesisCommitteeService,
+            defaultValues: {
+                ...(props.idC ? { thesis__scholar_year_id: props.idC } : {}),
+            },
+            query: {
+                ...(props.idC ? { thesis__scholar_year: props.idC } : {}),
+            },
             fields: [
                 {
                     name: 'student',
@@ -109,6 +143,9 @@ export default defineComponent({
                     },
                     type: 'select',
                     selectOptions: {
+                        query: {
+                            ...(props.idC ? { scholar_year: props.idC } : {}),
+                        },
                         list: thesisService.list,
                         value: 'id',
                         label: 'title',
@@ -273,6 +310,7 @@ export default defineComponent({
         return {
             config,
             professorCharges,
+            handleRoute,
             onReload() {
                 loading.value = true;
                 Object.keys(professorCharges.value).map((key) => {
@@ -283,6 +321,9 @@ export default defineComponent({
                 thesisCommitteeService
                     .list({
                         size: 100000,
+                        ...(props.idC
+                            ? { thesis__scholar_year: props.idC }
+                            : {}),
                     })
                     .then((response: any) => {
                         response.data.results.map((x: any) => {

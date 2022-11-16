@@ -135,7 +135,6 @@ import CSVDownload from '../components/csvDownload/CSVDownload.vue';
 import { useDepartamentSesion } from 'src/hooks/departamentSesion';
 import { DepartmentModel } from 'src/models/teachingAssignments/department.model';
 import { useRouter } from 'vue-router';
-import { route } from 'quasar/wrappers';
 export default defineComponent({
     components: { CSVDownload },
 

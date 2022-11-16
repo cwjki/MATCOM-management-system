@@ -1,5 +1,4 @@
 <template>
-    {{ idC }} {{ Cname }}
     <generic-crud-data-table :config="config" />
 </template>
 
@@ -25,6 +24,16 @@ export default defineComponent({
             singularLabel: 'Defensa de Tesis',
             searchLabel: 'Fecha o Tesis',
             service: thesisDefenseService,
+            defaultValues: {
+                ...(props.idC
+                    ? { thesis_committee__thesis__scholar_year_id: props.idC }
+                    : {}),
+            },
+            query: {
+                ...(props.idC
+                    ? { thesis_committee__thesis__scholar_year: props.idC }
+                    : {}),
+            },
             fields: [
                 {
                     name: 'date',
@@ -65,6 +74,13 @@ export default defineComponent({
                     },
                     type: 'select',
                     selectOptions: {
+                        query: {
+                            ...(props.idC
+                                ? {
+                                      thesis__scholar_year: props.idC,
+                                  }
+                                : {}),
+                        },
                         list: thesisCommitteeService.list,
                         value: 'id',
                         label: 'thesis_committee',

@@ -128,7 +128,7 @@
         </q-drawer> -->
 
         <q-page-container>
-            <router-view />
+            <router-view :key="$router.currentRoute.value.fullPath" />
         </q-page-container>
     </q-layout>
 </template>
@@ -279,7 +279,7 @@ const thesisCommitteeLinks = [
 
 export default defineComponent({
     name: 'MainLayout',
- 
+
     setup() {
         const leftDrawerOpen = ref(false);
         const imageLogo = require('src/assets/logo.jpg');
