@@ -1,5 +1,5 @@
 <template>
-    <div class="full-width justify-between row items-center q-pb-sm">
+    <div class="full-width justify-between row items-end q-pb-sm">
         <p class="text-h6 text-primary q-mb-none" v-if="idC">
             Curso escolar: {{ Cname }}
             <q-btn

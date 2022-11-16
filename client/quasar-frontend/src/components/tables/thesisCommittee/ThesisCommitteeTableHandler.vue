@@ -24,8 +24,20 @@
                     fabmini
                 ></q-btn>
             </p>
+        </div>
+
+        <div class="full-width justify-between row items-center">
             <q-btn
-                class="q-ml-md"
+                class=""
+                no-caps
+                color="secondary"
+                outline
+                label="Tesis"
+                @click="handleRoute('thesis', idC, Cname)"
+            >
+            </q-btn>
+            <q-btn
+                class=""
                 no-caps
                 color="secondary"
                 outline
@@ -34,6 +46,7 @@
             >
             </q-btn>
         </div>
+
         <q-card-section
             class="full-width row justify-center items-center q-pa-none q-pt-md"
         >

@@ -1,4 +1,30 @@
 <template>
+    <div class="full-width justify-between row items-center q-pb-sm">
+        <q-btn
+            class=""
+            no-caps
+            color="secondary"
+            outline
+            label="Tribunales"
+            @click="handleRoute('thesis-committees', idC, Cname)"
+        >
+        </q-btn>
+
+        <p class="text-h6 text-primary q-mb-none" v-if="idC">
+            Curso escolar: {{ Cname }}
+            <q-btn
+                color="red"
+                icon="clear"
+                class="q-ml-sm"
+                dense
+                rounded
+                outline
+                @click="$router.push({ name: 'thesis' })"
+                fabmini
+            ></q-btn>
+        </p>
+    </div>
+
     <generic-crud-data-table :config="config" />
 </template>
 
@@ -12,6 +38,7 @@ import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
 import { axios } from 'src/boot/axios';
+import { useRouteHandler } from 'src/hooks/routeHandler';
 
 export default defineComponent({
     components: { GenericCrudDataTable },
@@ -19,6 +46,7 @@ export default defineComponent({
     props: ['idC', 'Cname'],
     emits: [],
     setup(props, { emit }) {
+        const { handleRoute } = useRouteHandler();
         const config = ref<GenericCrudTableConfig>({
             name: 'Defensas de Tesis',
             singularLabel: 'Defensa de Tesis',
@@ -245,7 +273,10 @@ export default defineComponent({
                 ],
             },
         });
-        return { config };
+        return {
+            config,
+            handleRoute,
+        };
     },
 });
 </script>
