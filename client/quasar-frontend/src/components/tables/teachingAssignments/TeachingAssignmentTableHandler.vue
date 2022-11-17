@@ -9,10 +9,10 @@
     >
         <div
             class="full-width justify-center row items-center q-px-md q-pt-md"
-            v-if="departament.id"
+            v-if="department.id"
         >
             <p class="text-h6 text-primary q-mb-none">
-                Departamento: {{ departament.name }}
+                Departamento: {{ department.name }}
                 <q-btn
                     color="red"
                     icon="clear"
@@ -25,6 +25,17 @@
                 ></q-btn>
             </p>
         </div>
+
+        <q-btn
+            class=""
+            no-caps
+            color="secondary"
+            outline
+            label="Planificación"
+            @click="$router.push({ name: 'subject-plannings' })"
+        >
+        </q-btn>
+
         <q-card-section
             class="full-width row justify-center items-center q-pa-none q-pt-md"
         >
@@ -72,7 +83,7 @@ import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.mode
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
 import { Dictionary } from 'src/models/base';
 import { axios } from 'src/boot/axios';
-import { useDepartamentSesion } from 'src/hooks/departamentSesion';
+import { useDepartmentSession } from 'src/hooks/departmentSession';
 
 type UserCharge = {
     name: string;
@@ -90,7 +101,7 @@ export default defineComponent({
     props: {},
     emits: [],
     setup(props, { emit }) {
-        const { departament, clear } = useDepartamentSesion();
+        const { department, clear } = useDepartmentSession();
 
         const config = ref<GenericCrudTableConfig>({
             name: 'Asignaciones de docencia',
@@ -98,10 +109,10 @@ export default defineComponent({
             searchLabel: 'Asignatura o Actividad',
             service: teachingAssignmentService,
             query: {
-                ...(departament.value.id
+                ...(department.value.id
                     ? {
                           subject_description__subject__department:
-                              departament.value.id,
+                              department.value.id,
                       }
                     : {}),
             },
@@ -117,8 +128,8 @@ export default defineComponent({
                     type: 'select',
                     selectOptions: {
                         query: {
-                            ...(departament.value.id
-                                ? { subject__department: departament.value.id }
+                            ...(department.value.id
+                                ? { subject__department: department.value.id }
                                 : {}),
                         },
                         list: subjectDescriptionService.list,
@@ -217,8 +228,8 @@ export default defineComponent({
                         value: 'id',
                         label: 'name',
                         query: {
-                            ...(departament.value.id
-                                ? { department: departament.value.id }
+                            ...(department.value.id
+                                ? { department: department.value.id }
                                 : {}),
                         },
                         refactorValue: (value) =>
@@ -289,10 +300,10 @@ export default defineComponent({
                 teachingAssignmentService
                     .list({
                         size: 100000,
-                        ...(departament.value.id
+                        ...(department.value.id
                             ? {
                                   subject_description__subject__department:
-                                      departament.value.id,
+                                      department.value.id,
                               }
                             : {}),
                     })
@@ -329,7 +340,7 @@ export default defineComponent({
             },
             loading,
             clear,
-            departament,
+            department,
             refactorName(
                 data: {
                     hour: number;

@@ -1,14 +1,14 @@
 import { DepartmentModel } from 'src/models/teachingAssignments/department.model';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 
 const key = 'jw_d';
 
-export const useDepartamentSesion = () => {
-    const setDepartament = (d: DepartmentModel) => {
+export const useDepartmentSession = () => {
+    const setDepartment = (d: DepartmentModel) => {
         localStorage.setItem(key, JSON.stringify(d));
     };
 
-    const getDepartament = (): DepartmentModel => {
+    const getDepartment = (): DepartmentModel => {
         const d = localStorage.getItem(key);
         if (d != null) return JSON.parse(d) as DepartmentModel;
         return {
@@ -22,7 +22,7 @@ export const useDepartamentSesion = () => {
     };
 
     const refresh = () => {
-        departament.value = getDepartament();
+        department.value = getDepartment();
     };
 
     const clear = () => {
@@ -30,13 +30,13 @@ export const useDepartamentSesion = () => {
         document.location.reload();
     };
 
-    const departament = ref(getDepartament());
+    const department = ref(getDepartment());
 
     return {
-        setDepartament,
-        getDepartament,
+        setDepartment,
+        getDepartment,
         refresh,
         clear,
-        departament,
+        department,
     };
 };

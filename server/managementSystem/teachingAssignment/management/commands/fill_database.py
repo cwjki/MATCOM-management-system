@@ -164,7 +164,9 @@ class Command(BaseCommand):
         elif model_name == 'ScholarYears':
             for obj in data:
                 name = obj['name']
-                scholar_year = ScholarYear(name=name)
+                current_year = obj['current_year']
+                scholar_year = ScholarYear(
+                    name=name, current_year=current_year)
                 scholar_year.save()
 
         elif model_name == 'SubjectDescriptions':

@@ -122,7 +122,7 @@ class Command(BaseCommand):
 
         elif model_name == 'ScholarYears':
             queryset = ScholarYear.objects.all()
-            fieldnames = ['name']
+            fieldnames = ['name', 'current_year']
             data = [ScholarYearSerializerCSV(
                 scholar_year).data for scholar_year in queryset]
 

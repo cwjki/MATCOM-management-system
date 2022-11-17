@@ -1,4 +1,29 @@
 <template>
+    <div class="full-width justify-between row items-center q-pb-sm">
+        <p class="text-h6 text-primary q-mb-none" v-if="department.id">
+            Departamento: {{ department.name }}
+            <q-btn
+                color="red"
+                icon="clear"
+                class="q-ml-sm"
+                dense
+                rounded
+                outline
+                @click="clear"
+                fabmini
+            ></q-btn>
+        </p>
+        <q-btn
+            class=""
+            no-caps
+            color="secondary"
+            outline
+            label="Asignaturas"
+            @click="$router.push({ name: 'subjects' })"
+        >
+        </q-btn>
+    </div>
+
     <generic-crud-data-table :config="config" />
 </template>
 
@@ -12,6 +37,8 @@ import {
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
+import { useDepartmentSession } from 'src/hooks/departmentSession';
+import { FieldModel } from 'src/components/genericCrudTable/models/field.model';
 
 export default defineComponent({
     components: { GenericCrudDataTable },
@@ -19,11 +46,22 @@ export default defineComponent({
     props: {},
     emits: [],
     setup(props, { emit }) {
+        const { department, clear } = useDepartmentSession();
         const config = ref<GenericCrudTableConfig>({
             name: 'Profesores',
             singularLabel: 'Profesor',
             searchLabel: 'Buscar por texto',
             service: professorService,
+            // defaultValues: {
+            //     ...(departament.value.id
+            //         ? { department_id: departament.value.id }
+            //         : {}),
+            // },
+            query: {
+                ...(department.value.id
+                    ? { department: department.value.id }
+                    : {}),
+            },
             fields: [
                 {
                     name: 'name',
@@ -56,23 +94,28 @@ export default defineComponent({
                 //         },
                 //     },
                 // },
-                {
-                    name: 'department',
-                    label: 'Departamento',
-                    column: {
-                        transform(row) {
-                            return `${row.department.name}`;
-                        },
-                    },
-                    filter: true,
-                    type: 'select',
-                    selectOptions: {
-                        list: departmentService.list,
-                        value: 'id',
-                        label: 'name',
-                    },
-                    rules: ['required'],
-                },
+                ...(department.value.id
+                    ? []
+                    : ([
+                          {
+                              name: 'department',
+                              label: 'Departamento',
+                              column: {
+                                  transform(row) {
+                                      return `${row.department.name}`;
+                                  },
+                              },
+                              filter: true,
+                              type: 'select',
+                              selectOptions: {
+                                  list: departmentService.list,
+                                  value: 'id',
+                                  label: 'name',
+                              },
+                              rules: ['required'],
+                          },
+                      ] as FieldModel[])),
+
                 {
                     name: 'scientific_degree',
                     label: 'Grado Científico',
@@ -114,7 +157,7 @@ export default defineComponent({
                 delete: true,
             },
         });
-        return { config };
+        return { config, department, clear };
     },
 });
 </script>

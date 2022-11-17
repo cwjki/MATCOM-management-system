@@ -39,7 +39,7 @@ class ThesisViewSet(viewsets.ModelViewSet):
     queryset = Thesis.objects.all()
     serializer_class = ThesisSerializer
     search_fields = ['title']
-    filterset_fields = ['tutor', 'cotutors', 'keywords']
+    filterset_fields = ['tutor', 'cotutors', 'keywords', 'scholar_year']
 
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -54,7 +54,8 @@ class ThesisCommitteeViewSet(viewsets.ModelViewSet):
     search_fields = ['thesis__title',
                      'thesis__tutor__name', 'thesis__tutor__last_name',
                      'thesis__cotutors__name', 'thesis__cotutors__last_name']
-    filterset_fields = ['president', 'secretary', 'opponent']
+    filterset_fields = ['president', 'secretary',
+                        'opponent', 'thesis__scholar_year']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -66,7 +67,7 @@ class ThesisDefenseViewSet(viewsets.ModelViewSet):
     queryset = ThesisDefense.objects.all()
     serializer_class = ThesisDefenseSerializer
     search_fields = ['date', 'thesis_committee__thesis__title']
-    filterset_fields = ['place']
+    filterset_fields = ['place', 'thesis_committee__thesis__scholar_year']
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 

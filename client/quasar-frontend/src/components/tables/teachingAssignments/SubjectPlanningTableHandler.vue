@@ -1,7 +1,16 @@
 <template>
     <div class="full-width justify-between row items-center q-pb-sm">
-        <p class="text-h6 text-primary q-mb-none" v-if="departament.id">
-            Departamento: {{ departament.name }}
+        <q-btn
+            class=""
+            no-caps
+            color="secondary"
+            outline
+            label="Asignaturas"
+            @click="$router.push({ name: 'subjects' })"
+        >
+        </q-btn>
+        <p class="text-h6 text-primary q-mb-none" v-if="department.id">
+            Departamento: {{ department.name }}
             <q-btn
                 color="red"
                 icon="clear"
@@ -27,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { useDepartamentSesion } from 'src/hooks/departamentSesion';
+import { useDepartmentSession } from 'src/hooks/departmentSession';
 import {
     classTypeService,
     scholarYearService,
@@ -46,15 +55,15 @@ export default defineComponent({
     props: {},
     emits: [],
     setup(props, { emit }) {
-        const { departament, clear } = useDepartamentSesion();
+        const { department, clear } = useDepartmentSession();
         const config = ref<GenericCrudTableConfig>({
             name: 'Planificación de las Asignaturas',
             singularLabel: 'Planificación',
             searchLabel: 'Asignatura',
             service: subjectDescriptionService,
             query: {
-                ...(departament.value.id
-                    ? { subject__department: departament.value.id }
+                ...(department.value.id
+                    ? { subject__department: department.value.id }
                     : {}),
             },
             fields: [
@@ -72,8 +81,8 @@ export default defineComponent({
                         value: 'id',
                         label: 'name',
                         query: {
-                            ...(departament.value.id
-                                ? { department: departament.value.id }
+                            ...(department.value.id
+                                ? { department: department.value.id }
                                 : {}),
                         },
                         refactorValue: (value) =>
@@ -179,7 +188,7 @@ export default defineComponent({
             },
         });
 
-        return { config, departament, clear };
+        return { config, department, clear };
     },
 });
 </script>

@@ -27,7 +27,7 @@ export default defineComponent({
                 },
                 {
                     name: 'current_year',
-                    label: 'Actual ?',
+                    label: 'Curso vigente',
                     type: 'bool',
                 },
             ],

@@ -1,7 +1,17 @@
 <template>
     <div class="full-width justify-between row items-center q-pb-sm">
-        <p class="text-h6 text-primary q-mb-none" v-if="departament.id">
-            Departamento: {{ departament.name }}
+        <q-btn
+            class=""
+            no-caps
+            color="secondary"
+            outline
+            label="Profesores"
+            @click="$router.push({ name: 'professors' })"
+        >
+        </q-btn>
+
+        <p class="text-h6 text-primary q-mb-none" v-if="department.id">
+            Departamento: {{ department.name }}
             <q-btn
                 color="red"
                 icon="clear"
@@ -34,7 +44,7 @@ import {
     studyPlanService,
     subjectService,
 } from 'src/services';
-import { useDepartamentSesion } from 'src/hooks/departamentSesion';
+import { useDepartmentSession } from 'src/hooks/departmentSession';
 import { defineComponent, ref } from 'vue';
 import { GenericCrudTableConfig } from '../../genericCrudTable/models/table.model';
 import GenericCrudDataTable from '../../genericCrudTable/views/GenericCrudDataTable.vue';
@@ -46,20 +56,20 @@ export default defineComponent({
     props: {},
     emits: [],
     setup(props, { emit }) {
-        const { departament, clear } = useDepartamentSesion();
+        const { department, clear } = useDepartmentSession();
         const config = ref<GenericCrudTableConfig>({
             name: 'Asignaturas',
             singularLabel: 'Asignatura',
             searchLabel: 'Asignatura',
             service: subjectService,
             defaultValues: {
-                ...(departament.value.id
-                    ? { department_id: departament.value.id }
+                ...(department.value.id
+                    ? { department_id: department.value.id }
                     : {}),
             },
             query: {
-                ...(departament.value.id
-                    ? { department: departament.value.id }
+                ...(department.value.id
+                    ? { department: department.value.id }
                     : {}),
             },
             fields: [
@@ -100,7 +110,7 @@ export default defineComponent({
                         label: 'name',
                     },
                 },
-                ...(departament.value.id
+                ...(department.value.id
                     ? []
                     : ([
                           {
@@ -149,7 +159,7 @@ export default defineComponent({
             },
         });
 
-        return { config, departament, clear };
+        return { config, department, clear };
     },
 });
 </script>

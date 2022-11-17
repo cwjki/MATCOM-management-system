@@ -1,3 +1,8 @@
 title,student,tutor,cotutors,keywords,scholar_year
 Simulación y optimización de movimientos de malabares,Gustavo Despaigne Dita,"{'name': 'Fernando Raul', 'last_name': 'Rodriguez Flores'}",[],"[{'name': 'simulación'}, {'name': 'malabares'}, {'name': 'modelos de optimización'}]",{'name': '2022'}
 Propagación de epidemias mediante modelos basados en metapoblaciones,Abel Antonio Cruz Suárez,"{'name': 'Angela', 'last_name': 'León Mecías'}","[{'name': 'Alejandro', 'last_name': 'Mesejo Chiong'}, {'name': 'Camila', 'last_name': 'Pérez Mosquera'}]","[{'name': 'metapoblaciones'}, {'name': 'movimiento langrangiano'}, {'name': 'movimiento euleriano'}, {'name': 'modelos compartimentales'}]",{'name': '2022'}
+aklshfklasf,ajhslkhasf,"{'name': 'Elyanis', 'last_name': 'García Pola'}",[],"[{'name': 'argumentación computacional'}, {'name': 'lenguajes'}]",{'name': '2019-2020'}
+asfjkasf,asfhaklsf,"{'name': 'Elyanis', 'last_name': 'García Pola'}",[],"[{'name': 'DSL'}, {'name': 'desarrollo web'}]",{'name': '2020-2021'}
+asfasf,asfasf,"{'name': 'Daniela', 'last_name': 'González Beltrán'}","[{'name': 'Aymée', 'last_name': 'Marrero Severo'}]","[{'name': 'active learning'}, {'name': 'DSL'}]",{'name': '2019-2020'}
+asfasf,asfasf,"{'name': 'Carlos', 'last_name': 'Bouza Herrera'}","[{'name': 'Vivian', 'last_name': 'Sistaschs'}]","[{'name': 'argumentación computacional'}, {'name': 'DSL'}]",{'name': '2022'}
+asfa,asfa,"{'name': 'Camila', 'last_name': 'Pérez Mosquera'}","[{'name': 'Camila', 'last_name': 'Pérez Mosquera'}]",[{'name': 'argumentación computacional'}],{'name': '2022'}
