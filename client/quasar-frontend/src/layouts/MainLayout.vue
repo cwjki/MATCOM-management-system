@@ -21,15 +21,8 @@
                     Matcom
                 </q-toolbar-title>
 
-                <q-btn
-                    label="Página Principal"
-                    icon="home"
-                    no-caps
-                    @click="$router.push({ name: 'home' })"
-                />
-
                 <div>
-                    <q-btn-dropdown label="Nomencladores" no-caps>
+                    <q-btn-dropdown label="Datos generales" no-caps>
                         <q-list>
                             <q-item
                                 clickable

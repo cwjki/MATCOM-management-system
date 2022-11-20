@@ -8,13 +8,14 @@
         "
     >
         <div
-            class="full-width justify-between row items-center q-pb-sm q-pt-md q-px-md"
+            class="full-width justify-between row items-center q-pb-md q-pt-md q-px-md"
             v-if="department.id"
         >
             <q-btn
                 class=""
                 no-caps
                 color="secondary"
+                icon="navigate_before"
                 outline
                 label="Planificación"
                 @click="$router.push({ name: 'subject-plannings' })"
@@ -35,7 +36,16 @@
                 ></q-btn>
             </p>
 
-            <div></div>
+            <q-btn
+                class=""
+                no-caps
+                color="secondary"
+                icon-right="home"
+                outline
+                label="Página principal"
+                @click="$router.push({ name: 'home' })"
+            >
+            </q-btn>
         </div>
 
         <q-separator />

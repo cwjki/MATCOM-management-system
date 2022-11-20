@@ -8,12 +8,13 @@
         "
     >
         <div
-            class="full-width justify-between row items-center q-pb-sm q-pt-md q-px-md"
+            class="full-width justify-between row items-center q-pb-md q-pt-md q-px-md"
             v-if="idC"
         >
             <q-btn
                 class=""
                 no-caps
+                icon="navigate_before"
                 color="secondary"
                 outline
                 label="Tribunales"
@@ -21,12 +22,12 @@
             >
             </q-btn>
 
-            <p class="text-h6 text-primary q-mb-none" v-if="idC">
+            <p class="text-h6 text-primary q-mb-none">
                 Curso escolar: {{ Cname }}
                 <q-btn
                     color="red"
                     icon="clear"
-                    class="q-ml-sm"
+                    class="q-ml-sm q-mb-xs"
                     dense
                     rounded
                     outline
@@ -35,7 +36,16 @@
                 ></q-btn>
             </p>
 
-            <div></div>
+            <q-btn
+                class=""
+                no-caps
+                color="secondary"
+                icon-right="home"
+                outline
+                label="Página Principal"
+                @click="$router.push({ name: 'home' })"
+            >
+            </q-btn>
         </div>
     </q-card>
 

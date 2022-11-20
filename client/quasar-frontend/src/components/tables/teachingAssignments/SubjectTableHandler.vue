@@ -8,13 +8,14 @@
         "
     >
         <div
-            class="full-width justify-between row items-center q-pb-sm q-pt-md q-px-md"
+            class="full-width justify-between row items-center q-pb-md q-pt-md q-px-md"
             v-if="department.id"
         >
             <q-btn
                 class=""
                 no-caps
                 color="secondary"
+                icon="navigate_before"
                 outline
                 label="Profesores"
                 @click="$router.push({ name: 'professors' })"
@@ -26,7 +27,7 @@
                 <q-btn
                     color="red"
                     icon="clear"
-                    class="q-ml-sm"
+                    class="q-ml-sm q-mb-xs"
                     dense
                     rounded
                     outline
@@ -38,6 +39,7 @@
                 class=""
                 no-caps
                 color="secondary"
+                icon-right="navigate_next"
                 outline
                 label="Planificar asignaturas"
                 @click="$router.push({ name: 'subject-plannings' })"

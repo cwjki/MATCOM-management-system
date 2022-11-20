@@ -8,13 +8,14 @@
         "
     >
         <div
-            class="full-width justify-between row items-center q-pb-sm q-pt-md q-px-md"
+            class="full-width justify-between row items-center q-pb-md q-pt-md q-px-md"
             v-if="idC"
         >
             <q-btn
                 class=""
                 no-caps
                 color="secondary"
+                icon="navigate_before"
                 outline
                 label="Tesis"
                 @click="handleRoute('thesis', idC, Cname)"
@@ -26,7 +27,7 @@
                 <q-btn
                     color="red"
                     icon="clear"
-                    class="q-ml-sm"
+                    class="q-ml-sm q-mb-xs"
                     dense
                     rounded
                     outline
@@ -39,6 +40,7 @@
                 class=""
                 no-caps
                 color="secondary"
+                icon-right="navigate_next"
                 outline
                 label="Defensas"
                 @click="handleRoute('thesis-defenses', idC, Cname)"

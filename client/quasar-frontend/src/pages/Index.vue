@@ -102,10 +102,14 @@
                 }`"
             >
                 <q-card class="bg-custom-card" bordered>
-                    <q-card-section>
-                        <div class="text-h6 row items-center justify-start">
+                    <q-card-section class="q-mt-md">
+                        <div
+                            class="text-h5 text-bold row items-center justify-start"
+                        >
                             Planificación de las tesis
+
                             <q-select
+                                class="col-md-8 col-11 q-mt-xl q-mb-sm"
                                 :options="optionsYears"
                                 :loading="loadingYears"
                                 v-model="currentYear"
@@ -114,7 +118,6 @@
                                 hide-bottom-space
                                 option-label="name"
                                 option-value="id"
-                                class="col-md-8 col-11"
                                 dense
                             ></q-select>
                         </div>
@@ -144,7 +147,6 @@
                         </q-btn>
                         <q-btn
                             dark
-                            outline
                             no-caps
                             class="q-px-md col-3"
                             color="primary"
