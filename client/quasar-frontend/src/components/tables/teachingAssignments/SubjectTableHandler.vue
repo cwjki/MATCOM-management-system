@@ -1,38 +1,51 @@
 <template>
-    <div class="full-width justify-between row items-center q-pb-sm">
-        <q-btn
-            class=""
-            no-caps
-            color="secondary"
-            outline
-            label="Profesores"
-            @click="$router.push({ name: 'professors' })"
+    <q-card
+        class="full-width q-mb-md"
+        style="
+            position: sticky !important;
+            top: 60px !important;
+            z-index: 1000 !important;
+        "
+    >
+        <div
+            class="full-width justify-between row items-center q-pb-sm q-pt-md q-px-md"
+            v-if="department.id"
         >
-        </q-btn>
-
-        <p class="text-h6 text-primary q-mb-none" v-if="department.id">
-            Departamento: {{ department.name }}
             <q-btn
-                color="red"
-                icon="clear"
-                class="q-ml-sm"
-                dense
-                rounded
+                class=""
+                no-caps
+                color="secondary"
                 outline
-                @click="clear"
-                fabmini
-            ></q-btn>
-        </p>
-        <q-btn
-            class=""
-            no-caps
-            color="secondary"
-            outline
-            label="Planificar asignaturas"
-            @click="$router.push({ name: 'subject-plannings' })"
-        >
-        </q-btn>
-    </div>
+                label="Profesores"
+                @click="$router.push({ name: 'professors' })"
+            >
+            </q-btn>
+
+            <p class="text-h6 text-primary q-mb-none" v-if="department.id">
+                Departamento: {{ department.name }}
+                <q-btn
+                    color="red"
+                    icon="clear"
+                    class="q-ml-sm"
+                    dense
+                    rounded
+                    outline
+                    @click="clear"
+                    fabmini
+                ></q-btn>
+            </p>
+            <q-btn
+                class=""
+                no-caps
+                color="secondary"
+                outline
+                label="Planificar asignaturas"
+                @click="$router.push({ name: 'subject-plannings' })"
+            >
+            </q-btn>
+        </div>
+    </q-card>
+
     <generic-crud-data-table :config="config" />
 </template>
 

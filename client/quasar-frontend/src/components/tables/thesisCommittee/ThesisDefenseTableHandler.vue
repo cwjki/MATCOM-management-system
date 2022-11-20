@@ -1,29 +1,43 @@
 <template>
-    <div class="full-width justify-between row items-center q-pb-sm">
-        <q-btn
-            class=""
-            no-caps
-            color="secondary"
-            outline
-            label="Tribunales"
-            @click="handleRoute('thesis-committees', idC, Cname)"
+    <q-card
+        class="full-width q-mb-md"
+        style="
+            position: sticky !important;
+            top: 60px !important;
+            z-index: 1000 !important;
+        "
+    >
+        <div
+            class="full-width justify-between row items-center q-pb-sm q-pt-md q-px-md"
+            v-if="idC"
         >
-        </q-btn>
-
-        <p class="text-h6 text-primary q-mb-none" v-if="idC">
-            Curso escolar: {{ Cname }}
             <q-btn
-                color="red"
-                icon="clear"
-                class="q-ml-sm"
-                dense
-                rounded
+                class=""
+                no-caps
+                color="secondary"
                 outline
-                @click="$router.push({ name: 'thesis' })"
-                fabmini
-            ></q-btn>
-        </p>
-    </div>
+                label="Tribunales"
+                @click="handleRoute('thesis-committees', idC, Cname)"
+            >
+            </q-btn>
+
+            <p class="text-h6 text-primary q-mb-none" v-if="idC">
+                Curso escolar: {{ Cname }}
+                <q-btn
+                    color="red"
+                    icon="clear"
+                    class="q-ml-sm"
+                    dense
+                    rounded
+                    outline
+                    @click="$router.push({ name: 'thesis' })"
+                    fabmini
+                ></q-btn>
+            </p>
+
+            <div></div>
+        </div>
+    </q-card>
 
     <generic-crud-data-table :config="config" />
 </template>
