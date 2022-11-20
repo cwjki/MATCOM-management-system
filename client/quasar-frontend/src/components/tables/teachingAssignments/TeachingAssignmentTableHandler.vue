@@ -8,9 +8,19 @@
         "
     >
         <div
-            class="full-width justify-center row items-center q-px-md q-pt-md"
+            class="full-width justify-between row items-center q-pb-sm q-pt-md q-px-md"
             v-if="department.id"
         >
+            <q-btn
+                class=""
+                no-caps
+                color="secondary"
+                outline
+                label="Planificación"
+                @click="$router.push({ name: 'subject-plannings' })"
+            >
+            </q-btn>
+
             <p class="text-h6 text-primary q-mb-none">
                 Departamento: {{ department.name }}
                 <q-btn
@@ -24,17 +34,11 @@
                     fabmini
                 ></q-btn>
             </p>
+
+            <div></div>
         </div>
 
-        <q-btn
-            class=""
-            no-caps
-            color="secondary"
-            outline
-            label="Planificación"
-            @click="$router.push({ name: 'subject-plannings' })"
-        >
-        </q-btn>
+        <q-separator />
 
         <q-card-section
             class="full-width row justify-center items-center q-pa-none q-pt-md"

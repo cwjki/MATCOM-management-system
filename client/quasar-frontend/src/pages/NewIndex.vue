@@ -1,78 +1,36 @@
 <template>
-    <q-page padding>
-        <div flat class="row full-width justify-evenly items-center">
-            <q-card flat class="col-md-5 col-sm-6 col-12">
-                <q-card-section>
-                    <div class="text-h4">SISTEMA DE GESTIÓN DOCENTE</div>
-                    <div class="text-subtitle2'">
+    <q-page class="bgFond" padding>
+        <!-- <q-img class="full-height full-width" :src="imageBg"></q-img> -->
+        <div flat class="row full-width justify-evenly items-start">
+            <q-card class="col-12 bg-custom-grey-card row q-pa-md">
+                <q-card-section class="col-md-6 col-sm-8 col-11">
+                    <div class="text-h4 text-bold q-pb-sm">
+                        NEW SISTEMA DE GESTIÓN DOCENTE
+                    </div>
+                    <q-separator></q-separator>
+
+                    <div class="text-subtitle1 q-pt-md">
                         para la facultad de Matemática y Computación de la UH
                     </div>
                 </q-card-section>
             </q-card>
-            <div class="col-md-7 col-sm-6 col-12 q-pa-sm">
-                <q-card>
-                    <q-card-section>
-                        <div class="text-h6 row items-center">
-                            Planificación de las tesis
-                            <q-select
-                                :options="optionsYears"
-                                :loading="loadingYears"
-                                v-model="currentYear"
-                                clearable
-                                hide-bottom-space
-                                option-label="name"
-                                option-value="id"
-                                class="col-lg-3 col-md-4 col-sm-6 col-12 q-ml-md"
-                                dense
-                            ></q-select>
-                        </div>
-                        <div></div>
-                    </q-card-section>
-                    <q-separator inset />
-                    <q-card-actions align="left">
-                        <q-btn
-                            dark
-                            outline
-                            no-caps
-                            class="q-px-md"
-                            color="primary"
-                            @click="onSelectYear('thesis')"
-                        >
-                            Tesis
-                        </q-btn>
-                        <q-btn
-                            dark
-                            outline
-                            no-caps
-                            class="q-px-md"
-                            color="primary"
-                            @click="onSelectYear('thesis-committees')"
-                        >
-                            Tribunales
-                        </q-btn>
-                        <q-btn
-                            dark
-                            outline
-                            no-caps
-                            class="q-px-md"
-                            color="primary"
-                            @click="onSelectYear('thesis-defenses')"
-                        >
-                            Defensas
-                        </q-btn>
-                    </q-card-actions>
-                </q-card>
-            </div>
-            <div class="full-width q-my-md q-px-sm">
-                <q-separator></q-separator>
-            </div>
-            <div class="row justify-center col-12">
+            <q-card
+                :class="`bg-custom-card row justify-center col-md-9 col-sm-8 col-12 q-mt-lg ${
+                    $q.screen.xs || 'q-pa-md'
+                }`"
+            >
+                <q-card-section class="col-12 q-pb-none">
+                    <p class="text-h5 text-bold full-width">
+                        Administración de departamentos
+                    </p>
+                    <!-- <p class="text-subtitle2 text-grey-6 full-width">MATCOM</p> -->
+                </q-card-section>
                 <div
-                    class="col-md-4 col-lg-3 col-sm-10 col-12 q-pa-sm"
+                    class="col-md-6 col-12 q-pa-md"
                     v-for="(d, i) in departmentList"
                     :key="i"
                 >
-                    <q-card class="full-height">
+                    <q-card class="full-height bg-custom-card">
                         <q-card-section style="min-height: 120px">
                             <div class="text-h5 text-primary">
                                 {{ `${d.name}` }}
@@ -136,7 +94,78 @@
                         </q-card-actions>
                     </q-card>
                 </div>
+            </q-card>
+
+            <div
+                :class="`col-md-3 col-sm-4 col-12 q-pt-lg ${
+                    $q.screen.xs || 'q-pl-md'
+                }`"
+            >
+                <q-card class="bg-custom-card" bordered>
+                    <q-card-section>
+                        <div class="text-h6 row items-center justify-start">
+                            Planificación de las tesis
+                            <q-select
+                                :options="optionsYears"
+                                :loading="loadingYears"
+                                v-model="currentYear"
+                                clearable
+                                outlined
+                                hide-bottom-space
+                                option-label="name"
+                                option-value="id"
+                                class="col-md-8 col-11"
+                                dense
+                            ></q-select>
+                        </div>
+                        <div></div>
+                    </q-card-section>
+                    <q-separator inset />
+                    <q-card-actions align="right">
+                        <q-btn
+                            dark
+                            outline
+                            no-caps
+                            class="q-px-md col-3"
+                            color="primary"
+                            @click="onSelectYear('thesis')"
+                        >
+                            Tesis
+                        </q-btn>
+                        <q-btn
+                            dark
+                            outline
+                            no-caps
+                            class="q-px-md col-3"
+                            color="primary"
+                            @click="onSelectYear('thesis-committees')"
+                        >
+                            Tribunales
+                        </q-btn>
+                        <q-btn
+                            dark
+                            outline
+                            no-caps
+                            class="q-px-md col-3"
+                            color="primary"
+                            @click="onSelectYear('thesis-defenses')"
+                        >
+                            Defensas
+                        </q-btn>
+                    </q-card-actions>
+                </q-card>
             </div>
+
+            <q-card
+                :class="`col-12 bg-custom-grey-card text-grey-8 row q-pa-md q-mt-lg q-px-lg justify-${
+                    $q.screen.xs ? 'center' : 'between'
+                }`"
+            >
+                <div class="text-caption">
+                    {{ 2022 }}. Todos los derechos reservados
+                </div>
+                <div class="text-caption">MATCOM. Universidad de La Habana</div>
+            </q-card>
         </div>
     </q-page>
 </template>
@@ -175,7 +204,10 @@ export default defineComponent({
             .finally(() => {
                 loadingYears.value = false;
             });
+
+        const imageBg = require('src/assets/UH img.jpg');
         return {
+            imageBg,
             departmentList,
             currentYear,
             loadingYears,

@@ -1,1 +1,16 @@
 // app global css in SCSS form
+
+.bgFond {
+    background-image: url('../assets/uh.png');
+    background-size: cover;
+}
+
+.bg-custom-card {
+    border-radius: 15px !important;
+    background-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.bg-custom-grey-card {
+    border-radius: 15px !important;
+    background-color: rgba(224, 224, 224, 0.75) !important;
+}
