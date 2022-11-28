@@ -61,53 +61,6 @@
                                 >
                                 </q-btn>
                             </div>
-
-                            <!-- <q-btn
-                                dark
-                                outline
-                                no-caps
-                                class="q-px-xs q-mt-sm"
-                                color="primary"
-                                @click="onSelectDepartament(d, 'professors')"
-                            >
-                                Profesores
-                            </q-btn>
-                            <q-btn
-                                dark
-                                outline
-                                no-caps
-                                class="q-px-xs q-mt-sm"
-                                color="primary"
-                                @click="onSelectDepartament(d, 'subjects')"
-                            >
-                                Asignaturas
-                            </q-btn>
-                            <q-btn
-                                dark
-                                outline
-                                no-caps
-                                class="q-px-xs q-mt-sm"
-                                color="primary"
-                                @click="
-                                    onSelectDepartament(d, 'subject-plannings')
-                                "
-                            >
-                                Planificación
-                            </q-btn>
-                            <q-btn
-                                dark
-                                no-caps
-                                class="q-px-xs q-mt-sm"
-                                color="primary"
-                                @click="
-                                    onSelectDepartament(
-                                        d,
-                                        'teaching-assignments'
-                                    )
-                                "
-                            >
-                                Asignación
-                            </q-btn> -->
                         </q-card-actions>
                     </q-card>
                 </div>
@@ -158,36 +111,6 @@
                             >
                             </q-btn>
                         </div>
-
-                        <!-- <q-btn
-                            dark
-                            outline
-                            no-caps
-                            class="q-px-md col-3"
-                            color="primary"
-                            @click="onSelectYear('thesis')"
-                        >
-                            Tesis
-                        </q-btn>
-                        <q-btn
-                            dark
-                            outline
-                            no-caps
-                            class="q-px-md col-3"
-                            color="primary"
-                            @click="onSelectYear('thesis-committees')"
-                        >
-                            Tribunales
-                        </q-btn>
-                        <q-btn
-                            dark
-                            no-caps
-                            class="q-px-md col-3"
-                            color="primary"
-                            @click="onSelectYear('thesis-defenses')"
-                        >
-                            Defensas
-                        </q-btn> -->
                     </q-card-actions>
                 </q-card>
             </div>

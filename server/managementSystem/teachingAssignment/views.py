@@ -208,7 +208,7 @@ class SubjectDescriptionViewSet(viewsets.ModelViewSet):
     queryset = SubjectDescription.objects.all()
     serializer_class = SubjectDescriptionSerializer
     search_fields = ['subject__name']
-    filterset_fields = ['teaching_group', 'class_type',
+    filterset_fields = ['teaching_group', 'class_type', 'scholar_year',
                         'time_period', 'subject__department']
     ordering_fields = ['subject__name']
     ordering = ['subject__name']
