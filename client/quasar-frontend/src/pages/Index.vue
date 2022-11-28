@@ -45,7 +45,24 @@
                             :align="$q.screen.xs ? 'center' : 'right'"
                             class="q-px-xs"
                         >
-                            <q-btn
+                            <div
+                                class="q-ma-xs"
+                                v-for="(b, i) in departmentBtnList"
+                                :key="i"
+                            >
+                                <q-btn
+                                    dark
+                                    :outline="b.outline"
+                                    :label="b.title"
+                                    no-caps
+                                    class="q-px-xs"
+                                    color="primary"
+                                    @click="onSelectDepartament(d, b.link)"
+                                >
+                                </q-btn>
+                            </div>
+
+                            <!-- <q-btn
                                 dark
                                 outline
                                 no-caps
@@ -90,7 +107,7 @@
                                 "
                             >
                                 Asignación
-                            </q-btn>
+                            </q-btn> -->
                         </q-card-actions>
                     </q-card>
                 </div>
@@ -125,7 +142,24 @@
                     </q-card-section>
                     <q-separator inset />
                     <q-card-actions align="right">
-                        <q-btn
+                        <div
+                            class="q-ma-xs"
+                            v-for="(b, i) in thesisBtnList"
+                            :key="i"
+                        >
+                            <q-btn
+                                dark
+                                :outline="b.outline"
+                                :label="b.title"
+                                no-caps
+                                class="q-px-xs"
+                                color="primary"
+                                @click="onSelectYear(b.link)"
+                            >
+                            </q-btn>
+                        </div>
+
+                        <!-- <q-btn
                             dark
                             outline
                             no-caps
@@ -153,7 +187,7 @@
                             @click="onSelectYear('thesis-defenses')"
                         >
                             Defensas
-                        </q-btn>
+                        </q-btn> -->
                     </q-card-actions>
                 </q-card>
             </div>
@@ -179,10 +213,51 @@ import CSVDownload from '../components/csvDownload/CSVDownload.vue';
 import { useDepartmentSession } from 'src/hooks/departmentSession';
 import { DepartmentModel } from 'src/models/teachingAssignments/department.model';
 import { useRouter } from 'vue-router';
+import { LinkData } from 'src/models/linkData';
+
 export default defineComponent({
     components: { CSVDownload },
 
     setup(props, { emit }) {
+        const departmentBtnList: Array<LinkData> = [
+            {
+                title: 'Profesores',
+                link: 'professors',
+                outline: true,
+            },
+            {
+                title: 'Asignaturas',
+                link: 'subjects',
+                outline: true,
+            },
+            {
+                title: 'Planificación',
+                link: 'subject-plannings',
+                outline: true,
+            },
+            {
+                title: 'Asignación',
+                link: 'teaching-assignments',
+            },
+        ];
+
+        const thesisBtnList: Array<LinkData> = [
+            {
+                title: 'Tesis',
+                link: 'thesis',
+                outline: true,
+            },
+            {
+                title: 'Tribunales',
+                link: 'thesis-committees',
+                outline: true,
+            },
+            {
+                title: 'Defensas',
+                link: 'thesis-defenses',
+            },
+        ];
+
         const departmentList = ref<DepartmentModel[]>([]);
         departmentService.list().then((r) => {
             departmentList.value = r.data.results;
@@ -214,6 +289,8 @@ export default defineComponent({
             currentYear,
             loadingYears,
             optionsYears,
+            departmentBtnList,
+            thesisBtnList,
             onSelectDepartament(obj: DepartmentModel, routeName: string) {
                 setDepartment(obj);
                 R.push({ name: routeName });

@@ -128,7 +128,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { GroupLinkList } from 'src/models/link-list';
+import { GroupLinkData } from 'src/models/linkData';
 
 const teachingAssignmentLinks1 = [
     {
@@ -271,130 +271,188 @@ const thesisCommitteeLinks = [
     },
 ];
 
-const linksData: Array<GroupLinkList> = [
+const linksData: Array<GroupLinkData> = [
     {
-        header: {
+        data: {
             title: 'Datos generales',
         },
-        corpus: [
+        childLinks: [
             {
-                title: 'Facultades',
-                icon: 'museum',
-                link: 'faculties',
+                data: {
+                    title: 'Facultad',
+                },
+                childLinks: [
+                    {
+                        data: {
+                            title: 'Facultades',
+                            icon: 'museum',
+                            link: 'faculties',
+                        },
+                    },
+                    {
+                        data: {
+                            title: 'Carreras',
+                            icon: 'school',
+                            link: 'careers',
+                        },
+                    },
+                    {
+                        data: {
+                            title: 'Departamentos',
+                            icon: 'door_front',
+                            link: 'departments',
+                        },
+                    },
+                    {
+                        data: {
+                            title: 'Profesores',
+                            icon: 'face',
+                            link: 'professors',
+                        },
+                        childLinks: [
+                            {
+                                data: {
+                                    title: 'Categorías Docentes',
+                                    icon: 'star_rate',
+                                    link: 'teaching-category',
+                                },
+                            },
+                            {
+                                data: {
+                                    title: 'Grados Científicos',
+                                    icon: 'stars',
+                                    link: 'scientific-degree',
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        data: {
+                            title: 'Locales',
+                            icon: 'pin_drop',
+                            link: 'places',
+                        },
+                    },
+                ],
             },
             {
-                title: 'Carreras',
-                icon: 'school',
-                link: 'careers',
-            },
-            {
-                title: 'Actividades de clase',
-                icon: 'class',
-                link: 'class-types',
-            },
-            {
-                title: 'Planes de estudio',
-                icon: 'font_download',
-                link: 'study-plans',
-            },
-            {
-                title: 'Grupos',
-                icon: 'groups',
-                link: 'teaching-groups',
-            },
-            {
-                title: 'Cursos Escolares',
-                icon: 'date_range',
-                link: 'scholar-years',
-            },
-            {
-                title: 'Períodos de tiempo',
-                icon: 'date_range',
-                link: 'time-periods',
-            },
-            {
-                title: 'Semestres',
-                icon: 'calendar_month',
-                link: 'semesters',
-            },
-            {
-                title: 'Categorías Docentes',
-                icon: 'star_rate',
-                link: 'teaching-category',
-            },
-            {
-                title: 'Grados Científicos',
-                icon: 'stars',
-                link: 'scientific-degree',
+                data: {
+                    title: 'Curso escolar',
+                },
+                childLinks: [
+                    {
+                        data: {
+                            title: 'Cursos Escolares',
+                            icon: 'date_range',
+                            link: 'scholar-years',
+                        },
+                    },
+                    {
+                        data: {
+                            title: 'Planes de estudio',
+                            icon: 'font_download',
+                            link: 'study-plans',
+                        },
+                    },
+                    {
+                        data: {
+                            title: 'Grupos',
+                            icon: 'groups',
+                            link: 'teaching-groups',
+                        },
+                    },
+                    {
+                        data: {
+                            title: 'Períodos de tiempo',
+                            icon: 'date_range',
+                            link: 'time-periods',
+                        },
+                    },
+                    {
+                        data: {
+                            title: 'Semestres',
+                            icon: 'calendar_month',
+                            link: 'semesters',
+                        },
+                    },
+                    {
+                        data: {
+                            title: 'Actividades de clase',
+                            icon: 'class',
+                            link: 'class-types',
+                        },
+                    },
+                ],
             },
         ],
     },
     {
-        header: {
+        data: {
             title: 'Asignación de docencia',
         },
-        corpus: [
+        childLinks: [
             {
-                title: 'Departamentos',
-                icon: 'door_front',
-                link: 'departments',
+                data: {
+                    title: 'Detalles de años',
+                    icon: 'calendar_view_week',
+                    link: 'carmen-table',
+                },
             },
             {
-                title: 'Tabla de Carmen',
-                icon: 'calendar_view_week',
-                link: 'carmen-table',
+                data: {
+                    title: 'Asignaturas',
+                    icon: 'auto_stories',
+                    link: 'subjects',
+                },
             },
             {
-                title: 'Profesores',
-                icon: 'face',
-                link: 'professors',
+                data: {
+                    title: 'Carga de las asignaturas',
+                    icon: 'feed',
+                    link: 'subject-plannings',
+                },
             },
             {
-                title: 'Asignaturas',
-                icon: 'auto_stories',
-                link: 'subjects',
-            },
-            {
-                title: 'Planificación de Asignaturas',
-                icon: 'feed',
-                link: 'subject-plannings',
-            },
-            {
-                title: 'Asignación de Docencia',
-                icon: 'assignment_turned_in',
-                link: 'teaching-assignments',
+                data: {
+                    title: 'Asignación de Docencia',
+                    icon: 'assignment_turned_in',
+                    link: 'teaching-assignments',
+                },
             },
         ],
     },
     {
-        header: {
-            title: 'Planificación de tesis',
+        data: {
+            title: 'Planificación de las tesis',
         },
-        corpus: [
+        childLinks: [
             {
-                title: 'Locales',
-                icon: 'pin_drop',
-                link: 'places',
+                data: {
+                    title: 'Palabras Claves',
+                    icon: 'manage_search',
+                    link: 'keywords',
+                },
             },
             {
-                title: 'Palabras Claves',
-                icon: 'manage_search',
-                link: 'keywords',
+                data: {
+                    title: 'Tesis',
+                    icon: 'description',
+                    link: 'thesis',
+                },
             },
             {
-                title: 'Tesis',
-                icon: 'description',
-                link: 'thesis',
+                data: {
+                    title: 'Tribunal de Tesis',
+                    icon: 'groups',
+                    link: 'thesis-committees',
+                },
             },
             {
-                title: 'Tribunal de Tesis',
-                icon: 'groups',
-                link: 'thesis-committees',
-            },
-            {
-                title: 'Defensas de Tesis',
-                icon: 'calendar_month',
-                link: 'thesis-defenses',
+                data: {
+                    title: 'Defensas de Tesis',
+                    icon: 'calendar_month',
+                    link: 'thesis-defenses',
+                },
             },
         ],
     },
