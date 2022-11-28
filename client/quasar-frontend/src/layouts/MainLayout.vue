@@ -128,6 +128,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { GroupLinkList } from 'src/models/link-list';
 
 const teachingAssignmentLinks1 = [
     {
@@ -270,6 +271,135 @@ const thesisCommitteeLinks = [
     },
 ];
 
+const linksData: Array<GroupLinkList> = [
+    {
+        header: {
+            title: 'Datos generales',
+        },
+        corpus: [
+            {
+                title: 'Facultades',
+                icon: 'museum',
+                link: 'faculties',
+            },
+            {
+                title: 'Carreras',
+                icon: 'school',
+                link: 'careers',
+            },
+            {
+                title: 'Actividades de clase',
+                icon: 'class',
+                link: 'class-types',
+            },
+            {
+                title: 'Planes de estudio',
+                icon: 'font_download',
+                link: 'study-plans',
+            },
+            {
+                title: 'Grupos',
+                icon: 'groups',
+                link: 'teaching-groups',
+            },
+            {
+                title: 'Cursos Escolares',
+                icon: 'date_range',
+                link: 'scholar-years',
+            },
+            {
+                title: 'Períodos de tiempo',
+                icon: 'date_range',
+                link: 'time-periods',
+            },
+            {
+                title: 'Semestres',
+                icon: 'calendar_month',
+                link: 'semesters',
+            },
+            {
+                title: 'Categorías Docentes',
+                icon: 'star_rate',
+                link: 'teaching-category',
+            },
+            {
+                title: 'Grados Científicos',
+                icon: 'stars',
+                link: 'scientific-degree',
+            },
+        ],
+    },
+    {
+        header: {
+            title: 'Asignación de docencia',
+        },
+        corpus: [
+            {
+                title: 'Departamentos',
+                icon: 'door_front',
+                link: 'departments',
+            },
+            {
+                title: 'Tabla de Carmen',
+                icon: 'calendar_view_week',
+                link: 'carmen-table',
+            },
+            {
+                title: 'Profesores',
+                icon: 'face',
+                link: 'professors',
+            },
+            {
+                title: 'Asignaturas',
+                icon: 'auto_stories',
+                link: 'subjects',
+            },
+            {
+                title: 'Planificación de Asignaturas',
+                icon: 'feed',
+                link: 'subject-plannings',
+            },
+            {
+                title: 'Asignación de Docencia',
+                icon: 'assignment_turned_in',
+                link: 'teaching-assignments',
+            },
+        ],
+    },
+    {
+        header: {
+            title: 'Planificación de tesis',
+        },
+        corpus: [
+            {
+                title: 'Locales',
+                icon: 'pin_drop',
+                link: 'places',
+            },
+            {
+                title: 'Palabras Claves',
+                icon: 'manage_search',
+                link: 'keywords',
+            },
+            {
+                title: 'Tesis',
+                icon: 'description',
+                link: 'thesis',
+            },
+            {
+                title: 'Tribunal de Tesis',
+                icon: 'groups',
+                link: 'thesis-committees',
+            },
+            {
+                title: 'Defensas de Tesis',
+                icon: 'calendar_month',
+                link: 'thesis-defenses',
+            },
+        ],
+    },
+];
+
 export default defineComponent({
     name: 'MainLayout',
 
@@ -280,6 +410,7 @@ export default defineComponent({
             teachingAssignmentLinks1: teachingAssignmentLinks1,
             teachingAssignmentLinks2: teachingAssignmentLinks2,
             thesisCommitteeLinks: thesisCommitteeLinks,
+            linksData,
             leftDrawerOpen,
             imageLogo,
             toggleLeftDrawer() {
