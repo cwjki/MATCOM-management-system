@@ -2,7 +2,7 @@
     <q-layout view="lHh Lpr lFf">
         <q-header elevated>
             <q-toolbar>
-                <q-btn
+                <!-- <q-btn
                     flat
                     dense
                     round
@@ -11,9 +11,12 @@
                     class="q-mr-sm"
                     aria-label="Menu"
                     @click="toggleLeftDrawer"
-                />
+                /> -->
 
-                <q-avatar @click="$router.push({ name: 'home' })">
+                <q-avatar
+                    class="cursor-pointer"
+                    @click="$router.push({ name: 'home' })"
+                >
                     <img :src="imageLogo" />
                 </q-avatar>
 
@@ -21,7 +24,7 @@
                     Matcom
                 </q-toolbar-title>
 
-                <div>
+                <div v-if="!$q.screen.lt.sm">
                     <q-btn-dropdown label="Datos generales" no-caps>
                         <q-list>
                             <q-item
@@ -50,7 +53,7 @@
                     </q-btn-dropdown>
                 </div>
 
-                <div>
+                <div v-if="!$q.screen.lt.sm">
                     <q-btn-dropdown label="Asignación de Docencia" no-caps>
                         <q-list>
                             <q-item
@@ -79,7 +82,7 @@
                     </q-btn-dropdown>
                 </div>
 
-                <div>
+                <div v-if="!$q.screen.lt.sm">
                     <q-btn-dropdown label="Tribunal de Tesis" no-caps>
                         <q-list>
                             <q-item
@@ -111,13 +114,6 @@
         </q-header>
 
         <!-- <q-drawer v-model="leftDrawerOpen" bordered>
-            <q-list>
-                <EssentialLink
-                    v-for="link in essentialLinks"
-                    :key="link.title"
-                    v-bind="link"
-                />
-            </q-list>
         </q-drawer> -->
 
         <q-page-container>

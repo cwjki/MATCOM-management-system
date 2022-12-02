@@ -13,7 +13,7 @@ export default defineComponent({
     name: 'departmentHandler',
     props: {},
     emits: [],
-    setup(props, { emit }) {
+    setup() {
         const config = ref<GenericCrudTableConfig>({
             name: 'Departamentos',
             singularLabel: 'Departamento',

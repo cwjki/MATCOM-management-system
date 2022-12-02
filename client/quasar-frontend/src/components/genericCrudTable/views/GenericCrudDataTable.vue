@@ -75,7 +75,7 @@
                     emit-value
                     :readonly="!filterOptions[f.name]"
                     :key="`f-${i}`"
-                    class="q-mx-md"
+                    :class="`q-ml-md ${$q.screen.xs && 'q-mt-sm'}`"
                     map-options
                     use-chips
                     debounce="300"
@@ -92,8 +92,9 @@
                     v-model="filter"
                     :placeholder="config.searchLabel"
                     dense
-                    class="q-ml-md"
+                    :class="`q-ml-md ${$q.screen.xs && 'q-mt-sm'}`"
                     debounce="300"
+                    style="width: 170px !important"
                     outlined
                     borderless
                 >

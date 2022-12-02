@@ -1,10 +1,9 @@
 <template>
     <q-card
         class="full-width q-mb-md"
-        style="
-            position: sticky !important;
-            top: 60px !important;
-            z-index: 1000 !important;
+        :style="
+            $q.screen.xs ||
+            'position: sticky !important;top: 60px !important;z-index: 1000 !important;'
         "
     >
         <div
