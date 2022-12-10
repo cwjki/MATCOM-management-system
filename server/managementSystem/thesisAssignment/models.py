@@ -54,7 +54,3 @@ class ThesisDefense(models.Model):
         ThesisCommittee, on_delete=models.CASCADE)
     place = models.ForeignKey(
         Place, null=True, blank=True, on_delete=models.CASCADE)
-
-    # Relationships
-# this is a test
-# second test
