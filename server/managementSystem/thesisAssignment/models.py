@@ -56,3 +56,4 @@ class ThesisDefense(models.Model):
         Place, null=True, blank=True, on_delete=models.CASCADE)
 
     # Relationships
+# this is a test
