@@ -57,3 +57,4 @@ class ThesisDefense(models.Model):
 
     # Relationships
 # this is a test
+# second test
